@@ -5,7 +5,9 @@ GitHub workflow
 
 pull from group github main branch to local machine
 git checkout main
+
 git fetch origin 
+
 git reset --hard origin/main
 
 create a new branch
