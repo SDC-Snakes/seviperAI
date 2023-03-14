@@ -4,7 +4,9 @@ Front end capston project repository
 GitHub workflow
 
 pull from group github main branch to local machine
-git pull origin main
+git checkout main
+git fetch origin 
+git reset --hard origin/main
 
 create a new branch
 git checkout -b <branch_name>
