@@ -1,0 +1,9 @@
+.DS_STORE
+
+.env
+
+node_modules/
+
+#webpack build output
+client/dist/*bundle.js*
+node_modules
