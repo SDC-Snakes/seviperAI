@@ -1,0 +1,1 @@
+// this is the add image component, it's used to add images to the review form before submit
