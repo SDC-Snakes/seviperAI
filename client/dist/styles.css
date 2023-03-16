@@ -51,6 +51,39 @@ table {
 
 /***** Default styles *****/
 
+:root {
+  /* Use primary colors first, hues can be sparignly used for emphasis
+  5 is the darkest version of the color, 1 is the lightest, primary is level 3 */
+
+  /* Primary colors */
+  --main-color: #804BAC;
+  --sec-color: #4C72A9;
+  --ter-color: #F36074;
+
+  /* Main hues */
+  --main5-color: #531A82;
+  --main4-color: #6B319A;
+  --main2-color: #A172C8;
+  --main1-color: #C7A4E2;
+
+  /* Secondary hues */
+  --sec5-color: #1C4480;
+  --sec4-color: #335B97;
+  --sec2-color: #7294C6;
+  --sec1-color: #A5BDE1;
+
+  /* Tertiary hues */
+  --ter5-color: #B81A30;
+  --ter4-color: #DA3B51;
+  --ter2-color: #F36074;
+  --ter1-color: #FBB1BB;
+
+}
+
 body {
   font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 24px;
 }
