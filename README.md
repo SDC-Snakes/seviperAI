@@ -8,7 +8,7 @@ git checkout main<br />
 git fetch origin <br />
 git reset --hard origin/main<br />
 
-## pull a branch that does not yet exist on your machine<br />
+### pull a branch that does not yet exist on your machine<br />
 git fetch origin <branchName>:<branchName>
 
 ### create a new branch<br />
