@@ -21,13 +21,13 @@ git push -u origin <branch_name>
 we do it on github
 
 ## to update your feature branch with up-to-date main
-// Current branch : feature1
-git switch main
-git pull origin main 
+// Current branch : feature1 <br />
+git switch main <br />
+git pull origin main <br />
+<br />
+//now main branch in your local machine is up to date<br />
+git switch feature 1<br />
+git merge main<br />
 
-//now main branch in your local machine is up to date
-git switch feature 1
-git merge main
-
-// resolve conflict if any
+// resolve conflict if any<br />
 // commit changes
