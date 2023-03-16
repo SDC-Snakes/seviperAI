@@ -2,13 +2,13 @@
 
 import React from 'react';
 import StarRating from './StarRating';
-import Search from './SearchBarReviews';
+import AverageRatings from './AverageRatings';
 
 const ReviewsAndRatings = () => {
   // linter doesn't like the return for only one element
   return <div>Hello from RatingsReviews
     <Search/>
-    <StarRating />
+    <AverageRatings />
   </div>;
 };
 
