@@ -1,9 +1,9 @@
+const router = require('express').Router();
+const axios = require('axios');
 const cart = require('./cartRoutes');
 const products = require('./productsRoutes');
 const questions = require('./questionsRoutes');
 const reviews = require('./reviewsRoutes');
-const router = require('express').Router();
-const axios = require('axios');
 
 module.exports.cart = cart;
 module.exports.products = products;

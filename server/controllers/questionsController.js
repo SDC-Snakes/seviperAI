@@ -1,4 +1,4 @@
-const axios = reqiure('axios');
+const axios = require('axios');
 
 module.exports = {
   get: (req, res) => {
@@ -6,7 +6,7 @@ module.exports = {
     const page = req.query.page || 1;
     const count = req.query.count || 5;
     if (req.params.product_id) {
-      axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions?product_id=${req.params.product_id}&page=${page}&count=${count}`, {
+      axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions?product_id=${req.query.product_id}&page=${page}&count=${count}`, {
         headers: {
           Authorization: process.env.GITHUB_API_KEY,
         },
@@ -28,6 +28,88 @@ module.exports = {
         })
         .then((err) => {
           res.status(404).send(err);
+        });
+    }
+  },
+  postQuestion: (req, res) => {
+    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions`, {
+      headers: {
+        Authorization: process.env.GITHUB_API_KEY,
+      },
+      data: req.body,
+    })
+      .then(() => {
+        res.status(201).send('Question created');
+      })
+      .then((err) => {
+        res.status(422).send(err);
+      });
+  },
+  postAnswer: (req, res) => {
+    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/answers`, {
+      headers: {
+        Authorization: process.env.GITHUB_API_KEY,
+      },
+      data: req.body,
+    })
+      .then(() => {
+        res.status(201).send('Answer created');
+      })
+      .then((err) => {
+        res.status(422).send(err);
+      });
+  },
+  putHelpful: (req, res) => {
+    if (req.params.answer_id) {
+      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answer_id}/helpful`, {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      })
+        .then(() => {
+          res.status(204).send('Marked as helpful');
+        })
+        .then((err) => {
+          res.status(422).send(err);
+        });
+    } else {
+      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`, {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      })
+        .then(() => {
+          res.status(204).send('Marked as helpful');
+        })
+        .then((err) => {
+          res.status(422).send(err);
+        });
+    }
+  },
+  putReport: (req, res) => {
+    if (req.params.answer_id) {
+      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answer_id}/report`, {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      })
+        .then(() => {
+          res.status(204).send('Marked as helpful');
+        })
+        .then((err) => {
+          res.status(422).send(err);
+        });
+    } else {
+      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/report`, {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      })
+        .then(() => {
+          res.status(204).send('Marked as helpful');
+        })
+        .then((err) => {
+          res.status(422).send(err);
         });
     }
   },

@@ -7,12 +7,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.use('/products', router.products);
-// app.use('/reviews', router.reviews);
+app.use('/reviews', router.reviews);
 app.use('/qa/questions', router.questions);
-// app.use('/cart', router.cart);
-// app.use('/interactions', router.interactions);
+app.use('/cart', router.cart);
+app.use('/interactions', router.interactions);
 
 const PORT = process.env.PORT || 8080;
 
