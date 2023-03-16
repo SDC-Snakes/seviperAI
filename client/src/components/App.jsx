@@ -13,7 +13,7 @@ const App = () => {
       <QuestionsAnswers />
       <RelatedItems />
     </div>
-  );
+  )
 }
 // const domNode = document.getElementById('root');
 // const root = createRoot(domNode);

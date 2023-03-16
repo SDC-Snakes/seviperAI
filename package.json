@@ -4,7 +4,7 @@
 
   "scripts": {
     "client-dev": "npx webpack --watch",
-    "build": "npx webpack --config webpack.config.js",
+    "build": "npx webpack",
     "start": "node client/src/app.jsx"
   },
   "dependencies": {
