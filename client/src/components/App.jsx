@@ -1,7 +1,7 @@
 // import { createRoot } from 'react-dom/client';
 import React from 'react';
 import ProductDetails from './ProductDetails/ProductDetails';
-import RatingsReviews from './RatingsReviews/RatingsReviews';
+import ReviewsAndRatings from './RatingsReviews/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
 
@@ -10,7 +10,7 @@ function App() {
     <div>
       <ProductDetails />
       <RelatedItems />
-      <RatingsReviews />
+      <ReviewsAndRatings />
       <QuestionsAnswers />
     </div>
   );
