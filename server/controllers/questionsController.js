@@ -60,57 +60,29 @@ module.exports = {
       });
   },
   putHelpful: (req, res) => {
-    if (req.params.answer_id) {
-      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answer_id}/helpful`, {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
-        },
+    axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/helpful`, {
+      headers: {
+        Authorization: process.env.GITHUB_API_KEY,
+      },
+    })
+      .then(() => {
+        res.status(204).send('Marked as helpful');
       })
-        .then(() => {
-          res.status(204).send('Marked as helpful');
-        })
-        .then((err) => {
-          res.status(422).send(err);
-        });
-    } else {
-      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`, {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
-        },
-      })
-        .then(() => {
-          res.status(204).send('Marked as helpful');
-        })
-        .then((err) => {
-          res.status(422).send(err);
-        });
-    }
+      .then((err) => {
+        res.status(422).send(err);
+      });
   },
   putReport: (req, res) => {
-    if (req.params.answer_id) {
-      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answer_id}/report`, {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
-        },
+    axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/report`, {
+      headers: {
+        Authorization: process.env.GITHUB_API_KEY,
+      },
+    })
+      .then(() => {
+        res.status(204).send('Marked as helpful');
       })
-        .then(() => {
-          res.status(204).send('Marked as helpful');
-        })
-        .then((err) => {
-          res.status(422).send(err);
-        });
-    } else {
-      axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/report`, {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
-        },
-      })
-        .then(() => {
-          res.status(204).send('Marked as helpful');
-        })
-        .then((err) => {
-          res.status(422).send(err);
-        });
-    }
+      .then((err) => {
+        res.status(422).send(err);
+      });
   },
 };
