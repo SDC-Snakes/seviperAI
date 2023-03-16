@@ -5,7 +5,7 @@ import RatingsReviews from './RatingsReviews.jsx';
 import QuestionsAnswers from './QuestionsAnswers.jsx';
 import RelatedItems from './RelatedItems.jsx';
 
-const App () => {
+const App = () => {
   return (
     <div>
       <ProductDetail />
