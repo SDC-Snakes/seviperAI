@@ -1,23 +1,19 @@
 // import { createRoot } from 'react-dom/client';
 import React from 'react';
-import ProductDetails from './ProductDetails/ProductDetails.jsx';
-import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
-import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
-import RelatedItems from './RelatedItems/RelatedItems.jsx';
+import ProductDetails from './ProductDetails/ProductDetails';
+import RatingsReviews from './RatingsReviews/RatingsReviews';
+import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
+import RelatedItems from './RelatedItems/RelatedItems';
 
 function App() {
   return (
     <div>
-      <div>hello world</div>
       <ProductDetails />
+      <RelatedItems />
       <RatingsReviews />
       <QuestionsAnswers />
-      <RelatedItems />
     </div>
   );
 }
 
 export default App;
-// const domNode = document.getElementById('root');
-// const root = createRoot(domNode);
-// root.render(<App />);
