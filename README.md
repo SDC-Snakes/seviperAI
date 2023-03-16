@@ -19,3 +19,15 @@ git push -u origin <branch_name>
 
 ### create a pull request to merge to "main" branch<br />
 we do it on github
+
+## to update your feature branch with up-to-date main
+// Current branch : feature1 <br />
+git switch main <br />
+git pull origin main <br />
+<br />
+//now main branch in your local machine is up to date<br />
+git switch feature 1<br />
+git merge main<br />
+
+// resolve conflict if any<br />
+// commit changes
