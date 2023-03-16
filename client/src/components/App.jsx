@@ -5,6 +5,7 @@ import ReviewsAndRatings from './RatingsReviews/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
 
+
 function App() {
   return (
     <div>
@@ -12,6 +13,7 @@ function App() {
       <RelatedItems />
       <ReviewsAndRatings />
       <QuestionsAnswers />
+
     </div>
   );
 }
