@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// RTK Query
 
 export const api = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
