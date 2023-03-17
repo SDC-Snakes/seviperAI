@@ -3,7 +3,6 @@ import FormatCard from './FormatCard';
 import sampleData from './sampleData';
 
 const ItemsList = (/* id, image, rating, prod_category, prod_name, price */) => {
-
   const [relatedItemsList, setRelatedItemsList] = useState(sampleData);
   console.log('relatedItemsList: ', relatedItemsList);
 

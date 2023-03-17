@@ -2,7 +2,7 @@ import React from 'react';
 
 const FormatCard = ({ image, category, name, price }) => (
 
-  <div className='relatedCard'>
+  <div className='relatedItemsCard'>
     <img className='card-img' src={image}/>
     <div>Star rating</div>
     <h3 className='product-category'>{category}</h3>
