@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 function Dropdown() {
   const [selectedOption, setSelectedOption] = useState('Relevant');
-
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
     };

@@ -9,23 +9,22 @@ import ReviewTile from './ReviewTile';
 
 
 const Reviews = () => {
-const [numberReviews, setNumberReviews] = useState(2)
-
-const addReviews = () => {
-  setNumberReviews(numberReviews+2)
-}
-   return (
-  <div>
-    <Dropdown />
-    {[...Array(numberReviews)].map((_, index) => {
-      return (
-      <ReviewTile key={index.toString()} />
-      )
-    })}
-    <button onClick={addReviews}>MORE REVIEWS</button>
-    <button >ADD A REVIEW</button>
-  </div>
-  );
+  const [numberReviews, setNumberReviews] = useState(2)
+  const addReviews = () => {
+    setNumberReviews(numberReviews+2)
+  }
+    return (
+    <div>
+      <Dropdown />
+      {[...Array(numberReviews)].map((_, index) => {
+        return (
+        <ReviewTile key={index.toString()} />
+        )
+      })}
+      <input type="submit" value="MORE REVIEWS" onClick={addReviews} />
+      <input type="submit" value="ADD A REVIEW" />
+    </div>
+    );
 };
 
 export default Reviews;
