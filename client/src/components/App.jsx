@@ -4,6 +4,7 @@ import ProductDetails from './ProductDetails/ProductDetails';
 import RatingsReviews from './RatingsReviews/RatingsReviews';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
+// import DefaultCSSExample from './DefaultCSSExample';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <RelatedItems />
       <RatingsReviews />
       <QuestionsAnswers />
+      {/* <DefaultCSSExample /> */}
     </div>
   );
 }
