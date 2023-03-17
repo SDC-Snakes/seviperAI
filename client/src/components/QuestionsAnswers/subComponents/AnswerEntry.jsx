@@ -9,8 +9,8 @@ function AnswerEntry() {
       <div className="helpful-text">
         Helpful?
       </div>
-      <button type="button" className="yes-button">Yes (5)</button>
-      <button type="button" className="report-button">Report</button>
+      <input type="button" className="yes-button" value="Yes" />
+      <input type="button" className="report-button" value="Report" />
     </div>
   );
 }

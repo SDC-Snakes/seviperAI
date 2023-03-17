@@ -18,14 +18,14 @@ function AnswerForm() {
         <p>For authentication reasons, you will not be emailed.</p>
       </div>
       <div className="photos">
-        <button type="button"> Upload Photos </button>
+        <input type="button" value="Upload Photos" />
         <div className="photos-view">
           <img src="image1.jpg" alt="supplement to the answer" />
           <img src="image2.jpg" alt="supplement to the answer" />
           <img src="image3.jpg" alt="supplement to the answer" />
         </div>
       </div>
-      <button type="submit">Submit Answer</button>
+      <input type="submit" value="Submit Answer" />
     </form>
   );
 }

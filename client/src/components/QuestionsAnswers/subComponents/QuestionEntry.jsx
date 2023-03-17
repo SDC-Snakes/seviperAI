@@ -14,8 +14,8 @@ function QuestionEntry() {
         <span className="helpful-text">
           Helpful?
         </span>
-        <button type="button" className="yes-button">Yes</button>
-        <button type="button" className="add-answer-button">Add Answer</button>
+        <input type="button" className="yes-button" value="Yes" />
+        <input type="button" className="add-answer-button" value="Add Answer" />
         <div className="answer-list">
           <span className="a">
             A:
