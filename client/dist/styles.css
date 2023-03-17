@@ -60,6 +60,11 @@ table {
   --sec-color: #4C72A9;
   --ter-color: #F36074;
 
+  /* Primary grays */
+  --gray3-color: #525252;
+  --gray2-color: #C2C2C2;
+  --gray1-color: #EBEBEB;
+
   /* Main hues */
   --main5-color: #531A82;
   --main4-color: #6B319A;
@@ -82,37 +87,42 @@ table {
 
 body {
   font-family: 'Poppins', sans-serif;
-
 }
 
 h1 {
   font-size: 36px;
   line-height: 1.5em;
+  margin-bottom: 22px;
 }
 
 h2 {
   font-size: 30px;
   line-height: 1.2em;
+  margin-bottom: 20px;
 }
 
 h3 {
   font-size: 24px;
   line-height: 1.2em;
+  margin-bottom: 18px;
 }
 
 h4 {
   font-size: 20px;
   line-height: 0.9em;
+  margin-bottom: 16px;
 }
 
 h5 {
   font-size: 18px;
   line-height: 0.9em;
+  margin-bottom: 14px;
 }
 
 h6 {
   font-size: 16px;
   line-height: 0.9em;
+  margin-bottom: 8px;
 }
 
 p {
