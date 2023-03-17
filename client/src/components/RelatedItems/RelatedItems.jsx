@@ -1,9 +1,12 @@
 import React from 'react';
-import sampleData from './sampleData';
+import ItemsList from './ItemsList';
 
 const RelatedItems = () => {
-  // linter doesn't like the return for only one element
-  return <div>Hello from RelatedItems</div>;
-};
+  return (
+  <div>
+    <ItemsList />
+  </div>
+  );
+}
 
 export default RelatedItems;
