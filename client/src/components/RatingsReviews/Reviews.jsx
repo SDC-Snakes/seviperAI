@@ -1,6 +1,6 @@
-import React from 'react';
+import React , { useState } from 'react';
 import Dropdown from './SortReviews';
-
+import ReviewTile from './ReviewTile';
 
 //<sort> // drop down list to sort reviews
 // map => <ReviewTile> // multiple review tiles will be rendered
@@ -9,11 +9,23 @@ import Dropdown from './SortReviews';
 
 
 const Reviews = () => {
-  // linter doesn't like the return for only one element
-  return <div>Hello from RatingsReviews
+const [numberReviews, setNumberReviews] = useState(2)
 
+const addReviews = () => {
+  setNumberReviews(numberReviews+2)
+}
+   return (
+  <div>
     <Dropdown />
-  </div>;
+    {[...Array(numberReviews)].map((_, index) => {
+      return (
+      <ReviewTile key={index.toString()} />
+      )
+    })}
+    <button onClick={addReviews}>MORE REVIEWS</button>
+    <button >ADD A REVIEW</button>
+  </div>
+  );
 };
 
 export default Reviews;
