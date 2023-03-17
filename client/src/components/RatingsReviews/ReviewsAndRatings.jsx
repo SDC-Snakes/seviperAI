@@ -3,6 +3,7 @@
 import React from 'react';
 import StarRating from './StarRating';
 import AverageRatings from './AverageRatings';
+import Search from './SearchBarReviews';
 
 const ReviewsAndRatings = () => {
   // linter doesn't like the return for only one element

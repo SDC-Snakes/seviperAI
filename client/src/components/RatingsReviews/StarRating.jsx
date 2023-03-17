@@ -7,7 +7,7 @@ function StarRating() {
   const [hover, setHover] = useState(null);
 
   return (
-    <div>
+    <span>
       {[...Array(5)].map((star, index) => {
         const ratingValue = index + 1;
         return (
@@ -17,7 +17,7 @@ function StarRating() {
           </label>
         );
       })}
-    </div>
+    </span>
   );
 }
 
