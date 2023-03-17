@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import StarRating from '../RatingsReviews/StarRating';
 
-function Details({ styles, details }) {
+function Details({ details }) {
   return (
     <div>
       <div>
         <StarRating />
       </div>
       {details.category}
-      <br/>
+      <br />
       {details.name}
     </div>
   );

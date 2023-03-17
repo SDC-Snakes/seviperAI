@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function DropDown({  }) {
+function DropDown() {
   return (
     <div>
       Hi

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import ImageViewer from './ImageViewer';
 import Details from './Details';
 import Description from './Description';
