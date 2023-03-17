@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FormatCard from './FormatCard';
 
-const ItemsList = (/*id, image, rating, prod_category, prod_name, price*/) => {
+const ItemsList = (/* id, image, rating, prod_category, prod_name, price */) => {
 
   const [relatedItemsList, setRelatedItemsList] = useState([]);
 
