@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const apiSlice = createApi({
+export const api = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: 'api',
   // All of our requests will have URLs starting with '/fakeApi'
@@ -28,4 +28,4 @@ export const apiSlice = createApi({
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetFirstProductQuery, useGetSpecificProductQuery } = apiSlice;
+export const { useGetFirstProductQuery, useGetSpecificProductQuery } = api;

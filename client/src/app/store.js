@@ -5,7 +5,7 @@ import relatedReducer from '../features/related/relatedSlice';
 import reviewsReducer from '../features/reviews/reviewsSlice';
 import { api } from '../features/api/apiSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     products: productsReducer,
@@ -16,5 +16,3 @@ const store = configureStore({
   // Add the RTK Query API middleware
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
-
-export default store;

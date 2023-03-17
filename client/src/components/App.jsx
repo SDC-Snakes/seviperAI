@@ -1,21 +1,30 @@
-// import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import ProductDetails from './ProductDetails/ProductDetails';
-import RatingsReviews from './RatingsReviews/RatingsReviews';
+import ReviewsAndRatings from './RatingsReviews/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
-import { useGetFirstProductQuery } from '../features/api/apiSlice';
+import Spinner from './Spinner';
 
 function App() {
-  const { data: product, isLoading } = useGetFirstProductQuery();
-
-  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
-      <ProductDetails productId={product.id} />
-      <RelatedItems />
-      <RatingsReviews />
-      <QuestionsAnswers />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Spinner />} />
+          <Route
+            path="/:productId"
+            element={(
+              <>
+                <ProductDetails />
+                <RelatedItems />
+                <ReviewsAndRatings />
+                <QuestionsAnswers />
+              </>
+          )}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }

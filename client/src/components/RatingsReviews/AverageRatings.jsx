@@ -1,0 +1,1 @@
+// this is the Average ratings and reviews component

@@ -18,6 +18,10 @@ app.use('/qa/questions', router.questions);
 app.use('/cart', router.cart);
 app.use('/interactions', router.interactions);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/'));
+});
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {

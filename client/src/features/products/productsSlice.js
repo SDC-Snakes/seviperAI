@@ -12,3 +12,5 @@ const productsSlice = createSlice({
 });
 
 const { reset } = productsSlice.actions;
+
+export default productsSlice;
