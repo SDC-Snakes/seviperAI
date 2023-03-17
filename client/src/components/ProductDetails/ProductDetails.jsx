@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { useGetSpecificProductQuery } from '../../features/api/apiSlice';
 
-const ProductDetails = () => {
-  // linter doesn't like the return for only one element
-  return <div>Hello from ProductDetails</div>;
-};
+function ProductDetails() {
+  // first query before product id present
+
+  const { data: products, isFetching, isSuccess } = useGetSpecificProductQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  return (
+    <div>
+      Hello from ProductDetails
+    </div>
+  );
+}
 
 export default ProductDetails;
