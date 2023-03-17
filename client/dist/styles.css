@@ -93,6 +93,7 @@ h1 {
   font-size: 36px;
   line-height: 1.5em;
   margin-bottom: 22px;
+  color: var(--main-color) /* How to reference color variables, will remove later */
 }
 
 h2 {
@@ -136,7 +137,7 @@ input[name="rating"] {
   display:none;
   }
 
-  .star{
+  .star {
   cursor: pointer;
   transition: color 200ms;
 }
