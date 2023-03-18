@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import StarRating from '../RatingsReviews/StarRating';
+import StarRating from '../ReviewsRatings/StarRating';
 
 function Details({ details, styles }) {
   const [selectedStyle, setSelectedStyle] = useState(0);
-  console.log(styles)
 
   return (
     <div>

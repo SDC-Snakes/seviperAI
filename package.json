@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "client-dev": "npx webpack --watch",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "start": "node client/src/components/app.jsx"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
