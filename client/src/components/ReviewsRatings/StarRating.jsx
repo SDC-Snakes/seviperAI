@@ -16,7 +16,8 @@ function StarRating() {
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => (setRating(ratingValue))} />
+              onClick={() => (setRating(ratingValue))}
+            />
 
             <FaStar
               className="star"

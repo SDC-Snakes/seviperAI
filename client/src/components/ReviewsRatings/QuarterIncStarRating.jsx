@@ -3,7 +3,7 @@ import { FaStar } from 'react-icons/fa';
 // once the data is retreived from the API,
 // ratingNum has to be replaced by the incoming review rating.
 // setState is not being utilized, might need to be removed or replaced when implementing redux
-function HalfIncStarRating() {
+function QuarterIncStarRating() {
   const ratingNum = 3.2;
   const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
   const [remainder, setRemainder] = useState(`${(Math.round(((ratingNum - fullStarsNum)) * 4) / 4) * 100}%`);
@@ -41,4 +41,4 @@ function HalfIncStarRating() {
   );
 }
 
-export default HalfIncStarRating;
+export default QuarterIncStarRating;
