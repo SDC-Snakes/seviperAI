@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StarRating from '../RatingsReviews/StarRating';
 
-function Details({ details }) {
+function Details({ details, styles }) {
+  const [selectedStyle, setSelectedStyle] = useState(0);
+  console.log(styles)
+
   return (
     <div>
       <div>
         <StarRating />
+        <button type="button">See all reviews</button>
       </div>
-      {details.category}
-      <br />
-      {details.name}
+      <div>
+        {details.category}
+      </div>
+      <div>
+        {details.name}
+      </div>
+      <div>
+        {styles[selectedStyle].original_price}
+      </div>
     </div>
   );
 }
