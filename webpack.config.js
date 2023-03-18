@@ -1,4 +1,5 @@
 require('dotenv').config();
+const webpack = require('webpack');
 
 const path = require('path');
 
@@ -31,4 +32,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        ATLIER_API_ROUTE: JSON.stringify(process.env.ATLIER_API_ROUTE),
+      },
+    }),
+  ],
 };
