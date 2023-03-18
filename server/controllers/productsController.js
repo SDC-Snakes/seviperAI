@@ -11,7 +11,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
@@ -25,7 +25,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
@@ -39,7 +39,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
@@ -55,7 +55,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },

@@ -14,7 +14,7 @@ module.exports = {
         .then((response) => {
           res.status(200).send(response.data);
         })
-        .then((err) => {
+        .catch((err) => {
           res.status(404).send(err);
         });
     } else {
@@ -26,7 +26,7 @@ module.exports = {
         .then((response) => {
           res.status(200).send(response.data);
         })
-        .then((err) => {
+        .catch((err) => {
           res.status(404).send(err);
         });
     }
@@ -41,7 +41,7 @@ module.exports = {
       .then(() => {
         res.status(201).send('Question created');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },
@@ -55,7 +55,7 @@ module.exports = {
       .then(() => {
         res.status(201).send('Answer created');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },
@@ -68,7 +68,7 @@ module.exports = {
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },
@@ -81,7 +81,7 @@ module.exports = {
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },
