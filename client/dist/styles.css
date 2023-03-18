@@ -1,6 +1,6 @@
 input[name="rating"] {
   display:none;
- }
+}
 
  .star{
   cursor: pointer;
