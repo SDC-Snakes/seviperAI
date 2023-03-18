@@ -4,8 +4,8 @@ const FormatCard = ({ image, category, name, price, itemStyles }) => {
   console.log('imageSRC in FormatCard: ', image);
 
   return (
-  <div className={itemStyles['related-items-card']}>
-    <img className={itemStyles['card-img']} src={`${image}`}/>
+  <div className={itemStyles['items-card']}>
+    <img className={itemStyles['items-card-img']} src={`${image}`}/>
     <div>Star rating</div>
     <h3 className={itemStyles['product-category']}>{category}</h3>
     <h6 className={itemStyles['product-name']}>{name}</h6>

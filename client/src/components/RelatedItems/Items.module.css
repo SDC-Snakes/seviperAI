@@ -14,7 +14,7 @@
 
 /**** Related item card ****/
 
-.related-items-card {
+.items-card {
   min-width: 200px;
   min-height: 300px;
   border: solid;
@@ -22,7 +22,7 @@
   margin: 20px;
 }
 
-.card-img {
+.items-card-img {
   width: 100%;
   height: 60%;
 }
