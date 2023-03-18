@@ -1,5 +1,5 @@
 # project-atlier
-Front end capston project repository
+Front end capstone project repository
 
 ## GitHub workflow
 
@@ -7,6 +7,9 @@ Front end capston project repository
 git checkout main<br />
 git fetch origin <br />
 git reset --hard origin/main<br />
+
+### pull a branch that does not yet exist on your machine<br />
+git fetch origin [branchName]:[branchName]
 
 ### create a new branch<br />
 git checkout -b <branch_name>
@@ -16,3 +19,15 @@ git push -u origin <branch_name>
 
 ### create a pull request to merge to "main" branch<br />
 we do it on github
+
+## to update your feature branch with up-to-date main
+// Current branch : feature1 <br />
+git switch main <br />
+git pull origin main <br />
+<br />
+//now main branch in your local machine is up to date<br />
+git switch feature 1<br />
+git merge main<br />
+
+// resolve conflict if any<br />
+// commit changes
