@@ -13,4 +13,11 @@ let sampleData = [
   },
 ];
 
+let sampleModal = [
+  {
+    currItem: 'Shirt'
+  }
+];
+
 exports.sampleData = sampleData;
+exports.sampleModal = sampleModal;

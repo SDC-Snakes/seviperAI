@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import ProductDetails from '../ProductDetails/ProductDetails';
 
 const ComparisonModal = ({ sampleChar }) => {
 
   const [modal, setModal] = useState([]);
+
+  console.log('productData from comparisonModal: ', ProductDetails.productInfo.styles.results);
 
   const renderComparison = (char, index) => {
     return (
@@ -13,12 +16,14 @@ const ComparisonModal = ({ sampleChar }) => {
   }
 
   return(
-    <div>
-      <h2>Comparing</h2>
-      <h6>Current Product</h6>
-      <div>{modal.map((char, index) => renderComparison(char, index))}</div>
-      <h6>Related Product</h6>
-    </div>
+    <table>
+      <tr>
+        <th>Comparing</th>
+        <th>Current Product</th>
+        <tr>{modal.map((char, index) => renderComparison(char, index))}</tr>
+        <th>Related Product</th>
+      </tr>
+    </table>
   );
 };
 
