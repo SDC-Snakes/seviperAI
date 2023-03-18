@@ -17,7 +17,7 @@ function ProductDetails() {
   });
 
   useEffect(() => {
-
+    // update photos state
   }, [productInfo]);
 
   if (isFetching || !productInfo) {
