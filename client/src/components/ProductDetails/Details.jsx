@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRating from '../RatingsReviews/StarRating';
+import StarRating from '../ReviewsRatings/StarRating';
 
 function Details({ details }) {
   return (
