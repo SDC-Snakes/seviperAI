@@ -40,3 +40,5 @@ export default StarRating;
 //   cursor: pointer;
 //   transition: color 200ms;
 // }
+
+
