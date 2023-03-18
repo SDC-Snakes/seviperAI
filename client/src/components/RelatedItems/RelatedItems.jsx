@@ -1,10 +1,11 @@
 import React from 'react';
 import ItemsList from './ItemsList';
+import itemStyles from './Items.module.css';
 
 const RelatedItems = () => {
   return (
   <div>
-    <ItemsList />
+    <ItemsList itemStyles={itemStyles}/>
   </div>
   );
 }
