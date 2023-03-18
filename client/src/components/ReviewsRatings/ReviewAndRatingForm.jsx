@@ -3,11 +3,10 @@
 //<star rating component>
 //<addImage component>
 
-import REact, {useState} from "react";
-import "./Modal.css";
+import React, { useState } from 'react';
+import './Modal.css';
 
-const ReviewAndRatingForm = () => {
-
+function ReviewAndRatingForm() {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -25,3 +24,5 @@ const ReviewAndRatingForm = () => {
   )
 
 }
+
+export default  ReviewAndRatingForm;

@@ -18,6 +18,19 @@ export const api = createApi({
       // The URL for the request is '/fakeApi/posts'
       query: (productId) => `/products/${productId}`,
     }),
+    getProductStyles: build.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (productId) => `/products/${productId}/styles`,
+    }),
+    getProductInfo: build.query({
+      async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
+        const details = await fetchWithBQ(`/products/${productId}`);
+        if (details.error) return { error: details.error };
+        const styles = await fetchWithBQ(`/products/${productId}/styles`);
+        return styles.data
+          ? { data: { details: details.data, styles: styles.data } } : { error: styles.error };
+      },
+    }),
     // EXAMPLE MUTATION endpoint!!!
     // updateReview: build.mutation({
     //   query: reviewId => ({
@@ -29,4 +42,9 @@ export const api = createApi({
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetFirstProductQuery, useGetSpecificProductQuery } = api;
+export const {
+  useGetFirstProductQuery,
+  useGetSpecificProductQuery,
+  useGetProductStylesQuery,
+  useGetProductInfoQuery,
+} = api;
