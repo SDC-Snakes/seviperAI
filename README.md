@@ -1,5 +1,5 @@
 # project-atlier
-Front end capston project repository
+Front end capstone project repository
 
 ## GitHub workflow
 
