@@ -3,23 +3,22 @@ import { FaToolbox } from 'react-icons/fa';
 import data from './sampleData';
 // import ProductDetails from '../ProductDetails/ProductDetails';
 
-const ComparisonModal = ({ sampleChar }) => {
-console.log('sampleModal from ComparisonModal: ', data.sampleModal);
+const ComparisonModal = function ({ sampleChar }) {
   const [modal, setModal] = useState(data.sampleModal);
 
   // console.log('productData from comparisonModal: ', ProductDetails.productInfo.styles.results);
 
-  const renderComparison = (char, index) => {
+  const renderComparison = function (char, index) {
     return (
       <div key={index}>
         {char.currYes && <FaToolbox />}
         <p>{char.value}</p>
         {char.relYes && <FaToolbox />}
       </div>
-    )
-  }
+    );
+  };
 
-  return(
+  return (
     <table>
       <tr>
         <th>Comparing</th>
