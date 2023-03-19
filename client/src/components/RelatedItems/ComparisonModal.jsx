@@ -6,8 +6,6 @@ import data from './sampleData';
 const ComparisonModal = function ({ sampleChar }) {
   const [modal, setModal] = useState(data.sampleModal);
 
-  // console.log('productData from comparisonModal: ', ProductDetails.productInfo.styles.results);
-
   const renderComparison = function (char, index) {
     return (
       <div key={index}>

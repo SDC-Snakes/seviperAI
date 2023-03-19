@@ -4,14 +4,14 @@ import itemStyles from './Items.module.css';
 import OutfitList from './OutfitList';
 import ComparisonModal from './ComparisonModal';
 
-const RelatedItems = () => {
+const RelatedItems = function () {
   return (
-  <div>
-    <ItemsList itemStyles={itemStyles}/>
-    <OutfitList itemStyles={itemStyles}/>
-    <ComparisonModal itemStyles={itemStyles}/>
-  </div>
+    <div>
+      <ItemsList itemStyles={itemStyles} />
+      <OutfitList itemStyles={itemStyles} />
+      <ComparisonModal itemStyles={itemStyles} />
+    </div>
   );
-}
+};
 
 export default RelatedItems;
