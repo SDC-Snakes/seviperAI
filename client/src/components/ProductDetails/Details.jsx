@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StarRating from '../ReviewsRatings/StarRating';
+import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -29,7 +30,7 @@ function Details() {
         {`STYLE > ${selectedStyle.name}`}
       </h3>
       <div>
-        DISPLAY CIRCULAR IMAGES
+        <StyleList />
       </div>
       <div>
         <select>

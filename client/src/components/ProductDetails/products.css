@@ -20,10 +20,13 @@ button {
   justify-content: center;
 }
 
-.circle {
+.circleImage {
+  display: flex;
+  overflow: scroll;
+  border: 2px solid #525252;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 .sale {
