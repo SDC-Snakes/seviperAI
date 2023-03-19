@@ -24,6 +24,7 @@ function ReviewAndRatingForm({RNRCSS}) {
       ...prevState,
       [someChar]: event.target.value, // radio button data e.target.value??
     }));
+    console.log('readio buttons', characteristics)
   };
 
   const toggleModal = (inputBool) => {
@@ -76,7 +77,8 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
-                        onChange={(e) => { handleCharChange(e, 'Width'); }}
+                        checked={characteristics.Size === element}
+                        onChange={(e) => { handleCharChange(e, 'Size'); }}
                       />
                       {element}
                     </label>
@@ -90,6 +92,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
+                        checked={characteristics.Width === element}
                         onChange={(e) => { handleCharChange(e, 'Width'); }}
                       />
                       {element}
@@ -104,7 +107,8 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
-                        onChange={(e) => { handleCharChange(e, 'Comfortable'); }}
+                        checked={characteristics.Comfort === element}
+                        onChange={(e) => { handleCharChange(e, 'Comfort'); }}
                       />
                       {element}
                     </label>
@@ -118,7 +122,23 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
+                        checked={characteristics.Quality === element}
                         onChange={(e) => { handleCharChange(e, 'Quality'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
+
+                <div className="Length-Radio-Button">
+                  Length
+                  {['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        checked={characteristics.Length === element}
+                        onChange={(e) => { handleCharChange(e, 'Length'); }}
                       />
                       {element}
                     </label>
@@ -132,6 +152,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
+                        checked={characteristics.Fit === element}
                         onChange={(e) => { handleCharChange(e, 'Fit'); }}
                       />
                       {element}
