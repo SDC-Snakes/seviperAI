@@ -27,7 +27,7 @@ function Details() {
         </p>
       </div>
       <h3>
-        {`STYLE > ${selectedStyle.name}`}
+        {selectedStyle.name}
       </h3>
       <div>
         <StyleList />

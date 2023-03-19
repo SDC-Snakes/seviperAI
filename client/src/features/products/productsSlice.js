@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { api } from '../api/apiSlice';
 
 const initialState = {
-  product: {},
   selectedStyle: {},
   styles: {},
   details: {},
@@ -15,6 +14,9 @@ const initialState = {
 function changeStyle(state = initialState, action) {
   return { ...state, selectedStyle: action.payload };
 }
+function changeImage(state = initialState, action) {
+  return { ...state, selectedImage: action.payload };
+}
 
 const productsSlice = createSlice({
   name: 'product',
@@ -22,6 +24,7 @@ const productsSlice = createSlice({
   reducers: {
     reset: (state) => initialState,
     newSelectedStyle: changeStyle,
+    newSelectedImage: changeImage,
   },
   extraReducers: (builder) => {
     builder
