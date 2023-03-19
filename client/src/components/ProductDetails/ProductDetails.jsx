@@ -31,10 +31,10 @@ function ProductDetails() {
           <ImageViewer />
         </div>
         <div className="detailsDiv">
-          <Details details={productInfo.details} styles={productInfo.styles.results} />
+          <Details />
         </div>
       </div>
-      <Description details={productInfo.details} />
+      <Description />
     </div>
   );
 }
