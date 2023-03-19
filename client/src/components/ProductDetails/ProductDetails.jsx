@@ -26,9 +26,13 @@ function ProductDetails() {
 
   return (
     <div>
-      <div className="inline">
-        <ImageViewer styles={productInfo.styles.results} />
-        <Details details={productInfo.details} styles={productInfo.styles.results} />
+      <div className="mainDiv">
+        <div>
+          <ImageViewer />
+        </div>
+        <div className="detailsDiv">
+          <Details details={productInfo.details} styles={productInfo.styles.results} />
+        </div>
       </div>
       <Description details={productInfo.details} />
     </div>
