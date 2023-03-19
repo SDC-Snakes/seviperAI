@@ -15,8 +15,20 @@ let sampleData = [
 
 let sampleModal = [
   {
-    currItem: 'Shirt'
-  }
+    currYes: true,
+    value: 'GMO and Pesticide-free',
+    relYes: false,
+  },
+  {
+    currYes: true,
+    value: 'Free for anyone',
+    relYes: true,
+  },
+  {
+    currYes: false,
+    value: 'Dragons are cool',
+    relYes: false,
+  },
 ];
 
 exports.sampleData = sampleData;
