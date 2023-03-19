@@ -22,6 +22,10 @@ export const api = createApi({
       // The URL for the request is '/fakeApi/posts'
       query: (productId) => `/products/${productId}/styles`,
     }),
+    getProductReviews: build.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (productId) => `/reviews?product_id=${productId}`,
+    }),
     getProductInfo: build.query({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
         const details = await fetchWithBQ(`/products/${productId}`);
@@ -47,4 +51,5 @@ export const {
   useGetSpecificProductQuery,
   useGetProductStylesQuery,
   useGetProductInfoQuery,
+  useGetProductReviewsQuery,
 } = api;
