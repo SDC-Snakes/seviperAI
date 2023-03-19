@@ -10,6 +10,21 @@ import StarRating from './StarRating';
 function ReviewAndRatingForm({RNRCSS}) {
   const [modal, setModal] = useState(false);
   const [recommendOption, setrecommendOption] = useState("");
+  const [characteristics, setCharacteristics] = useState({
+    Size: '',
+    Width: '',
+    Comfort: '',
+    Quality: '',
+    Length: '',
+    Fit: '',
+  });
+
+  const handleCharChange = (e, someChar) => {
+    setCharacteristics((prevState) => ({
+      ...prevState,
+      [someChar]: event.target.value, // radio button data e.target.value??
+    }));
+  };
 
   const toggleModal = (inputBool) => {
     setModal(inputBool);
@@ -52,6 +67,77 @@ function ReviewAndRatingForm({RNRCSS}) {
                   />
                   No
                 </label>
+              </div>
+              <div className="characteristicsRadioButtons">
+                <div className="Size-Radio-Button">
+                  Size
+                  {['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        onChange={(e) => { handleCharChange(e, 'Width'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
+
+                <div className="Width-Radio-Button">
+                  Width
+                  {['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        onChange={(e) => { handleCharChange(e, 'Width'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
+
+                <div className="Comfort-Radio-Button">
+                  Comfortable
+                  {['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        onChange={(e) => { handleCharChange(e, 'Comfortable'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
+
+                <div className="Quality-Radio-Button">
+                  Quality
+                  {['Poor', 'Below average', 'What I expected', 'Pretty Great', 'Perfect'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        onChange={(e) => { handleCharChange(e, 'Quality'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
+
+                <div className="Fit-Radio-Button">
+                  Fit
+                  {['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'].map((element) => (
+                    <label>
+                      <input
+                        type="radio"
+                        value={element}
+                        onChange={(e) => { handleCharChange(e, 'Fit'); }}
+                      />
+                      {element}
+                    </label>
+                  ))}
+                </div>
 
               </div>
               <div>
@@ -59,6 +145,9 @@ function ReviewAndRatingForm({RNRCSS}) {
               </div>
               <div>
                 <input value="" placeholder="Review Body" />
+              </div>
+              <div>
+                <input type="submit" value="Add Images" />
               </div>
               <div>
                 <input value="" placeholder="username" />
