@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormatCard from './FormatCard';
+import StarRating from '../ReviewsRatings/StarRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -16,7 +17,6 @@ const ItemsList = function ({ itemStyles }) {
   const findImage = function(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
       const style = item.photos.results[i];
-      // console.log('item.photos.results.photos: ', item.photos.results);
       for (let j = 0; j < style.photos.length; j++) {
         const stylePhoto = style.photos[j];
         if (stylePhoto.thumbnail_url) {
@@ -40,6 +40,7 @@ const ItemsList = function ({ itemStyles }) {
     return (
       <FormatCard
         key={index}
+        stars={StarRating}
         name={item.details.name}
         category={item.details.category}
         image={findImage(item)}
