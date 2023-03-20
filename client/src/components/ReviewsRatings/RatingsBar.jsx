@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-function RatingBar({ index }) {
-  const [percentFill, setPercentFill] = useState((index + 1) * 15);
+function RatingBar({ index, element }) {
+  const [percentFill, setPercentFill] = useState(element);
 
   return (
     <div className="rating-bar-container">
-      <span style={{ marginRight: '5px' }}>{index+1}star</span>
+      <span style={{ marginRight: '5px' }}> {index+1}star </span>
       <div className="rating-bar">
         <div className="rating-bar-fill" style={{ width: `${percentFill}%` }} />
       </div>
