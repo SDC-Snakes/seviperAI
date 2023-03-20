@@ -6,7 +6,6 @@ import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 
 function AverageRatings({RNRCSS}) {
   const { meta } = useSelector((state) => state.reviews);
-  console.log('meta in avgRatings', meta)
   const obj = meta.ratings;
   const values = Object.values(obj);
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)));

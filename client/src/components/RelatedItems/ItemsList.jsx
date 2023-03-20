@@ -7,12 +7,16 @@ import { useSelector } from 'react-redux';
 
 const ItemsList = function ({ itemStyles }) {
   const params = useParams();
+  // let { related } = useSelector((state) => state.related);
+  // const dispatch = useDispatch();
   const {
     data: relatedProducts,
     isFetching,
   } = useGetRelatedProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
+
+  // console.log('related CarouselList: ', related);
 
   const findImage = function(item) {
     for (let i = 0; i < item.photos.results.length; i++) {

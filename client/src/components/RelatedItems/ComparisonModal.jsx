@@ -3,7 +3,7 @@ import { FaToolbox } from 'react-icons/fa';
 import data from './sampleData';
 // import ProductDetails from '../ProductDetails/ProductDetails';
 
-const ComparisonModal = function ({ sampleChar }) {
+const ComparisonModal = function ({ itemStyles, sampleChar }) {
   const [modal, setModal] = useState(data.sampleModal);
 
   const renderComparison = function (char, index) {

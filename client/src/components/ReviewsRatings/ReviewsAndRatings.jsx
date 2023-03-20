@@ -30,8 +30,6 @@ function ReviewsAndRatings() {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log('META', metaReviews);
-
   if (isFetching || isFetchingMeta || !productReviews || !metaReviews) {
     return <div>loading...</div>;
   }

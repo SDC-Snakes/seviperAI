@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const FormatCard = function ({ name, image, price, category, starRating, itemStyles }) {
-  let related = useSelector((state) => state.related);
+  // let related = useSelector((state) => state.related);
   // const dispatch = useDispatch();
 
   return (

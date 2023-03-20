@@ -10,20 +10,21 @@ const CarouselList = function ({ itemStyles }) {
   const dispatch = useDispatch();
 
   const nextSlide = function () {
-    dispatch(newRelatedCarouselIndex(carouselIndex === related.length - 1 ? 0 : carouselIndex + 1));
+    dispatch(newRelatedCarouselIndex(carouselIndex === /* related.length - 1 */ 4 ? 0 : carouselIndex + 1));
   };
   const prevSlide = function () {
-    dispatch(newRelatedCarouselIndex(carouselIndex === 0 ? related.length - 1 : carouselIndex - 1));
+    dispatch(newRelatedCarouselIndex(carouselIndex === 0 ? /* related.length - 1 */ 4 : carouselIndex - 1));
   };
 
-  console.log('carouselIndex: ', carouselIndex);
+  // console.log('related CarouselList: ', related);
+  // console.log('carouselIndex: ', carouselIndex);
 
   return (
     <div>
       <div className={itemStyles['items-list']}>
-        <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} itemStyles={itemStyles} />
+        <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} />
         <ItemsList itemStyles={itemStyles} />
-        <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} itemStyles={itemStyles} />
+        <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />
       </div>
       <div>
         {/* <FaChevronLeft />
