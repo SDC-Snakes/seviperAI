@@ -4,6 +4,14 @@ button {
 
 .inline {
   display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  background-color: #C2C2C2;
+  width: 60vw;
+}
+
+.mainDiv {
+  display: flex;
 }
 
 .center {
@@ -12,8 +20,48 @@ button {
   justify-content: center;
 }
 
-.circle {
+.circleImage {
+  display: flex;
+  overflow: scroll;
+  border: 2px solid #525252;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
+  margin: 2px;
+}
+
+.sale {
+  color: #B81A30;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+}
+
+.sideGrid {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideImage {
+  border: 2px solid #525252;
+  border-radius: 0.3rem;
+  margin: 3px;
+  height: 40px;
+  width: 40px;
+}
+
+.mainImage {
+  margin: 0 15px;
+  height: 50vh;
+  max-width: 45vw;
+}
+
+.detailsGrid {
+  width: 40vw;
+}
+
+.flex {
+  display: flex;
 }
