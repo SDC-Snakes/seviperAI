@@ -5,7 +5,6 @@ import ReviewsAndRatings from './ReviewsRatings/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
 import Spinner from './Spinner';
-// import DefaultCSSExample from './DefaultCSSExample';
 
 function App() {
   return (
