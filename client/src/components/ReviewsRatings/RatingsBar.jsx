@@ -5,7 +5,7 @@ function RatingBar({ index, element, reviewsNum }) {
 
   return (
     <div className="rating-bar-container">
-      <span style={{ marginRight: '5px' }}> {index+1}star-{reviewsNum}</span>
+      <span style={{ marginRight: '5px' }}> {index+1} star {reviewsNum}</span>
       <div className="rating-bar">
         <div className="rating-bar-fill" style={{ width: `${percentFill}%` }} />
       </div>
