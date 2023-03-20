@@ -24,7 +24,6 @@ function ReviewTile({ index }) {
       <small>
         { format(new Date(reviews.results[index].date), 'MMMM dd yyyy') }
       </small>
-      <h4>Reviewer Name:{reviews.results[index].reviewer_name}</h4>
       <h5>
         Review Title Summary:
         {reviews.results[index].summary}
@@ -42,7 +41,21 @@ function ReviewTile({ index }) {
         </span>
       ))}
       {/* if user recommends the product return text and a checkmark */}
-      { reviews.results[index].recommend && <div> <FaRegCheckCircle /> I recommend this product </div>}
+      { reviews.results[index].recommend
+      && (<div> <FaRegCheckCircle /> I recommend this product </div>
+      )}
+
+      <h6>
+        Reviewer Name:{reviews.results[index].reviewer_name}
+      </h6>
+
+      {reviews.results[index].response && (
+        <div className={RNRCSS["response-from-seller"]}>
+          <h6> Response from seller:</h6>
+          <p>reviews.results[index].response</p>
+        </div>
+      )}
+
       <div>
         Helpful?
         <span onClick={() => { setHelpful('yes'); }}> Yes {reviews.results[index].helpfulness}</span>
