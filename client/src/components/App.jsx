@@ -4,12 +4,16 @@ import ProductDetails from './ProductDetails/ProductDetails';
 import ReviewsAndRatings from './ReviewsRatings/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
-import Spinner from './Spinner';
+import Spinner from './SharedComponents/Spinner';
+import Navbar from './SharedComponents/Navbar';
+import SiteAnnouncement from './SharedComponents/SiteAnnouncement';
 
 function App() {
   return (
     <div>
       <Router>
+        <Navbar />
+        <SiteAnnouncement />
         <Routes>
           <Route path="/" element={<Spinner />} />
           <Route
