@@ -13,7 +13,7 @@ function ReviewsAndRatings() {
   const params = useParams();
 
   let {reviews} = useSelector((state) => state.reviews);
-  console.log('reviews', reviews);
+  // console.log('reviews', reviews);
   const {
     data: productReviews,
     isFetching,
@@ -21,7 +21,7 @@ function ReviewsAndRatings() {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(productReviews);
+  // console.log(productReviews);
 
   if (isFetching || !productReviews) {
     return <div>loading...</div>;
