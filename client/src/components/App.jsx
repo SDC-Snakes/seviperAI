@@ -22,8 +22,8 @@ function App() {
               <>
                 <ProductDetails />
                 <RelatedItems />
-                <ReviewsAndRatings />
                 <QuestionsAnswers />
+                <ReviewsAndRatings />
               </>
           )}
           />

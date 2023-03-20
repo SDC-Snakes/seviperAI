@@ -14,11 +14,15 @@ function Reviews({RNRCSS}) {
     setNumberReviews(numberReviews + 2);
   };
   return (
-    <div>
+    <div className={RNRCSS['reviews-container-right']}>
+      <h3>Product Reviews</h3>
+
 
       <Dropdown />
       {[...Array(numberReviews)].map((_, index) => (
-        <ReviewTile index={index} key={index.toString()} />
+        <div className={RNRCSS['review-tile']}>
+          <ReviewTile index={index} key={index.toString()} />
+        </div>
       ))}
       <input type="submit" value="MORE REVIEWS" onClick={addReviews} />
       <ReviewAndRatingForm RNRCSS={RNRCSS} />
