@@ -1,7 +1,7 @@
 // this is the Review Tile component
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, parseISO, format } from 'date-fns';
 import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 
@@ -13,11 +13,11 @@ function ReviewTile({ index }) {
     <div>
       {reviews.results[index].rating}
       <QuarterIncStarRating averageRating={reviews.results[index].rating} />
-      <h5>
-        Review Title {reviews.results[index].summary}
-      </h5>
-      <small> Date posted:{ formatDistanceToNow(new Date(reviews.results[index].date))}
+      <small>{ format(new Date(reviews.results[index].date), 'MMMM dd yyyy') }
       </small>
+      <h5>
+        Review Title Summary: {reviews.results[index].summary}
+      </h5>
       <p>{reviews.results[index].body}</p>
       {reviews.results[index].photos.map((photo) => (
         // eslint-disable-next-line jsx-a11y/img-redundant-alt
