@@ -37,12 +37,16 @@ function ReviewsAndRatings() {
   }
 
   return (
-    <div>
-      Hello from RatingsReviews
-      <Search />
-      <AverageRatings />
-      <Reviews RNRCSS={RNRCSS} />
+    <div className={RNRCSS['reviewsAndRatings-container-main']}>
+      <div>
+        <h1>Ratings & Reviews</h1>
+        <Search />
+        <AverageRatings RNRCSS={RNRCSS} />
+        <Reviews RNRCSS={RNRCSS} />
+      </div>
+
     </div>
+
   );
 }
 

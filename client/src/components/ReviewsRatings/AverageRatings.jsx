@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 
-function AverageRatings() {
+function AverageRatings({RNRCSS}) {
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   const values = Object.values(obj);
@@ -13,8 +13,8 @@ function AverageRatings() {
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
 
   return (
-    <aside>
-      <h3>RATINGS & REVIEWS</h3>
+    <aside className={RNRCSS['average-ratings-left']}>
+      <h3>Product Ratings</h3>
       <QuarterStarsAverageRating />
       <div>% of reviews recommend this product</div>
       {
