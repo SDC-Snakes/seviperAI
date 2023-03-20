@@ -6,17 +6,13 @@ import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 function ReviewTile({ index }) {
   const [helpful, setHelpful] = useState('');
   // send a post request with the helpful state to the API
   const { reviews } = useSelector((state) => state.reviews);
-
-  function renderImageModal() {
-    console.log('renderImage MODAL')
-    //return (<ThumbnailImageModal RNRCSS={RNRCSS} />);
-  }
-  // copied from ThumbnailImageModal
+  console.log("reviews data", reviews)
   const [modalImage, setModalImage] = useState(false); // or false?
   const toggleModalImage = (inputBool) => (
     setModalImage(inputBool)
@@ -44,6 +40,8 @@ function ReviewTile({ index }) {
           {modalImage && (<ThumbnailImageModal RNRCSS={RNRCSS} toggleModalImage={toggleModalImage} photo={photo}/>)}
         </span>
       ))}
+      {/* if user recommends the product return text and a checkmark */}
+      { reviews.results[index].recommend && <div> <FaRegCheckCircle /> I recommend this product </div>}
       <div>
         Helpful?
         <span onClick={() => { setHelpful('yes'); }}> Yes {reviews.results[index].helpfulness}</span>
