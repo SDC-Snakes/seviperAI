@@ -13,7 +13,9 @@ function ReviewsAndRatings() {
   const params = useParams();
 
   let {reviews} = useSelector((state) => state.reviews);
+
   // console.log('reviews', reviews);
+
   const {
     data: productReviews,
     isFetching,
