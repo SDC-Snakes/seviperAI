@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { api } from '../api/apiSlice';
 
 const initialState = {
-  related: {},
+  related: [],
 };
 
 const relatedSlice = createSlice({
