@@ -9,8 +9,8 @@ import RNRCSS from './Modal.module.css';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 function ReviewTile({ index }) {
-  const [helpful, setHelpful] = useState('');
-  // send a post request with the helpful state to the API
+  const [helpful, setHelpful] = useState('No');
+  // send a post request with the helpful state to the API when helpful is 'yes'
   const { reviews } = useSelector((state) => state.reviews);
   console.log("reviews data", reviews)
   const [modalImage, setModalImage] = useState(false); // or false?
@@ -50,7 +50,7 @@ function ReviewTile({ index }) {
       </h6>
 
       {reviews.results[index].response && (
-        <div className={RNRCSS["response-from-seller"]}>
+        <div className={RNRCSS['response-from-seller']}>
           <h6> Response from seller:</h6>
           <p>reviews.results[index].response</p>
         </div>
@@ -60,7 +60,7 @@ function ReviewTile({ index }) {
         Helpful?
         <span onClick={() => { setHelpful('yes'); }}> Yes {reviews.results[index].helpfulness}</span>
         |
-        <span onClick={() => { setHelpful('No'); }}>No</span>
+        <span>No</span>
         |
         <Report />
       </div>
