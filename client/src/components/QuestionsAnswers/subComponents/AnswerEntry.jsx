@@ -1,10 +1,10 @@
 import React from 'react';
 
-function AnswerEntry() {
+function AnswerEntry({ answer }) {
   return (
     <div className="answer-entry">
       <div className="answer-text">
-        Hello world!
+        {answer.body}
       </div>
       <div className="helpful-text">
         Helpful?
