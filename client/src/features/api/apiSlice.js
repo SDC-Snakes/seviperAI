@@ -26,6 +26,10 @@ export const api = createApi({
       // The URL for the request is '/fakeApi/posts'
       query: (productId) => `/reviews?product_id=${productId}`,
     }),
+    getMetaReviews: build.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (productId) => `/reviews/meta?product_id=${productId}`,
+    }),
     getRelatedProducts: build.query({
       // The URL for the request is '/fakeApi/posts'
       query: (productId) => `/products/${productId}/related`,
@@ -76,4 +80,5 @@ export const {
   useGetProductReviewsQuery,
   useGetRelatedProductsQuery,
   useGetRelatedProductInfoQuery,
+  useGetMetaReviewsQuery,
 } = api;
