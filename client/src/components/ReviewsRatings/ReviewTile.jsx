@@ -24,6 +24,7 @@ function ReviewTile({ index }) {
       <small>
         { format(new Date(reviews.results[index].date), 'MMMM dd yyyy') }
       </small>
+      <h4>Reviewer Name:{reviews.results[index].reviewer_name}</h4>
       <h5>
         Review Title Summary:
         {reviews.results[index].summary}
