@@ -8,8 +8,11 @@ const initialState = {
   outfitLength: 0,
 };
 
-function moveCarousel(state = initialState, action) {
-  return { ...state, current: action.payload };
+function moveRelatedCarousel(state = initialState, action) {
+  return { ...state, carouselIndex: action.payload };
+}
+function moveOutfitCarousel(state = initialState, action) {
+  return { ...state, outfitIndex: action.payload };
 }
 
 const relatedSlice = createSlice({
@@ -17,7 +20,9 @@ const relatedSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
-    newCarouselIndex: moveCarousel,
+    newRelatedCarouselIndex: moveRelatedCarousel,
+    newOutfitCarouselIndex: moveOutfitCarousel,
+
   },
   extraReducers: (builder) => {
     builder
@@ -29,7 +34,8 @@ const relatedSlice = createSlice({
 
 export const {
   reset,
-  newCarouselIndex,
+  newRelatedCarouselIndex,
+  newOutfitCarouselIndex,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

@@ -1,6 +1,7 @@
 /**** Related item list ****/
 
 .items-list {
+  position: relative;
   display: inline-flex;
 }
 
@@ -24,4 +25,21 @@
   width: 100%;
   height: 75%;
   object-fit: cover;
+}
+
+/**** Carousel ****/
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  size: 5rem;
+  z-index: 1;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  size: 5rem;
+  z-index: 1;
 }

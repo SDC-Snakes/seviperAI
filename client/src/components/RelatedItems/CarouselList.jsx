@@ -3,33 +3,35 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import ItemsList from './ItemsList';
 import OutfitList from './OutfitList';
-import { newCarouselIndex } from '../../features/related/relatedSlice';
+import { newRelatedCarouselIndex } from '../../features/related/relatedSlice';
 
-const CarouselList = function () {
+const CarouselList = function ({ itemStyles }) {
   let { carouselIndex, related } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
-  const nextSlider = function () {
-    dispatch(newCarouselIndex(carouselIndex + 3 === related.length ? 0 : carouselIndex + 1))
-  }
-  const prevSlider = function () {
-    dispatch(newCarouselIndex(carouselIndex === 0 ? 0 : carouselIndex - 1))
-  }
+  const nextSlide = function () {
+    dispatch(newRelatedCarouselIndex(carouselIndex === related.length - 1 ? 0 : carouselIndex + 1));
+  };
+  const prevSlide = function () {
+    dispatch(newRelatedCarouselIndex(carouselIndex === 0 ? related.length - 1 : carouselIndex - 1));
+  };
+
+  console.log('carouselIndex: ', carouselIndex);
 
   return (
     <div>
-      <div>
-        <FaChevronLeft />
-        <ItemsList />
-        <FaChevronRight />
+      <div className={itemStyles['items-list']}>
+        <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} itemStyles={itemStyles} />
+        <ItemsList itemStyles={itemStyles} />
+        <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} itemStyles={itemStyles} />
       </div>
       <div>
-        <FaChevronLeft />
+        {/* <FaChevronLeft />
         <OutfitList />
-        <FaChevronRight />
+        <FaChevronRight /> */}
       </div>
     </div>
-  )
+  );
 };
 
 export default CarouselList;
