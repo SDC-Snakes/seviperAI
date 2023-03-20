@@ -1,6 +1,19 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
+import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 
 const FormatCard = function({ image, category, name, price, itemStyles }) {
+  const params = useParams();
+
+  const {
+    data: relatedProducts,
+    isFetching,
+  } = useGetRelatedProductInfoQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  console.log('FormatCard relatedProducts: ', relatedProducts);
+
   return (
     <div className={itemStyles['items-card']}>
       <img className={itemStyles['items-card-img']} src={image} alt="Cheetah print t-shirt" />

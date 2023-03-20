@@ -20,7 +20,7 @@ module.exports = {
   },
   getMeta: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
-    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews?product_id=${req.query.product_id}`, {
+    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews/meta?product_id=${req.query.product_id}`, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
