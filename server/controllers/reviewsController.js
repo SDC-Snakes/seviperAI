@@ -14,13 +14,13 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
   getMeta: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
-    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews?product_id=${req.query.product_id}`, {
+    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews/meta?product_id=${req.query.product_id}`, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
@@ -28,7 +28,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
@@ -43,7 +43,7 @@ module.exports = {
       .then((response) => {
         res.status(200).send(response.data);
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(404).send(err);
       });
   },
@@ -56,7 +56,7 @@ module.exports = {
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },
@@ -69,7 +69,7 @@ module.exports = {
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
-      .then((err) => {
+      .catch((err) => {
         res.status(422).send(err);
       });
   },

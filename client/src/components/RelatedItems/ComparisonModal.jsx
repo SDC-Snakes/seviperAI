@@ -8,24 +8,26 @@ const ComparisonModal = function ({ sampleChar }) {
 
   const renderComparison = function (char, index) {
     return (
-      <div key={index}>
-        {char.currYes && <FaToolbox />}
-        <p>{char.value}</p>
-        {char.relYes && <FaToolbox />}
-      </div>
+      <tr key={index}>
+        <td>{char.currYes && <FaToolbox />}</td>
+        <td>{char.value}</td>
+        <td>{char.relYes && <FaToolbox />}</td>
+      </tr>
     );
   };
 
   return (
     <table>
-      <tr>
-        <th>Comparing</th>
-        <th>Current Product</th>
-        <th>Related Product</th>
-      </tr>
-      <tr>
+      <thead>
+        <tr>
+          <th>Comparing</th>
+          <th>Current Product</th>
+          <th>Related Product</th>
+        </tr>
+      </thead>
+      <tbody>
         {modal.map((char, index) => renderComparison(char, index))}
-      </tr>
+      </tbody>
     </table>
   );
 };
