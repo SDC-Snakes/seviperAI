@@ -8,6 +8,7 @@ const initialState = {
   images: [],
   selectedImage: '',
   expanded: false,
+  sku: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -17,6 +18,9 @@ function changeStyle(state = initialState, action) {
 function changeImage(state = initialState, action) {
   return { ...state, selectedImage: action.payload };
 }
+function updateDropdown(state = initialState, action) {
+  return { ...state, [action.payload.name]: action.payload.value };
+}
 
 const productsSlice = createSlice({
   name: 'product',
@@ -25,6 +29,7 @@ const productsSlice = createSlice({
     reset: (state) => initialState,
     newSelectedStyle: changeStyle,
     newSelectedImage: changeImage,
+    handleDropdown: updateDropdown,
   },
   extraReducers: (builder) => {
     builder
@@ -36,6 +41,11 @@ const productsSlice = createSlice({
   },
 });
 
-export const { reset, newSelectedStyle } = productsSlice.actions;
+export const {
+  reset,
+  newSelectedStyle,
+  newSelectedImage,
+  handleDropdown,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

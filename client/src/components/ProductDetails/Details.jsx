@@ -3,10 +3,13 @@ import StarRating from '../ReviewsRatings/StarRating';
 import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { handleDropdown } from '../../features/products/productsSlice';
 
 function Details() {
-  let { selectedStyle, styles, details } = useSelector((state) => state.products);
+  let { selectedStyle, styles, details, sku } = useSelector((state) => state.products);
+  const { quantity } = selectedStyle.skus[sku] || null;
   const dispatch = useDispatch();
+  console.log(size)
 
   return (
     <div>
@@ -33,14 +36,20 @@ function Details() {
         <StyleList />
       </div>
       <div>
-        <select defaultValue="Select a size">
+        <select name="sku" onChange={(e) => dispatch(handleDropdown(e.target))}>
           <option value="selectSize">Select Size</option>
           {Object.keys(selectedStyle.skus).map(
-            (sku) => (<option value={sku.size}>{sku.size}</option>),
+            (sku) => (
+              <option value={sku}>
+                {selectedStyle.skus[sku].size}
+              </option>
+            ),
           )}
         </select>
-        <select defaultValue="1">
-          {[1, 2, 3, 4, 5].map((qty) => (<option value={qty}>{qty}</option>))}
+        <select name="qty">
+          {quantity.length
+            ? quantity.map((qty) => (<option value={qty}>{qty}</option>))
+            : <option>-</option>}
         </select>
       </div>
       <div>
