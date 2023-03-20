@@ -5,13 +5,26 @@ button {
 .inline {
   display: flex;
   justify-content: space-around;
-  margin: 10px;
+  margin: 10px 0px;
   background-color: #C2C2C2;
   width: 60vw;
 }
 
+.expanded {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0px;
+  background-color: #C2C2C2;
+  width: 98vw;
+  cursor: zoom-in;
+}
+
 .mainDiv {
   display: flex;
+}
+
+.detailsDiv {
+  width: 40vw;
 }
 
 .center {
@@ -64,4 +77,16 @@ button {
 
 .flex {
   display: flex;
+}
+
+.containCircles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.topRight {
+  z-index: 1;
+  position: absolute;
+  left: 58vw;
 }

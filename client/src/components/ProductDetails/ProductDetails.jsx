@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import ImageViewer from './ImageViewer';
 import Details from './Details';
 import Description from './Description';
@@ -8,6 +9,7 @@ import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 
 function ProductDetails() {
   const params = useParams();
+  let { expanded } = useSelector((state) => state.products);
 
   const {
     data: productInfo,
@@ -26,14 +28,22 @@ function ProductDetails() {
 
   return (
     <div>
-      <div className="mainDiv">
-        <div>
-          <ImageViewer />
+      {expanded ? (
+        <div className="mainDiv">
+          <div>
+            <ImageViewer />
+          </div>
         </div>
-        <div className="detailsDiv">
-          <Details />
+      ) : (
+        <div className="mainDiv">
+          <div>
+            <ImageViewer />
+          </div>
+          <div className="detailsDiv">
+            <Details />
+          </div>
         </div>
-      </div>
+      )}
       <Description />
     </div>
   );

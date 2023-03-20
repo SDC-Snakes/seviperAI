@@ -4,12 +4,16 @@ import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleDropdown } from '../../features/products/productsSlice';
+import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
 
 function Details() {
   let { selectedStyle, styles, details, sku } = useSelector((state) => state.products);
-  const { quantity } = selectedStyle.skus[sku] || null;
   const dispatch = useDispatch();
-  console.log(size)
+  let { quantity } = selectedStyle.skus[sku] || 0;
+
+  if (quantity > 15) {
+    quantity = 15;
+  }
 
   return (
     <div>
@@ -36,30 +40,35 @@ function Details() {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => dispatch(handleDropdown(e.target))}>
+        <select name="sku" onChange={(e) => { dispatch(handleDropdown({ name: e.target.name, value: e.target.value })) }}>
           <option value="selectSize">Select Size</option>
           {Object.keys(selectedStyle.skus).map(
-            (sku) => (
-              <option value={sku}>
-                {selectedStyle.skus[sku].size}
+            (sizeSku) => (
+              <option key={sizeSku} value={sizeSku}>
+                {selectedStyle.skus[sizeSku].size}
               </option>
             ),
           )}
         </select>
         <select name="qty">
-          {quantity.length
-            ? quantity.map((qty) => (<option value={qty}>{qty}</option>))
+          {quantity
+            ? Array.from({ length: quantity }, (_, i) => i + 1).map(
+              (qty) => (<option key={qty} value={qty}>{qty}</option>),
+            )
             : <option>-</option>}
         </select>
       </div>
       <div>
-        <button>
-
+        <button type="button">
+          Add to cart
         </button>
-        <button>
-
+        <button type="button">
+          <FaHeart />
         </button>
       </div>
+      <FaTwitter />
+      <FaPinterest />
+      <FaFacebookF />
     </div>
   );
 }
