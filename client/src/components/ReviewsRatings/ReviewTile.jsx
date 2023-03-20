@@ -1,15 +1,20 @@
 // this is the Review Tile component
 import React from 'react';
-import QuarterIncStarRating from './QuarterIncStarRating';
+import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import Report from './Report';
 
 function ReviewTile() {
   return (
     <div>
-      <QuarterIncStarRating/>
+      <QuarterStarsAverageRating />
       <h5>Review Title</h5>
-      <p>Review Body, asf fjsadf sdjhr tefjlaskdf ajsflas fhglrkitjas falsdkfjs dfghjowernfs df fjhaslf dsfhalsdnfk </p>
-      <div>Helpful? Yes or NO  | <Report /> </div>
+      <p>Review Body, asf fjsadf sdjhr tefjlaskdf ajsflas
+         fhglrkitjas falsdkfjs dfghjowernfs df fjhaslf dsfhalsdnfk
+      </p>
+      <div>
+        Helpful? Yes or NO  |
+        <Report />
+      </div>
       <div>_________________________________________________________________________________</div>
     </div>
   );

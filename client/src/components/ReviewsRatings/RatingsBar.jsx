@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 function RatingBar({ index }) {
   const [percentFill, setPercentFill] = useState((index + 1) * 15);
 
-  let {reviews} = useSelector((state) => state.reviews);
   return (
     <div className="rating-bar-container">
       <span style={{ marginRight: '5px' }}>{index+1}star</span>
