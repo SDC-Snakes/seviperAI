@@ -10,7 +10,6 @@ const relatedSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
-    relatedItemsList:
   },
   extraReducers: (builder) => {
     builder
