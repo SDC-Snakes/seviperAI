@@ -1,21 +1,34 @@
 // this is the Review Tile component
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formatDistanceToNow, parseISO } from 'date-fns';
-import QuarterStarsAverageRating from './QuarterStarsAverageRating';
+import { formatDistanceToNow } from 'date-fns';
+import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 
-function ReviewTile({index}) {
+function ReviewTile({ index }) {
+  const [helpful, setHelpful] = useState('');
+  // send a post request with the helpful state to the API
   const { reviews } = useSelector((state) => state.reviews);
-  console.log("reviews", reviews);
   return (
     <div>
-      <QuarterStarsAverageRating />
-      <h5>Review Title {reviews.results[index].summary}</h5>
-      <small>Date posted: { formatDistanceToNow(new Date(reviews.results[index].date))} </small>
+      {reviews.results[index].rating}
+      <QuarterIncStarRating averageRating={reviews.results[index].rating} />
+      <h5>
+        Review Title {reviews.results[index].summary}
+      </h5>
+      <small> Date posted:{ formatDistanceToNow(new Date(reviews.results[index].date))}
+      </small>
       <p>{reviews.results[index].body}</p>
+      {reviews.results[index].photos.map((photo) => (
+        // eslint-disable-next-line jsx-a11y/img-redundant-alt
+        <img key={photo.id} src={photo.url} alt={`Photo ${photo.id}`} />
+      ))}
       <div>
-        Helpful? Yes or NO  |
+        Helpful?
+        <span onClick={() => { setHelpful('yes'); }}> Yes {reviews.results[index].helpfulness}</span>
+        |
+        <span onClick={() => { setHelpful('No'); }}>No</span>
+        |
         <Report />
       </div>
       <div>_________________________________________________________________________________</div>

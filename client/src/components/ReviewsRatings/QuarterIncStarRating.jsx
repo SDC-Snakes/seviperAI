@@ -12,7 +12,7 @@ function QuarterIncStarRating({averageRating}) {
 
   return (
 
-    <div>
+    <span>
       {[...Array(fullStarsNum)].map((_, index) => (
         <span key={`yellow_star ${index}`}>
           <FaStar style={{ color: '#ffc107' }} />
@@ -37,7 +37,7 @@ function QuarterIncStarRating({averageRating}) {
           <FaStar style={{ color: '#e4e5e9' }} />
         </span>
       ))}
-    </div>
+    </span>
 
   );
 }

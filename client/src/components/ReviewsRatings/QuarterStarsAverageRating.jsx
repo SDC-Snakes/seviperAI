@@ -7,7 +7,7 @@ function QuarterStarsAverageRating() {
   // axios.get(`/reviews/meta?product_id=${40344}`)
 
   const { meta } = useSelector((state) => state.reviews);
-  let obj = meta.ratings;
+  const obj = meta.ratings;
   // obj will be replaced with the "ratings" object from the API,  /reviews/meta route.
 
   let sum = 0;
