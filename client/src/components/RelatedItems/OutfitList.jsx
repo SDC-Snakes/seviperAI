@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 
 const OutfitList = function ({ itemStyles }) {
-  const [outfitList, setOutfitList] = useState(sampleData);
   const params = useParams();
   const {
     data: relatedProducts,
@@ -20,9 +19,9 @@ const OutfitList = function ({ itemStyles }) {
     return (
       <FormatCard
         key={index}
-        name={item.name}
-        image={item.image}
-        price={item.price}
+        name={PLACEHOLDER.details.name}
+        image={PLACEHOLDER.photos.results[0].photos.url}
+        price={PLACEHOLDER.default_price}
         itemStyles={itemStyles}
       />
     );
@@ -32,7 +31,7 @@ const OutfitList = function ({ itemStyles }) {
     <div>
       <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list']}>
-        {outfitList.sampleData.map((item, index) => renderList(item, index))}
+        {relatedProducts.map((item, index) => renderList(item, index))}
       </div>
     </div>
   );
