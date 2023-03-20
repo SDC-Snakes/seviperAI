@@ -13,6 +13,18 @@ const ItemsList = function ({ itemStyles }) {
     refetchOnMountOrArgChange: true,
   });
 
+  const findImage = function(item) {
+    for (let i = 0; i < item.photos.results.length; i++) {
+      const style = item.photos.results[i];
+      // console.log('item.photos.results.photos: ', item.photos.results);
+      for (let j = 0; j < style.photos.length; j++) {
+        const stylePhoto = style.photos[j];
+        if (stylePhoto.thumbnail_url) {
+          return stylePhoto.thumbnail_url;
+        }
+      }
+    }
+  };
   // console.log('relatedProducts ItemsList: ', relatedProducts);
 
   const renderList = function (item, index) {
@@ -21,7 +33,7 @@ const ItemsList = function ({ itemStyles }) {
         key={index}
         name={item.details.name}
         category={item.details.category}
-        image={item.photos.results[0].photos[0].thumbnail_url}
+        image={findImage(item)}
         price={item.details.default_price}
         itemStyles={itemStyles}
       />

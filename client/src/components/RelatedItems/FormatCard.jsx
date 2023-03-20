@@ -5,10 +5,10 @@ const FormatCard = function ({ name, image, price, category, itemStyles }) {
   let related = useSelector((state) => state.related);
   // const dispatch = useDispatch();
 
-  console.log('name FormatCard: ', name);
-  console.log('image FormatCard: ', image);
-  console.log('price FormatCard: ', price);
-  console.log('category FormatCard: ', category);
+  // console.log('name FormatCard: ', name);
+  // console.log('image FormatCard: ', image);
+  // console.log('price FormatCard: ', price);
+  // console.log('category FormatCard: ', category);
 
   return (
     <div className={itemStyles['items-card']}>
