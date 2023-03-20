@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetFirstProductQuery } from '../features/api/apiSlice';
+import { useGetFirstProductQuery } from '../../features/api/apiSlice';
 
 function Spinner() {
   const navigate = useNavigate();

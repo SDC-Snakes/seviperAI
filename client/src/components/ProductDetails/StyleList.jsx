@@ -7,7 +7,7 @@ function StyleList() {
   let { styles } = useSelector((state) => state.products);
 
   return (
-    <div className="flex">
+    <div className="flex containCircles">
       {styles.map((style) => (
         <StyleImage
           image={style.photos[0].thumbnail_url}

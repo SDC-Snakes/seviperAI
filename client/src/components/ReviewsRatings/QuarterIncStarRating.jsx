@@ -3,15 +3,16 @@ import { FaStar } from 'react-icons/fa';
 // once the data is retreived from the API,
 // ratingNum has to be replaced by the incoming review rating.
 // setState is not being utilized, might need to be removed or replaced when implementing redux
-function QuarterIncStarRating() {
-  const ratingNum = 3.2;
+function QuarterIncStarRating({averageRating}) {
+  // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
+  const ratingNum = averageRating;
   const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
   const [remainder, setRemainder] = useState(`${(Math.round(((ratingNum - fullStarsNum)) * 4) / 4) * 100}%`);
   const [greyStars, setGreyStars] = useState(5 - (Math.ceil(ratingNum)));
 
   return (
 
-    <div>
+    <span>
       {[...Array(fullStarsNum)].map((_, index) => (
         <span key={`yellow_star ${index}`}>
           <FaStar style={{ color: '#ffc107' }} />
@@ -36,7 +37,7 @@ function QuarterIncStarRating() {
           <FaStar style={{ color: '#e4e5e9' }} />
         </span>
       ))}
-    </div>
+    </span>
 
   );
 }

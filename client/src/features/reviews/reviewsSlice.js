@@ -3,6 +3,7 @@ import { api } from '../api/apiSlice';
 
 const initialState = {
   reviews: {},
+  meta: {},
 };
 
 const reviewsSlice = createSlice({
@@ -15,6 +16,9 @@ const reviewsSlice = createSlice({
     builder
       .addMatcher(api.endpoints.getProductReviews.matchFulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addMatcher(api.endpoints.getMetaReviews.matchFulfilled, (state, action) => {
+        state.meta = action.payload;
       });
   },
 });
