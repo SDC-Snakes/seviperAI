@@ -12,11 +12,10 @@ function RatingBar({ index }) {
         <div className="rating-bar-fill" style={{ width: `${percentFill}%` }} />
       </div>
     </div>
-  )
+  );
 }
 
 // MS: note to change the percentage fill later one use the percentFill state ,currently it's set to 15 times the index+1 to generate different fill %,
 // An onClick is also needed to filter reviews later on
-
 
 export default RatingBar;
