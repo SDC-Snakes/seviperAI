@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StarRating from '../ReviewsRatings/StarRating';
+import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,7 +18,7 @@ function Details() {
   return (
     <div>
       <div>
-        <StarRating />
+        <QuarterStarsAverageRating />
         <button type="button">See all reviews</button>
       </div>
       <h3>
