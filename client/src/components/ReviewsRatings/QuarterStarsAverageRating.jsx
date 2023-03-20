@@ -21,7 +21,9 @@ function QuarterStarsAverageRating() {
   const averageRating = sum / numOfRatings;
 
   return (
-    <QuarterIncStarRating averageRating={averageRating} />
+    <span>
+      {Math.round(averageRating * 10) / 10} <QuarterIncStarRating averageRating={averageRating} />
+    </span>
   );
 }
 

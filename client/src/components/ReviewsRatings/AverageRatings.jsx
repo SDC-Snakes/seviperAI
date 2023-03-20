@@ -24,7 +24,7 @@ function AverageRatings() {
         // and has a value of 0
         starRatingPercentages.map((element, index) => (
           <div key={index.toString()}>
-            <RatingBar index={index} element={Number(element)} />
+            <RatingBar index={index} element={Number(element)} reviewsNum={values[index]} />
           </div>
         ))
       }
