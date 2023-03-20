@@ -26,6 +26,10 @@ export const api = createApi({
       // The URL for the request is '/fakeApi/posts'
       query: (productId) => `/reviews?product_id=${productId}`,
     }),
+    getRelatedProducts: build.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (productId) => `/products/${productId}/related`,
+    }),
     getProductInfo: build.query({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
         const details = await fetchWithBQ(`/products/${productId}`);
@@ -35,14 +39,38 @@ export const api = createApi({
           ? { data: { details: details.data, styles: styles.data } } : { error: styles.error };
       },
     }),
-    // EXAMPLE MUTATION endpoint!!!
-    // updateReview: build.mutation({
-    //   query: reviewId => ({
-    //     url: `/reviews/${reviewId}`,
-    //     method: 'POST',
-    //     body: updatedReview
-    //   })
+    getRelatedProductInfo: build.query({
+      async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
+        const related = await fetchWithBQ(`/products/${productId}/related`);
+        if (related.error) return { error: related.error };
+        const relatedItem = {};
+        await Promise.all(related.data.map(async (item) => {
+          relatedItem[item] = {};
+          const itemDetails = await fetchWithBQ(`/products/${item}`);
+          return itemDetails.data
+          ? relatedItem[item].details = itemDetails.data : relatedItem[item].detailsError = itemDetails.error;
+        }));
+        await Promise.all(related.data.map(async (item) => {
+          const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
+          return ratingsDetails.data
+          ? relatedItem[item].ratings = ratingsDetails.data : relatedItem[item].ratingsError = ratingsDetails.error;
+        }));
+        await Promise.all(related.data.map(async (item) => {
+          const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
+          return allPhotos.data
+          ? relatedItem[item].photos = allPhotos.data : relatedItem[item].photoError = allPhotos.error;
+        }));
+        return { data: relatedItem };
+      },
+    }),
   }),
+  // EXAMPLE MUTATION endpoint!!!
+  // updateReview: build.mutation({
+  //   query: reviewId => ({
+  //     url: `/reviews/${reviewId}`,
+  //     method: 'POST',
+  //     body: updatedReview
+  //   })
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
@@ -52,4 +80,6 @@ export const {
   useGetProductStylesQuery,
   useGetProductInfoQuery,
   useGetProductReviewsQuery,
+  useGetRelatedProductsQuery,
+  useGetRelatedProductInfoQuery,
 } = api;
