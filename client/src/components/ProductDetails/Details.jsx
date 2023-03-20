@@ -33,11 +33,14 @@ function Details() {
         <StyleList />
       </div>
       <div>
-        <select>
-
+        <select defaultValue="Select a size">
+          <option value="selectSize">Select Size</option>
+          {Object.keys(selectedStyle.skus).map(
+            (sku) => (<option value={sku.size}>{sku.size}</option>),
+          )}
         </select>
-        <select>
-
+        <select defaultValue="1">
+          {[1, 2, 3, 4, 5].map((qty) => (<option value={qty}>{qty}</option>))}
         </select>
       </div>
       <div>
