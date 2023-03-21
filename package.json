@@ -4,7 +4,8 @@
   "scripts": {
     "client-dev": "npx webpack --watch",
     "build": "npx webpack",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "reset-main": "git checkout main && git fetch origin && git reset --hard origin/main"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

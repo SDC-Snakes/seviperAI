@@ -1,11 +1,11 @@
 import React from 'react';
 import QnASet from './QnASet';
 
-function QuestionsList() {
+function QuestionsList({ questions, numberOfQs }) {
   return (
     <div id="questions-list">
-      <QnASet />
-      <div>More Answered Questions</div>
+      {questions.slice(0, numberOfQs).map((question) => (
+        <QnASet question={question} key={questions.question_id} />))}
     </div>
   );
 }

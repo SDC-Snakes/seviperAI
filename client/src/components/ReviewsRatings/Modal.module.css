@@ -45,7 +45,7 @@ body.active-modal {
 .average-ratings-left {
   width: 22%;
     float: left;
-    padding: 2px;
+    padding: 10px;
     border: 2px solid grey;
     border-radius: 1%;
     margin-top: 10px;
@@ -55,9 +55,9 @@ body.active-modal {
 }
 
 .reviews-container-right {
-  width: 76%;
+  width: 74%;
     float: right;
-    padding: 2px;
+    padding: 10px;
     border: 2px solid grey;
     border-radius: 1%;
     margin-right: 10px;
@@ -88,4 +88,10 @@ body.active-modal {
   margin-top: 10px;
   background-color: lightgrey;
 
+}
+
+/* images in reviewTile, thumbnail images */
+.thumbnail-review-image {
+  height:40px;
+  margin-right: 10px;
 }

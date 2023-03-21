@@ -1,15 +1,13 @@
 import React from 'react';
+import HelpfulModule from './HelpfulModule';
 
-function AnswerEntry() {
+function AnswerEntry({ answer }) {
   return (
     <div className="answer-entry">
       <div className="answer-text">
-        Hello world!
+        {answer.body}
       </div>
-      <div className="helpful-text">
-        Helpful?
-      </div>
-      <input type="button" className="yes-button" value="Yes" />
+      <HelpfulModule count={answer.helpfulness} onClick={() => console.log('helpful ANSWER')} />
       <input type="button" className="report-button" value="Report" />
     </div>
   );

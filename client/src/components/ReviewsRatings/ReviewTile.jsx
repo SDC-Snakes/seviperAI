@@ -12,10 +12,16 @@ function ReviewTile({ index }) {
   const [helpful, setHelpful] = useState('No');
   // send a post request with the helpful state to the API when helpful is 'yes'
   const { reviews } = useSelector((state) => state.reviews);
-  const [modalImage, setModalImage] = useState(false); // or false?
+  console.log("reviews data", reviews)
+  const [modalImage, setModalImage] = useState(false);
+  const [photoState, setPhotoState] = useState('');
   const toggleModalImage = (inputBool) => (
     setModalImage(inputBool)
+   );
+  const togglePhotoState = (photo) => (
+    setPhotoState(photo)
   );
+
   return (
     <div>
       {reviews.results[index].rating}
@@ -24,28 +30,33 @@ function ReviewTile({ index }) {
         { format(new Date(reviews.results[index].date), 'MMMM dd yyyy') }
       </small>
       <h5>
-        Review Title Summary:
+        {/* Review Title Summary: */}
         {reviews.results[index].summary}
       </h5>
       <p>{reviews.results[index].body}</p>
       {reviews.results[index].photos.map((photo) => (
         <span key={photo.id}>
           <img
+            className={RNRCSS['thumbnail-review-image']}
             key={photo.id}
             src={photo.url}
             alt={`${photo.id}`}
-            onClick={() => { toggleModalImage(true); }}
+            onClick={() => {
+              toggleModalImage(!modalImage);
+              togglePhotoState(photo);
+            }}
           />
-          {modalImage && (<ThumbnailImageModal RNRCSS={RNRCSS} toggleModalImage={toggleModalImage} photo={photo}/>)}
         </span>
       ))}
+       {modalImage && (<ThumbnailImageModal RNRCSS={RNRCSS} toggleModalImage={toggleModalImage} photo={photoState}/>)}
       {/* if user recommends the product return text and a checkmark */}
       { reviews.results[index].recommend
       && (<div> <FaRegCheckCircle /> I recommend this product </div>
       )}
 
       <h6>
-        Reviewer Name:{reviews.results[index].reviewer_name}
+        {/* Reviewer Name:*/}
+        {reviews.results[index].reviewer_name}
       </h6>
 
       {reviews.results[index].response && (

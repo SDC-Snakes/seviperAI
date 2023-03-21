@@ -24,7 +24,7 @@ export const api = createApi({
     }),
     getProductReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
-      query: (obj) => `/reviews?count=${obj.count}&product_id=${obj.id}`,
+      query: (obj) => `/reviews?count=${obj.count}&sort=${obj.sort}&product_id=${obj.id}`,
     }),
     getMetaReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
