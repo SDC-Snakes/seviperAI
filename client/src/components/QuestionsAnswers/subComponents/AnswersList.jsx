@@ -11,7 +11,7 @@ function AnswersList({ answers }) {
     setNumberOfAs(folded ? answersList.length : 2);
     setFolded(!folded);
   };
-  return (
+  return answersList.length > 0 && (
     <div className="answer-list">
       <span className="a">
         A:
@@ -21,18 +21,20 @@ function AnswersList({ answers }) {
           <AnswerEntry answer={answer} />
         </span>
       ))}
-
-      <div>
-        <b
-          style={{ cursor: 'pointer' }}
-          onClick={answerFold}
-          role="button"
-          onKeyPress={answerFold}
-          tabIndex={0}
-        >
-          {folded ? 'See more answers' : 'Collapse answers'}
-        </b>
-      </div>
+      {answersList.length > 2
+        && (
+          <div>
+            <b
+              style={{ cursor: 'pointer' }}
+              onClick={answerFold}
+              role="button"
+              onKeyPress={answerFold}
+              tabIndex={0}
+            >
+              {folded ? 'See more answers' : 'Collapse answers'}
+            </b>
+          </div>
+        )}
     </div>
   );
 }

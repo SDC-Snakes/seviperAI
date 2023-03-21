@@ -7,7 +7,7 @@ function QnASet({ question }) {
   return (
     <div className="qna-set">
       <QuestionEntry question={question} />
-      <AnswersList answers={answersSample.results} />
+      <AnswersList answers={question.answers} />
     </div>
   );
 }

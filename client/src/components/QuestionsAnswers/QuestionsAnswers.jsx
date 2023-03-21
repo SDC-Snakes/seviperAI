@@ -13,7 +13,7 @@ function QuestionsAnswers() {
   const [numberOfQs, setNumberOfQs] = useState(2);
 
   const loadMoreQs = () => {
-    setNumberOfQs(numberOfQs + 2);
+    setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
 
   return (
@@ -21,17 +21,20 @@ function QuestionsAnswers() {
       <h2>Main Q&A Div</h2>
       {/* <Search /> */}
       <QuestionsList questions={questions} numberOfQs={numberOfQs} />
-      <div>
-        <b
-          style={{ cursor: 'pointer' }}
-          onClick={loadMoreQs}
-          role="button"
-          onKeyPress={loadMoreQs}
-          tabIndex={0}
-        >
-          More Answered Questions
-        </b>
-      </div>
+      {numberOfQs < questions.length
+        && (
+          <div>
+            <b
+              style={{ cursor: 'pointer' }}
+              onClick={loadMoreQs}
+              role="button"
+              onKeyPress={loadMoreQs}
+              tabIndex={0}
+            >
+              More Answered Questions
+            </b>
+          </div>
+        )}
       {/* <AnswerModalWindow /> */}
     </div>
   );
