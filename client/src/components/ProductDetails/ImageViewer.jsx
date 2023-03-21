@@ -14,19 +14,19 @@ function ImageViewer() {
   } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
-  const handleImageClick = (image, style, ind) => {
+  const handleImageClick = (image, ind) => {
     dispatch(newSelectedImage(image.url));
     dispatch(newImageIndex(ind));
   };
 
   const handleHorizontalScroll = (direction) => {
     if (direction === 'left') {
-      if (Math.floor((imageIndex) / 7) !== page) {
+      if (Math.floor((imageIndex - 1) / 7) !== page) {
         dispatch(handleStateUpdate({ name: 'page', value: page - 1 }));
       }
       dispatch(handleStateUpdate({ name: 'imageIndex', value: imageIndex - 1 }));
     } else {
-      if (Math.floor((imageIndex) / 7) !== page) {
+      if (Math.floor((imageIndex + 1) / 7) !== page) {
         dispatch(handleStateUpdate({ name: 'page', value: page + 1 }));
       }
       dispatch(handleStateUpdate({ name: 'imageIndex', value: imageIndex + 1 }));
@@ -60,7 +60,7 @@ function ImageViewer() {
       <div>
         {imageIndex > 0 ? <FaChevronLeft onClick={() => handleHorizontalScroll('left')} /> : null}
         { Object.keys(selectedStyle).length > 0 ? <img className="mainImage" src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} /> : null }
-        {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => dispatch(handleStateUpdate({ name: 'imageIndex', value: imageIndex + 1 }))} /> : null}
+        {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => handleHorizontalScroll('right')} /> : null}
       </div>
     </div>
   );
