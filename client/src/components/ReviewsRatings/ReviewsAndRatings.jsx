@@ -11,6 +11,7 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 
 function ReviewsAndRatings() {
   const params = useParams();
+  // const [trigger, { data }] = useGetProductReviewsQuery();
 
   let { reviews } = useSelector((state) => state.reviews);
 
@@ -33,8 +34,9 @@ function ReviewsAndRatings() {
   });
 
   useEffect(() => {
+    // trigger({ id: params.productId, count, sortState });
     refetch();
-  }, [sortState, refetch]);
+  }, [sortState,refetch]);
 
   function handleSortState(sortInput) {
       setSortState(sortInput);
@@ -42,7 +44,21 @@ function ReviewsAndRatings() {
   }
 
   if (isFetching || isFetchingMeta || !productReviews || !metaReviews) {
-    return <div>loading...</div>;
+    return (
+      <div className={RNRCSS['loading-window']}>
+       <h1>Ratings & Reviews</h1>
+       <Search />
+        <aside className={RNRCSS['average-ratings-left']}>
+          <h3>Product Ratings</h3>
+          <h3>Loading...</h3>
+        </aside>
+        <div className={RNRCSS['reviews-container-right']}>
+            <h3>Product Reviews</h3>
+            <h3>Loading...</h3>
+        </div>
+      </div>
+    )
+
   }
 
   return (

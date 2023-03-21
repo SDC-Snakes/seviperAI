@@ -61,7 +61,7 @@ function ReviewTile({ index }) {
       {reviews.results[index].response && (
         <div className={RNRCSS['response-from-seller']}>
           <h6> Response from seller:</h6>
-          <p>reviews.results[index].response</p>
+          <p>{reviews.results[index].response}</p>
         </div>
       )}
 
