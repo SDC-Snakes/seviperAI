@@ -43,7 +43,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   const renderList = function (item, index) {
     return (
       <div>
-      {relatedIndex === index && <FormatCard
+      {(relatedIndex <= index) && <FormatCard
         key={index}
         stars={StarRating}
         name={item.details.name}

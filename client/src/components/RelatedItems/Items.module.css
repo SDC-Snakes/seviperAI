@@ -15,6 +15,7 @@
 
 .items-list-content {
   display: inline-flex;
+  transition: all 250ms linear;
 }
 
 .items-list-title {
@@ -44,6 +45,7 @@
 .left-arrow, .right-arrow {
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   font-size: 2rem;
   z-index: 1;
 }
