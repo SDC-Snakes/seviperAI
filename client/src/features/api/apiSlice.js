@@ -47,24 +47,18 @@ export const api = createApi({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
         const related = await fetchWithBQ(`/products/${productId}/related`);
         if (related.error) return { error: related.error };
-        const relatedItem = {};
-        await Promise.all(related.data.map(async (item) => {
-          relatedItem[item] = {};
+        const allItems = await Promise.all(related.data.map(async (item) => {
+          const relatedItem = {};
+          relatedItem.product_id = item;
           const itemDetails = await fetchWithBQ(`/products/${item}`);
-          return itemDetails.data
-            ? relatedItem[item].details = itemDetails.data : relatedItem[item].detailsError = itemDetails.error;
-        }));
-        await Promise.all(related.data.map(async (item) => {
+          itemDetails.data ? relatedItem.details = itemDetails.data : relatedItem.detailsError = itemDetails.error;
           const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
-          return ratingsDetails.data
-            ? relatedItem[item].ratings = ratingsDetails.data : relatedItem[item].ratingsError = ratingsDetails.error;
-        }));
-        await Promise.all(related.data.map(async (item) => {
+          ratingsDetails.data ? relatedItem.ratings = ratingsDetails.data : relatedItem.ratingsError = ratingsDetails.error;
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
-          return allPhotos.data
-            ? relatedItem[item].photos = allPhotos.data : relatedItem[item].photoError = allPhotos.error;
+          allPhotos.data ? relatedItem.photos = allPhotos.data : relatedItem.photoError = allPhotos.error;
+          return relatedItem;   
         }));
-        return { data: relatedItem };
+        return { data: allItems };
       },
     }),
     AddToCart: build.mutation({

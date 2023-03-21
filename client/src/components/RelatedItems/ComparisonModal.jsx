@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FaToolbox } from 'react-icons/fa';
 import data from './sampleData';
-// import ProductDetails from '../ProductDetails/ProductDetails';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ComparisonModal = function ({ sampleChar }) {
-  const [modal, setModal] = useState(data.sampleModal);
+const ComparisonModal = function ({ itemStyles, sampleChar }) {
+  let { modalOpen } = useSelector((state) => state.related);
+  const dispatch = useDispatch();
+  const [modal] = useState(data.sampleModal);
 
   const renderComparison = function (char, index) {
     return (
@@ -18,10 +20,11 @@ const ComparisonModal = function ({ sampleChar }) {
 
   return (
     <table>
+      <caption>Comparing</caption>
       <thead>
         <tr>
-          <th>Comparing</th>
           <th>Current Product</th>
+          <th>Characteristic</th>
           <th>Related Product</th>
         </tr>
       </thead>
