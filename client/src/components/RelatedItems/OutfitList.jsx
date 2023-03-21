@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 
-const OutfitList = function ({ itemStyles }) {
+function OutfitList({ itemStyles }) {
   const params = useParams();
   const {
     data: relatedProducts,
@@ -16,7 +16,7 @@ const OutfitList = function ({ itemStyles }) {
   let { selectedStyle, styles } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
-  const renderList = function (item, index) {
+  function renderList(item, index) {
     return (
       <FormatCard
         key={index}
@@ -27,7 +27,7 @@ const OutfitList = function ({ itemStyles }) {
         itemStyles={itemStyles}
       />
     );
-  };
+  }
 
   if (isFetching) {
     return <div>loading...</div>;
@@ -41,6 +41,6 @@ const OutfitList = function ({ itemStyles }) {
       </div>
     </div>
   );
-};
+}
 
 export default OutfitList;

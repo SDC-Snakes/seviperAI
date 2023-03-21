@@ -5,16 +5,16 @@ import ItemsList from './ItemsList';
 import OutfitList from './OutfitList';
 import { newRelatedCarouselIndex } from '../../features/related/relatedSlice';
 
-const CarouselList = function ({ itemStyles }) {
+function CarouselList({ itemStyles }) {
   let { relatedIndex, related } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
-  const nextSlide = function () {
+  function nextSlide() {
     dispatch(newRelatedCarouselIndex(relatedIndex === related.length - 1 ? 0 : relatedIndex + 1));
-  };
-  const prevSlide = function () {
+  }
+  function prevSlide() {
     dispatch(newRelatedCarouselIndex(relatedIndex === 0 ? related.length - 1 : relatedIndex - 1));
-  };
+  }
 
   return (
     <div>
@@ -30,7 +30,7 @@ const CarouselList = function ({ itemStyles }) {
       </div>
     </div>
   );
-};
+}
 
 export default CarouselList;
 

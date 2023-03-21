@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { newModalState, newCurrentRelatedProduct } from '../../features/related/relatedSlice';
 
-const ItemsList = function ({ relatedIndex, itemStyles }) {
+function ItemsList({ relatedIndex, itemStyles }) {
   const dispatch = useDispatch();
   const params = useParams();
   const {
@@ -16,7 +16,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
     refetchOnMountOrArgChange: true,
   });
 
-  const findImage = function(item) {
+  function findImage(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
       const style = item.photos.results[i];
       for (let j = 0; j < style.photos.length; j++) {
@@ -36,13 +36,13 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   //   };
   // };
 
-  const handleModalClick = function(e, item) {
+  function handleModalClick(e, item) {
     e.preventDefault();
     dispatch(newModalState());
     dispatch(newCurrentRelatedProduct(item.details.features));
-  };
+  }
 
-  const renderList = function (item, index) {
+  function renderList(item, index) {
     return (
       <div key={index} onClick={(e) => handleModalClick(e, item)}>
         {relatedIndex <= index && (
@@ -57,7 +57,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
         )}
       </div>
     );
-  };
+  }
 
   if (isFetching) {
     return <div>loading...</div>;
@@ -71,6 +71,6 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
       </div>
     </div>
   );
-};
+}
 
 export default ItemsList;

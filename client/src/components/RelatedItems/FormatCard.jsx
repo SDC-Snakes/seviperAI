@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-const FormatCard = function ({ name, image, price, category, stars, itemStyles }) {
+function FormatCard({ name, image, price, category, stars, itemStyles }) {
   return (
     <div className={itemStyles['items-card']}>
       <img className={itemStyles['items-card-img']} src={image} />

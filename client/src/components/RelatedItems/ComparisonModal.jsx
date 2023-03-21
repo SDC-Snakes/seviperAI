@@ -3,7 +3,7 @@ import { FaToolbox } from 'react-icons/fa';
 import data from './sampleData';
 import { useSelector, useDispatch } from 'react-redux';
 
-const ComparisonModal = function ({ itemStyles, sampleChar }) {
+function ComparisonModal({ itemStyles, sampleChar }) {
   let { modalOpen } = useSelector((state) => state.related);
   const dispatch = useDispatch();
   const [modal] = useState(data.sampleModal);
@@ -33,6 +33,6 @@ const ComparisonModal = function ({ itemStyles, sampleChar }) {
       </tbody>
     </table>
   );
-};
+}
 
 export default ComparisonModal;
