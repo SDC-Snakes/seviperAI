@@ -15,11 +15,11 @@ function ReviewsAndRatings() {
   let {reviews} = useSelector((state) => state.reviews);
 
   // console.log('reviews', reviews);
-
+  const count = 9;
   const {
     data: productReviews,
     isFetching,
-  } = useGetProductReviewsQuery(`${params.productId}`, {
+  } = useGetProductReviewsQuery({ id: params.productId, count }, {
     refetchOnMountOrArgChange: true,
   });
 
