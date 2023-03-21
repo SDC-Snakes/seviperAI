@@ -18,6 +18,8 @@ function ProductDetails() {
     refetchOnMountOrArgChange: true,
   });
 
+  console.log('productInfo ProductDetails: ', productInfo);
+
   useEffect(() => {
     // update photos state
   }, [productInfo]);

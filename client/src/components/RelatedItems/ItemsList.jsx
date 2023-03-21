@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import FormatCard from './FormatCard';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
+import ComparisonModal from './ComparisonModal';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { useParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { newModalState } from '../../features/related/relatedSlice';
 
 const ItemsList = function ({ relatedIndex, itemStyles }) {
+  let { modalOpen } = useSelector((state) => state.related);
+  const dispatch = useDispatch();
   const params = useParams();
   const {
     data: relatedProducts,
@@ -34,12 +38,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   //   };
   // };
 
-  console.log('relatedProducts ItemsList: ', relatedProducts);
-
   const renderList = function (item, index) {
-    // const maxLength = relatedProducts.length;
-    // console.log('relatedIndex ItemsList: ', relatedIndex);
-    // console.log('index ItemsList: ', index);
     return (
       <div>
         {relatedIndex <= index && (
@@ -51,6 +50,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
             image={findImage(item)}
             price={item.details.default_price}
             itemStyles={itemStyles}
+
           />
         )}
       </div>
@@ -64,7 +64,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   return (
     <div className={itemStyles['items-list-wrapper']}>
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
-      <div className={itemStyles['items-list-content']}>
+      <div onClick={() => dispatch(newModalState())}className={itemStyles['items-list-content']}>
         {relatedProducts.map((item, index) => renderList(item, index))}
       </div>
     </div>

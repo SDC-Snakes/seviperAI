@@ -6,6 +6,7 @@ const initialState = {
   relatedIndex: 0,
   outfitIndex: 0,
   outfitLength: 0,
+  modalOpen: false,
 };
 
 function moveRelatedCarousel(state = initialState, action) {
@@ -13,6 +14,10 @@ function moveRelatedCarousel(state = initialState, action) {
 }
 function moveOutfitCarousel(state = initialState, action) {
   return { ...state, outfitIndex: action.payload };
+}
+function toggleModal(state = initialState, action) {
+  const toggle = (input) => !input;
+  state.modalOpen = toggle(state.modalOpen);
 }
 
 const relatedSlice = createSlice({
@@ -22,7 +27,7 @@ const relatedSlice = createSlice({
     reset: (state) => initialState,
     newRelatedCarouselIndex: moveRelatedCarousel,
     newOutfitCarouselIndex: moveOutfitCarousel,
-
+    newModalState: toggleModal,
   },
   extraReducers: (builder) => {
     builder
@@ -36,6 +41,7 @@ export const {
   reset,
   newRelatedCarouselIndex,
   newOutfitCarouselIndex,
+  newModalState,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;
