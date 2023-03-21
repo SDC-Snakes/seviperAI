@@ -51,6 +51,7 @@ function QuestionsAnswers() {
       <h2>Main Q&A Div</h2>
       {/* <Search /> */}
       <QuestionsList questions={questions} numberOfQs={numberOfQs} />
+      {/* show more questions button only when there are more */}
       {numberOfQs < questions.length
         && (
           <div>
