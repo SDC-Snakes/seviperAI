@@ -14,7 +14,7 @@ function OutfitList() {
     refetchOnMountOrArgChange: true,
   });
 
-  let { selectedStyle, styles } = useSelector((state) => state.products);
+  let { selectedStyle, styles, details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   function renderList(item, index) {

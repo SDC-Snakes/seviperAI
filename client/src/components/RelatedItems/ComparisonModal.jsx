@@ -6,10 +6,34 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function ComparisonModal({ sampleChar }) {
   let { modalOpen, relatedProductFeatures } = useSelector((state) => state.related);
+  let { details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [modal] = useState(data.sampleModal);
 
-  const renderComparison = function (char, index) {
+  function comparisonData() {
+    const combinedData = {};
+    const relatedProductDetails = relatedProductFeatures;
+    const currentProductDetails = details.features;
+
+    relatedProductDetails.forEach((char) => {
+      const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
+      combinedData[description] = { related: true, current: false };
+    });
+    currentProductDetails.forEach((char) => {
+      const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
+      if (combinedData[description]) {
+        combinedData[description].current = true;
+      } else {
+        combinedData[description] = { related: false, current: true };
+      }
+    });
+
+    console.log('combinedData: ', combinedData);
+    console.log('relatedProductFeatures: ', relatedProductFeatures);
+    console.log('details.features: ', details.features);
+  }
+
+  function renderComparison(char, index) {
     return (
       <tr key={index}>
         <td>{char.currYes && <FaToolbox />}</td>
@@ -17,24 +41,25 @@ function ComparisonModal({ sampleChar }) {
         <td>{char.relYes && <FaToolbox />}</td>
       </tr>
     );
-  };
-
-  console.log('relatedProductFeatures: ', relatedProductFeatures);
+  }
 
   return (
-    <table>
-      <caption>Comparing</caption>
-      <thead>
-        <tr>
-          <th>Current Product</th>
-          <th>Characteristic</th>
-          <th>Related Product</th>
-        </tr>
-      </thead>
-      <tbody>
-        {modal.map((char, index) => renderComparison(char, index))}
-      </tbody>
-    </table>
+    { modalOpen } ? (
+      <table>
+        <caption onClick={comparisonData}>Comparing</caption>
+        <thead>
+          <tr>
+            <th>Current Product</th>
+            <th>Characteristic</th>
+            <th>Related Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          {modal.map((char, index) => renderComparison(char, index))}
+        </tbody>
+      </table>
+    )
+      : null
   );
 }
 

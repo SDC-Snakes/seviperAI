@@ -26,9 +26,9 @@ function CarouselList() {
         {relatedIndex !== related.length - 5 && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />}
       </div>
       <div>
-        <FaChevronLeft />
+        {/* <FaChevronLeft />
         <OutfitList />
-        <FaChevronRight />
+        <FaChevronRight /> */}
       </div>
     </div>
   );
