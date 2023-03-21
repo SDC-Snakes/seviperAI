@@ -25,8 +25,8 @@ function loadingReducer(state, action) {
   }
 }
 
-function useAsync(reqObj, deps = []) {
-  // reqObj: i.e. axios request object, Promise object
+function useAsync(reqObjs, deps = []) {
+  // reqObjs: array with axios request objects, Promise objects
   // deps: useEffect dependencies, variables that triggers useEffect
   const [state, dispatch] = useReducer(loadingReducer, {
     loading: false,
@@ -36,7 +36,7 @@ function useAsync(reqObj, deps = []) {
 
   useEffect(() => {
     dispatch({ type: 'LOADING' });
-    reqObj
+    Promise.all(reqObjs)
       .then((response) => {
         dispatch({
           type: 'SUCCESS',

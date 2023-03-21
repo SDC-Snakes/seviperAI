@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import Search from './subComponents/Search';
@@ -9,7 +9,6 @@ import qnaStyles from './qnaStyles.module.css';
 
 // create and export css as a context object
 export const QnaStyles = React.createContext(null);
-export const productName = React.createContext(null);
 
 function QuestionsAnswers() {
   const params = useParams(); // to get productId
@@ -23,30 +22,38 @@ function QuestionsAnswers() {
 
   // fetching initial data
   /// handle loading and error
-  const reqObj = axios.get('http://localhost:8080/qa/questions/', {
-    params: {
-      product_id: params.productId,
-      page: 1,
-      count: 100,
-    },
-  });
+  const reqObjs = [
+    axios.get('http://localhost:8080/qa/questions/', {
+      params: {
+        product_id: params.productId,
+        page: 1,
+        count: 100,
+      },
+    }),
+    axios.get(`http://localhost:8080/products/${params.productId}`),
+  ];
 
   // custom hook to handle requests
-  const { loading, response, error } = useAsync(reqObj, []);
+  const { loading, response, error } = useAsync(reqObjs, []);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;
   if (error) return <div> Error has occurred while loading</div>;
   if (!response) return null;
 
-  // extract and sort questions array
-  const questions = response.data.results.sort(sortDescHelpful);
+  // extract data from responses
+  const questions = response[0].data.results.sort(sortDescHelpful);
+  const productName = response[1].data.name;
+  console.log(response);
+
   // function for loading more questions
   const loadMoreQs = () => {
     setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
 
-
+  const onToggleAnswer = (state) => {
+    setAnswerFromVisible(state);
+  };
 
   return (
 
@@ -70,7 +77,13 @@ function QuestionsAnswers() {
               </b>
             </div>
           )}
-        {answerFormVisible && <AnswerModalWindow qnaStyles={qnaStyles} />}
+        {answerFormVisible
+          && (
+            <AnswerModalWindow
+              qnaStyles={qnaStyles}
+              onToggleAnswer={onToggleAnswer}
+            />
+          )}
       </div>
     </QnaStyles.Provider>
   );

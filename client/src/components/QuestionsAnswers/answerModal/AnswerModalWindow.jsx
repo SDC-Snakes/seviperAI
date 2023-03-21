@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import AnswerForm from './AnswerForm';
 
-function AnswerModalWindow({ qnaStyles }) {
+function AnswerModalWindow({ qnaStyles, onToggleAnswer }) {
   const params = useParams();
   const productName = 'DUMMY PRODUCT';
   const questionBody = 'DUMMY QUESTION';
@@ -39,7 +39,7 @@ function AnswerModalWindow({ qnaStyles }) {
               <input value="" placeholder="Review Body" />
             </div>
             <div>
-              <input type="submit" value="Add Images" />
+              <input type="button" value="Add Images" />
             </div>
             <div>
               <input value="" placeholder="username" />
@@ -48,10 +48,10 @@ function AnswerModalWindow({ qnaStyles }) {
               <input value="" placeholder="email" />
             </div>
             <div>
-              <input type="submit" value="Submit Review" />
+              <input type="button" value="Submit Review" />
             </div>
 
-            <input type="submit" className={qnaStyles['close-modal']} onClick={() => { toggleModal(false); }} value="X" />
+            <input type="button" className={qnaStyles['close-modal']} onClick={() => { onToggleAnswer(false); }} value="X" />
           </div>
         </div>
       </div>
