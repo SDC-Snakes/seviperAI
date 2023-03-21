@@ -19,6 +19,7 @@ function AverageRatings({RNRCSS}) {
     <aside className={RNRCSS['average-ratings-left']}>
       <h3>Product Ratings</h3>
       <QuarterStarsAverageRating />
+      <div>Total number of reviews: {totalNumRatings}</div>
       {
         // make sure that the data returned from the API includes
         // all 5 stars always, meaning if no one rated the product

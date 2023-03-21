@@ -43,7 +43,7 @@ body.active-modal {
 
 
 .average-ratings-left {
-  width: 30%;
+  width: 22%;
     float: left;
     padding: 2px;
     border: 2px solid grey;
@@ -55,7 +55,7 @@ body.active-modal {
 }
 
 .reviews-container-right {
-  width: 68%;
+  width: 76%;
     float: right;
     padding: 2px;
     border: 2px solid grey;
@@ -79,4 +79,13 @@ body.active-modal {
   padding: 5px;
   margin: 5px;
   border-radius:1%;
+}
+
+.response-from-seller {
+  padding: 2px;
+  border: 2px solid grey;
+  border-radius: 1%;
+  margin-top: 10px;
+  background-color: lightgrey;
+
 }
