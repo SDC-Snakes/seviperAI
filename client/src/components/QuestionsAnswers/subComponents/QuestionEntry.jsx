@@ -1,7 +1,7 @@
 import React from 'react';
-import AnswerEntry from './AnswerEntry';
+import HelpfulModule from './HelpfulModule';
 
-function QuestionEntry() {
+function QuestionEntry({ question }) {
   return (
     <div className="question-entry">
       <span className="q">
@@ -9,23 +9,10 @@ function QuestionEntry() {
       </span>
       <span>
         <span className="question-text">
-          How do you greet world?
+          {question.question_body}
         </span>
-        <span className="helpful-text">
-          Helpful?
-        </span>
-        <input type="button" className="yes-button" value="Yes" />
+        <HelpfulModule count={question.question_helpfulness} onClick={() => console.log('HELPFUL')} />
         <input type="button" className="add-answer-button" value="Add Answer" />
-        <div className="answer-list">
-          <span className="a">
-            A:
-          </span>
-          <span>
-            <AnswerEntry />
-            <AnswerEntry />
-          </span>
-          <div>See more answers</div>
-        </div>
       </span>
     </div>
   );
