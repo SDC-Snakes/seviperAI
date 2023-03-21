@@ -5,7 +5,6 @@ module.exports = {
     // Finding a way to add query params in axios config would be cleaner
     const page = req.query.page || 1;
     const count = req.query.count || 5;
-    console.log(req.query);
     if (req.query.product_id) {
       axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions/?product_id=${req.query.product_id}&page=${req.query.page}&count=${req.query.count}`, {
         headers: {

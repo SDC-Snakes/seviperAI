@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import AnswerForm from './AnswerForm';
 
-function AnswerModalWindow({ qnaStyles, onToggleAnswer }) {
-  const params = useParams();
-  const productName = 'DUMMY PRODUCT';
-  const questionBody = 'DUMMY QUESTION';
-
-  console.log(params);
+function AnswerModalWindow({ qnaStyles, onAddAnswer, productInfo, questionInfo }) {
+console.log(questionInfo);
 
   return (
     <div className="answer-modal-window">
       <div className="header">
         <p>Submit Your Answer</p>
         <p>
-          {productName}
+          {productInfo.name}
           :
-          {questionBody}
+          {questionInfo.body}
         </p>
       </div>
       (
@@ -24,7 +20,7 @@ function AnswerModalWindow({ qnaStyles, onToggleAnswer }) {
         <div className={qnaStyles.overlay}>
           <div className={qnaStyles['modal-content']}>
             <h2> Submit your Answer</h2>
-            <h6>{productName}: {questionBody}</h6>
+            <h6> {questionInfo.body}</h6>
             <p>
               please fill out the fields below to submit a product review
             </p>
@@ -51,7 +47,7 @@ function AnswerModalWindow({ qnaStyles, onToggleAnswer }) {
               <input type="button" value="Submit Review" />
             </div>
 
-            <input type="button" className={qnaStyles['close-modal']} onClick={() => { onToggleAnswer(false); }} value="X" />
+            <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAddAnswer(false); }} value="X" />
           </div>
         </div>
       </div>

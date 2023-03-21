@@ -9,6 +9,7 @@ import qnaStyles from './qnaStyles.module.css';
 
 // create and export css as a context object
 export const QnaStyles = React.createContext(null);
+export const OnAddAnswer = React.createContext(null);
 
 function QuestionsAnswers() {
   const params = useParams(); // to get productId
@@ -18,7 +19,12 @@ function QuestionsAnswers() {
   // need to declare all the state variables on the top
   const [numberOfQs, setNumberOfQs] = useState(2);
   // visibility state variable for answer modal window
-  const [answerFormVisible, setAnswerFromVisible] = useState(true);
+  const [answerFormVisible, setAnswerFromVisible] = useState(false);
+  // question stata vars for answer modal
+  const [questionInfo, setQuestionInfo] = useState({
+    id: '',
+    body:'',
+  })
 
   // fetching initial data
   /// handle loading and error
@@ -43,48 +49,43 @@ function QuestionsAnswers() {
 
   // extract data from responses
   const questions = response[0].data.results.sort(sortDescHelpful);
-  const productName = response[1].data.name;
-  console.log(response);
+  const productInfo = response[1].data;
 
   // function for loading more questions
   const loadMoreQs = () => {
     setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
 
-  const onToggleAnswer = (state) => {
+  const onAddAnswer = (state, id, body) => {
+    setQuestionInfo({id, body})
     setAnswerFromVisible(state);
   };
 
   return (
 
     <QnaStyles.Provider value={qnaStyles}>
-      <div>
-        <h2>Main Q&A Div</h2>
-        {/* <Search /> */}
-        <QuestionsList questions={questions} numberOfQs={numberOfQs} />
-        {/* show more questions button only when there are more */}
-        {numberOfQs < questions.length
-          && (
-            <div>
-              <b
-                style={{ cursor: 'pointer' }}
-                onClick={loadMoreQs}
-                role="button"
-                onKeyPress={loadMoreQs}
-                tabIndex={0}
-              >
-                More Answered Questions
-              </b>
-            </div>
-          )}
-        {answerFormVisible
-          && (
-            <AnswerModalWindow
-              qnaStyles={qnaStyles}
-              onToggleAnswer={onToggleAnswer}
-            />
-          )}
-      </div>
+      <OnAddAnswer.Provider value={onAddAnswer}>
+        <div>
+          <h2>Main Q&A Div</h2>
+          {/* <Search /> */}
+          <QuestionsList questions={questions} numberOfQs={numberOfQs} />
+          {/* show more questions button only when there are more */}
+          <div>
+            {numberOfQs < questions.length
+              && <input type="button" onClick={loadMoreQs} value="More Answered Questions" />}
+            <input type="button" onClick={console.log} value="Add a question +" />
+          </div>
+          {answerFormVisible
+            && (
+              <AnswerModalWindow
+                qnaStyles={qnaStyles}
+                onAddAnswer={onAddAnswer}
+                productInfo={productInfo}
+                questionInfo={questionInfo}
+              />
+            )}
+        </div>
+      </OnAddAnswer.Provider>
     </QnaStyles.Provider>
   );
 }
