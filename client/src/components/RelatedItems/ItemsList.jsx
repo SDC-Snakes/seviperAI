@@ -5,7 +5,7 @@ import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
-const ItemsList = function ({ itemStyles }) {
+const ItemsList = function ({ relatedIndex, itemStyles }) {
   const params = useParams();
   // let { related } = useSelector((state) => state.related);
   // const dispatch = useDispatch();
@@ -42,7 +42,8 @@ const ItemsList = function ({ itemStyles }) {
 
   const renderList = function (item, index) {
     return (
-      <FormatCard
+      <div>
+      {relatedIndex === index && <FormatCard
         key={index}
         stars={StarRating}
         name={item.details.name}
@@ -51,6 +52,8 @@ const ItemsList = function ({ itemStyles }) {
         price={item.details.default_price}
         itemStyles={itemStyles}
       />
+      }
+      </div>
     );
   };
 
@@ -58,10 +61,12 @@ const ItemsList = function ({ itemStyles }) {
     return <div>loading...</div>;
   }
 
+  console.log('ItemsListIndex: ', relatedIndex);
+
   return (
-    <div>
+    <div className={itemStyles['items-list-wrapper']}>
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
-      <div className={itemStyles['items-list']}>
+      <div className={itemStyles['items-list-content']}>
         {relatedProducts.map((item, index) => renderList(item, index))}
       </div>
     </div>
@@ -69,3 +74,5 @@ const ItemsList = function ({ itemStyles }) {
 };
 
 export default ItemsList;
+
+

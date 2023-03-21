@@ -6,24 +6,24 @@ import OutfitList from './OutfitList';
 import { newRelatedCarouselIndex } from '../../features/related/relatedSlice';
 
 const CarouselList = function ({ itemStyles }) {
-  let { carouselIndex, related } = useSelector((state) => state.related);
+  let { relatedIndex, related } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
   const nextSlide = function () {
-    dispatch(newRelatedCarouselIndex(carouselIndex === /* related.length - 1 */ 4 ? 0 : carouselIndex + 1));
+    dispatch(newRelatedCarouselIndex(relatedIndex === related.length - 1 ? 0 : relatedIndex + 1));
   };
   const prevSlide = function () {
-    dispatch(newRelatedCarouselIndex(carouselIndex === 0 ? /* related.length - 1 */ 4 : carouselIndex - 1));
+    dispatch(newRelatedCarouselIndex(relatedIndex === 0 ? related.length - 1 : relatedIndex - 1));
   };
 
   // console.log('related CarouselList: ', related);
-  // console.log('carouselIndex: ', carouselIndex);
+  // console.log('carouselIndex: ', relatedIndex);
 
   return (
     <div>
-      <div className={itemStyles['items-list']}>
+      <div className={itemStyles['items-list-container']}>
         <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} />
-        <ItemsList itemStyles={itemStyles} />
+        <ItemsList itemStyles={itemStyles} relatedIndex={relatedIndex} />
         <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />
       </div>
       <div>
@@ -36,3 +36,5 @@ const CarouselList = function ({ itemStyles }) {
 };
 
 export default CarouselList;
+
+// style={{ transform: `translateX(-${relatedIndex} * 25%)` }}

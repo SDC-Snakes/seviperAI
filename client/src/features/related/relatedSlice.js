@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import { api } from '../api/apiSlice';
 
 const initialState = {
   related: [],
-  carouselIndex: 0,
+  relatedIndex: 0,
   outfitIndex: 0,
   outfitLength: 0,
 };
 
 function moveRelatedCarousel(state = initialState, action) {
-  return { ...state, carouselIndex: action.payload };
+  return { ...state, relatedIndex: action.payload };
 }
 function moveOutfitCarousel(state = initialState, action) {
   return { ...state, outfitIndex: action.payload };
@@ -27,7 +27,7 @@ const relatedSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(api.endpoints.getRelatedProductInfo.matchFulfilled, (state, action) => {
-        state.related = action.payload.data;
+        state.related = action.payload;
       });
   },
 });
