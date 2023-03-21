@@ -67,7 +67,7 @@ export const api = createApi({
         return { data: relatedItem };
       },
     }),
-    AddToCart: build.mutation({
+    addToCart: build.mutation({
       query: skuId => ({
         url: '/cart',
         method: 'POST',

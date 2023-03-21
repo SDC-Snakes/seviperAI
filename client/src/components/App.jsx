@@ -8,9 +8,14 @@ import Spinner from './SharedComponents/Spinner';
 import Navbar from './SharedComponents/Navbar';
 import SiteAnnouncement from './SharedComponents/SiteAnnouncement';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const rnrRef = React.useRef(null);
+  const handleScroll = () => {
+    rnrRef.current.scrollIntoView();
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -23,10 +28,12 @@ function App() {
             path="/:productId"
             element={(
               <>
-                <ProductDetails />
+                <ProductDetails handleScroll={handleScroll} />
                 <RelatedItems />
                 <QuestionsAnswers />
-                <ReviewsAndRatings />
+                <div ref={rnrRef}>
+                  <ReviewsAndRatings />
+                </div>
               </>
           )}
           />
