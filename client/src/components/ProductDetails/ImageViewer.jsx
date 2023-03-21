@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { newSelectedStyle, newSelectedImage, toggleState, newImageIndex, handleStateUpdate } from '../../features/products/productsSlice';
+import { newSelectedImage, toggleState, newImageIndex, handleStateUpdate } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import {FaChevronLeft, FaChevronRight, FaChevronUp, FaChevronDown, FaExpand, FaCompress} from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
