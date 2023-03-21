@@ -12,7 +12,6 @@ function ReviewTile({ index }) {
   const [helpful, setHelpful] = useState('No');
   // send a post request with the helpful state to the API when helpful is 'yes'
   const { reviews } = useSelector((state) => state.reviews);
-  console.log("reviews data", reviews)
   const [modalImage, setModalImage] = useState(false);
   const [photoState, setPhotoState] = useState('');
   const toggleModalImage = (inputBool) => (

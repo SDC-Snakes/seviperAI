@@ -14,12 +14,15 @@ function AverageRatings({RNRCSS}) {
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
 
   // recommended percentage calculation
-  let recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100 ;
+  // eslint-disable-next-line max-len
+  const recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100;
   return (
     <aside className={RNRCSS['average-ratings-left']}>
       <h3>Product Ratings</h3>
-      <QuarterStarsAverageRating productRating={obj}/>
-      <div>Total number of reviews: {totalNumRatings}</div>
+      <QuarterStarsAverageRating productRating={obj} />
+      <div>
+        Total number of reviews: {totalNumRatings}
+      </div>
       <h4>Rating Breakdown</h4>
       {
         // make sure that the data returned from the API includes
@@ -32,7 +35,10 @@ function AverageRatings({RNRCSS}) {
           </div>
         ))
       }
-      <div>{Math.round(recommendPercent)}% of reviews recommend this product</div>
+      <div>
+        {Math.round(recommendPercent)}
+        % of reviews recommend this product
+      </div>
       <div>
         <CharBar />
       </div>
