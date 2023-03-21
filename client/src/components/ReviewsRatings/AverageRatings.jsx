@@ -18,7 +18,7 @@ function AverageRatings({RNRCSS}) {
   return (
     <aside className={RNRCSS['average-ratings-left']}>
       <h3>Product Ratings</h3>
-      <QuarterStarsAverageRating />
+      <QuarterStarsAverageRating productRating={obj}/>
       <div>Total number of reviews: {totalNumRatings}</div>
       <h4>Rating Breakdown</h4>
       {
