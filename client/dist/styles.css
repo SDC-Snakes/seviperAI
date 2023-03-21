@@ -146,7 +146,7 @@ input[name="rating"] {
 
 .rating-bar-container {
   display: flex;
-  width: 400px;
+  width: 90%;
   margin-top: 10px;
  }
 

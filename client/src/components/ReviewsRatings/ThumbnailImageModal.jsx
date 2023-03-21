@@ -11,6 +11,8 @@ function ThumbnailImageModal({ RNRCSS, toggleModalImage, photo }) {
             key={photo.id}
             src={photo.url}
             alt={`${photo.id}`}
+            height="500"
+            width="auto"
             onClick={() => { toggleModalImage(true); }}
           />
           {/* usee the 'close-modal' class name to add css properties to

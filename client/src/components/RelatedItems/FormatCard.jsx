@@ -1,23 +1,12 @@
 import React from 'react';
-import { useParams } from "react-router-dom";
-import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-const FormatCard = function ({ image, category, name, price, itemStyles }) {
-  const params = useParams();
-  const {
-    data: relatedProducts,
-    isFetching,
-  } = useGetRelatedProductInfoQuery(`${params.productId}`, {
-    refetchOnMountOrArgChange: true,
-  });
-
-  // console.log('FormatCard relatedProducts: ', relatedProducts);
-
+const FormatCard = function ({ name, image, price, category, stars, itemStyles }) {
   return (
     <div className={itemStyles['items-card']}>
-      <img className={itemStyles['items-card-img']} src={image} alt="Cheetah print t-shirt" />
-      <div>Star rating</div>
-      <h3 className={itemStyles['product-category']}>{category}</h3>
+      <img className={itemStyles['items-card-img']} src={image} />
+      <div>{stars}</div>
+      <p className={itemStyles['product-category']}>{category}</p>
       <h6 className={itemStyles['product-name']}>{name}</h6>
       <p className={itemStyles['card-price']}>{price}</p>
     </div>
