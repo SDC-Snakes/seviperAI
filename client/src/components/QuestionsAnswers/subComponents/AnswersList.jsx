@@ -17,9 +17,7 @@ function AnswersList({ answers }) {
         A:
       </span>
       {answersList.slice(0, numberOfAs).map((answer) => (
-        <span>
-          <AnswerEntry answer={answer} />
-        </span>
+        <AnswerEntry answer={answer} key={answer.id} />
       ))}
       {answersList.length > 2
         && (

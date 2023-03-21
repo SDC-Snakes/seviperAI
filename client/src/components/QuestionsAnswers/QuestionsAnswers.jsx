@@ -3,8 +3,11 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import Search from './subComponents/Search';
 import QuestionsList from './subComponents/QuestionsList';
-// import AnswerModalWindow from './answerModal/AnswerModalWindow';
-import { questionsSample } from './sampleData';
+import AnswerModalWindow from './answerModal/AnswerModalWindow';
+import qnaStyles from './qnaStyles.module.css';
+
+// create and export css as a context object
+export const QnaStyles = React.createContext(null);
 
 function QuestionsAnswers() {
   const params = useParams();
@@ -16,7 +19,11 @@ function QuestionsAnswers() {
   const [error, setError] = useState(null);
   // need to declare all the state variables on the top
   const [numberOfQs, setNumberOfQs] = useState(2);
+  // visibility state variable for answer modal window
+  const [answerFormVisible, setAnswerFromVisible] = useState(true);
 
+  // fetching initial data
+  /// handle loading and error
   useEffect(() => {
     setError(null);
     setQuestions(null);
@@ -41,33 +48,36 @@ function QuestionsAnswers() {
   if (loading) return <div> Loading...</div>;
   if (error) return <div> Error has occurred while loading</div>;
   if (!questions) return null;
-
+  // function for loading more questions
   const loadMoreQs = () => {
     setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
 
   return (
-    <div>
-      <h2>Main Q&A Div</h2>
-      {/* <Search /> */}
-      <QuestionsList questions={questions} numberOfQs={numberOfQs} />
-      {/* show more questions button only when there are more */}
-      {numberOfQs < questions.length
-        && (
-          <div>
-            <b
-              style={{ cursor: 'pointer' }}
-              onClick={loadMoreQs}
-              role="button"
-              onKeyPress={loadMoreQs}
-              tabIndex={0}
-            >
-              More Answered Questions
-            </b>
-          </div>
-        )}
-      {/* <AnswerModalWindow /> */}
-    </div>
+
+    <QnaStyles.Provider value={qnaStyles}>
+      <div>
+        <h2>Main Q&A Div</h2>
+        {/* <Search /> */}
+        <QuestionsList questions={questions} numberOfQs={numberOfQs} />
+        {/* show more questions button only when there are more */}
+        {numberOfQs < questions.length
+          && (
+            <div>
+              <b
+                style={{ cursor: 'pointer' }}
+                onClick={loadMoreQs}
+                role="button"
+                onKeyPress={loadMoreQs}
+                tabIndex={0}
+              >
+                More Answered Questions
+              </b>
+            </div>
+          )}
+        {answerFormVisible && <AnswerModalWindow qnaStyles={qnaStyles} />}
+      </div>
+    </QnaStyles.Provider>
   );
 }
 
