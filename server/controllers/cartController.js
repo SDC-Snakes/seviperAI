@@ -15,13 +15,25 @@ module.exports = {
       });
   },
   post: (req, res) => {
-    axios.post(`${process.env.ATLIER_API_ROUTE}/cart?sku_id=${req.params.sku_id}`, {
+    const data = JSON.stringify({
+      sku_id: req.body.sku_id,
+    });
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${process.env.ATLIER_API_ROUTE}/cart`,
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
+        'Content-Type': 'application/json',
       },
-    })
+      data: data,
+    };
+
+    axios(config)
       .then(() => {
-        res.status(201).send('Content created');
+        res.setHeader('content-type', 'text/plain');
+        res.status(201).send(JSON.stringify('Content created'));
       })
       .catch((err) => {
         res.status(422).send(err);

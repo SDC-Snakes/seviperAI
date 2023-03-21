@@ -1,10 +1,13 @@
 import React from 'react';
 import QuestionEntry from './QuestionEntry';
+import AnswersList from './AnswersList';
+import { answersSample } from '../sampleData';
 
-function QnASet() {
+function QnASet({ question }) {
   return (
     <div className="qna-set">
-      <QuestionEntry />
+      <QuestionEntry question={question} />
+      <AnswersList answers={question.answers} />
     </div>
   );
 }

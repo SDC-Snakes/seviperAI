@@ -20,8 +20,8 @@ function Reviews({RNRCSS}) {
 
       <Dropdown />
       {[...Array(numberReviews)].map((_, index) => (
-        <div className={RNRCSS['review-tile']}>
-          <ReviewTile index={index} key={index.toString()} />
+        <div className={RNRCSS['review-tile']} key={index.toString()}>
+          <ReviewTile index={index} />
         </div>
       ))}
       <input type="submit" value="MORE REVIEWS" onClick={addReviews} />

@@ -1,21 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import QuarterIncStarRating from './QuarterIncStarRating';
 
-function QuarterStarsAverageRating() {
-  // axios.get(`/reviews/meta?product_id=${40344}`)
-
-  const { meta } = useSelector((state) => state.reviews);
-  const obj = meta.ratings;
-  // obj will be replaced with the "ratings" object from the API,  /reviews/meta route.
-
+function QuarterStarsAverageRating({productRating}) {
   let sum = 0;
   let numOfRatings = 0;
 
-  for (const key in obj) {
-    sum+= (Number(key) * Number(obj[key]));
-    numOfRatings += Number(obj[key]);
+  for (const key in productRating) {
+    sum+= (Number(key) * Number(productRating[key]));
+    numOfRatings += Number(productRating[key]);
   }
 
   const averageRating = sum / numOfRatings;

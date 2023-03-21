@@ -24,7 +24,7 @@ export const api = createApi({
     }),
     getProductReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
-      query: (productId) => `/reviews?product_id=${productId}`,
+      query: (obj) => `/reviews?count=${obj.count}&sort=${obj.sort}&product_id=${obj.id}`,
     }),
     getMetaReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
@@ -56,10 +56,17 @@ export const api = createApi({
           ratingsDetails.data ? relatedItem.ratings = ratingsDetails.data : relatedItem.ratingsError = ratingsDetails.error;
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
           allPhotos.data ? relatedItem.photos = allPhotos.data : relatedItem.photoError = allPhotos.error;
-          return relatedItem;
+          return relatedItem;   
         }));
         return { data: allItems };
       },
+    }),
+    AddToCart: build.mutation({
+      query: skuId => ({
+        url: '/cart',
+        method: 'POST',
+        body: { sku_id: parseInt(skuId, 10) },
+      }),
     }),
   }),
   // EXAMPLE MUTATION endpoint!!!
@@ -81,4 +88,5 @@ export const {
   useGetRelatedProductsQuery,
   useGetRelatedProductInfoQuery,
   useGetMetaReviewsQuery,
+  useAddToCartMutation,
 } = api;

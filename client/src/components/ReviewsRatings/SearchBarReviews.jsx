@@ -9,9 +9,9 @@ function Search({handleSearch}) {
   return (
     <div>
       <input className="wordSearch" type="text" placeholder="search..." value={searchInput} onChange={SearchFunc} />
-      <input type="submit" value="search" onClick={()=>{handleSearch(searchInput)}}/>
+      <input type="submit" value="search" onClick={() => { handleSearch(searchInput); }} />
     </div>
-  )
+  );
 }
 
 export default Search;

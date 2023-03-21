@@ -4,7 +4,7 @@ function Dropdown() {
   const [selectedOption, setSelectedOption] = useState('Relevant');
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    };
+  };
 
   return (
     <div>
