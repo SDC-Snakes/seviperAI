@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormatCard from './FormatCard';
-import StarRating from '../ReviewsRatings/StarRating';
+import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -36,14 +36,14 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
 
   const renderList = function (item, index) {
     // const maxLength = relatedProducts.length;
-    console.log('relatedIndex ItemsList: ', relatedIndex);
-    console.log('index ItemsList: ', index);
+    // console.log('relatedIndex ItemsList: ', relatedIndex);
+    // console.log('index ItemsList: ', index);
     return (
       <div>
         {relatedIndex <= index && (
           <FormatCard
             key={index}
-            stars={StarRating}
+            stars={QuarterStarsAverageRating}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
