@@ -3,7 +3,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { handleDropdown } from '../../features/products/productsSlice';
+import { handleStateUpdate } from '../../features/products/productsSlice';
 import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
 
 function Details() {
@@ -40,11 +40,15 @@ function Details() {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => { dispatch(handleDropdown({ name: e.target.name, value: e.target.value })) }}>
+        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           <option value="selectSize">Select Size</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
-              <option key={sizeSku} value={sizeSku}>
+              <option
+                key={sizeSku}
+                value={sizeSku}
+                disabled={!selectedStyle.skus[sizeSku].quantity}
+              >
                 {selectedStyle.skus[sizeSku].size}
               </option>
             ),
