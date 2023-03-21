@@ -12,7 +12,6 @@ function ImageViewer() {
       <div className="topRight" onClick={(e) => { dispatch(toggleState('expanded')); }}>
         {expanded ? <FaCompress /> : <FaExpand /> }
       </div>
-      {console.log("styles", styles)}
       <div className="sideGrid">
         {styles.map((style) => <img className="sideImage" onClick={() => { dispatch(newSelectedStyle(style)); }} src={style.photos[0].url} alt="ImageView" key={style.style_id} height="40" width="auto" />)}
       </div>

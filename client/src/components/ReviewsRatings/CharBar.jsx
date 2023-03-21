@@ -13,7 +13,6 @@ import { FaSortDown } from 'react-icons/fa';
 function CharBar() {
   const { meta } = useSelector((state) => state.reviews);
   const charObj = meta.characteristics;
-  console.log(' in charBar', charObj);
   const charKeys = Object.keys(charObj);
 
   // end of copy
@@ -31,19 +30,14 @@ function CharBar() {
           {/* // a bar
           // rating values at 1 3 and 5 stars
           // */}
-          <div>
-          {`(${char})`}
-          </div>
           <div className={charCSS['char-bar-container']}>
-
-            <div className={charCSS['char-bar']}>
-
-              <FaSortDown className={charCSS['char-bar-icon']} style={{ marginLeft: `${((charObj[char].value / 5) * 100)  }%` }} />
-
+            <div>
+            {`(${char})`}
             </div>
-
+            <div className={charCSS['char-bar']}>
+              <FaSortDown className={charCSS['char-bar-icon']} style={{ marginLeft: `${((charObj[char].value / 5) * 100)}%` }} />
+            </div>
           </div>
-
         </div>
       ))}
 

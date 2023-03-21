@@ -16,10 +16,11 @@ function ReviewsAndRatings() {
 
   // console.log('reviews', reviews);
   const count = 9;
+  const sort = 'helpful';
   const {
     data: productReviews,
     isFetching,
-  } = useGetProductReviewsQuery({ id: params.productId, count }, {
+  } = useGetProductReviewsQuery({ id: params.productId, count, sort }, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -29,8 +30,6 @@ function ReviewsAndRatings() {
   } = useGetMetaReviewsQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
-
-  console.log('META', metaReviews);
 
   if (isFetching || isFetchingMeta || !productReviews || !metaReviews) {
     return <div>loading...</div>;
