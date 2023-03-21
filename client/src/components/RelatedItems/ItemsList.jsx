@@ -7,16 +7,12 @@ import { useSelector } from 'react-redux';
 
 const ItemsList = function ({ relatedIndex, itemStyles }) {
   const params = useParams();
-  // let { related } = useSelector((state) => state.related);
-  // const dispatch = useDispatch();
   const {
     data: relatedProducts,
     isFetching,
   } = useGetRelatedProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
-
-  // console.log('related CarouselList: ', related);
 
   const findImage = function(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
@@ -38,21 +34,22 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   //   };
   // };
 
-  // console.log('relatedProducts ItemsList: ', relatedProducts);
-
   const renderList = function (item, index) {
+    console.log('relatedIndex ItemsList: ', relatedIndex);
+    console.log('index ItemsList: ', index);
     return (
       <div>
-      {(relatedIndex <= index) && <FormatCard
-        key={index}
-        stars={StarRating}
-        name={item.details.name}
-        category={item.details.category}
-        image={findImage(item)}
-        price={item.details.default_price}
-        itemStyles={itemStyles}
-      />
-      }
+        {relatedIndex <= index && (
+          <FormatCard
+            key={index}
+            stars={StarRating}
+            name={item.details.name}
+            category={item.details.category}
+            image={findImage(item)}
+            price={item.details.default_price}
+            itemStyles={itemStyles}
+          />
+        )}
       </div>
     );
   };
@@ -60,8 +57,6 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   if (isFetching) {
     return <div>loading...</div>;
   }
-
-  console.log('ItemsListIndex: ', relatedIndex);
 
   return (
     <div className={itemStyles['items-list-wrapper']}>
@@ -74,5 +69,3 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
 };
 
 export default ItemsList;
-
-
