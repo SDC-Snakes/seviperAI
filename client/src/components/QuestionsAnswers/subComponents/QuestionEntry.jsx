@@ -1,5 +1,4 @@
 import React from 'react';
-import AnswerEntry from './AnswerEntry';
 
 function QuestionEntry({ question }) {
   return (
@@ -14,7 +13,9 @@ function QuestionEntry({ question }) {
         <span className="helpful-text">
           Helpful?
         </span>
-        <input type="button" className="yes-button" value="Yes" />
+        <span className="yes-button" onClick={()=> console.log('HELPFUL')}>
+          Yes({question.question_helpfulness})
+        </span>
         <input type="button" className="add-answer-button" value="Add Answer" />
 
       </span>

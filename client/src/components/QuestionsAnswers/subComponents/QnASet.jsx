@@ -4,6 +4,7 @@ import AnswersList from './AnswersList';
 import { answersSample } from '../sampleData';
 
 function QnASet({ question }) {
+
   return (
     <div className="qna-set">
       <QuestionEntry question={question} />
