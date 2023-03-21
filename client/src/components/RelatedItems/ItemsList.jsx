@@ -47,7 +47,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
       <div key={index} onClick={(e) => handleModalClick(e, item)}>
         {relatedIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating rating={item.ratings.ratings} />}
+            stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
