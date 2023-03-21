@@ -52,20 +52,27 @@ export const api = createApi({
           relatedItem[item] = {};
           const itemDetails = await fetchWithBQ(`/products/${item}`);
           return itemDetails.data
-          ? relatedItem[item].details = itemDetails.data : relatedItem[item].detailsError = itemDetails.error;
+            ? relatedItem[item].details = itemDetails.data : relatedItem[item].detailsError = itemDetails.error;
         }));
         await Promise.all(related.data.map(async (item) => {
           const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
           return ratingsDetails.data
-          ? relatedItem[item].ratings = ratingsDetails.data : relatedItem[item].ratingsError = ratingsDetails.error;
+            ? relatedItem[item].ratings = ratingsDetails.data : relatedItem[item].ratingsError = ratingsDetails.error;
         }));
         await Promise.all(related.data.map(async (item) => {
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
           return allPhotos.data
-          ? relatedItem[item].photos = allPhotos.data : relatedItem[item].photoError = allPhotos.error;
+            ? relatedItem[item].photos = allPhotos.data : relatedItem[item].photoError = allPhotos.error;
         }));
         return { data: relatedItem };
       },
+    }),
+    AddToCart: build.mutation({
+      query: skuId => ({
+        url: '/cart',
+        method: 'POST',
+        body: { sku_id: parseInt(skuId, 10) },
+      }),
     }),
   }),
   // EXAMPLE MUTATION endpoint!!!
@@ -87,4 +94,5 @@ export const {
   useGetRelatedProductsQuery,
   useGetRelatedProductInfoQuery,
   useGetMetaReviewsQuery,
+  useAddToCartMutation,
 } = api;

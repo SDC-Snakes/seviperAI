@@ -3,18 +3,35 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import StyleList from './StyleList';
 import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { handleDropdown } from '../../features/products/productsSlice';
+import { handleStateUpdate } from '../../features/products/productsSlice';
 import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
+import { useAddToCartMutation } from '../../features/api/apiSlice';
+import {toast} from 'react-toastify';
+import { api } from '../../features/api/apiSlice';
 
 function Details() {
-  let { selectedStyle, styles, details, sku } = useSelector((state) => state.products);
+  let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
+  const [trigger, { data }] = useAddToCartMutation();
 
   if (quantity > 15) {
     quantity = 15;
   }
+
+  const handleCartClick = async () => {
+    if (sku !== '' && sku !== 'selectSize') {
+      const res = await trigger(sku);
+      if (res.data === 'Content created') {
+        toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
+      } else {
+        toast.error('Unable to add to cart');
+      }
+    } else {
+      toast.error('Unable to add to cart: please select a size');
+    }
+  };
 
   return (
     <div>
@@ -41,17 +58,21 @@ function Details() {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => { dispatch(handleDropdown({ name: e.target.name, value: e.target.value })) }}>
+        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           <option value="selectSize">Select Size</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
-              <option key={sizeSku} value={sizeSku}>
+              <option
+                key={sizeSku}
+                value={sizeSku}
+                disabled={!selectedStyle.skus[sizeSku].quantity}
+              >
                 {selectedStyle.skus[sizeSku].size}
               </option>
             ),
           )}
         </select>
-        <select name="qty">
+        <select name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           {quantity
             ? Array.from({ length: quantity }, (_, i) => i + 1).map(
               (qty) => (<option key={qty} value={qty}>{qty}</option>),
@@ -60,7 +81,7 @@ function Details() {
         </select>
       </div>
       <div>
-        <button type="button">
+        <button type="button" onClick={handleCartClick}>
           Add to cart
         </button>
         <button type="button">
