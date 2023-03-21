@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import itemStyles from './Items.module.css';
 
-function FormatCard({ name, image, price, category, stars, itemStyles }) {
+function FormatCard({ name, image, price, category, stars }) {
   return (
     <div className={itemStyles['items-card']}>
-      <img className={itemStyles['items-card-img']} src={image} />
+      <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
       <h6 className={itemStyles['product-name']}>{name}</h6>

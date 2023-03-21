@@ -4,9 +4,10 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { newModalState, newCurrentRelatedProduct } from '../../features/related/relatedSlice';
+import { newModalState, newRelatedProductFeatures } from '../../features/related/relatedSlice';
+import itemStyles from './Items.module.css';
 
-function ItemsList({ relatedIndex, itemStyles }) {
+function ItemsList({ relatedIndex }) {
   const dispatch = useDispatch();
   const params = useParams();
   const {
@@ -26,7 +27,7 @@ function ItemsList({ relatedIndex, itemStyles }) {
         }
       }
     }
-  };
+  }
 
   // ATTEMPTED REFACTOR, DOES NOT WORK
   // const findImage = function (item) {
@@ -39,7 +40,7 @@ function ItemsList({ relatedIndex, itemStyles }) {
   function handleModalClick(e, item) {
     e.preventDefault();
     dispatch(newModalState());
-    dispatch(newCurrentRelatedProduct(item.details.features));
+    dispatch(newRelatedProductFeatures(item.details.features));
   }
 
   function renderList(item, index) {

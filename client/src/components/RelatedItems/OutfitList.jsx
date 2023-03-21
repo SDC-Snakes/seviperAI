@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import FormatCard from './FormatCard';
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
+import FormatCard from './FormatCard';
+import itemStyles from './Items.module.css';
 
-function OutfitList({ itemStyles }) {
+function OutfitList() {
   const params = useParams();
   const {
     data: relatedProducts,
@@ -24,7 +25,6 @@ function OutfitList({ itemStyles }) {
         category={item.details.category}
         image={item.photos.results[0].photos.url}
         price={item.details.default_price}
-        itemStyles={itemStyles}
       />
     );
   }
