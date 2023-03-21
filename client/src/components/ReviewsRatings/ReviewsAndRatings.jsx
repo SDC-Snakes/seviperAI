@@ -18,7 +18,6 @@ function ReviewsAndRatings() {
   const count = 9;
    const [sortState, setSortState] = useState('relevant');
    function handleSortState(sortInput) {
-    event.preventDefault();
     return setSortState(sortInput);
    }
   const {
