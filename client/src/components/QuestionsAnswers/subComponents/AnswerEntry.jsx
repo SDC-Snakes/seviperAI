@@ -1,4 +1,5 @@
 import React from 'react';
+import HelpfulModule from './HelpfulModule';
 
 function AnswerEntry({ answer }) {
   return (
@@ -6,10 +7,7 @@ function AnswerEntry({ answer }) {
       <div className="answer-text">
         {answer.body}
       </div>
-      <div className="helpful-text">
-        Helpful?
-      </div>
-      <input type="button" className="yes-button" value="Yes" />
+      <HelpfulModule count={answer.helpfulness} onClick={() => console.log('helpful ANSWER')} />
       <input type="button" className="report-button" value="Report" />
     </div>
   );
