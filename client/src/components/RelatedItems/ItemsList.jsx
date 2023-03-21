@@ -34,6 +34,8 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   //   };
   // };
 
+  console.log('relatedProducts ItemsList: ', relatedProducts);
+
   const renderList = function (item, index) {
     // const maxLength = relatedProducts.length;
     // console.log('relatedIndex ItemsList: ', relatedIndex);
@@ -43,7 +45,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
         {relatedIndex <= index && (
           <FormatCard
             key={index}
-            stars={QuarterStarsAverageRating}
+            stars={<QuarterStarsAverageRating rating={item.ratings.ratings} />}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
