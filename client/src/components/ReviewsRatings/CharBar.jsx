@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import charCSS from './CharBarCSS.module.css';
 import { FaSortDown } from 'react-icons/fa';
 
-
 function CharBar() {
   const { meta } = useSelector((state) => state.reviews);
   const charObj = meta.characteristics;
@@ -22,7 +21,7 @@ function CharBar() {
   return (
     <div>
       {charKeys.map((char) => (
-        <>
+        <div key={charObj[char].id}>
           {/* <div key={charObj[char].id}>
             characteristic: {char}
             id:{charObj[char].id}
@@ -45,8 +44,7 @@ function CharBar() {
 
           </div>
 
-
-        </>
+        </div>
       ))}
 
     </div>
