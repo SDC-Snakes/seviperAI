@@ -5,7 +5,8 @@ function Dropdown({handleSortState}) {
   const handleOptionChange = (event) => {
      setSelectedOption(event.target.value);
      handleSortState(event.target.value);
-  };
+   };
+
 
 
   return (
