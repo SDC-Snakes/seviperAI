@@ -3,9 +3,10 @@ import { FaToolbox } from 'react-icons/fa';
 import data from './sampleData';
 import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
+import { newCombinedProductFeatures } from '../../features/related/relatedSlice';
 
 function ComparisonModal({ sampleChar }) {
-  let { modalOpen, relatedProductFeatures } = useSelector((state) => state.related);
+  let { modalOpen, relatedProductFeatures, combinedProductFeatures } = useSelector((state) => state.related);
   let { details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [modal] = useState(data.sampleModal);
@@ -14,7 +15,7 @@ function ComparisonModal({ sampleChar }) {
     const combinedData = {};
     const relatedProductDetails = relatedProductFeatures;
     const currentProductDetails = details.features;
-
+    function generateData() {
     relatedProductDetails.forEach((char) => {
       const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
       combinedData[description] = { related: true, current: false };
@@ -27,10 +28,11 @@ function ComparisonModal({ sampleChar }) {
         combinedData[description] = { related: false, current: true };
       }
     });
-
-    console.log('combinedData: ', combinedData);
-    console.log('relatedProductFeatures: ', relatedProductFeatures);
-    console.log('details.features: ', details.features);
+    dispatch(newCombinedProductFeatures(combinedData));
+    console.log('combinedProductFeatures: ', combinedProductFeatures);
+    // console.log('combinedData: ', combinedData);
+    // console.log('relatedProductFeatures: ', relatedProductFeatures);
+    // console.log('details.features: ', details.features);
   }
 
   function renderComparison(char, index) {
