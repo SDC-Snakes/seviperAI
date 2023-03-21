@@ -16,9 +16,6 @@ const CarouselList = function ({ itemStyles }) {
     dispatch(newRelatedCarouselIndex(relatedIndex === 0 ? related.length - 1 : relatedIndex - 1));
   };
 
-  // console.log('related CarouselList: ', related);
-  // console.log('carouselIndex: ', relatedIndex);
-
   return (
     <div>
       <div className={itemStyles['items-list-container']}>

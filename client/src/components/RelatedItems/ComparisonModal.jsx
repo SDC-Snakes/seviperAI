@@ -20,8 +20,8 @@ const ComparisonModal = function ({ itemStyles, sampleChar }) {
 
   return (
     <table>
+      <caption>Comparing</caption>
       <thead>
-        <th>Comparing</th>
         <tr>
           <th>Current Product</th>
           <th>Characteristic</th>
