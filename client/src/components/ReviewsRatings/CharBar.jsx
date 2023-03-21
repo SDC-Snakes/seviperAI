@@ -30,19 +30,14 @@ function CharBar() {
           {/* // a bar
           // rating values at 1 3 and 5 stars
           // */}
-
           <div className={charCSS['char-bar-container']}>
             <div>
             {`(${char})`}
             </div>
             <div className={charCSS['char-bar']}>
-
-              <FaSortDown className={charCSS['char-bar-icon']} style={{ marginLeft: `${((charObj[char].value / 5) * 100)  }%` }} />
-
+              <FaSortDown className={charCSS['char-bar-icon']} style={{ marginLeft: `${((charObj[char].value / 5) * 100)}%` }} />
             </div>
-
           </div>
-
         </div>
       ))}
 
