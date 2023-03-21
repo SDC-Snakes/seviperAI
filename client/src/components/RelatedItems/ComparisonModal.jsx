@@ -8,7 +8,6 @@ const ComparisonModal = function ({ itemStyles, sampleChar }) {
   const dispatch = useDispatch();
   const [modal] = useState(data.sampleModal);
 
-  console.log('modalOpen ComparisonModal: ', modalOpen);
   const renderComparison = function (char, index) {
     return (
       <tr key={index}>
