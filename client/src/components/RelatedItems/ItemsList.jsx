@@ -35,6 +35,7 @@ const ItemsList = function ({ relatedIndex, itemStyles }) {
   // };
 
   const renderList = function (item, index) {
+    // const maxLength = relatedProducts.length;
     console.log('relatedIndex ItemsList: ', relatedIndex);
     console.log('index ItemsList: ', index);
     return (
