@@ -12,6 +12,7 @@ function ReviewTile({ index }) {
   const [helpful, setHelpful] = useState('No');
   // send a post request with the helpful state to the API when helpful is 'yes'
   const { reviews } = useSelector((state) => state.reviews);
+  console.log("reviews data", reviews)
   const [modalImage, setModalImage] = useState(false); // or false?
   const toggleModalImage = (inputBool) => (
     setModalImage(inputBool)
@@ -31,6 +32,7 @@ function ReviewTile({ index }) {
       {reviews.results[index].photos.map((photo) => (
         <span key={photo.id}>
           <img
+            className={RNRCSS['thumbnail-review-image']}
             key={photo.id}
             src={photo.url}
             alt={`${photo.id}`}

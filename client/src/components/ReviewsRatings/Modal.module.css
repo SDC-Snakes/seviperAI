@@ -89,3 +89,9 @@ body.active-modal {
   background-color: lightgrey;
 
 }
+
+/* images in reviewTile, thumbnail images */
+.thumbnail-review-image {
+  height:40px;
+  margin-right: 10px;
+}

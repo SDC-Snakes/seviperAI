@@ -16,10 +16,11 @@ function ReviewsAndRatings() {
 
   // console.log('reviews', reviews);
   const count = 9;
+  const sort = 'helpful';
   const {
     data: productReviews,
     isFetching,
-  } = useGetProductReviewsQuery({ id: params.productId, count }, {
+  } = useGetProductReviewsQuery({ id: params.productId, count, sort }, {
     refetchOnMountOrArgChange: true,
   });
 
