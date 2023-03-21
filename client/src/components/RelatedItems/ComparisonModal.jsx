@@ -15,7 +15,6 @@ function ComparisonModal({ sampleChar }) {
     const combinedData = {};
     const relatedProductDetails = relatedProductFeatures;
     const currentProductDetails = details.features;
-    function generateData() {
     relatedProductDetails.forEach((char) => {
       const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
       combinedData[description] = { related: true, current: false };
