@@ -13,7 +13,6 @@ import { FaSortDown } from 'react-icons/fa';
 function CharBar() {
   const { meta } = useSelector((state) => state.reviews);
   const charObj = meta.characteristics;
-  console.log(' in charBar', charObj);
   const charKeys = Object.keys(charObj);
 
   // end of copy

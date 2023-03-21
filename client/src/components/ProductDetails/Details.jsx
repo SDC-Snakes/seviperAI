@@ -8,6 +8,7 @@ import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
 
 function Details() {
   let { selectedStyle, styles, details, sku } = useSelector((state) => state.products);
+  const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
 
@@ -18,7 +19,7 @@ function Details() {
   return (
     <div>
       <div>
-        <QuarterStarsAverageRating />
+        <QuarterStarsAverageRating productRating={meta.ratings} />
         <button type="button">See all reviews</button>
       </div>
       <h3>
