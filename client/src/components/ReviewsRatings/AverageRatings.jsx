@@ -3,8 +3,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
+import CharBar from './CharBar';
 
-function AverageRatings() {
+function AverageRatings({RNRCSS}) {
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   const values = Object.values(obj);
@@ -12,11 +13,14 @@ function AverageRatings() {
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
 
+  // recommended percentage calculation
+  let recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100 ;
   return (
-    <aside>
-      <h3>RATINGS & REVIEWS</h3>
+    <aside className={RNRCSS['average-ratings-left']}>
+      <h3>Product Ratings</h3>
       <QuarterStarsAverageRating />
-      <div>% of reviews recommend this product</div>
+      <div>Total number of reviews: {totalNumRatings}</div>
+      <h4>Rating Breakdown</h4>
       {
         // make sure that the data returned from the API includes
         // all 5 stars always, meaning if no one rated the product
@@ -28,6 +32,10 @@ function AverageRatings() {
           </div>
         ))
       }
+      <div>{Math.round(recommendPercent)}% of reviews recommend this product</div>
+      <div>
+        <CharBar />
+      </div>
     </aside>
   );
 }
