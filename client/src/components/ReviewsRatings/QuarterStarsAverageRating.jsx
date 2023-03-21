@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import QuarterIncStarRating from './QuarterIncStarRating';
 
 function QuarterStarsAverageRating() {
-  // axios.get(`/reviews/meta?product_id=${40344}`)
-
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   // obj will be replaced with the "ratings" object from the API,  /reviews/meta route.
