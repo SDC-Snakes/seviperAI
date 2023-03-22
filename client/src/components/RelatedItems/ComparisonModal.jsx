@@ -28,10 +28,15 @@ function ComparisonModal({ sampleChar }) {
       }
     });
     dispatch(newCombinedProductFeatures(combinedData));
-    console.log('combinedProductFeatures: ', combinedProductFeatures);
-    // console.log('combinedData: ', combinedData);
-    // console.log('relatedProductFeatures: ', relatedProductFeatures);
-    // console.log('details.features: ', details.features);
+    const mappedData = Object.keys(combinedProductFeatures).map(
+      (key) => ({
+        value: key,
+        related: combinedProductFeatures[key].related,
+        current: combinedProductFeatures[key].current,
+      }),
+    );
+    dispatch(newCombinedProductFeatures(mappedData));
+    // console.log('combinedProductFeaturesOutside: ', mappedData);
   }
 
   function renderComparison(char, index) {
