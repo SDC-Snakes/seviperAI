@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
-import { useParams } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import { newModalState, newRelatedProductFeatures } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
 

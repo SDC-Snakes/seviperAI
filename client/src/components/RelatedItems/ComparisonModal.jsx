@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { FaToolbox } from 'react-icons/fa';
-import data from './sampleData';
+import React from 'react';
 import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { newCombinedProductFeatures } from '../../features/related/relatedSlice';
@@ -21,9 +19,9 @@ function ComparisonModal({ sampleChar }) {
     currentProductDetails.forEach((char) => {
       const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
       let hasCharacteristic = false;
-      combinedData.forEach((el) => {
-        if (el.value === description) {
-          el.current = true;
+      combinedData.forEach((existingChar) => {
+        if (existingChar.value === description) {
+          existingChar.current = true;
           hasCharacteristic = true;
         }
       });
@@ -36,9 +34,9 @@ function ComparisonModal({ sampleChar }) {
   function renderComparison(char, index) {
     return (
       <tr key={index}>
-        <td>{char.current && <FaCheck />}</td>
+        <td>{char.current && <i className="fa-solid fa-circle-check" />}</td>
         <td>{char.value}</td>
-        <td>{char.related && <FaToolbox />}</td>
+        <td>{char.related && <i className="fa-solid fa-circle-check" />}</td>
       </tr>
     );
   }
