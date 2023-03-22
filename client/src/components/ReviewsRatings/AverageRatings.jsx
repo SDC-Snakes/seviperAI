@@ -5,6 +5,7 @@ import { newSetRating , newResetRating } from '../../features/reviews/reviewsSli
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
+import { FaSortDown } from 'react-icons/fa';
 
 function AverageRatings({RNRCSS}) {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function AverageRatings({RNRCSS}) {
               className ={RNRCSS['reviews-filter']}
               value={filter}
               onClick={()=>{ dispatch(newSetRating(filter))}}>
+                <FaSortDown />
               {filter}
             </span>
 
