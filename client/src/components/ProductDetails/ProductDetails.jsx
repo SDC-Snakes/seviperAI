@@ -18,6 +18,8 @@ function ProductDetails({ handleScroll }) {
     refetchOnMountOrArgChange: true,
   });
 
+  // console.log(productInfo.styles.results);
+
   useEffect(() => {
     // update photos state
   }, [productInfo]);

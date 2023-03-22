@@ -9,10 +9,10 @@ import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
   let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
-  const { meta, refFn } = useSelector((state) => state.reviews);
+  const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
-  const [trigger, { data, isSuccess }] = useAddToCartMutation();
+  const [trigger] = useAddToCartMutation();
 
   if (quantity > 15) {
     quantity = 15;
@@ -34,6 +34,7 @@ function Details({ handleScroll }) {
   const handleRnrClick = () => {
     handleScroll();
   };
+  console.log(meta.ratings);
 
   return (
     <div>

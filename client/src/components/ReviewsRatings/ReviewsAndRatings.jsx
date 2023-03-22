@@ -17,10 +17,10 @@ function ReviewsAndRatings() {
 
   // console.log('reviews', reviews);
   const count = 9;
-   const [sortState, setSortState] = useState('relevant');
-   function handleSortState(sortInput) {
+  const [sortState, setSortState] = useState('relevant');
+  function handleSortState(sortInput) {
     return setSortState(sortInput);
-   }
+  }
   const {
     data: productReviews,
     isFetching,

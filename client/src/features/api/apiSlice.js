@@ -56,7 +56,7 @@ export const api = createApi({
           ratingsDetails.data ? relatedItem.ratings = ratingsDetails.data : relatedItem.ratingsError = ratingsDetails.error;
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
           allPhotos.data ? relatedItem.photos = allPhotos.data : relatedItem.photoError = allPhotos.error;
-          return relatedItem;   
+          return relatedItem;
         }));
         return { data: allItems };
       },
@@ -88,5 +88,6 @@ export const {
   useGetRelatedProductsQuery,
   useGetRelatedProductInfoQuery,
   useGetMetaReviewsQuery,
+  useLazyGetMetaReviewsQuery,
   useAddToCartMutation,
 } = api;
