@@ -9,7 +9,7 @@ import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
   let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
-  const { meta, refFn } = useSelector((state) => state.reviews);
+  const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
   const [trigger, { data, isSuccess }] = useAddToCartMutation();
