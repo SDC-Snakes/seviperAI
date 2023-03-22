@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import Search from './subComponents/Search';
 import QuestionsList from './subComponents/QuestionsList';
-import AnswerModalWindow from './answerModal/AnswerModalWindow';
+import WindowWrapper from './ModalWindow/WindowWrapper';
 import useAsync from './useAsync';
 import qnaStyles from './qnaStyles.module.css';
 
@@ -79,7 +79,7 @@ function QuestionsAnswers() {
           </div>
           {answerFormVisible
             && (
-              <AnswerModalWindow
+              <WindowWrapper
                 qnaStyles={qnaStyles}
                 onAddAnswer={onAddAnswer}
                 productInfo={productInfo}

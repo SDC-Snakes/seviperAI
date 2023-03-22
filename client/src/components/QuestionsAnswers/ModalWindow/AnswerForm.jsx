@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import AnswerForm from './AnswerForm';
 import useAsync from '../useAsync';
 
-function AnswerModalWindow({
+function AnswerForm({
   qnaStyles, onAddAnswer, productInfo, questionInfo,
 }) {
-  // const [reqStatus, setReqStatus] = useState(false);
   const [reqObjs, setReqObjs] = useState([]);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
 
@@ -28,10 +26,7 @@ function AnswerModalWindow({
   }
 
   return (
-    <div className="answer-modal-window">
-      <div className={qnaStyles.modal}>
-        <div className={qnaStyles.overlay}>
-          <div className={qnaStyles['modal-content']}>
+    <div className={qnaStyles['modal-content']}>
             <h3> Submit your Answer</h3>
             <h6>
               {`${productInfo.name}: ${questionInfo.body}`}
@@ -65,10 +60,7 @@ function AnswerModalWindow({
             </form>
             <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAddAnswer(false); }} value="X" />
           </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
-export default AnswerModalWindow;
+export default AnswerForm;
