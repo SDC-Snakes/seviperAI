@@ -24,6 +24,7 @@ export function renderWithProviders(
          related: relatedReducer,
          reviews: reviewsReducer,
        },
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
       preloadedState,
     }),
     ...renderOptions

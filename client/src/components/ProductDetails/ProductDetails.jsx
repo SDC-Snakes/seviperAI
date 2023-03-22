@@ -9,7 +9,7 @@ import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 
 function ProductDetails({ handleScroll }) {
   const params = useParams();
-  let { expanded, selectedImage } = useSelector((state) => state.products);
+  let { expanded } = useSelector((state) => state.products);
 
   const {
     data: productInfo,

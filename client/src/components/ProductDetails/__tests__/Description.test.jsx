@@ -21,7 +21,7 @@ test('products details render', async () => {
   };
 
   render(<Description details={detailsStub} />);
-  screen.debug();
+  // screen.debug();
 
   // Check that loading state is not displayed
   // expect(screen.queryByText('Loading...')).toBeNull();
