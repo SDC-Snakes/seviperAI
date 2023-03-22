@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import HelpfulModule from './HelpfulModule';
+import { OnAddAnswer } from '../QuestionsAnswers';
 
 function QuestionEntry({ question }) {
+  const onAddAnswer = useContext(OnAddAnswer);
+
   return (
     <div className="question-entry">
       <span className="q">
@@ -11,8 +14,16 @@ function QuestionEntry({ question }) {
         <span className="question-text">
           {question.question_body}
         </span>
-        <HelpfulModule count={question.question_helpfulness} onClick={() => console.log('HELPFUL')} />
-        <input type="button" className="add-answer-button" value="Add Answer" />
+        <HelpfulModule
+          count={question.question_helpfulness}
+          onClick={() => console.log(question)}
+        />
+        <input
+          type="button"
+          className="add-answer-button"
+          onClick={() => onAddAnswer(true, question.question_id, question.question_body)}
+          value="Add Answer"
+        />
       </span>
     </div>
   );
