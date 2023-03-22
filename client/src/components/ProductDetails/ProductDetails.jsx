@@ -44,7 +44,7 @@ function ProductDetails({ handleScroll }) {
           </div>
         </div>
       )}
-      <Description />
+      <Description details={productInfo.details} />
     </div>
   );
 }
