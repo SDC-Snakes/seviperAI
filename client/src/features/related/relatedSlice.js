@@ -27,6 +27,27 @@ function setRelatedProductFeatures(state = initialState, action) {
 function setCombinedProductFeatures(state = initialState, action) {
   return { ...state, combinedProductFeatures: action.payload };
 }
+function generateCombinedProductFeatures(state = initialState, action) {
+  const combinedData = [];
+  const relatedProductDetails = state.relatedProductFeatures;
+  const currentProductDetails = action.payload;
+  relatedProductDetails.forEach((char) => {
+    const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
+    combinedData.push({ value: description, related: true, current: false });
+  });
+  currentProductDetails.forEach((char) => {
+    const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
+    let hasCharacteristic = false;
+    combinedData.forEach((existingChar) => {
+      if (existingChar.value === description) {
+        existingChar.current = true;
+        hasCharacteristic = true;
+      }
+    });
+    if (!hasCharacteristic) { combinedData.push({ value: description, related: false, current: true }); }
+    return state.combinedProductFeatures = combinedData
+  });
+}
 
 const relatedSlice = createSlice({
   name: 'related',
@@ -38,6 +59,7 @@ const relatedSlice = createSlice({
     newModalState: toggleModal,
     newRelatedProductFeatures: setRelatedProductFeatures,
     newCombinedProductFeatures: setCombinedProductFeatures,
+    generateProductFeatures: generateCombinedProductFeatures,
   },
   extraReducers: (builder) => {
     builder
@@ -54,6 +76,7 @@ export const {
   newModalState,
   newRelatedProductFeatures,
   newCombinedProductFeatures,
+  generateProductFeatures,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

@@ -1,14 +1,15 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
-import { GenerateComparisonData } from './GenerateComparisonData';
+import GenerateComparisonData from './GenerateComparisonData';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
-import { newModalState, newRelatedProductFeatures } from '../../features/related/relatedSlice';
+import { newModalState, newRelatedProductFeatures, generateProductFeatures } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
 
 function ItemsList({ relatedIndex }) {
+  let { details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const params = useParams();
   const {
@@ -42,7 +43,7 @@ function ItemsList({ relatedIndex }) {
     e.preventDefault();
     dispatch(newModalState());
     dispatch(newRelatedProductFeatures(item.details.features));
-    GenerateComparisonData();
+    dispatch(generateProductFeatures(details.features));
   }
 
   function renderList(item, index) {
