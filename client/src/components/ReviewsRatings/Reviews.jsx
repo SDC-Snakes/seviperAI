@@ -12,6 +12,7 @@ function Reviews({RNRCSS, handleSortState}) {
   const barRating = useSelector(state => state.reviews.ratingBarSelect);
   const { reviews } = useSelector((state) => state.reviews);
   const [numberReviews, setNumberReviews] = useState(2);
+  console.log('review', reviews)
   const addReviews = () => {
     setNumberReviews(numberReviews + 2);
   };
@@ -26,7 +27,7 @@ function Reviews({RNRCSS, handleSortState}) {
           {filteredArr.map((review, index) => {
             if (index < numberReviews) {
               return (
-              <div className={RNRCSS['review-tile']} key={index.toString()}>
+              <div className={RNRCSS['review-tile']} key={review.review_id}>
               <ReviewTile reviewsObj={review} />
               </div>
               );
