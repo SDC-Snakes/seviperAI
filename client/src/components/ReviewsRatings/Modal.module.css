@@ -100,3 +100,8 @@ body.active-modal {
   height: 500px;
   width: 100%;
   }
+
+  /* review filters */
+  .reviews-filter {
+    margin-right: 10px;
+  }

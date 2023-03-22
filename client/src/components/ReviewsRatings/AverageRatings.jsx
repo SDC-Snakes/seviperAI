@@ -1,11 +1,14 @@
 // this is the Average ratings and reviews component
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { newSetRating , newResetRating } from '../../features/reviews/reviewsSlice';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
 
 function AverageRatings({RNRCSS}) {
+  const dispatch = useDispatch();
+  const barRating = useSelector(state => state.reviews.ratingBarSelect);
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   const values = Object.values(obj);
@@ -24,6 +27,28 @@ function AverageRatings({RNRCSS}) {
         Total number of reviews: {totalNumRatings}
       </div>
       <h4>Rating Breakdown</h4>
+      {barRating.length > 0 && (
+        <div>
+          <h4>
+            applied filters
+          </h4>
+          {barRating.map((filter) => (
+            <span
+              className ={RNRCSS['reviews-filter']}
+              onClick={()=>{console.log('clicked star', filter)}}>
+              {filter}
+            </span>
+
+          ))}
+          <div>
+            <input
+            className ={RNRCSS['reviews-filter-reset-input']}
+
+            type="submit" value="reset filters" onClick={()=>{dispatch(newResetRating())}} />
+          </div>
+        </div>
+      )}
+
       {
         // make sure that the data returned from the API includes
         // all 5 stars always, meaning if no one rated the product

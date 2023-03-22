@@ -23,6 +23,9 @@ const reviewsSlice = createSlice({
         state.ratingBarSelect = state.ratingBarSelect.filter((rating) => rating !== action.payload);
       }
     },
+    newResetRating: (state, action) => {
+      state.ratingBarSelect = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -35,6 +38,6 @@ const reviewsSlice = createSlice({
   },
 });
 
-export const { reset, newSetRating } = reviewsSlice.actions;
+export const { reset, newSetRating, newResetRating} = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;
