@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { newCombinedProductFeatures } from '../../features/related/relatedSlice';
 
-function GenerateComparisonData() {
+const GenerateComparisonData = () => {
   let { modalOpen, relatedProductFeatures, combinedProductFeatures } = useSelector((state) => state.related);
   let { details } = useSelector((state) => state.products);
   const dispatch = useDispatch();

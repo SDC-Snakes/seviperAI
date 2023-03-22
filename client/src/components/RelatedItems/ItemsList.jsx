@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
+import { GenerateComparisonData } from './GenerateComparisonData';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { newModalState, newRelatedProductFeatures } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
@@ -41,11 +42,12 @@ function ItemsList({ relatedIndex }) {
     e.preventDefault();
     dispatch(newModalState());
     dispatch(newRelatedProductFeatures(item.details.features));
+    GenerateComparisonData();
   }
 
   function renderList(item, index) {
     return (
-      <div key={index} onClick={(e) => handleModalClick(e, item)}>
+      <div key={index} onClick={(e) => {handleModalClick(e, item)}}>
         {relatedIndex <= index && (
           <FormatCard
             stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
