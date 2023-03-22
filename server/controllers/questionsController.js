@@ -6,7 +6,7 @@ module.exports = {
     const page = req.query.page || 1;
     const count = req.query.count || 5;
     if (req.query.product_id) {
-      axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions?product_id=${req.query.product_id}`, {
+      axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions/?product_id=${req.query.product_id}&page=${req.query.page}&count=${req.query.count}`, {
         headers: {
           Authorization: process.env.GITHUB_API_KEY,
         },
@@ -46,12 +46,15 @@ module.exports = {
       });
   },
   postAnswer: (req, res) => {
-    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/answers`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
-      },
-      data: req.body,
-    })
+    axios.post(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/answers`,
+      req.body,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      }
+    )
       .then(() => {
         res.status(201).send('Answer created');
       })
