@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import FormatCard from './FormatCard';
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
+import FormatCard from './FormatCard';
+import itemStyles from './Items.module.css';
 
-const OutfitList = function ({ itemStyles }) {
+function OutfitList() {
   const params = useParams();
   const {
     data: relatedProducts,
@@ -13,10 +14,10 @@ const OutfitList = function ({ itemStyles }) {
     refetchOnMountOrArgChange: true,
   });
 
-  let { selectedStyle, styles } = useSelector((state) => state.products);
+  let { selectedStyle, styles, details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
-  const renderList = function (item, index) {
+  function renderList(item, index) {
     return (
       <FormatCard
         key={index}
@@ -24,10 +25,9 @@ const OutfitList = function ({ itemStyles }) {
         category={item.details.category}
         image={item.photos.results[0].photos.url}
         price={item.details.default_price}
-        itemStyles={itemStyles}
       />
     );
-  };
+  }
 
   if (isFetching) {
     return <div>loading...</div>;
@@ -41,6 +41,6 @@ const OutfitList = function ({ itemStyles }) {
       </div>
     </div>
   );
-};
+}
 
 export default OutfitList;
