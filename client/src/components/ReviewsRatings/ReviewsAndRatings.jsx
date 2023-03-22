@@ -16,7 +16,7 @@ function ReviewsAndRatings() {
   const dispatch = useDispatch();
 
   let { reviews } = useSelector((state) => state.reviews);
-
+  const reviewCount = useSelector(state => state.reviews.reviewTileCount);
   // console.log('reviews', reviews);
   const count = 20;
   const [sortState, setSortState] = useState('relevant');

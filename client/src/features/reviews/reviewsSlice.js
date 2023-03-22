@@ -5,6 +5,7 @@ const initialState = {
   reviews: {},
   meta: {},
   ratingBarSelect: [],
+  reviewTileCount:0,
 };
 // eslint-disable-next-line default-param-last
 function setRating(state = initialState, action) {
@@ -31,6 +32,9 @@ const reviewsSlice = createSlice({
     newResetRating: (state, action) => {
       state.ratingBarSelect = [];
     },
+    newReviewTileCount: (state) => {
+      state.reviewTileCount += 1;
+    },
 
     changeState: updateState,
 
@@ -46,8 +50,7 @@ const reviewsSlice = createSlice({
   },
 });
 
-
-export const { reset, newSetRating, newResetRating, changeState} = reviewsSlice.actions;
-
+// eslint-disable-next-line max-len
+export const { reset, newSetRating, newResetRating, changeState, newReviewTileCount } = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;
