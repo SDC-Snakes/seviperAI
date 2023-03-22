@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AverageRatings from './AverageRatings';
 import Search from './SearchBarReviews';
 import Reviews from './Reviews';
