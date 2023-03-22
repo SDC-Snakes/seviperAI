@@ -5,7 +5,11 @@ function QuestionsList({ questions, numberOfQs }) {
   return (
     <div id="questions-list">
       {questions.slice(0, numberOfQs).map((question) => (
-        <QnASet question={question} key={questions.question_id} />))}
+        <QnASet
+          question={question}
+          key={question.question_id}
+        />
+      ))}
     </div>
   );
 }
