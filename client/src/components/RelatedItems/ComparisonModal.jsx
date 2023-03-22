@@ -23,17 +23,17 @@ function ComparisonModal({ sampleChar }) {
     });
     currentProductDetails.forEach((char) => {
       const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
-      let flag = false;
+      let hasCharacteristic = false;
       combinedData.forEach((el) => {
         if (el.value === description) {
           el.current = true;
-          flag = true;
+          hasCharacteristic = true;
         }
       });
-      if (!flag) { combinedData.push({ value: description, related: false, current: true }); }
+      if (!hasCharacteristic) { combinedData.push({ value: description, related: false, current: true }); }
     });
-    console.log('combinedData: ', combinedData);
-    // dispatch(newCombinedProductFeatures(combinedData));
+    // console.log('combinedData: ', combinedData);
+    dispatch(newCombinedProductFeatures(combinedData));
   }
 
   function renderComparison(char, index) {
