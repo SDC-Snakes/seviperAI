@@ -95,3 +95,13 @@ body.active-modal {
   height:40px;
   margin-right: 10px;
 }
+
+.loading-window {
+  height: 500px;
+  width: 100%;
+  }
+
+  /* review filters */
+  .reviews-filter {
+    margin-right: 10px;
+  }
