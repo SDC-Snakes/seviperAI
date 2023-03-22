@@ -9,9 +9,6 @@ function ComparisonModal({ sampleChar }) {
   let { modalOpen, relatedProductFeatures, combinedProductFeatures } = useSelector((state) => state.related);
   let { details } = useSelector((state) => state.products);
   const dispatch = useDispatch();
-  const [modal] = useState(data.sampleModal);
-
-  let mappedData = [];
 
   function comparisonData() {
     const combinedData = [];
@@ -39,7 +36,7 @@ function ComparisonModal({ sampleChar }) {
   function renderComparison(char, index) {
     return (
       <tr key={index}>
-        <td>{char.current && <FaToolbox />}</td>
+        <td>{char.current && <FaCheck />}</td>
         <td>{char.value}</td>
         <td>{char.related && <FaToolbox />}</td>
       </tr>
