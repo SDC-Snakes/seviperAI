@@ -4,7 +4,6 @@ import { api } from '../api/apiSlice';
 const initialState = {
   reviews: {},
   meta: {},
-  refFn: {},
 };
 
 function updateState(state = initialState, action) {
