@@ -8,14 +8,21 @@ import { renderWithProviders } from '../../../utils/test-utils'
 
 import Details from '../Details';
 
+// eslint-disable-next-line import/prefer-default-export
 export const handlers = [
-  rest.get('/products', (req, res, ctx) => {
-    return res(ctx.json('John Smith'), ctx.delay(150))
-  })
-]
+  rest.get('/products', (req, res, ctx) => res(ctx.json('John Smith'), ctx.delay(150))),
+];
 
-const server = setupServer(...handlers)
+const server = setupServer(...handlers);
 
+// Enable API mocking before tests.
+beforeAll(() => server.listen());
+
+// Reset any runtime request handlers we may add during the tests.
+afterEach(() => server.resetHandlers());
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close());
 
 test('products details render', async () => {
   let detailsStub = {
@@ -32,7 +39,12 @@ test('products details render', async () => {
     ],
   };
 
-  renderWithProviders(<Details />);
+  renderWithProviders(<Details />, {
+    preloadedState: {
+      products: proxyProducts,
+      reviews: proxyReviews,
+    },
+  });
   screen.debug();
 
   // Check that loading state is not displayed
