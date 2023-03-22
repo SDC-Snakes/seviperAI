@@ -44,8 +44,10 @@ function generateCombinedProductFeatures(state = initialState, action) {
         hasCharacteristic = true;
       }
     });
-    if (!hasCharacteristic) { combinedData.push({ value: description, related: false, current: true }); }
-    return state.combinedProductFeatures = combinedData
+    if (!hasCharacteristic) {
+      combinedData.push({ value: description, related: false, current: true });
+    }
+    state.combinedProductFeatures = combinedData;
   });
 }
 

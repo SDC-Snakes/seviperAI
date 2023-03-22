@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
-import GenerateComparisonData from './GenerateComparisonData';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import { newModalState, newRelatedProductFeatures, generateProductFeatures } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
