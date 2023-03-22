@@ -3,7 +3,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import StyleList from './StyleList';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
-import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
+import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/fa';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import {toast} from 'react-toastify';
 
