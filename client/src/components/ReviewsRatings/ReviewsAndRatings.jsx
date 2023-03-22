@@ -38,7 +38,7 @@ function ReviewsAndRatings() {
   useEffect(() => {
     // trigger({ id: params.productId, count, sortState });
     refetch();
-  }, [sortState,refetch]);
+  }, [sortState, refetch]);
 
   function handleSortState(sortInput) {
       setSortState(sortInput);

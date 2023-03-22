@@ -4,7 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { renderWithProviders } from '../../../utils/test-utils'
+import { renderWithProviders } from './utils/test-utils';
+import stateStub from './proxies/stateProxy';
 
 import Details from '../Details';
 
@@ -25,29 +26,16 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('products details render', async () => {
-  let detailsStub = {
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    features: [
-      {
-        feature: 'Fabric',
-        value: 'canvas',
-      },
-      {
-        feature: 'Buttons',
-        value: 'Brass',
-      },
-    ],
-  };
-
   renderWithProviders(<Details />, {
     preloadedState: {
-      products: proxyProducts,
-      reviews: proxyReviews,
+      products: stateStub.products,
+      reviews: stateStub.reviews,
     },
   });
   screen.debug();
 
   // Check that loading state is not displayed
   // expect(screen.queryByText('Loading...')).toBeNull();
-  expect(screen.getByText(detailsStub.description)).toBeInTheDocument();
+  expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });
