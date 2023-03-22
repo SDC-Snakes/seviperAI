@@ -8,7 +8,7 @@ const initialState = {
   outfitLength: 0,
   modalOpen: false,
   relatedProductFeatures: {},
-  combinedProductFeatures: {},
+  combinedProductFeatures: [],
 };
 
 function moveRelatedCarousel(state = initialState, action) {
