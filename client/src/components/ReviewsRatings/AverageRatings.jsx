@@ -33,9 +33,10 @@ function AverageRatings({RNRCSS}) {
           <h4>
             applied filters
           </h4>
-          {barRating.map((filter) => (
+          {barRating.map((filter, index) => (
             <span
               className ={RNRCSS['reviews-filter']}
+              key={index.toString()}
               value={filter}
               onClick={()=>{ dispatch(newSetRating(filter))}}>
                 <FaSortDown />
