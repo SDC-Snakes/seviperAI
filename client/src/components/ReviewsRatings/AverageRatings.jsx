@@ -35,7 +35,8 @@ function AverageRatings({RNRCSS}) {
           {barRating.map((filter) => (
             <span
               className ={RNRCSS['reviews-filter']}
-              onClick={()=>{console.log('clicked star', filter)}}>
+              value={filter}
+              onClick={()=>{ dispatch(newSetRating(filter))}}>
               {filter}
             </span>
 
