@@ -49,7 +49,7 @@ function useAsync(reqObjs, deps = []) {
   };
 
   useEffect(() => sendRequestAsync(reqObjs), deps);
-  return { state, sendRequestAsync };
+  return { state };
 }
 
 export default useAsync;

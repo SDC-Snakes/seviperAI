@@ -40,7 +40,7 @@ function QuestionsAnswers() {
   ];
 
   // custom hook to handle requests
-  const { state: { loading, response, error }, sendRequestAsync } = useAsync(reqObjs, []);
+  const { state: { loading, response, error } } = useAsync(reqObjs, []);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;
@@ -84,7 +84,6 @@ function QuestionsAnswers() {
                 onAddAnswer={onAddAnswer}
                 productInfo={productInfo}
                 questionInfo={questionInfo}
-                sendRequestAsync={sendRequestAsync}
               />
             )}
         </div>

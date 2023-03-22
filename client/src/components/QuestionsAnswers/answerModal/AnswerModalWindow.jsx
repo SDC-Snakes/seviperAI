@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import AnswerForm from './AnswerForm';
 import useAsync from '../useAsync';
 
 function AnswerModalWindow({
-  qnaStyles, onAddAnswer, productInfo, questionInfo, sendRequestAsync
+  qnaStyles, onAddAnswer, productInfo, questionInfo,
 }) {
-  console.log(questionInfo);
+  // const [reqStatus, setReqStatus] = useState(false);
+  const [reqObjs, setReqObjs] = useState([]);
+  const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    // const { useAsync(reqObjs)
-    axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
-      body: e.target[0].value,
-      name: e.target[1].value,
-      email: e.target[2].value,
-    },);
-    // sendRequestAsync(reqObj,[])
+    console.log('EVENT:', e);
+    console.log('QUESTIONINFO:', questionInfo);
+    setReqObjs(() => ([
+      axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
+        body: e.target[0].value,
+        name: e.target[1].value,
+        email: e.target[2].value,
+      }),
+    ]));
   };
+  if (response !== null && response[0] && response[0].status === 201) {
+    alert('Thank you for your answer!')
+    onAddAnswer(false);
+  }
 
   return (
     <div className="answer-modal-window">
@@ -53,12 +60,13 @@ function AnswerModalWindow({
                 </div>
               </div>
               <input type="submit" value="Submit Answer" />
+              {loading && <div> Submitting the answer...</div>}
+              {error && <div>Error has occurred. Please try again.</div>}
             </form>
             <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAddAnswer(false); }} value="X" />
           </div>
         </div>
       </div>
-      <AnswerForm />
     </div>
   );
 }
