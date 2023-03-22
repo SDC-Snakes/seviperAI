@@ -34,9 +34,9 @@ function useAsync(reqObjs, deps = []) {
     error: null,
   });
 
-  useEffect(() => {
+  const sendRequestAsync = (promises) => {
     dispatch({ type: 'LOADING' });
-    Promise.all(reqObjs)
+    Promise.all(promises)
       .then((response) => {
         dispatch({
           type: 'SUCCESS',
@@ -46,8 +46,10 @@ function useAsync(reqObjs, deps = []) {
       .catch((err) => {
         dispatch({ type: 'ERROR', error: err });
       });
-  }, deps);
-  return state;
+  };
+
+  useEffect(() => sendRequestAsync(reqObjs), deps);
+  return { state, sendRequestAsync };
 }
 
 export default useAsync;

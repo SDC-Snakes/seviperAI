@@ -46,12 +46,15 @@ module.exports = {
       });
   },
   postAnswer: (req, res) => {
-    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/answers`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
-      },
-      data: req.body,
-    })
+    axios.post(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/answers`,
+      req.body,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      }
+    )
       .then(() => {
         res.status(201).send('Answer created');
       })

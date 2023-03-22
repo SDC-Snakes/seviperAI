@@ -10,25 +10,24 @@ import qnaStyles from './qnaStyles.module.css';
 // create and export css as a context object
 export const QnaStyles = React.createContext(null);
 export const OnAddAnswer = React.createContext(null);
+export const SendRequestAsync = React.createContext(null);
 
 function QuestionsAnswers() {
-  const params = useParams(); // to get productId
-  // sort according to helpfulness
-  const sortDescHelpful = (a, b) => (b.question_helpfulness - a.question_helpfulness);
-
+  const params = useParams(); // get productId
   // need to declare all the state variables on the top
   const [numberOfQs, setNumberOfQs] = useState(2);
   // visibility state variable for answer modal window
   const [answerFormVisible, setAnswerFromVisible] = useState(false);
-  // question stata vars for answer modal
+  // question state vars for answer modal
   const [questionInfo, setQuestionInfo] = useState({
     id: '',
-    body:'',
-  })
+    body: '',
+  });
 
   // fetching initial data
   /// handle loading and error
   const reqObjs = [
+    // questions for a product
     axios.get('http://localhost:8080/qa/questions/', {
       params: {
         product_id: params.productId,
@@ -36,11 +35,12 @@ function QuestionsAnswers() {
         count: 100,
       },
     }),
+    // product info. for adding a question and answer
     axios.get(`http://localhost:8080/products/${params.productId}`),
   ];
 
   // custom hook to handle requests
-  const { loading, response, error } = useAsync(reqObjs, []);
+  const { state: {loading, response, error}, sendRequestAsync } = useAsync(reqObjs, []);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;
@@ -48,6 +48,8 @@ function QuestionsAnswers() {
   if (!response) return null;
 
   // extract data from responses
+  // sort according to helpfulness
+  const sortDescHelpful = (a, b) => (b.question_helpfulness - a.question_helpfulness);
   const questions = response[0].data.results.sort(sortDescHelpful);
   const productInfo = response[1].data;
 
@@ -55,9 +57,9 @@ function QuestionsAnswers() {
   const loadMoreQs = () => {
     setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
-
+  // toggle functions
   const onAddAnswer = (state, id, body) => {
-    setQuestionInfo({id, body})
+    setQuestionInfo({ id, body });
     setAnswerFromVisible(state);
   };
 
@@ -82,6 +84,7 @@ function QuestionsAnswers() {
                 onAddAnswer={onAddAnswer}
                 productInfo={productInfo}
                 questionInfo={questionInfo}
+                sendRequestAsync={sendRequestAsync}
               />
             )}
         </div>

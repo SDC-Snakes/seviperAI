@@ -14,8 +14,16 @@ function QuestionEntry({ question }) {
         <span className="question-text">
           {question.question_body}
         </span>
-        <HelpfulModule count={question.question_helpfulness} onClick={() => console.log(question)} />
-        <input type="button" className="add-answer-button" onClick={() => onAddAnswer(true, question.question_id, question.question_body)} value="Add Answer" />
+        <HelpfulModule
+          count={question.question_helpfulness}
+          onClick={() => console.log(question)}
+        />
+        <input
+          type="button"
+          className="add-answer-button"
+          onClick={() => onAddAnswer(true, question.question_id, question.question_body)}
+          value="Add Answer"
+        />
       </span>
     </div>
   );
