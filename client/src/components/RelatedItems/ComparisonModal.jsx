@@ -3,7 +3,7 @@ import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
 
-function ComparisonModal({ sampleChar }) {
+function ComparisonModal() {
   let { modalOpen, combinedProductFeatures } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ function ComparisonModal({ sampleChar }) {
   // onClick={dispatch(newModalState())}
 
   return modalOpen ? (
-    <div className={itemStyles.modal}>
+    <div className={itemStyles.modal} onClick={closeModal}>
       <div className={itemStyles.overlay}>
         <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
           <caption>Comparing</caption>
