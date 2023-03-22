@@ -11,7 +11,9 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 
 function ReviewsAndRatings() {
   const params = useParams();
+
   // const [trigger, { data }] = useGetProductReviewsQuery();
+  const dispatch = useDispatch();
 
   let { reviews } = useSelector((state) => state.reviews);
 
