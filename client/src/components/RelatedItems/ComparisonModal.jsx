@@ -22,30 +22,28 @@ function ComparisonModal({ sampleChar }) {
     dispatch(newModalState());
   }
 
+  // onClick={dispatch(newModalState())}
 
-  if (modalOpen) {
-  return (
-      <div className={itemStyles.modal}>
-        <div className={itemStyles.overlay}>
-          <table className={itemStyles['modal-content']}>
-            <caption>Comparing</caption>
-            <thead>
-              <tr>
-                <th>Current Product</th>
-                <th>Characteristic</th>
-                <th>Related Product</th>
-              </tr>
-            </thead>
-            <tbody>
-              {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-            </tbody>
-          </table>
-          <input type='button' className={itemStyles['close-modal']} value="CLOSE MODAL" onClick={closeModal}/>
-        </div>
+  return modalOpen ? (
+    <div className={itemStyles.modal}>
+      <div className={itemStyles.overlay}>
+        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+          <caption>Comparing</caption>
+          <thead>
+            <tr>
+              <th>Current Product</th>
+              <th>Characteristic</th>
+              <th>Related Product</th>
+            </tr>
+          </thead>
+          <tbody>
+            {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
+          </tbody>
+        </table>
+        <input type="button" className={itemStyles['close-modal']} value="CLOSE MODAL" onClick={closeModal} />
       </div>
-    )
-  }
-  return null;
+    </div>
+  ) : null;
 }
 
 export default ComparisonModal;
