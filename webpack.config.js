@@ -40,6 +40,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         ATLIER_API_ROUTE: JSON.stringify(process.env.ATLIER_API_ROUTE),
+        PORT: JSON.stringify(process.env.PORT)
       },
     }),
   ],

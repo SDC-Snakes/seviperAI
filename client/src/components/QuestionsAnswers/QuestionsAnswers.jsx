@@ -28,7 +28,7 @@ function QuestionsAnswers() {
   /// handle loading and error
   const reqObjs = [
     // questions for a product
-    axios.get('http://localhost:8080/qa/questions/', {
+    axios.get(`http://localhost:${process.env.PORT}/qa/questions/`, {
       params: {
         product_id: params.productId,
         page: 1,
@@ -36,7 +36,7 @@ function QuestionsAnswers() {
       },
     }),
     // product info. for adding a question and answer
-    axios.get(`http://localhost:8080/products/${params.productId}`),
+    axios.get(`http://localhost:${process.env.PORT}/products/${params.productId}`),
   ];
 
   // custom hook to handle requests

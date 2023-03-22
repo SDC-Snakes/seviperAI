@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import AnswerForm from './AnswerForm';
 import useAsync from '../useAsync';
 
@@ -13,14 +12,13 @@ function AnswerModalWindow({
     e.preventDefault();
     console.log(e);
     // const { useAsync(reqObjs)
-    axios.post(`http://localhost:8080/qa/questions/${questionInfo.id}/answers`, {
+    axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
       body: e.target[0].value,
       name: e.target[1].value,
       email: e.target[2].value,
     },);
     // sendRequestAsync(reqObj,[])
-  }
-
+  };
 
   return (
     <div className="answer-modal-window">
