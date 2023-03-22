@@ -1,6 +1,6 @@
 // this is the main reviews and ratings widget
 
-import React from 'react';
+import React,{useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import AverageRatings from './AverageRatings';
@@ -11,16 +11,20 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 
 function ReviewsAndRatings() {
   const params = useParams();
+  const dispatch = useDispatch();
 
   let {reviews} = useSelector((state) => state.reviews);
 
   // console.log('reviews', reviews);
   const count = 9;
-  const sort = 'helpful';
+   const [sortState, setSortState] = useState('relevant');
+   function handleSortState(sortInput) {
+    return setSortState(sortInput);
+   }
   const {
     data: productReviews,
     isFetching,
-  } = useGetProductReviewsQuery({ id: params.productId, count, sort }, {
+  } = useGetProductReviewsQuery({ id: params.productId, count, sortState }, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -41,7 +45,7 @@ function ReviewsAndRatings() {
         <h1>Ratings & Reviews</h1>
         <Search />
         <AverageRatings RNRCSS={RNRCSS} />
-        <Reviews RNRCSS={RNRCSS} />
+        <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} />
       </div>
 
     </div>

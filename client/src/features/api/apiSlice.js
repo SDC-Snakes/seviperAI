@@ -24,7 +24,7 @@ export const api = createApi({
     }),
     getProductReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
-      query: (obj) => `/reviews?count=${obj.count}&sort=${obj.sort}&product_id=${obj.id}`,
+      query: (obj) => `/reviews?count=${obj.count}&sort=${obj.sortState}&product_id=${obj.id}`,
     }),
     getMetaReviews: build.query({
       // The URL for the request is '/fakeApi/posts'
@@ -61,7 +61,7 @@ export const api = createApi({
         return { data: allItems };
       },
     }),
-    AddToCart: build.mutation({
+    addToCart: build.mutation({
       query: skuId => ({
         url: '/cart',
         method: 'POST',

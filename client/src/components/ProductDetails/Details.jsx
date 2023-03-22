@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
-import { newSelectedStyle } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
 import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/Fa';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import {toast} from 'react-toastify';
-import { api } from '../../features/api/apiSlice';
 
-function Details() {
+function Details({ handleScroll }) {
   let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
-  const { meta } = useSelector((state) => state.reviews);
+  const { meta, refFn } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
-  const [trigger, { data }] = useAddToCartMutation();
+  const [trigger, { data, isSuccess }] = useAddToCartMutation();
 
   if (quantity > 15) {
     quantity = 15;
@@ -33,11 +31,15 @@ function Details() {
     }
   };
 
+  const handleRnrClick = () => {
+    handleScroll();
+  };
+
   return (
     <div>
       <div>
         <QuarterStarsAverageRating productRating={meta.ratings} />
-        <button type="button">See all reviews</button>
+        <button type="button" onClick={handleRnrClick}>See all reviews</button>
       </div>
       <h3>
         {details.category}

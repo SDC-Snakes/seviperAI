@@ -71,7 +71,6 @@ function ReviewTile({ index }) {
         <span onClick={() => { setHelpful('yes'); }}> Yes {reviews.results[index].helpfulness}</span>
         |
         <span>No</span>
-        |
         <Report />
       </div>
     </div>

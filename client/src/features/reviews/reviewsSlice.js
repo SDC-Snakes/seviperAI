@@ -4,13 +4,19 @@ import { api } from '../api/apiSlice';
 const initialState = {
   reviews: {},
   meta: {},
+  refFn: {},
 };
+
+function updateState(state = initialState, action) {
+  return { ...state, [action.payload.name]: action.payload.value };
+}
 
 const reviewsSlice = createSlice({
   name: 'reviews',
   initialState,
   reducers: {
     reset: (state) => initialState,
+    changeState: updateState,
   },
   extraReducers: (builder) => {
     builder
@@ -23,6 +29,6 @@ const reviewsSlice = createSlice({
   },
 });
 
-export const { reset } = reviewsSlice.actions;
+export const { reset, changeState } = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;
