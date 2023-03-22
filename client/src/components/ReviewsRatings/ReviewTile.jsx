@@ -24,7 +24,7 @@ function ReviewTile({ index, updateRenderedElements }) {
   const togglePhotoState = (photo) => (
     setPhotoState(photo)
   );
-    console.log("reviews data", barRating.includes(reviews.results[index].rating))
+    // console.log("reviews data", barRating.includes(reviews.results[index].rating))
 
   return (
    <div>
