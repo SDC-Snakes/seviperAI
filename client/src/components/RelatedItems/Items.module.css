@@ -57,5 +57,51 @@
 
 .right-arrow {
   right: 0;
+}
 
+/**** Comparison Modal ****/
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  font-size: 15px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+/* .overlay {
+  background: rgba(49,49,49,0.8);
+} */
+
+.modal-content {
+  --shadow-color: hsl(0deg 0% 0% / 26%);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  border: solid;
+  border-width: 0.1px;
+  border-color: var(--shadow-color);
+  background: #f1f1f1;
+  padding: 14px 28px;
+  filter: drop-shadow(0px 2px 8px var(--shadow-color))
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
 }
