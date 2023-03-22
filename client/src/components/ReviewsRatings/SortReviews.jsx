@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Dropdown({handleSortState}) {
-  const [selectedOption, setSelectedOption] = useState('Relevant');
+  const [selectedOption, setSelectedOption] = useState('');
   const handleOptionChange = (event) => {
-    event.preventDefault();
-    setSelectedOption(event.target.value);
-    handleSortState(selectedOption);
-  };
+     setSelectedOption(event.target.value);
+     handleSortState(event.target.value);
+   };
+
+
 
   return (
     <div>
