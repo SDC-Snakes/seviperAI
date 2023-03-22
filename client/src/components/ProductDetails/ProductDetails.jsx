@@ -7,7 +7,7 @@ import Description from './Description';
 import './products.css';
 import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 
-function ProductDetails() {
+function ProductDetails({ handleScroll }) {
   const params = useParams();
   let { expanded, selectedImage } = useSelector((state) => state.products);
 
@@ -40,7 +40,7 @@ function ProductDetails() {
             <ImageViewer />
           </div>
           <div className="detailsDiv">
-            <Details />
+            <Details handleScroll={handleScroll} />
           </div>
         </div>
       )}
