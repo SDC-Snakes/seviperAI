@@ -162,19 +162,28 @@ function ReviewAndRatingForm({RNRCSS}) {
 
               </div>
               <div>
-                <input value="" placeholder="Review Summary" />
+                <input value="" placeholder="Example: Best purchase ever!" minLength="1" maxLength="60" />
               </div>
               <div>
-                <input value="" placeholder="Review Body" />
+                <input value="" placeholder="Why did you like the product or not?" minLength="50" maxLength="1000" />
+              </div>
+              <div>
+               Minimum required characters left: {'Number'} As the user types, the count of characters should update. After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
               </div>
               <div>
                 <input type="submit" value="Add Images" />
               </div>
               <div>
-                <input value="" placeholder="username" />
+                <input value="" placeholder="Example: jackson11!" />
               </div>
               <div>
-                <input value="" placeholder="email" />
+                For privacy reasons, do not use your full name or email address
+              </div>
+              <div>
+                <input value="" placeholder="Example: jackson11@email.com" minLength="60" />
+              </div>
+              <div>
+                For authentication reasons, you will not be emailed
               </div>
               <div>
                 <input type="submit" value="Submit Review" />

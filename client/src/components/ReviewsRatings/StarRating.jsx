@@ -5,7 +5,8 @@ import { FaStar } from 'react-icons/fa';
 function StarRating() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-
+  const ratingValues = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const ratingDescription = ratingValues[rating - 1] || '';
   return (
     <span>
       {[...Array(5)].map((star, index) => {
@@ -29,6 +30,7 @@ function StarRating() {
           </label>
         );
       })}
+      <span>{ratingDescription}</span>
     </span>
   );
 }
