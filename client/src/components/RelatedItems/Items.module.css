@@ -25,7 +25,7 @@
   font-size: 36px;
 }
 
-/**** Related item card ****/
+/**** Related item & outfit cards ****/
 
 .items-card {
   position: relative;
@@ -56,6 +56,10 @@
 
 .items-xmark {
   left: 10px;
+}
+
+.card-price-sale {
+  color: #fc3c3c
 }
 
 /**** Carousel ****/
