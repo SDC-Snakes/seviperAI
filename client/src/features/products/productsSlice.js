@@ -7,6 +7,7 @@ const initialState = {
   details: {},
   selectedImage: '',
   expanded: false,
+  zoom: false,
   sku: '',
   quantitySelected: 1,
   imageIndex: 0,

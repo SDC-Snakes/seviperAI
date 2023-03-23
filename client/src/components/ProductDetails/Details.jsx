@@ -3,12 +3,19 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import StyleList from './StyleList';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
-import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/fa';
+import {
+ FaHeart, FaTwitter, FaPinterest, FaFacebookF
+} from 'react-icons/fa';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
-  const { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
+  const {
+    selectedStyle,
+    details,
+    sku,
+    quantitySelected,
+  } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
@@ -29,6 +36,12 @@ function Details({ handleScroll }) {
     } else {
       toast.error('Unable to add to cart: please select a size');
     }
+  };
+
+  const handleOutfitClick = () => {
+    // {details, styles, ratings}
+    // dispatch(addToOutfit({ details, selectedStyle, ratings: meta }));
+    console.log({ details, selectedStyle, ratings: meta });
   };
 
   const handleRnrClick = () => {
@@ -98,7 +111,7 @@ function Details({ handleScroll }) {
         <button type="button" onClick={handleCartClick}>
           Add to cart
         </button>
-        <button type="button">
+        <button type="button" onClick={handleOutfitClick}>
           <FaHeart />
         </button>
       </div>
