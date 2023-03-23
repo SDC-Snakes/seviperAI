@@ -12,10 +12,10 @@ import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
-import { useHelpfulReviewMutation } from '../../features/api/apiSlice';
+import { useHelpfulReviewMutation, useReportReviewMutation} from '../../features/api/apiSlice';
 function ReviewTile({ reviewsObj }) {
   const barRating = useSelector(state => state.reviews.ratingBarSelect);
-  const [helpful, setHelpful] = useState('No');
+  const [helpful, setHelpful] = useState({});
   // send a post request with the helpful state to the API when helpful is 'yes'
 
   const [modalImage, setModalImage] = useState(false);
@@ -27,22 +27,17 @@ function ReviewTile({ reviewsObj }) {
     setPhotoState(photo)
   );
   const [trigger, { data, isSuccess }]  = useHelpfulReviewMutation();
+  const [triggerReport, { dataReport, isSuccessReport }]  = useReportReviewMutation();
 
   const helpfulClickHandler = () => {
-    //useHelpfulReviewMutation(reviewsObj.review_id);
      trigger((reviewsObj.review_id));
-    // axios.put(`http://localhost:/reviews/${reviewsObj.review_id}/helpful`
-    // )
-    //   .then(() => {
-    //     res.status(204).send('Marked as helpful');
-    //   })
-    //   .catch((err) => {
-    //     res.status(422).send(err);
-    //   });
-
-    setHelpful('yes');
+    // will be used later to store session id's to prevent submitting a
+    // put request more than once
+    // setHelpful('yes');
     }
-    console.log('reviewsTiles', reviewsObj)
+    const reportClickHandler = () => {
+      triggerReport((reviewsObj.review_id));
+     }
   return (
     <div className={RNRCSS['review-tile-in-reviews']}>
       {reviewsObj.rating}
@@ -99,7 +94,9 @@ function ReviewTile({ reviewsObj }) {
         </span>
         |
         <span>No</span>
-        <Report />
+        <span onClick={reportClickHandler}>
+          <Report />
+        </span>
       </div>
     </div>
   );

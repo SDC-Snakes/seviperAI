@@ -79,7 +79,7 @@ export const api = createApi({
       query: (review_id) => ({
         url: `/reviews/${review_id}/helpful`,
         method: 'PUT',
-        body: { reveiw_id: review_id },
+        body: {review_id},
       }),
     }),
     reportReview: build.mutation({

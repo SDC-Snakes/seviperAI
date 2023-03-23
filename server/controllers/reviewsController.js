@@ -48,7 +48,7 @@ module.exports = {
       });
   },
   putHelpful: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/helpful`, {
+    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/helpful`, null, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
@@ -61,7 +61,7 @@ module.exports = {
       });
   },
   putReport: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/report`, {
+    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/report`, null, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
