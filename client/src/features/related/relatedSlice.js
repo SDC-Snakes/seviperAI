@@ -41,7 +41,6 @@ function addToOutfit(state = initialState, action) {
   state.outfitList.push(action.payload);
 }
 function removeFromOutfit(state = initialState, action) {
-  console.log('outfit payload: ', action.payload);
   localStorage.removeItem(action.payload.details.id);
   const index = state.outfitList.indexOf(action.payload);
   if (index > -1) {

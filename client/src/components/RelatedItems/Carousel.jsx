@@ -27,7 +27,7 @@ function Carousel() {
       </div>
       <div>
         <FaChevronLeft />
-        <OutfitList relatedIndex={relatedIndex} />
+        <OutfitList relatedIndex={0} />
         <FaChevronRight />
       </div>
     </div>

@@ -19,6 +19,7 @@ function OutfitList({ relatedIndex }) {
   const { meta } = useSelector((state) => state.reviews);
   const currentProduct = { details, selectedStyle, meta };
 
+  // Add item to outfit card
   function handleAddToOutfit(productData) {
     if (!JSON.parse(localStorage.getItem(productData.details.id))) {
       dispatch(newAddToOutfit(productData));
@@ -29,6 +30,7 @@ function OutfitList({ relatedIndex }) {
     );
   }
 
+  // Searches item data for first photo
   function findImage(item) {
     for (let i = 0; i < item.selectedStyle.photos.length; i++) {
       const stylePhoto = item.selectedStyle.photos[i];

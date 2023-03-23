@@ -4,7 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
 
 function ComparisonModal() {
-  const { modalOpen, combinedProductFeatures, currentProductName, relatedProductName } = useSelector((state) => state.related);
+  const {
+    modalOpen,
+    combinedProductFeatures,
+    currentProductName,
+    relatedProductName,
+  } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
   function renderComparison(char, index) {

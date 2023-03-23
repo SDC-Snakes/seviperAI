@@ -11,10 +11,9 @@ import {
   newOutfitList,
 } from '../../features/related/relatedSlice';
 
-function FormatCard({ name, image, price, category, stars, outfit, modal, item }) {
+function FormatCard({ name, image, price, category, stars, outfit, item }) {
   const dispatch = useDispatch();
   let { details } = useSelector((state) => state.products);
-  // console.log('item: ', item);
 
   function removeFromOutfit(itemData) {
     dispatch(newRemoveFromOutfit(itemData));
@@ -33,12 +32,11 @@ function FormatCard({ name, image, price, category, stars, outfit, modal, item }
   return (
     <div className={itemStyles['items-card']}>
       <i className={
-      `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-info']}`}
-      onClick={(e) => {handleModalClick(e, item)}}/>
+        `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
+        onClick={(e) => {handleModalClick(e, item)}}/>
       {outfit && <i className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
-        onClick={() => removeFromOutfit(item)}
-      />}
+        onClick={() => removeFromOutfit(item)}/>}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
@@ -46,6 +44,6 @@ function FormatCard({ name, image, price, category, stars, outfit, modal, item }
       <p className={itemStyles['card-price']}>{price}</p>
     </div>
   );
-};
+}
 
 export default FormatCard;
