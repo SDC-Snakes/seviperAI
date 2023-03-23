@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import itemStyles from './Items.module.css';
 import {
   newModalState,
@@ -13,6 +14,7 @@ import {
 
 function FormatCard({ name, image, price, category, stars, outfit, item, salePrice }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let { details } = useSelector((state) => state.products);
 
   // itemData is passed as a prop 'item' from the corresponding list
@@ -21,6 +23,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
     dispatch(newOutfitList());
   }
 
+  // Generates data for modal based on card selected
   function handleModalClick(e, itemData) {
     e.preventDefault();
     dispatch(newModalState());
@@ -30,8 +33,14 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
     dispatch(generateProductFeatures(details.features));
   }
 
+  // Refreshes page to selected related item
+  function navigateToRelatedItem(e, productId) {
+    e.preventDefault();
+    navigate(`/${productId}`);
+  }
+
   return (
-    <div className={itemStyles['items-card']}>
+    <div className={itemStyles['items-card']} onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
       <i className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
         onClick={(e) => {handleModalClick(e, item)}}/>
