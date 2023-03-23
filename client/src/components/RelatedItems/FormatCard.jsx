@@ -42,15 +42,13 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
       <h6 className={itemStyles['product-name']}>{name}</h6>
-      <div className={itemStyles['card-price']}>
-        {salePrice ? (
-          <div>
-            <p><s>{`$${price}`}</s></p>
-            <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
-          </div>
-        )
-          : <p>{`$${price}`}</p>}
-      </div>
+      {salePrice ? (
+        <div className={itemStyles['card-price']}>
+          <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
+          <p><s>{`$${price}`}</s></p>
+        </div>
+      )
+        : <p>{`$${price}`}</p>}
     </div>
   );
 }

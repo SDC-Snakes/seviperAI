@@ -58,8 +58,13 @@
   left: 10px;
 }
 
+.card-price {
+  display: flex;
+}
+
 .card-price-sale {
-  color: #fc3c3c
+  color: #fc3c3c;
+  padding-right: 8px;
 }
 
 /**** Carousel ****/
