@@ -65,9 +65,9 @@ module.exports = {
         res.status(422).send(err);
       });
   },
-  putHelpful: (req, res) => {
+  putQuestionHelpful: (req, res) => {
     axios.put(
-      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/helpful`,
+      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`,
       null,
       {
         headers: {
@@ -82,9 +82,27 @@ module.exports = {
         res.status(422).send(err);
       });
   },
-  putReport: (req, res) => {
+  putAnswerHelpful: (req, res) => {
+    console.log(req.params);
     axios.put(
-      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/report`,
+      `${process.env.ATLIER_API_ROUTE}/qa/answers/${req.params.answer_id}/helpful`,
+      null,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+      },
+    )
+      .then(() => {
+        res.status(204).send('Marked as helpful');
+      })
+      .catch((err) => {
+        res.status(422).send(err);
+      });
+  },
+  putAnswerReport: (req, res) => {
+    axios.put(
+      `${process.env.ATLIER_API_ROUTE}/qa/answers/${req.params.answer_id}/report`,
       null,
       {
         headers: {

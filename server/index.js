@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/products', router.products);
 app.use('/reviews', router.reviews);
-app.use('/qa/questions', router.questions);
+app.use('/qa', router.questions);
 app.use('/cart', router.cart);
 app.use('/interactions', router.interactions);
 
