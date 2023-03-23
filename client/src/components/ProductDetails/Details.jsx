@@ -20,7 +20,7 @@ function Details({ handleScroll }) {
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
-  const [trigger, { data, isSuccess }] = useAddToCartMutation();
+  const [trigger] = useAddToCartMutation();
 
   if (quantity > 15) {
     quantity = 15;

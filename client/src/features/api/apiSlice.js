@@ -90,5 +90,6 @@ export const {
   useGetRelatedProductsQuery,
   useGetRelatedProductInfoQuery,
   useGetMetaReviewsQuery,
+  useLazyGetMetaReviewsQuery,
   useAddToCartMutation,
 } = api;

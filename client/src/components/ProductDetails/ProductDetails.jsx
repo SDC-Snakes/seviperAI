@@ -20,6 +20,8 @@ function ProductDetails({ handleScroll }) {
     refetchOnMountOrArgChange: true,
   });
 
+  // console.log(productInfo.styles.results);
+
   useEffect(() => {
     if (error) {
       navigate('/NotFound');
