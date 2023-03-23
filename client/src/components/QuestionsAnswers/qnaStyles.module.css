@@ -54,18 +54,19 @@ body.active-modal {
 
 }
 
-.reviews-container-right {
-  width: 74%;
-    float: right;
+.questions-list-container{
+  width: 80%;
+    float: left;
     padding: 10px;
     border: 2px solid grey;
     border-radius: 1%;
-    margin-right: 10px;
+    margin-right: 40px;
+    margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 40px;
 
 }
-.reviewsAndRatings-container-main {
+.qna-container-main {
     margin-left: 20px;
     padding: 2px;
     margin-top: 20px;
@@ -73,15 +74,14 @@ body.active-modal {
 
 
 }
-.review-tile {
-
+.qna-tile {
   border: 2px solid grey;
   padding: 5px;
   margin: 5px;
   border-radius:1%;
 }
 
-.response-from-seller {
+.answer-tile {
   padding: 2px;
   border: 2px solid grey;
   border-radius: 1%;
