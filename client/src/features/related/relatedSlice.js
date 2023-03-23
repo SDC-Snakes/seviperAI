@@ -40,6 +40,14 @@ function addToOutfit(state = initialState, action) {
   localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
   state.outfitList.push(action.payload);
 }
+function removeFromOutfit(state = initialState, action) {
+  console.log('outfit payload: ', action.payload);
+  localStorage.removeItem(action.payload.details.id);
+  const index = state.outfitList.indexOf(action.payload);
+  if (index > -1) {
+    state.outfitList.splice(index, 1);
+  }
+}
 
 function generateCombinedProductFeatures(state = initialState, action) {
   const combinedData = [];
@@ -79,6 +87,7 @@ const relatedSlice = createSlice({
     newCurrentProductName: setCurrentProductName,
     newOutfitList: setOutfitList,
     newAddToOutfit: addToOutfit,
+    newRemoveFromOutfit: removeFromOutfit,
 
   },
   extraReducers: (builder) => {
@@ -100,6 +109,7 @@ export const {
   newCurrentProductName,
   newOutfitList,
   newAddToOutfit,
+  newRemoveFromOutfit,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

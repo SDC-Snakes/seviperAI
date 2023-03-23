@@ -7,17 +7,25 @@ import {
   newRelatedProductFeatures,
   generateProductFeatures,
   newCurrentProductName,
+  newRemoveFromOutfit,
+  newOutfitList,
 } from '../../features/related/relatedSlice';
 
 function FormatCard({ name, image, price, category, stars, outfit, modal, item }) {
   const dispatch = useDispatch();
   let { details } = useSelector((state) => state.products);
+  // let { outfitList } = useSelector((state) => state.related);
 
-  function handleModalClick(e, item) {
+  function removeFromOutfit(itemData) {
+    dispatch(newRemoveFromOutfit(itemData));
+    dispatch(newOutfitList());
+  }
+
+  function handleModalClick(e, itemData) {
     e.preventDefault();
     dispatch(newModalState());
-    dispatch(newRelatedProductFeatures(item.details.features));
-    dispatch(newRelatedProductName(item.details.name));
+    dispatch(newRelatedProductFeatures(itemData.details.features));
+    dispatch(newRelatedProductName(itemData.details.name));
     dispatch(newCurrentProductName(details.name));
     dispatch(generateProductFeatures(details.features));
   }
@@ -29,6 +37,7 @@ function FormatCard({ name, image, price, category, stars, outfit, modal, item }
       onClick={(e) => {handleModalClick(e, item)}}/>
       {outfit && <i className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
+        onClick={() => removeFromOutfit(item)}
       />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div>{stars}</div>
