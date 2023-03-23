@@ -59,7 +59,7 @@ function ImageViewer() {
       </div>
       <div>
         {imageIndex > 0 ? <FaChevronLeft onClick={() => handleHorizontalScroll('left')} /> : null}
-        { Object.keys(selectedStyle).length > 0 ? <img className="mainImage" src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} /> : null }
+        { Object.keys(selectedStyle).length > 0 ? <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} /> : null }
         {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => handleHorizontalScroll('right')} /> : null}
       </div>
     </div>

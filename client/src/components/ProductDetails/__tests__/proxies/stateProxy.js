@@ -13,8 +13,12 @@ const stateStub = {
       ],
       skus: {
         1394769: {
-          quantity: 8,
+          quantity: 0,
           size: 'XS',
+        },
+        1394770: {
+          quantity: 0,
+          size: 'S',
         },
       },
     },
@@ -32,8 +36,12 @@ const stateStub = {
         ],
         skus: {
           1394769: {
-            quantity: 8,
+            quantity: 0,
             size: 'XS',
+          },
+          1394770: {
+            quantity: 0,
+            size: 'S',
           },
         },
       },

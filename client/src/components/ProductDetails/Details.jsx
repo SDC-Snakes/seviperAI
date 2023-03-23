@@ -8,7 +8,7 @@ import { useAddToCartMutation } from '../../features/api/apiSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
-  let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
+  const { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
@@ -33,6 +33,18 @@ function Details({ handleScroll }) {
 
   const handleRnrClick = () => {
     handleScroll();
+  };
+
+  const checkStock = (productSkus) => {
+    const values = Object.values(productSkus);
+
+    if (values.length > 0) {
+      const stock = values.reduce((accum, val) => accum + val.quantity, 0);
+      if (stock > 0) {
+        return true;
+      }
+    }
+    return false;
   };
 
   return (
@@ -60,8 +72,8 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
-          <option value="selectSize">Select Size</option>
+        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }} disabled={!checkStock(selectedStyle.skus)} id="sizeBtn">
+          <option value="selectSize">{checkStock(selectedStyle.skus) ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
               <option
@@ -90,9 +102,9 @@ function Details({ handleScroll }) {
           <FaHeart />
         </button>
       </div>
-      <FaTwitter />
-      <FaPinterest />
-      <FaFacebookF />
+      <a href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter /></a>
+      <a href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF /></a>
+      <a href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest /></a>
     </div>
   );
 }

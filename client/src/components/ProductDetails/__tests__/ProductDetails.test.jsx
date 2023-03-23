@@ -41,7 +41,7 @@ test('products details render after making a call to the API', async () => {
       reviews: stateStub.reviews,
     },
   });
-  screen.debug();
+  // screen.debug();
 
   expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
 
