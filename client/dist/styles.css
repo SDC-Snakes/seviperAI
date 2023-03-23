@@ -166,3 +166,12 @@ input[name="rating"] {
   background-color: green;
 }
 
+.navbar {
+  background-color: #525252;
+  color: var(--main-color);
+}
+
+.headline {
+  background-color: #C2C2C2;
+  color: var(--sec-color);
+}
