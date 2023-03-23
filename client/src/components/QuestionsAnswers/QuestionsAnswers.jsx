@@ -77,7 +77,7 @@ function QuestionsAnswers() {
 
     <QnaStyles.Provider value={qnaStyles}>
       <OnAddAnswer.Provider value={onAdd}>
-        <div>
+        <div className={qnaStyles['qna-container-main']}>
           <h2>Main Q&A Div</h2>
           <Search />
           <QuestionsList questions={questions} numberOfQs={numberOfQs} />
