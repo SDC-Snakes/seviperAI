@@ -3,7 +3,7 @@ import HelpfulModule from './HelpfulModule';
 import { OnAddAnswer } from '../QuestionsAnswers';
 
 function QuestionEntry({ question }) {
-  const onAddAnswer = useContext(OnAddAnswer);
+  const onAdd = useContext(OnAddAnswer);
 
   return (
     <div className="question-entry">
@@ -21,7 +21,7 @@ function QuestionEntry({ question }) {
         <input
           type="button"
           className="add-answer-button"
-          onClick={() => onAddAnswer(true, question.question_id, question.question_body)}
+          onClick={() => onAdd('answer', true, false, question.question_id, question.question_body)}
           value="Add Answer"
         />
       </span>

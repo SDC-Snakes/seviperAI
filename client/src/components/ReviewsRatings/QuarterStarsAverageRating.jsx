@@ -1,7 +1,7 @@
 import React from 'react';
 import QuarterIncStarRating from './QuarterIncStarRating';
 
-function QuarterStarsAverageRating({productRating}) {
+function QuarterStarsAverageRating({ productRating }) {
   let sum = 0;
   let numOfRatings = 0;
 
