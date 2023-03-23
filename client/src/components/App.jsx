@@ -37,6 +37,7 @@ function App() {
               </>
           )}
           />
+          <Route path="/NotFound" element={<div>404 not found...</div>} />
         </Routes>
       </Router>
     </div>

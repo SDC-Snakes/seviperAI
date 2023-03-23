@@ -25,7 +25,7 @@ function CharBar() {
   return (
     <div>
       {charKeys.map((char) => (
-        <div key={charObj[char].id}>
+        <div className={charCSS['char-major-container']} key={charObj[char].id}>
           <div className={charCSS['char-bar-label']}>
             {`(${char})`}
           </div>

@@ -4,15 +4,15 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { renderWithProviders } from '../../../utils/test-utils'
+import { renderWithProviders } from './utils/test-utils';
+import stateStub from './proxies/stateProxy';
 
 import Details from '../Details';
 
+// eslint-disable-next-line import/prefer-default-export
 export const handlers = [
-  rest.get('/products', (req, res, ctx) => {
-    return res(ctx.json('John Smith'), ctx.delay(150))
-  })
-]
+  rest.get('/products', (req, res, ctx) => res(ctx.json('John Smith'), ctx.delay(150))),
+];
 
 const server = setupServer(...handlers);
 
@@ -25,26 +25,32 @@ afterEach(() => server.resetHandlers());
 // Disable API mocking after the tests are done.
 afterAll(() => server.close());
 
-
 test('products details render', async () => {
-  let detailsStub = {
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    features: [
-      {
-        feature: 'Fabric',
-        value: 'canvas',
-      },
-      {
-        feature: 'Buttons',
-        value: 'Brass',
-      },
-    ],
-  };
-
-  renderWithProviders(<Details />);
-  screen.debug();
+  renderWithProviders(<Details />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+  // screen.debug();
 
   // Check that loading state is not displayed
   // expect(screen.queryByText('Loading...')).toBeNull();
-  expect(screen.getByText(detailsStub.description)).toBeInTheDocument();
+  expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  // expect(screen.getByText('Some other string')).toBeInTheDocument();
+});
+
+test('the select size dropdown renders out of stock when no items in stock', async () => {
+  renderWithProviders(<Details />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+  // screen.debug();
+
+  // Check that loading state is not displayed
+  // expect(screen.queryByText('Loading...')).toBeNull();
+  expect(screen.getByText('Out Of Stock')).toBeInTheDocument();
+  // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });

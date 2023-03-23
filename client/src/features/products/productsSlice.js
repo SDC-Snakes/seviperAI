@@ -7,6 +7,7 @@ const initialState = {
   details: {},
   selectedImage: '',
   expanded: false,
+  zoom: false,
   sku: '',
   quantitySelected: 1,
   imageIndex: 0,
@@ -14,11 +15,12 @@ const initialState = {
 };
 
 // eslint-disable-next-line default-param-last
+// Thanks to immer we can safely mutate state as well
 function changeStyle(state = initialState, action) {
-  return { ...state, selectedStyle: action.payload };
+  state.selectedStyle = action.payload;
 }
 function changeImage(state = initialState, action) {
-  return { ...state, selectedImage: action.payload };
+  state.selectedImage = action.payload;
 }
 function updateState(state = initialState, action) {
   return { ...state, [action.payload.name]: action.payload.value };

@@ -16,6 +16,9 @@ button {
   margin: 10px 0px;
   background-color: #C2C2C2;
   width: 98vw;
+}
+
+.expandedImage {
   cursor: zoom-in;
 }
 
