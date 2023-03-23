@@ -31,6 +31,7 @@ function OutfitList({ relatedIndex }) {
   }
 
   function findImage(item) {
+    console.log(item, 'FIND IMAGE')
     for (let i = 0; i < item.styles.results.length; i++) {
       const style = item.styles.results[i];
       for (let j = 0; j < style.photos.length; j++) {
@@ -43,6 +44,7 @@ function OutfitList({ relatedIndex }) {
   }
 
   function renderList(item, index) {
+    console.log(outfitList)
     return (
       <div key={index}>
         {relatedIndex <= index && (

@@ -34,7 +34,7 @@ function setCurrentProductName(state = initialState, action) {
   state.currentProductName = action.payload;
 }
 function setOutfitList(state = initialState, action) {
-  state.outfitList = action.payload;
+  state.outfitList = Object.values({ ...localStorage }).map((item) => JSON.parse(item));
 }
 function addToOutfit(state = initialState, action) {
   localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
