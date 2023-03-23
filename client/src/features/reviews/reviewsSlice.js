@@ -5,7 +5,18 @@ const initialState = {
   reviews: {},
   meta: {},
   ratingBarSelect: [],
-  reviewTileCount:0,
+  reviewTileCount: 0,
+  reviewPostObj: {
+    product_id: 0,
+    rating: 0,
+    summary: '',
+    body: '',
+    recommend: false,
+    name: '',
+    email: '',
+    photos: [],
+    characteristics: {},
+  },
 };
 // eslint-disable-next-line default-param-last
 function setRating(state = initialState, action) {

@@ -4,10 +4,26 @@
 //<addImage component>
 
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { changeState } from '../../features/reviews/reviewsSlice';
 import StarRating from './StarRating';
 // import './Modal.module.css';
-
+// reviewPostObj: {
+//   product_id: 0,
+//   rating: 0,
+//   summary: '',
+//   body: '',
+//   recommend: false,
+//   name: '',
+//   email: '',
+//   photos: [],
+//   characteristics: {},
+// },
 function ReviewAndRatingForm({RNRCSS}) {
+  const params = useParams();
+
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [recommendOption, setrecommendOption] = useState("");
   const [characteristics, setCharacteristics] = useState({
@@ -18,13 +34,28 @@ function ReviewAndRatingForm({RNRCSS}) {
     Length: '',
     Fit: '',
   });
+  const [reviewPropsObj, setReviewPropsObj] = useState({
+    product_id: params.productId,
+    rating: 0,
+    summary: '',
+    body: '',
+    recommend: recommendOption,
+    name: '',
+    email: '',
+    photos: [],
+    characteristics,
+  });
 
-  const handleCharChange = (e, someChar) => {
+  const postObj = useSelector(state => state.reviews.reviewPostObj);
+  // const submitReview = () => {
+  //   dispatch(changeState(reviewPropsObj));
+  // }
+  const handleCharChange = (e, charName) => {
     setCharacteristics((prevState) => ({
       ...prevState,
-      [someChar]: event.target.value, // radio button data e.target.value??
+      [charName]: e.target.value,
     }));
-    console.log('readio buttons', characteristics)
+    console.log('radio buttons', characteristics)
   };
 
   const toggleModal = (inputBool) => {
@@ -33,6 +64,9 @@ function ReviewAndRatingForm({RNRCSS}) {
   const handleOptionChange = (event) => {
     setrecommendOption(event.target.value);
   };
+  const handleInputChange = (event, propertyName) => {
+    setReviewPropsObj({...reviewPropsObj, [propertyName]: event.target.value})
+  }
   return (
     <>
       <input type="submit" onClick={() => { toggleModal(true); }} className={RNRCSS["btn-modal"]} value="Add a review" />
@@ -162,25 +196,36 @@ function ReviewAndRatingForm({RNRCSS}) {
 
               </div>
               <div>
-                <input value="" placeholder="Example: Best purchase ever!" minLength="1" maxLength="60" />
+                <input value={reviewPropsObj.summary} onChange={(e) => { handleInputChange(e, 'summary'); }} placeholder="Example: Best purchase ever!" minLength="1" maxLength="60" />
               </div>
               <div>
-                <input value="" placeholder="Why did you like the product or not?" minLength="50" maxLength="1000" />
+                <input
+                  value={reviewPropsObj.body}
+                  onChange={(e) => { handleInputChange(e, 'body'); }} placeholder="Why did you like the product or not?"
+                  minLength="50"
+                  maxLength="1000" />
               </div>
               <div>
-               Minimum required characters left: {'Number'} As the user types, the count of characters should update. After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
+                Minimum required characters left: {'Number'}
+                 As the user types, the count of characters should update.
+                 After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
               </div>
               <div>
                 <input type="submit" value="Add Images" />
               </div>
               <div>
-                <input value="" placeholder="Example: jackson11!" />
+                <input
+                value={reviewPropsObj.name}
+                onChange={(e) => { handleInputChange(e, 'name'); }} placeholder="Example: jackson11!" />
               </div>
               <div>
                 For privacy reasons, do not use your full name or email address
               </div>
               <div>
-                <input value="" placeholder="Example: jackson11@email.com" minLength="60" />
+                <input
+                value={reviewPropsObj.email}
+                onChange={(e) => { handleInputChange(e, 'email'); }}
+                placeholder="Example: jackson11@email.com" minLength="60" />
               </div>
               <div>
                 For authentication reasons, you will not be emailed

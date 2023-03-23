@@ -68,6 +68,27 @@ export const api = createApi({
         body: { sku_id: parseInt(skuId, 10) },
       }),
     }),
+    postNewReview: build.mutation({
+      query: (obj) => ({
+        url: '/reviews',
+        method: 'POST',
+        body: obj,
+      }),
+    }),
+    helpfulReview: build.mutation({
+      query: (review_id) => ({
+        url: `/reviews/${review_id}/helpful`,
+        method: 'PUT',
+        body: { reveiw_id: review_id },
+      }),
+    }),
+    reportReview: build.mutation({
+      query: (review_id) => ({
+        url: `/reviews/${review_id}/report`,
+        method: 'PUT',
+        body: {review_id: review_id},
+      }),
+    }),
   }),
   // EXAMPLE MUTATION endpoint!!!
   // updateReview: build.mutation({
@@ -89,4 +110,7 @@ export const {
   useGetRelatedProductInfoQuery,
   useGetMetaReviewsQuery,
   useAddToCartMutation,
+  usePostNewReviewMutation,
+  useHelpfulReviewMutation,
+  useReportReviewMutation,
 } = api;

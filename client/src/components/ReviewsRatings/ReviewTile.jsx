@@ -7,11 +7,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { FaRegCheckCircle } from 'react-icons/fa';
+import axios from 'axios';
 import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
-
+import { useHelpfulReviewMutation } from '../../features/api/apiSlice';
 function ReviewTile({ reviewsObj }) {
   const barRating = useSelector(state => state.reviews.ratingBarSelect);
   const [helpful, setHelpful] = useState('No');
@@ -25,7 +26,23 @@ function ReviewTile({ reviewsObj }) {
   const togglePhotoState = (photo) => (
     setPhotoState(photo)
   );
+  const [trigger, { data, isSuccess }]  = useHelpfulReviewMutation();
 
+  const helpfulClickHandler = () => {
+    //useHelpfulReviewMutation(reviewsObj.review_id);
+     trigger((reviewsObj.review_id));
+    // axios.put(`http://localhost:/reviews/${reviewsObj.review_id}/helpful`
+    // )
+    //   .then(() => {
+    //     res.status(204).send('Marked as helpful');
+    //   })
+    //   .catch((err) => {
+    //     res.status(422).send(err);
+    //   });
+
+    setHelpful('yes');
+    }
+    console.log('reviewsTiles', reviewsObj)
   return (
     <div className={RNRCSS['review-tile-in-reviews']}>
       {reviewsObj.rating}
@@ -76,7 +93,7 @@ function ReviewTile({ reviewsObj }) {
 
       <div>
         Helpful?
-        <span onClick={() => { setHelpful('yes'); }}>
+        <span onClick={helpfulClickHandler}>
           Yes
           {reviewsObj.helpfulness}
         </span>

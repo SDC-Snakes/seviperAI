@@ -34,7 +34,7 @@ module.exports = {
   },
   post: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
-    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews`, {
+    axios.post(`${process.env.ATLIER_API_ROUTE}/reviews?product_id=${req.query.product_id}&rating=${req.query.rating}&summary=${req.query.summary}&body=${req.query.body}&recommend=${req.query.recommend}&name=${req.query.name}&email=${req.query.email}&photos=${req.query.photos}&characteristics=${req.query.characteristics}`, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
@@ -67,7 +67,7 @@ module.exports = {
       },
     })
       .then(() => {
-        res.status(204).send('Marked as helpful');
+        res.status(204).send('Review reported');
       })
       .catch((err) => {
         res.status(422).send(err);
