@@ -8,6 +8,7 @@ import itemStyles from './Items.module.css';
 function OutfitList({ relatedIndex }) {
   const dispatch = useDispatch();
 
+  // Generate outfitlist upon page load
   useEffect(() => {
     dispatch(newOutfitList());
   }, []);
@@ -48,6 +49,7 @@ function OutfitList({ relatedIndex }) {
             image={findImage(item)}
             price={item.details.default_price}
             itemStyles={itemStyles}
+            outfit={true}
           />
         )}
       </div>

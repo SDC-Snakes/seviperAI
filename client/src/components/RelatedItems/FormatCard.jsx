@@ -1,9 +1,11 @@
 import React from 'react';
 import itemStyles from './Items.module.css';
 
-function FormatCard({ name, image, price, category, stars }) {
+function FormatCard({ name, image, price, category, stars, outfit }) {
   return (
     <div className={itemStyles['items-card']}>
+      <i className={`fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-info']}`} />
+      {outfit && <i className={`fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`} />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
