@@ -46,7 +46,7 @@ function Details({ handleScroll }) {
     dispatch(newOutfitList());
     // {details, styles, ratings}
     // dispatch(addToOutfit({ details, selectedStyle, ratings: meta }));
-    console.log({ details, styles: { results: [selectedStyle] }, ratings: meta });
+    // console.log({ details, styles: { results: [selectedStyle] }, ratings: meta });
   };
 
   const handleRnrClick = () => {

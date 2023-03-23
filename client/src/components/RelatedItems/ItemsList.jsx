@@ -46,6 +46,7 @@ function ItemsList({ relatedIndex }) {
             category={item.details.category}
             image={findImage(item)}
             price={item.details.default_price}
+            salePrice={item.details.sale_price}
             itemStyles={itemStyles}
             item={item}
           />

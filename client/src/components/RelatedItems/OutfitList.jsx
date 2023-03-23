@@ -50,8 +50,9 @@ function OutfitList({ relatedIndex }) {
             category={item.details.category}
             image={findImage(item)}
             price={item.details.default_price}
+            salePrice={item.selectedStyle.sale_price}
             itemStyles={itemStyles}
-            outfit={true}
+            outfit="outfit"
             item={item}
           />
         )}
@@ -61,10 +62,10 @@ function OutfitList({ relatedIndex }) {
 
   return (
     <div className={itemStyles['items-list-wrapper']}>
-      <span className={itemStyles['items-list-title']}>Outfit List</span>
+      <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list-content']}>
-        <div className={itemStyles['items-card']} onClick={() => handleAddToOutfit(currentProduct)}>
-          <span>Add to outfit</span>
+        <div className={itemStyles['items-card']}>
+          <span onClick={() => handleAddToOutfit(currentProduct)}>Add to outfit</span>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}
       </div>

@@ -11,7 +11,7 @@ import {
   newOutfitList,
 } from '../../features/related/relatedSlice';
 
-function FormatCard({ name, image, price, category, stars, outfit, item }) {
+function FormatCard({ name, image, price, category, stars, outfit, item, salePrice }) {
   const dispatch = useDispatch();
   let { details } = useSelector((state) => state.products);
 
@@ -42,7 +42,12 @@ function FormatCard({ name, image, price, category, stars, outfit, item }) {
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
       <h6 className={itemStyles['product-name']}>{name}</h6>
-      <p className={itemStyles['card-price']}>{price}</p>
+      {salePrice ? (
+        <div>
+          <p className={itemStyles['card-price']}><s>{price}</s></p>
+          <p className={itemStyles['card-price-sale']}>{salePrice}</p>
+        </div>
+      ) : <p className={itemStyles['card-price']}>{price}</p>}
     </div>
   );
 }
