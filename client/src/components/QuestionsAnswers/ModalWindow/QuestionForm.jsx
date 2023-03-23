@@ -10,18 +10,19 @@ function QuestionForm({
 
   useEffect(() => {
     if (response !== null && response[0] && response[0].status === 201) {
-      alert('Thank you for your answer!')
-      onAdd('answer', false, true);
+      alert('Thank you for your question!')
+      onAdd('question', false, true);
     }
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
     setReqObjs(() => ([
-      axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
+      axios.post(`http://localhost:${process.env.PORT}/qa/questions/`, {
         body: e.target[0].value,
         name: e.target[1].value,
         email: e.target[2].value,
+        product_id: productInfo.id,
       }),
     ]));
   };
@@ -53,12 +54,12 @@ function QuestionForm({
         <div className="photos">
           <input type="button" value="Upload Photos" />
           <div className="photos-view">
-            <img src="image1.jpg" alt="supplement to the answer" />
-            <img src="image2.jpg" alt="supplement to the answer" />
-            <img src="image3.jpg" alt="supplement to the answer" />
+            <img src="image1.jpg" alt="supplement to the question" />
+            <img src="image2.jpg" alt="supplement to the question" />
+            <img src="image3.jpg" alt="supplement to the question" />
           </div>
         </div>
-        <input type="submit" value="Submit Answer" />
+        <input type="submit" value="Submit" />
         {loading && <div> Submitting your question...</div>}
         {error && <div>Error has occurred. Please try again.</div>}
       </form>
