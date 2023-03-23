@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import Search from './subComponents/Search';
+import Search from './subComponents/Search';
 import QuestionsList from './subComponents/QuestionsList';
 import WindowWrapper from './ModalWindow/WindowWrapper';
 import useAsync from './useAsync';
@@ -79,7 +79,7 @@ function QuestionsAnswers() {
       <OnAddAnswer.Provider value={onAdd}>
         <div>
           <h2>Main Q&A Div</h2>
-          {/* <Search /> */}
+          <Search />
           <QuestionsList questions={questions} numberOfQs={numberOfQs} />
           {/* show more questions button only when there are more */}
           <div>
