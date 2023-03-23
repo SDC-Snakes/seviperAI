@@ -14,7 +14,7 @@ import {
 function FormatCard({ name, image, price, category, stars, outfit, modal, item }) {
   const dispatch = useDispatch();
   let { details } = useSelector((state) => state.products);
-  // let { outfitList } = useSelector((state) => state.related);
+  // console.log('item: ', item);
 
   function removeFromOutfit(itemData) {
     dispatch(newRemoveFromOutfit(itemData));

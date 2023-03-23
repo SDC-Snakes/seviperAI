@@ -69,8 +69,8 @@ function generateCombinedProductFeatures(state = initialState, action) {
     if (!hasCharacteristic) {
       combinedData.push({ value: description, related: false, current: true });
     }
-    state.combinedProductFeatures = combinedData;
   });
+  state.combinedProductFeatures = combinedData;
 }
 
 const relatedSlice = createSlice({
