@@ -1,69 +1,49 @@
-import React, { useState } from 'react';
-import { FaToolbox } from 'react-icons/fa';
-import data from './sampleData';
+import React from 'react';
 import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { newCombinedProductFeatures } from '../../features/related/relatedSlice';
+import { newModalState } from '../../features/related/relatedSlice';
 
-function ComparisonModal({ sampleChar }) {
-  let { modalOpen, relatedProductFeatures, combinedProductFeatures } = useSelector((state) => state.related);
-  let { details } = useSelector((state) => state.products);
+function ComparisonModal() {
+  const {
+    modalOpen,
+    combinedProductFeatures,
+    currentProductName,
+    relatedProductName,
+  } = useSelector((state) => state.related);
   const dispatch = useDispatch();
-  const [modal] = useState(data.sampleModal);
-
-  let mappedData = [];
-
-  function comparisonData() {
-    const combinedData = [];
-    const relatedProductDetails = relatedProductFeatures;
-    const currentProductDetails = details.features;
-    relatedProductDetails.forEach((char) => {
-      const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
-      combinedData.push({ value: description, related: true, current: false });
-    });
-    currentProductDetails.forEach((char) => {
-      const description = char.value ? `${char.feature}: ${char.value}` : char.feature;
-      let hasCharacteristic = false;
-      combinedData.forEach((el) => {
-        if (el.value === description) {
-          el.current = true;
-          hasCharacteristic = true;
-        }
-      });
-      if (!hasCharacteristic) { combinedData.push({ value: description, related: false, current: true }); }
-    });
-    // console.log('combinedData: ', combinedData);
-    dispatch(newCombinedProductFeatures(combinedData));
-  }
 
   function renderComparison(char, index) {
     return (
       <tr key={index}>
-        <td>{char.current && <FaToolbox />}</td>
-        <td>{char.value}</td>
-        <td>{char.related && <FaToolbox />}</td>
+        <td className={itemStyles['left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
+        <td className={itemStyles.characteristic}>{char.value}</td>
+        <td className={itemStyles['right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
       </tr>
     );
   }
 
-  return (
-    { modalOpen } ? (
-      <table>
-        <caption onClick={comparisonData}>Comparing</caption>
-        <thead>
-          <tr>
-            <th>Current Product</th>
-            <th>Characteristic</th>
-            <th>Related Product</th>
-          </tr>
-        </thead>
-        <tbody>
-          {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-        </tbody>
-      </table>
-    )
-      : null
-  );
+  function closeModal(e) {
+    e.preventDefault();
+    dispatch(newModalState());
+  }
+
+  return modalOpen ? (
+    <div className={itemStyles.modal}>
+      <div className={itemStyles.overlay} onClick={closeModal} />
+        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+          <caption className={itemStyles['modal-title']}>Comparing</caption>
+          <thead>
+            <tr className={itemStyles['modal-headers']}>
+              <th className={itemStyles['modal-current-product']}>{currentProductName}</th>
+              <th className={itemStyles['modal-related-product']}>{relatedProductName}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
+          </tbody>
+        </table>
+    </div>
+  ) : null;
 }
 
 export default ComparisonModal;
