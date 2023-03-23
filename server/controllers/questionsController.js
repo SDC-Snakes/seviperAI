@@ -32,12 +32,16 @@ module.exports = {
     }
   },
   postQuestion: (req, res) => {
-    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
+    console.log(req);
+    axios.post(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions`,
+      req.body,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
       },
-      data: req.body,
-    })
+    )
       .then(() => {
         res.status(201).send('Question created');
       })
@@ -53,7 +57,7 @@ module.exports = {
         headers: {
           Authorization: process.env.GITHUB_API_KEY,
         },
-      }
+      },
     )
       .then(() => {
         res.status(201).send('Answer created');
