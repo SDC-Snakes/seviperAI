@@ -15,6 +15,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item }) {
   const dispatch = useDispatch();
   let { details } = useSelector((state) => state.products);
 
+  // itemData is passed as a prop 'item' from the corresponding list
   function removeFromOutfit(itemData) {
     dispatch(newRemoveFromOutfit(itemData));
     dispatch(newOutfitList());

@@ -15,6 +15,7 @@ function ItemsList({ relatedIndex }) {
     refetchOnMountOrArgChange: true,
   });
 
+  // Finds first available image for the primary style
   function findImage(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
       const style = item.photos.results[i];

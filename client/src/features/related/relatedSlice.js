@@ -15,17 +15,17 @@ const initialState = {
 };
 
 function moveRelatedCarousel(state = initialState, action) {
-  return { ...state, relatedIndex: action.payload };
+  state.relatedIndex = action.payload;
 }
 function moveOutfitCarousel(state = initialState, action) {
-  return { ...state, outfitIndex: action.payload };
+  state.outfitIndex = action.payload;
 }
 function toggleModal(state = initialState, action) {
   const toggle = (input) => !input;
   state.modalOpen = toggle(state.modalOpen);
 }
 function setRelatedProductFeatures(state = initialState, action) {
-  return { ...state, relatedProductFeatures: action.payload };
+  state.relatedProductFeatures = action.payload;
 }
 function setRelatedProductName(state = initialState, action) {
   state.relatedProductName = action.payload;
