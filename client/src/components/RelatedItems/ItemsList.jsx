@@ -1,22 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
 import ComparisonModal from './ComparisonModal';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import itemStyles from './Items.module.css';
-import {
-  newModalState,
-  newRelatedProductName,
-  newRelatedProductFeatures,
-  generateProductFeatures,
-  newCurrentProductName,
-} from '../../features/related/relatedSlice';
 
 function ItemsList({ relatedIndex }) {
-  let { details } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
   const params = useParams();
   const {
     data: relatedProducts,
@@ -45,18 +35,9 @@ function ItemsList({ relatedIndex }) {
   //   };
   // };
 
-  function handleModalClick(e, item) {
-    e.preventDefault();
-    dispatch(newModalState());
-    dispatch(newRelatedProductFeatures(item.details.features));
-    dispatch(newRelatedProductName(item.details.name));
-    dispatch(newCurrentProductName(details.name));
-    dispatch(generateProductFeatures(details.features));
-  }
-
   function renderList(item, index) {
     return (
-      <div key={index} onClick={(e) => {handleModalClick(e, item)}}>
+      <div key={index}>
         {relatedIndex <= index && (
           <FormatCard
             stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
@@ -65,6 +46,7 @@ function ItemsList({ relatedIndex }) {
             image={findImage(item)}
             price={item.details.default_price}
             itemStyles={itemStyles}
+            item={item}
           />
         )}
       </div>

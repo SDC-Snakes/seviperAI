@@ -50,6 +50,7 @@ function OutfitList({ relatedIndex }) {
             price={item.details.default_price}
             itemStyles={itemStyles}
             outfit={true}
+            item={item}
           />
         )}
       </div>
