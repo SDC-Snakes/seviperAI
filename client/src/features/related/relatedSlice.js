@@ -11,6 +11,7 @@ const initialState = {
   relatedProductName: null,
   currentProductName: null,
   combinedProductFeatures: [],
+  outfitList: [],
 };
 
 function moveRelatedCarousel(state = initialState, action) {
@@ -31,6 +32,9 @@ function setRelatedProductName(state = initialState, action) {
 }
 function setCurrentProductName(state = initialState, action) {
   state.currentProductName = action.payload;
+}
+function setOutfitList(state = initialState, action) {
+  state.outfitList = action.payload;
 }
 
 function generateCombinedProductFeatures(state = initialState, action) {
@@ -69,6 +73,7 @@ const relatedSlice = createSlice({
     generateProductFeatures: generateCombinedProductFeatures,
     newRelatedProductName: setRelatedProductName,
     newCurrentProductName: setCurrentProductName,
+    newOutfitList: setOutfitList,
   },
   extraReducers: (builder) => {
     builder
@@ -87,6 +92,7 @@ export const {
   generateProductFeatures,
   newRelatedProductName,
   newCurrentProductName,
+  newOutfitList,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

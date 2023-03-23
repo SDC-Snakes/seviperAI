@@ -5,12 +5,17 @@ import FormatCard from './FormatCard';
 import ComparisonModal from './ComparisonModal';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
-import { newModalState, newRelatedProductName, newRelatedProductFeatures, generateProductFeatures, newCurrentProductName } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
+import {
+  newModalState,
+  newRelatedProductName,
+  newRelatedProductFeatures,
+  generateProductFeatures,
+  newCurrentProductName,
+} from '../../features/related/relatedSlice';
 
 function ItemsList({ relatedIndex }) {
   let { details } = useSelector((state) => state.products);
-  let { currentProductName } = useSelector((state) => state.related);
   const dispatch = useDispatch();
   const params = useParams();
   const {
@@ -47,6 +52,7 @@ function ItemsList({ relatedIndex }) {
     dispatch(newRelatedProductName(item.details.name));
     dispatch(newCurrentProductName(details.name));
     dispatch(generateProductFeatures(details.features));
+    console.log('relatedItemDetails: ', item);
   }
 
   function renderList(item, index) {

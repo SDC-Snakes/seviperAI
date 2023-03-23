@@ -38,9 +38,11 @@ export const api = createApi({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
         const details = await fetchWithBQ(`/products/${productId}`);
         if (details.error) return { error: details.error };
+        const ratings = await fetchWithBQ(`/reviews/meta?product_id=${productId}`);
+        if (ratings.error) return { error: ratings.error };
         const styles = await fetchWithBQ(`/products/${productId}/styles`);
         return styles.data
-          ? { data: { details: details.data, styles: styles.data } } : { error: styles.error };
+          ? { data: { details: details.data, styles: styles.data, ratings: ratings.data } } : { error: styles.error };
       },
     }),
     getRelatedProductInfo: build.query({
