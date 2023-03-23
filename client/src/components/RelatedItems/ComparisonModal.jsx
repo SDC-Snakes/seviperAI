@@ -14,9 +14,9 @@ function ComparisonModal() {
   function renderComparison(char, index) {
     return (
       <tr key={index}>
-        <td>{char.current && <i className="fa-solid fa-circle-check" />}</td>
-        <td>{char.value}</td>
-        <td>{char.related && <i className="fa-solid fa-circle-check" />}</td>
+        <td className={itemStyles['left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
+        <td className={itemStyles.characteristic}>{char.value}</td>
+        <td className={itemStyles['right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
       </tr>
     );
   }
@@ -30,21 +30,19 @@ function ComparisonModal() {
 
   return modalOpen ? (
     <div className={itemStyles.modal}>
-      <div className={itemStyles.overlay} onClick={closeModal}>
-      <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
-        <caption>Comparing</caption>
-        <thead>
-          <tr>
-            <th>{currentProductName}</th>
-            <th>Characteristic</th>
-            <th>{relatedProductName}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-        </tbody>
-      </table>
-      </div>
+      <div className={itemStyles.overlay} onClick={closeModal} />
+        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+          <caption className={itemStyles['modal-title']}>Comparing</caption>
+          <thead>
+            <tr className={itemStyles['modal-headers']}>
+              <th className={itemStyles['modal-current-product']}>{currentProductName}</th>
+              <th className={itemStyles['modal-related-product']}>{relatedProductName}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
+          </tbody>
+        </table>
     </div>
   ) : null;
 }

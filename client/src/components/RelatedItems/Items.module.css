@@ -72,6 +72,7 @@ body.active-modal {
 
 .modal {
   position: relative;
+  caption-side: top;
 }
 
 .overlay {
@@ -86,23 +87,19 @@ body.active-modal {
 
 }
 
-/* .overlay {
-  background: rgba(49,49,49,0.8);
-} */
-
 .modal-content {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 40%;
-  height: 40%;
-  overflow: scroll;
+  min-width: 300px;
+  max-width: 400px;
+  min-height: 300px;
+  max-height: 500px;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  border: solid;
-  border-width: 0.1px;
-  border-color: var(--shadow-color);
-  background: var(--ter-color);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #fff;
   --shadow-color: hsl(0deg 0% 0% / 26%);
   filter: drop-shadow(0px 2px 8px var(--shadow-color))
 }
@@ -112,4 +109,29 @@ body.active-modal {
   top: 10px;
   right: 10px;
   padding: 5px 7px;
+}
+
+/* Modal elements */
+
+.modal-title {
+  background: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: -1px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+.modal-headers {
+  display: inline-flex;
+  padding: 5px;
+}
+
+.modal-current-product {
+  align-content: flex-start;
+}
+
+.modal-related-product {
+  align-content: flex-end;
 }
