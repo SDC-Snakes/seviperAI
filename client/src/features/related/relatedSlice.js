@@ -29,6 +29,9 @@ function setRelatedProductFeatures(state = initialState, action) {
 function setRelatedProductName(state = initialState, action) {
   state.relatedProductName = action.payload;
 }
+function setCurrentProductName(state = initialState, action) {
+  state.currentProductName = action.payload;
+}
 
 function generateCombinedProductFeatures(state = initialState, action) {
   const combinedData = [];
@@ -52,7 +55,6 @@ function generateCombinedProductFeatures(state = initialState, action) {
     }
     state.combinedProductFeatures = combinedData;
   });
-  console.log('combinedData: ', combinedData);
 }
 
 const relatedSlice = createSlice({
@@ -66,6 +68,7 @@ const relatedSlice = createSlice({
     newRelatedProductFeatures: setRelatedProductFeatures,
     generateProductFeatures: generateCombinedProductFeatures,
     newRelatedProductName: setRelatedProductName,
+    newCurrentProductName: setCurrentProductName,
   },
   extraReducers: (builder) => {
     builder
@@ -83,6 +86,7 @@ export const {
   newRelatedProductFeatures,
   generateProductFeatures,
   newRelatedProductName,
+  newCurrentProductName,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

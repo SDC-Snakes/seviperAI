@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
 
 function ComparisonModal() {
-  const { modalOpen, combinedProductFeatures } = useSelector((state) => state.related);
+  const { modalOpen, combinedProductFeatures, currentProductName, relatedProductName } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
   function renderTitle(char, index) {
@@ -35,9 +35,9 @@ function ComparisonModal() {
         <caption>Comparing</caption>
         <thead>
           <tr>
-            <th>Current Product</th>
+            <th>{currentProductName}</th>
             <th>Characteristic</th>
-            <th>Related Product</th>
+            <th>{relatedProductName}</th>
           </tr>
         </thead>
         <tbody>
