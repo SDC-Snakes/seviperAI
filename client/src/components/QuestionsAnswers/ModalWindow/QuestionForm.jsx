@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useAsync from '../useAsync';
 
-function AnswerForm({
-  qnaStyles, onAdd, productInfo, questionInfo,
+function QuestionForm({
+  qnaStyles, onAdd, productInfo,
 }) {
   const [reqObjs, setReqObjs] = useState([]);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
@@ -31,21 +31,21 @@ function AnswerForm({
   // }
   return (((response === null) || response.length === 0)) && (
     <div className={qnaStyles['modal-content']}>
-      <h3> Submit your Answer</h3>
+      <h3> Ask Your Question</h3>
       <h6>
-        {`${productInfo.name}: ${questionInfo.body}`}
+        {`About the ${productInfo.name}`}
       </h6>
       <form onSubmit={onSubmit}>
-        <div className="answer-form-group">
-          <label htmlFor="answer-input">Answer:</label>
-          <input type="text" id="answer" name="answer" rows="3" required maxLength="1000" />
+        <div className="question-form-group">
+          <label htmlFor="question-input">Question:</label>
+          <input type="text" id="question-input" name="question" rows="3" required maxLength="1000" />
         </div>
-        <div className="answer-form-group">
+        <div className="question-form-group">
           <label htmlFor="nickname-input">Nickname:</label>
-          <input type="text" id="nickname-input" required maxLength="60" placeholder="Example: Jack543!" />
-          <p>For privacy reasons, do not use your full name or email address.</p>
+          <input type="text" id="nickname-input" required maxLength="60" placeholder="Example: jackson11!" />
+          <p>For privacy reasons, do not use your full name or email address</p>
         </div>
-        <div className="answer-form-group">
+        <div className="question-form-group">
           <label htmlFor="email-input">Email:</label>
           <input type="email" id="email-input" name="email" required maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
@@ -59,12 +59,12 @@ function AnswerForm({
           </div>
         </div>
         <input type="submit" value="Submit Answer" />
-        {loading && <div> Submitting the answer...</div>}
+        {loading && <div> Submitting your question...</div>}
         {error && <div>Error has occurred. Please try again.</div>}
       </form>
-      <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAdd('answer', false); }} value="X" />
+      <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAdd('question', false); }} value="X" />
     </div>
   );
 }
 
-export default AnswerForm;
+export default QuestionForm;

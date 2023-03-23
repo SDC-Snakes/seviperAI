@@ -17,12 +17,15 @@ function QuestionsAnswers() {
   // need to declare all the state variables on the top
   const [numberOfQs, setNumberOfQs] = useState(2);
   // visibility state variable for answer modal window
-  const [answerFormVisible, setAnswerFromVisible] = useState(false);
+  const [answerFormVisible, setAnswerFormVisible] = useState(false);
+  const [questionFormVisible, setQuestionFormVisible] = useState(false);
   // question state vars for answer modal
   const [questionInfo, setQuestionInfo] = useState({
     id: '',
     body: '',
   });
+  // state var to control re-fetch data
+  const [reload, setReload] = useState(false);
 
   // fetching initial data
   /// handle loading and error
@@ -40,7 +43,7 @@ function QuestionsAnswers() {
   ];
 
   // custom hook to handle requests
-  const { state: { loading, response, error } } = useAsync(reqObjs, []);
+  const { state: { loading, response, error } } = useAsync(reqObjs, [reload]);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;
@@ -58,15 +61,22 @@ function QuestionsAnswers() {
     setNumberOfQs(Math.min(numberOfQs + 2, questions.length));
   };
   // toggle functions
-  const onAddAnswer = (state, id, body) => {
-    setQuestionInfo({ id, body });
-    setAnswerFromVisible(state);
+  const onAdd = (item, visibleState, refetch = false, id, body) => {
+    if (item === 'answer') {
+      setQuestionInfo({ id, body });
+      setAnswerFormVisible(visibleState);
+    } else if (item === 'question') {
+      setQuestionFormVisible(visibleState);
+    }
+    if (refetch) {
+      setReload(!reload);
+    }
   };
 
   return (
 
     <QnaStyles.Provider value={qnaStyles}>
-      <OnAddAnswer.Provider value={onAddAnswer}>
+      <OnAddAnswer.Provider value={onAdd}>
         <div>
           <h2>Main Q&A Div</h2>
           {/* <Search /> */}
@@ -75,15 +85,26 @@ function QuestionsAnswers() {
           <div>
             {numberOfQs < questions.length
               && <input type="button" onClick={loadMoreQs} value="More Answered Questions" />}
-            <input type="button" onClick={console.log} value="Add a question +" />
+            <input type="button" onClick={() => { onAdd('question', true); }} value="Add a question +" />
           </div>
           {answerFormVisible
             && (
               <WindowWrapper
                 qnaStyles={qnaStyles}
-                onAddAnswer={onAddAnswer}
+                onAdd={onAdd}
                 productInfo={productInfo}
                 questionInfo={questionInfo}
+                form="answer"
+              />
+            )}
+          {questionFormVisible
+            && (
+              <WindowWrapper
+                qnaStyles={qnaStyles}
+                onAdd={onAdd}
+                productInfo={productInfo}
+                questionInfo={questionInfo}
+                form="question"
               />
             )}
         </div>
@@ -92,4 +113,4 @@ function QuestionsAnswers() {
   );
 }
 
-export default QuestionsAnswers;
+export default React.memo(QuestionsAnswers);

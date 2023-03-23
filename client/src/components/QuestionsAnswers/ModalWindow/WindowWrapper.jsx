@@ -1,20 +1,33 @@
 import React from 'react';
 import AnswerForm from './AnswerForm';
+import QuestionForm from './QuestionForm';
 
 function WindowWrapper({
-  qnaStyles, onAddAnswer, productInfo, questionInfo,
+  qnaStyles, onAdd, productInfo, questionInfo, form
 }) {
   // const [reqStatus, setReqStatus] = useState(false);
   return (
     <div className="answer-modal-window">
       <div className={qnaStyles.modal}>
         <div className={qnaStyles.overlay}>
-          <AnswerForm
-            qnaStyles={qnaStyles}
-            onAddAnswer={onAddAnswer}
-            productInfo={productInfo}
-            questionInfo={questionInfo}
-          />
+          {form === 'answer'
+            && (
+            <AnswerForm
+              qnaStyles={qnaStyles}
+              onAdd={onAdd}
+              productInfo={productInfo}
+              questionInfo={questionInfo}
+            />
+            )}
+          {form === 'question'
+            && (
+            <QuestionForm
+              qnaStyles={qnaStyles}
+              onAdd={onAdd}
+              productInfo={productInfo}
+            />
+            )}
+
         </div>
       </div>
     </div>
