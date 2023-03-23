@@ -8,9 +8,6 @@ function Spinner() {
   const { data: products, isSuccess } = useGetFirstProductQuery();
 
   useEffect(() => {
-    if (products[0].length === 0) {
-      navigate('/NotFound');
-    }
     if (isSuccess) {
       navigate(`/${products[0].id}`);
     }

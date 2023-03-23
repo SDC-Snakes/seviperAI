@@ -24,6 +24,7 @@ function App() {
         <SiteAnnouncement />
         <Routes>
           <Route path="/" element={<Spinner />} />
+          <Route path="/NotFound" element={<div>404 not found...</div>} />
           <Route
             path="/:productId"
             element={(
@@ -37,7 +38,6 @@ function App() {
               </>
           )}
           />
-          <Route path="/NotFound" element={<div>404 not found...</div>} />
         </Routes>
       </Router>
     </div>

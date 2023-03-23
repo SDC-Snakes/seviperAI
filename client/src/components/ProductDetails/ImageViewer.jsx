@@ -1,8 +1,20 @@
-import React from 'react';
-import { newSelectedImage, toggleState, newImageIndex, handleStateUpdate } from '../../features/products/productsSlice';
+import React, { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaChevronLeft, FaChevronRight, FaChevronUp, FaChevronDown, FaExpand, FaCompress } from 'react-icons/fa';
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaChevronUp,
+  FaChevronDown,
+  FaExpand,
+  FaCompress,
+} from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
+import {
+  newSelectedImage,
+  toggleState,
+  newImageIndex,
+  handleStateUpdate,
+} from '../../features/products/productsSlice';
 import errorImage from '../SharedComponents/errorImage.jpg';
 
 function ImageViewer() {
@@ -14,6 +26,10 @@ function ImageViewer() {
     page,
   } = useSelector((state) => state.products);
   const dispatch = useDispatch();
+  const imgRef = useRef(null);
+
+  const [dimensions, setDimensions] = useState([]);
+  const [relPosition, setRelPosition] = useState([]);
 
   const handleImageClick = (image, ind) => {
     dispatch(newSelectedImage(image.url));
@@ -45,30 +61,69 @@ function ImageViewer() {
     return null;
   });
 
-  return (
-    <div className={expanded ? 'expanded' : 'inline'}>
-      {zoom ? <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
-        : (
-          <div>
-            <button type="button" className="topRight buttonWrap" onClick={() => { dispatch(toggleState('expanded')); }}>
-              {expanded ? <FaCompress /> : <FaExpand /> }
-            </button>
+  const handleZoom = () => {
+    if (zoom === false) {
+      const newArray = [imgRef.current.clientWidth, imgRef.current.clientHeight];
+      setDimensions(newArray);
+    }
+    dispatch(toggleState('zoom'));
+    dispatch(toggleState('expanded'));
+  };
 
-            <div className="sideGrid">
-              {page > 0 ? <FaChevronUp onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
-              {sideImages()}
-              {page < ((selectedStyle.photos.length / 7) - 1)
-                ? <FaChevronDown onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
-                : null}
+  const mousePos = (e) => {
+    const bounds = e.currentTarget.getBoundingClientRect();
+    let relLeft = (e.clientX - bounds.left) * 1.5;
+    const relTop = (e.clientY - bounds.top) * 1.5;
+    if (relLeft < 0) {
+      relLeft = 0;
+    }
+    setRelPosition([relLeft, relTop]);
+  };
+
+  return (
+    zoom
+      ? (
+        <div className="imageViewPort expanded center">
+          <button className="imgContainer" type="button" onClick={handleZoom} onMouseMove={mousePos} style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px`, overflow: 'hidden' }}>
+            <div style={{
+              width: `${dimensions[0] * 4}px`, height: `${dimensions[1] * 4}px`, overflow: 'hidden', cursor: 'zoom-out', position: 'relative', left: `${-1.5 * dimensions[0]}px`, top: `${-1.5 * dimensions[1]}px`,
+            }}
+            >
+              <img
+                src={selectedStyle.photos[imageIndex].url || errorImage}
+                alt="SelectedImage"
+                key={selectedStyle.style_id}
+                style={{
+                  width: `${dimensions[0] * 2.5}px`, height: `${dimensions[1] * 2.5}px`, position: 'relative', bottom: `${relPosition[1] - (dimensions[1] * 1.495)}px`, right: `${relPosition[0] - (dimensions[0] * 0.74)}px`, objectFit: 'cover',
+                }}
+              />
             </div>
-            <div>
-              {imageIndex > 0 ? <FaChevronLeft onClick={() => handleHorizontalScroll('left')} /> : null}
-              { Object.keys(selectedStyle).length > 0 ? <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} /> : null }
-              {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => handleHorizontalScroll('right')} /> : null}
-            </div>
+          </button>
+        </div>
+      )
+      : (
+        <div className={expanded ? 'expanded' : 'inline'}>
+          <button type="button" className="topRight buttonWrap" onClick={() => { dispatch(toggleState('expanded')); }}>
+            {expanded ? <FaCompress /> : <FaExpand /> }
+          </button>
+
+          <div className="sideGrid">
+            {page > 0 ? <FaChevronUp onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
+            {sideImages()}
+            {page < ((selectedStyle.photos.length / 7) - 1)
+              ? <FaChevronDown onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
+              : null}
           </div>
-        )}
-    </div>
+          <div className="center">
+            {imageIndex > 0 ? <FaChevronLeft onClick={() => handleHorizontalScroll('left')} /> : null}
+            <button className="buttonWrap" type="button" onClick={expanded ? handleZoom : null} ref={imgRef}>
+              <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
+            </button>
+            {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => handleHorizontalScroll('right')} /> : null}
+          </div>
+        </div>
+      )
+
   );
 }
 
