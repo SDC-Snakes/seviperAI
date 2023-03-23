@@ -5,38 +5,39 @@
 // first off handle data
 // then css
 
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import charCSS from './CharBarCSS.module.css';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { FaSortDown } from 'react-icons/fa';
+import charCSS from './CharBarCSS.module.css';
 
 function CharBar() {
   const { meta } = useSelector((state) => state.reviews);
   const charObj = meta.characteristics;
   const charKeys = Object.keys(charObj);
-
-  // end of copy
-
+  const charRateValues = {
+    Size: ['A size too small', 'A size too wide'],
+    Width: ['Too narrow', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Perfect'],
+    Quality: ['Poor', 'Perfect'],
+    Length: ['Runs short', 'Runs long'],
+    Fit: ['Runs tight', 'Runs Long'],
+  };
   return (
     <div>
       {charKeys.map((char) => (
         <div key={charObj[char].id}>
-          {/* <div key={charObj[char].id}>
-            characteristic: {char}
-            id:{charObj[char].id}
-            value:{charObj[char].value}
-            percentage: {(charObj[char].value / 5) * 100}%
-          </div> */}
-          {/* // a bar
-          // rating values at 1 3 and 5 stars
-          // */}
-          <div className={charCSS['char-bar-container']}>
-            <div>
+          <div className={charCSS['char-bar-label']}>
             {`(${char})`}
-            </div>
+          </div>
+          <div className={charCSS['char-bar-container']}>
             <div className={charCSS['char-bar']}>
               <FaSortDown className={charCSS['char-bar-icon']} style={{ marginLeft: `${((charObj[char].value / 5) * 100)}%` }} />
             </div>
+          </div>
+          <div>
+            <span className={charCSS['char-1']}>{charRateValues[char][0]}</span>
+            <span className={charCSS['char-5']}>{charRateValues[char][1]}</span>
+
           </div>
         </div>
       ))}

@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-bind */
 // this is the main reviews and ratings widget
 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AverageRatings from './AverageRatings';
 import Search from './SearchBarReviews';
 import Reviews from './Reviews';
@@ -11,13 +12,7 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 
 function ReviewsAndRatings() {
   const params = useParams();
-
-  // const [trigger, { data }] = useGetProductReviewsQuery();
-  const dispatch = useDispatch();
-
-  let { reviews } = useSelector((state) => state.reviews);
-
-  // console.log('reviews', reviews);
+  const { reviews } = useSelector((state) => state.reviews);
   const count = 20;
   const [sortState, setSortState] = useState('relevant');
   const {
@@ -38,29 +33,27 @@ function ReviewsAndRatings() {
   useEffect(() => {
     // trigger({ id: params.productId, count, sortState });
     refetch();
-  }, [sortState,refetch]);
+  }, [sortState, refetch]);
 
   function handleSortState(sortInput) {
-      setSortState(sortInput);
-     console.log("sortInput in reviewsAndRatings handleSort", sortInput);
+    setSortState(sortInput);
   }
 
   if (isFetching || isFetchingMeta || !productReviews || !metaReviews) {
     return (
       <div className={RNRCSS['loading-window']}>
-       <h1>Ratings & Reviews</h1>
-       <Search />
+        <h1>Ratings & Reviews</h1>
+        <Search />
         <aside className={RNRCSS['average-ratings-left']}>
           <h3>Product Ratings</h3>
           <h3>Loading...</h3>
         </aside>
         <div className={RNRCSS['reviews-container-right']}>
-            <h3>Product Reviews</h3>
-            <h3>Loading...</h3>
+          <h3>Product Reviews</h3>
+          <h3>Loading...</h3>
         </div>
       </div>
-    )
-
+    );
   }
 
   return (
@@ -76,9 +69,5 @@ function ReviewsAndRatings() {
 
   );
 }
-
-//<Search Bar Component>
-//<average ratings component/>
-//<Reviews component>
 
 export default ReviewsAndRatings;
