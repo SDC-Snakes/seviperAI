@@ -11,6 +11,7 @@ function OutfitList({ relatedIndex }) {
   const dispatch = useDispatch();
   const params = useParams();
   let { outfitList } = useSelector((state) => state.related);
+  // let { outfitList } = useSelector((state) => state.products);
 
   const {
     data: productInfo,

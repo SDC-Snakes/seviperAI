@@ -6,7 +6,7 @@ import OutfitList from './OutfitList';
 import itemStyles from './Items.module.css';
 import { newRelatedCarouselIndex } from '../../features/related/relatedSlice';
 
-function CarouselList() {
+function Carousel() {
   let { relatedIndex, related } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
@@ -34,6 +34,6 @@ function CarouselList() {
   );
 }
 
-export default CarouselList;
+export default Carousel;
 
 // style={{ transform: `translateX(-${relatedIndex} * 25%)` }}

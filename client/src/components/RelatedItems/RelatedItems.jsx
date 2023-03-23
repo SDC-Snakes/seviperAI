@@ -1,11 +1,11 @@
 import React from 'react';
-import CarouselList from './CarouselList';
+import Carousel from './Carousel';
 import ComparisonModal from './ComparisonModal';
 
 function RelatedItems() {
   return (
     <div>
-      <CarouselList />
+      <Carousel />
       <ComparisonModal />
     </div>
   );
