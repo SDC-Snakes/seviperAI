@@ -1,16 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import useAsync from '../useAsync';
 import { QnaStyles } from '../QuestionsAnswers'
 import HelpfulModule from './HelpfulModule';
 
 function AnswerEntry({ answer }) {
   const qnaStyles = useContext(QnaStyles);
+  const [reqObjs, setReqObjs] = useState([]);
+  const [reportButtonText, setReportButtonText] = useState('Report');
+  const [reportButtonStatus, setReportButtonStatus] = useState(false);
+  const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
+
+  useEffect(() => {
+    if (response !== null && response[0] && response[0].status === 204) {
+      setReportButtonText('Reported');
+      setReportButtonStatus(true);
+      setReqObjs([]);
+    }
+  });
+
+  const onReport = () => {
+    setReqObjs(() => ([
+      axios.put(`http://localhost:${process.env.PORT}/qa/answers/${answer.id}/report`),
+    ]));
+  };
+
   return (
     <span>
       <div className={qnaStyles['qna-tile']}>
         {answer.body}
       </div>
-      <HelpfulModule count={answer.helpfulness} onClick={() => console.log('helpful ANSWER')} />
-      <input type="button" className="report-button" value="Report" />
+      <HelpfulModule
+        count={answer.helpfulness}
+        itemId={answer.id}
+        item="answers"
+      />
+      <input
+      type="button"
+      className="report-button"
+      value={reportButtonText}
+      onClick={onReport}
+      disabled={reportButtonStatus}
+      />
     </span>
   );
 }
