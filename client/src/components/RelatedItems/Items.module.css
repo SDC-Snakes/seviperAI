@@ -62,6 +62,7 @@
 /**** Comparison Modal ****/
 
 body.active-modal {
+  height: 100vh;
   overflow-y: hidden;
 }
 
@@ -69,14 +70,20 @@ body.active-modal {
   font-size: 15px;
 }
 
-.modal, .overlay {
+.modal {
+  position: relative;
+}
+
+.overlay {
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: hidden;
   position: fixed;
+
 }
 
 /* .overlay {
@@ -84,18 +91,19 @@ body.active-modal {
 } */
 
 .modal-content {
-  --shadow-color: hsl(0deg 0% 0% / 26%);
-  position: absolute;
-  top: 40%;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  width: 500px;
+  width: 40%;
+  height: 40%;
+  overflow: scroll;
   transform: translate(-50%, -50%);
   line-height: 1.4;
   border: solid;
   border-width: 0.1px;
   border-color: var(--shadow-color);
-  background: #f1f1f1;
-  padding: 14px 28px;
+  background: var(--ter-color);
+  --shadow-color: hsl(0deg 0% 0% / 26%);
   filter: drop-shadow(0px 2px 8px var(--shadow-color))
 }
 

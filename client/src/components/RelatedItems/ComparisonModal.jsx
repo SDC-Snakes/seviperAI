@@ -4,8 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
 
 function ComparisonModal() {
-  let { modalOpen, combinedProductFeatures } = useSelector((state) => state.related);
+  const { modalOpen, combinedProductFeatures } = useSelector((state) => state.related);
   const dispatch = useDispatch();
+
+  function renderTitle(char, index) {
+
+  }
 
   function renderComparison(char, index) {
     return (
@@ -25,22 +29,21 @@ function ComparisonModal() {
   // onClick={dispatch(newModalState())}
 
   return modalOpen ? (
-    <div className={itemStyles.modal} onClick={closeModal}>
-      <div className={itemStyles.overlay}>
-        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
-          <caption>Comparing</caption>
-          <thead>
-            <tr>
-              <th>Current Product</th>
-              <th>Characteristic</th>
-              <th>Related Product</th>
-            </tr>
-          </thead>
-          <tbody>
-            {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-          </tbody>
-        </table>
-        <input type="button" className={itemStyles['close-modal']} value="CLOSE MODAL" onClick={closeModal} />
+    <div className={itemStyles.modal}>
+      <div className={itemStyles.overlay} onClick={closeModal}>
+      <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+        <caption>Comparing</caption>
+        <thead>
+          <tr>
+            <th>Current Product</th>
+            <th>Characteristic</th>
+            <th>Related Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
+        </tbody>
+      </table>
       </div>
     </div>
   ) : null;

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import FormatCard from './FormatCard';
+import ComparisonModal from './ComparisonModal';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
-import { newModalState, newRelatedProductFeatures, generateProductFeatures } from '../../features/related/relatedSlice';
+import { newModalState, newRelatedProductName, newRelatedProductFeatures, generateProductFeatures } from '../../features/related/relatedSlice';
 import itemStyles from './Items.module.css';
 
 function ItemsList({ relatedIndex }) {
@@ -42,6 +43,7 @@ function ItemsList({ relatedIndex }) {
     e.preventDefault();
     dispatch(newModalState());
     dispatch(newRelatedProductFeatures(item.details.features));
+    dispatch(newRelatedProductName(item.details.name));
     dispatch(generateProductFeatures(details.features));
   }
 
@@ -68,6 +70,7 @@ function ItemsList({ relatedIndex }) {
 
   return (
     <div className={itemStyles['items-list-wrapper']}>
+      <ComparisonModal />
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
       <div className={itemStyles['items-list-content']}>
         {relatedProducts.map((item, index) => renderList(item, index))}
