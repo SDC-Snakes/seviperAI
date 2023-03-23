@@ -36,6 +36,10 @@ function setCurrentProductName(state = initialState, action) {
 function setOutfitList(state = initialState, action) {
   state.outfitList = action.payload;
 }
+function addToOutfit(state = initialState, action) {
+  localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
+  state.outfitList.push(action.payload);
+}
 
 function generateCombinedProductFeatures(state = initialState, action) {
   const combinedData = [];
@@ -74,6 +78,7 @@ const relatedSlice = createSlice({
     newRelatedProductName: setRelatedProductName,
     newCurrentProductName: setCurrentProductName,
     newOutfitList: setOutfitList,
+    newAddToOutfit: addToOutfit,
   },
   extraReducers: (builder) => {
     builder
@@ -93,6 +98,7 @@ export const {
   newRelatedProductName,
   newCurrentProductName,
   newOutfitList,
+  newAddToOutfit,
 } = relatedSlice.actions;
 
 export default relatedSlice.reducer;

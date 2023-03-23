@@ -27,7 +27,7 @@ function CarouselList() {
       </div>
       <div>
         <FaChevronLeft />
-        <OutfitList />
+        <OutfitList relatedIndex={relatedIndex} />
         <FaChevronRight />
       </div>
     </div>
