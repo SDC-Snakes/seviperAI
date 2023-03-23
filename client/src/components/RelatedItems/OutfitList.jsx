@@ -1,55 +1,44 @@
 import React, { useState } from 'react';
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
-import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import FormatCard from './FormatCard';
 import itemStyles from './Items.module.css';
 
 function OutfitList({ relatedIndex }) {
   const dispatch = useDispatch();
-  const params = useParams();
-  let { outfitList } = useSelector((state) => state.related);
-  // let { outfitList } = useSelector((state) => state.products);
 
-  const {
-    data: productInfo,
-    isFetching,
-  } = useGetProductInfoQuery(`${params.productId}`, {
-    refetchOnMountOrArgChange: true,
-  });
+  // Compiles current object data
+  const { outfitList } = useSelector((state) => state.related);
+  const { selectedStyle, details } = useSelector((state) => state.products);
+  const { meta } = useSelector((state) => state.reviews);
+  const currentProduct = { details, selectedStyle, meta };
 
-  function handleAddToOutfit(productInfo) {
-    if (!JSON.parse(localStorage.getItem(productInfo.details.id))) {
-      dispatch(newAddToOutfit(productInfo));
+  function handleAddToOutfit(productData) {
+    if (!JSON.parse(localStorage.getItem(productData.details.id))) {
+      dispatch(newAddToOutfit(productData));
     }
-    dispatch(newOutfitList(Object.values({ ...localStorage }).map((item) => JSON.parse(item))));
+    dispatch(newOutfitList());
     return (
       <div>Item already in outfit</div>
     );
   }
 
   function findImage(item) {
-    console.log(item, 'FIND IMAGE')
-    for (let i = 0; i < item.styles.results.length; i++) {
-      const style = item.styles.results[i];
-      for (let j = 0; j < style.photos.length; j++) {
-        const stylePhoto = style.photos[j];
-        if (stylePhoto.thumbnail_url) {
-          return stylePhoto.thumbnail_url;
-        }
+    for (let i = 0; i < item.selectedStyle.photos.length; i++) {
+      const stylePhoto = item.selectedStyle.photos[i];
+      if (stylePhoto.thumbnail_url) {
+        return stylePhoto.thumbnail_url;
       }
     }
   }
 
   function renderList(item, index) {
-    console.log(outfitList)
     return (
       <div key={index}>
         {relatedIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
+            stars={<QuarterStarsAverageRating productRating={item.meta.ratings} />}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
@@ -65,7 +54,7 @@ function OutfitList({ relatedIndex }) {
     <div className={itemStyles['items-list-wrapper']}>
       <span className={itemStyles['items-list-title']}>Outfit List</span>
       <div className={itemStyles['items-list-content']}>
-        <div className={itemStyles['items-card']} onClick={() => handleAddToOutfit(productInfo)}>
+        <div className={itemStyles['items-card']} onClick={() => handleAddToOutfit(currentProduct)}>
           <span>Add to outfit</span>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}

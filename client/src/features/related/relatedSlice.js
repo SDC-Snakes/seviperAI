@@ -79,6 +79,7 @@ const relatedSlice = createSlice({
     newCurrentProductName: setCurrentProductName,
     newOutfitList: setOutfitList,
     newAddToOutfit: addToOutfit,
+
   },
   extraReducers: (builder) => {
     builder
