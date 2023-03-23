@@ -7,6 +7,7 @@ import {
  FaHeart, FaTwitter, FaPinterest, FaFacebookF
 } from 'react-icons/fa';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
+import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
@@ -39,9 +40,13 @@ function Details({ handleScroll }) {
   };
 
   const handleOutfitClick = () => {
+    if (!JSON.parse(localStorage.getItem(details.id))) {
+      dispatch(newAddToOutfit({ details, selectedStyle, meta }));
+    }
+    dispatch(newOutfitList());
     // {details, styles, ratings}
     // dispatch(addToOutfit({ details, selectedStyle, ratings: meta }));
-    console.log({ details, selectedStyle, ratings: meta });
+    console.log({ details, styles: { results: [selectedStyle] }, ratings: meta });
   };
 
   const handleRnrClick = () => {
