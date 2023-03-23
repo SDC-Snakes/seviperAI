@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
@@ -7,6 +7,10 @@ import itemStyles from './Items.module.css';
 
 function OutfitList({ relatedIndex }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(newOutfitList());
+  }, []);
 
   // Compiles current object data
   const { outfitList } = useSelector((state) => state.related);
