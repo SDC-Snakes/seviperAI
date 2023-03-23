@@ -22,15 +22,13 @@ function AnswersList({ answers }) {
       {answersList.length > 2
         && (
           <div>
-            <b
-              style={{ cursor: 'pointer' }}
+            <input
               onClick={answerFold}
-              role="button"
-              onKeyPress={answerFold}
-              tabIndex={0}
-            >
-              {folded ? 'See more answers' : 'Collapse answers'}
-            </b>
+              value={folded ? 'See more answers' : 'Collapse answers'}
+              color="blue"
+              type="button"
+            />
+
           </div>
         )}
     </div>

@@ -32,12 +32,15 @@ module.exports = {
     }
   },
   postQuestion: (req, res) => {
-    axios.post(`${process.env.ATLIER_API_ROUTE}/qa/questions`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
+    axios.post(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions`,
+      req.body,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
       },
-      data: req.body,
-    })
+    )
       .then(() => {
         res.status(201).send('Question created');
       })
@@ -53,7 +56,7 @@ module.exports = {
         headers: {
           Authorization: process.env.GITHUB_API_KEY,
         },
-      }
+      },
     )
       .then(() => {
         res.status(201).send('Answer created');
@@ -63,11 +66,15 @@ module.exports = {
       });
   },
   putHelpful: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/helpful`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
+    axios.put(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/helpful`,
+      null,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
       },
-    })
+    )
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
@@ -76,11 +83,15 @@ module.exports = {
       });
   },
   putReport: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/report`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
+    axios.put(
+      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.answerOrQuestion_id}/report`,
+      null,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
       },
-    })
+    )
       .then(() => {
         res.status(204).send('Marked as helpful');
       })
