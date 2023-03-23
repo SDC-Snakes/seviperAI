@@ -52,7 +52,6 @@ function ItemsList({ relatedIndex }) {
     dispatch(newRelatedProductName(item.details.name));
     dispatch(newCurrentProductName(details.name));
     dispatch(generateProductFeatures(details.features));
-    console.log('relatedItemDetails: ', item);
   }
 
   function renderList(item, index) {
@@ -78,7 +77,7 @@ function ItemsList({ relatedIndex }) {
 
   return (
     <div className={itemStyles['items-list-wrapper']}>
-      {/* <ComparisonModal /> */}
+      <ComparisonModal />
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
       <div className={itemStyles['items-list-content']}>
         {relatedProducts.map((item, index) => renderList(item, index))}

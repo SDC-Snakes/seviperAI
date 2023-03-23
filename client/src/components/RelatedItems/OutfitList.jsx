@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
 import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
-// import { addToOutfit, removeFromOutfit } from './outfitListStorage';
 import FormatCard from './FormatCard';
 import itemStyles from './Items.module.css';
 
@@ -21,18 +20,13 @@ function OutfitList({ relatedIndex }) {
   });
 
   function handleAddToOutfit(productInfo) {
-    // console.log('currentProduct: ', productInfo);
     if (!JSON.parse(localStorage.getItem(productInfo.details.id))) {
       dispatch(newAddToOutfit(productInfo));
     }
     dispatch(newOutfitList(Object.values({ ...localStorage }).map((item) => JSON.parse(item))));
-    // console.log('outfitList: ', Object.values({ ...localStorage }).map((item) => JSON.parse(item)));
-    console.log('outfitList: ', outfitList);
     return (
       <div>Item already in outfit</div>
     );
-    // console.log('outfitList: ', outfit);
-    // console.log('localStorage: ', JSON.parse(localStorage.getItem(productInfo.details.id)));
   }
 
   function findImage(item) {

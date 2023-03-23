@@ -7,10 +7,6 @@ function ComparisonModal() {
   const { modalOpen, combinedProductFeatures, currentProductName, relatedProductName } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
-  function renderTitle(char, index) {
-
-  }
-
   function renderComparison(char, index) {
     return (
       <tr key={index}>
@@ -25,8 +21,6 @@ function ComparisonModal() {
     e.preventDefault();
     dispatch(newModalState());
   }
-
-  // onClick={dispatch(newModalState())}
 
   return modalOpen ? (
     <div className={itemStyles.modal}>
