@@ -66,6 +66,7 @@ module.exports = {
       });
   },
   putQuestionHelpful: (req, res) => {
+    console.log(req);
     axios.put(
       `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`,
       null,

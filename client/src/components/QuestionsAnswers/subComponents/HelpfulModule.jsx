@@ -9,7 +9,7 @@ function HelpfulModule({ count, itemId, item }) {
 
   useEffect(() => {
     if (response !== null && response[0] && response[0].status === 204) {
-      setCountTemp(countTemp + 1);
+      setCountTemp(count + 1);
       setReqObjs(Function);
     }
   });
