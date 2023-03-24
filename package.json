@@ -22,12 +22,8 @@
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
-<<<<<<< HEAD
-    "react-toastify": "^9.1.2"
-=======
     "react-toastify": "^9.1.1",
     "uuid": "^9.0.0"
->>>>>>> main
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",

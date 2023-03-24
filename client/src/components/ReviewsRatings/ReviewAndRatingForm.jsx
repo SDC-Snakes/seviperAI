@@ -42,7 +42,6 @@ function ReviewAndRatingForm({RNRCSS}) {
         [propertyChar]: rating,
       },
     }));
-    console.log('radio buttons changed', reviewPropsObj.characteristics);
   };
   const toggleModal = (inputBool) => {
     setModal(inputBool);
@@ -111,8 +110,8 @@ function ReviewAndRatingForm({RNRCSS}) {
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics[charId.Size.id] === index+1}
-                        onChange={() => { handleCharChange(index+1, 'Size'); }}
+                        checked={characteristics[charId.Size.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Size'); }}
                       />
                       {element}
                     </label>
