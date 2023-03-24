@@ -5,7 +5,6 @@ const initialState = {
   related: [],
   relatedIndex: 0,
   outfitIndex: 0,
-  outfitLength: 0,
   modalOpen: false,
   relatedProductFeatures: {},
   relatedProductName: null,
@@ -38,8 +37,7 @@ function setOutfitList(state = initialState, action) {
 }
 function addToOutfit(state = initialState, action) {
   localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
-  state.outfitList.push(action.payload);
-  state.outfitLength += 1;
+  state.outfitList.unshift(action.payload);
 }
 function removeFromOutfit(state = initialState, action) {
   localStorage.removeItem(action.payload.details.id);

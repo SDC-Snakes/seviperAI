@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import ItemsList from './ItemsList';
 import OutfitList from './OutfitList';
 import itemStyles from './Items.module.css';
-import { newRelatedCarouselIndex, newOutfitCarouselIndex } from '../../features/related/relatedSlice';
+import { newRelatedCarouselIndex, newOutfitCarouselIndex, newOutfitList } from '../../features/related/relatedSlice';
 
 function Carousel() {
   const {
@@ -20,7 +20,6 @@ function Carousel() {
       dispatch(newRelatedCarouselIndex(relatedIndex === related.length - 1 ? 0 : relatedIndex + 1));
       return;
     }
-    console.log('outsideRelatedList next');
     dispatch(newOutfitCarouselIndex(outfitIndex === outfitList.length - 1 ? 0 : outfitIndex + 1));
   }
 
@@ -29,12 +28,12 @@ function Carousel() {
       dispatch(newRelatedCarouselIndex(relatedIndex === 0 ? related.length - 1 : relatedIndex - 1));
       return;
     }
-    console.log('outsideRelatedList next');
     dispatch(newOutfitCarouselIndex(outfitIndex === 0 ? outfitList.length - 1 : outfitIndex - 1));
   }
 
-  console.log('outfitIndex: ', outfitIndex);
-  // console.log('outfitLength: ', outfitLength);
+  // useEffect(() => {
+  //   prevSlide();
+  // }, []);
 
   return (
     <div>

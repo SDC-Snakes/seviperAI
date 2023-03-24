@@ -37,11 +37,14 @@ function ItemsList({ relatedIndex, width, cardsShowing }) {
   // };
 
   function renderList(item, index) {
+    console.log('itemRating: ', Object.keys);
     return (
       <div key={index}>
         {relatedIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
+            stars={Object.keys(item.ratings.ratings).length > 0
+              ? <QuarterStarsAverageRating productRating={item.ratings.ratings} />
+              : <p>rating unavailable</p>}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
