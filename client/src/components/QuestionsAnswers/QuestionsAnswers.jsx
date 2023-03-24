@@ -44,7 +44,7 @@ function QuestionsAnswers() {
   ];
 
   // custom hook to handle requests
-  const { state: { loading, response, error } } = useAsync(reqObjs, []);
+  const { state: { loading, response, error } } = useAsync(reqObjs, [reload]);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;
