@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Search from './subComponents/Search';
@@ -28,11 +28,9 @@ function QuestionsAnswers() {
   const [reload, setReload] = useState(false);
   // show only 4 questions when reloaded
   useEffect(() => setNumberOfQs(4), [reload]);
-
-
   // fetching initial data
   /// handle loading and error
-  const reqObjs = [
+  const reqObjs = () => [
     // questions for a product
     axios.get(`http://localhost:${process.env.PORT}/qa/questions/`, {
       params: {
@@ -46,7 +44,7 @@ function QuestionsAnswers() {
   ];
 
   // custom hook to handle requests
-  const { state: { loading, response, error } } = useAsync(reqObjs, [reload]);
+  const { state: { loading, response, error } } = useAsync(reqObjs, []);
 
   // handle loading state;
   if (loading) return <div> Loading...</div>;

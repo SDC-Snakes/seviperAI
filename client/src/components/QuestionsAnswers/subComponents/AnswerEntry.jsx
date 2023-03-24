@@ -6,7 +6,7 @@ import HelpfulModule from './HelpfulModule';
 
 function AnswerEntry({ answer }) {
   const qnaStyles = useContext(QnaStyles);
-  const [reqObjs, setReqObjs] = useState([]);
+  const [reqObjs, setReqObjs] = useState(Function);
   const [reportButtonText, setReportButtonText] = useState('Report');
   const [reportButtonStatus, setReportButtonStatus] = useState(false);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
@@ -15,14 +15,16 @@ function AnswerEntry({ answer }) {
     if (response !== null && response[0] && response[0].status === 204) {
       setReportButtonText('Reported');
       setReportButtonStatus(true);
-      setReqObjs([]);
+      setReqObjs(Function);
     }
   });
 
   const onReport = () => {
-    setReqObjs(() => ([
-      axios.put(`http://localhost:${process.env.PORT}/qa/answers/${answer.id}/report`),
-    ]));
+    setReqObjs(() => function putRequest() {
+      return [
+        axios.put(`http://localhost:${process.env.PORT}/qa/answers/${answer.id}/report`),
+      ];
+    });
   };
 
   return (

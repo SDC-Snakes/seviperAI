@@ -5,7 +5,7 @@ import useAsync from '../useAsync';
 function QuestionForm({
   qnaStyles, onAdd, productInfo,
 }) {
-  const [reqObjs, setReqObjs] = useState([]);
+  const [reqObjs, setReqObjs] = useState(Function);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
 
   useEffect(() => {
@@ -17,14 +17,16 @@ function QuestionForm({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setReqObjs(() => ([
-      axios.post(`http://localhost:${process.env.PORT}/qa/questions/`, {
-        body: e.target[0].value,
-        name: e.target[1].value,
-        email: e.target[2].value,
-        product_id: productInfo.id,
-      }),
-    ]));
+    setReqObjs(() => function postRequest() {
+      return [
+        axios.post(`http://localhost:${process.env.PORT}/qa/questions/`, {
+          body: e.target[0].value,
+          name: e.target[1].value,
+          email: e.target[2].value,
+          product_id: productInfo.id,
+        }),
+      ];
+    });
   };
   // if (response !== null && response[0] && response[0].status === 201) {
   //   alert('Thank you for your answer!')
