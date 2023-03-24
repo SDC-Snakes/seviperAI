@@ -38,7 +38,6 @@ function useAsync(reqObjs, deps = []) {
     dispatch({ type: 'LOADING' });
     Promise.all(promises())
       .then((response) => {
-        console.log('LOADED!');
         dispatch({
           type: 'SUCCESS',
           response,
