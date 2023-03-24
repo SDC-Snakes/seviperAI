@@ -1,6 +1,7 @@
 // this is the add image component, it's used to add images to the review form before submit
 import React, { useState, useEffect } from 'react';
 import RNRCSS from './Modal.module.css';
+import ImageDropzone from './ImageDropzone';
 
 function AddImageReviews({uploadImageHandler}) {
   const [modal, setModal] = useState(false);
@@ -37,6 +38,7 @@ function AddImageReviews({uploadImageHandler}) {
                 value={inputField}
                 onChange={handleInputFieldChange}
               />
+              <ImageDropzone handleUploadedImages={handleUploadedImages} />
               {images.length < 5
                 && (
                 <input
