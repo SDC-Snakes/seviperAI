@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useAsync from '../useAsync';
 
@@ -7,6 +7,7 @@ function QuestionForm({
 }) {
   const [reqObjs, setReqObjs] = useState(Function);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     if (response !== null && response[0] && response[0].status === 201) {
@@ -17,6 +18,7 @@ function QuestionForm({
 
   const onSubmit = (e) => {
     e.preventDefault();
+    firstLoad.current = false;
     setReqObjs(() => function postRequest() {
       return [
         axios.post(`http://localhost:${process.env.PORT}/qa/questions/`, {
@@ -63,7 +65,7 @@ function QuestionForm({
         </div>
         <input type="submit" value="Submit" />
         {loading && <div> Submitting your question...</div>}
-        {error && <div>Error has occurred. Please try again.</div>}
+        {!firstLoad.currnt && error && <div>Error has occurred. Please try again.</div>}
       </form>
       <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAdd('question', false); }} value="X" />
     </div>
