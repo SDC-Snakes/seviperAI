@@ -34,21 +34,28 @@ module.exports = {
   },
   post: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
-    axios.get(`${process.env.ATLIER_API_ROUTE}/reviews`, {
-      headers: {
-        Authorization: process.env.GITHUB_API_KEY,
+    console.log('Postreq req.query: ', req.body)
+
+    axios.post(
+      `${process.env.ATLIER_API_ROUTE}/reviews`,
+      req.body,
+      {
+        headers: {
+          Authorization: process.env.GITHUB_API_KEY,
+        },
+        data: req.body,
       },
-      data: req.body,
-    })
+    )
       .then((response) => {
         res.status(200).send(response.data);
       })
       .catch((err) => {
+        console.log(err)
         res.status(404).send(err);
       });
   },
   putHelpful: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/helpful`, {
+    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/helpful`, null, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
@@ -61,13 +68,13 @@ module.exports = {
       });
   },
   putReport: (req, res) => {
-    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/report`, {
+    axios.put(`${process.env.ATLIER_API_ROUTE}/reviews/${req.params.review_id}/report`, null, {
       headers: {
         Authorization: process.env.GITHUB_API_KEY,
       },
     })
       .then(() => {
-        res.status(204).send('Marked as helpful');
+        res.status(204).send('Review reported');
       })
       .catch((err) => {
         res.status(422).send(err);
