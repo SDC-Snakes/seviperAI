@@ -1,38 +1,43 @@
 import React, { useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import ImageViewer from './ImageViewer';
 import Details from './Details';
 import Description from './Description';
 import './products.css';
 import { useGetProductInfoQuery } from '../../features/api/apiSlice';
+import Spinner from '../SharedComponents/Spinner';
 
 function ProductDetails({ handleScroll }) {
   const params = useParams();
-  let { expanded } = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const { expanded, zoom } = useSelector((state) => state.products);
 
   const {
     data: productInfo,
     isFetching,
+    error,
   } = useGetProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
 
+  // console.log(productInfo.styles.results);
+
   useEffect(() => {
-    // update photos state
-  }, [productInfo]);
+    if (error) {
+      navigate('/NotFound');
+    }
+  }, [productInfo, isFetching, error]);
 
   if (isFetching || !productInfo) {
-    return <div>loading...</div>;
+    return (<div><Spinner context="details" /></div>);
   }
 
   return (
     <div>
-      {expanded ? (
+      {expanded || zoom ? (
         <div className="mainDiv">
-          <div>
-            <ImageViewer />
-          </div>
+          <ImageViewer />
         </div>
       ) : (
         <div className="mainDiv">
