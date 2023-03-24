@@ -6,7 +6,7 @@ import { FaStar } from 'react-icons/fa';
 function QuarterIncStarRating({averageRating}) {
   // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
   if (!averageRating) {
-    return <span>unable to retreive rating</span>;
+    return <span>unable to retrieve rating</span>;
   }
   const ratingNum = averageRating;
   const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
