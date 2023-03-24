@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from './app/store';
 import App from './components/App';
 
-const domNode = document.getElementById('root');
+const domNode = document.getElementById('root') || document.createElement('div'); // for testing purposes
 const root = createRoot(domNode);
 root.render(
   <React.StrictMode>
