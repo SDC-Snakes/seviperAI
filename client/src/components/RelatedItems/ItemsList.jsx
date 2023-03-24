@@ -6,7 +6,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import itemStyles from './Items.module.css';
 
-function ItemsList({ relatedIndex }) {
+function ItemsList({ relatedIndex, width, cardsShowing }) {
   const params = useParams();
   const {
     data: relatedProducts,

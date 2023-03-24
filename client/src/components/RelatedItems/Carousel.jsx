@@ -14,8 +14,14 @@ function Carousel() {
 
   // Determine size of screen
   useEffect(() => {
-    window.addEventListener('resize', () => setWidth(window.innerWidth));
-  }, []);
+    function handleResize() {
+      setWidth(window.innerWidth);
+      setCardsShowing(Math.floor(width / 240));
+    }
+    window.addEventListener('resize', handleResize());
+    handleResize();
+    // return window.removeEventListener('resize', handleResize);
+  }, [width]);
 
   function nextSlide() {
     dispatch(newRelatedCarouselIndex(relatedIndex === related.length - 1 ? 0 : relatedIndex + 1));
@@ -29,8 +35,8 @@ function Carousel() {
     <div>
       <div className={itemStyles['items-list-container']}>
         {relatedIndex !== 0 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} />}
-        <ItemsList relatedIndex={relatedIndex} />
-        {(related.length > 5 && relatedIndex !== related.length - 5)
+        <ItemsList relatedIndex={relatedIndex} width={width} cardsShowing={cardsShowing} />
+        {(related.length > cardsShowing && relatedIndex !== related.length - cardsShowing)
         && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />}
         {/* {relatedIndex !== related.length
         && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />} */}
