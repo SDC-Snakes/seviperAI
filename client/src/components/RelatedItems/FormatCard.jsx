@@ -58,8 +58,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
           <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
           <p><s>{`$${price}`}</s></p>
         </div>
-      )
-        : <p>{`$${price}`}</p>}
+      ) : <p>{`$${price}`}</p>}
     </div>
   );
 }
