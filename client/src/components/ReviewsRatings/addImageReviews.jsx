@@ -37,12 +37,15 @@ function AddImageReviews({uploadImageHandler}) {
                 value={inputField}
                 onChange={handleInputFieldChange}
               />
-              <input
-                type="submit"
-                className={RNRCSS['add-image-input']}
-                onClick={() => { handleUploadedImages(inputField); }}
-                value="upload image"
-              />
+              {images.length < 5
+                && (
+                <input
+                  type="submit"
+                  className={RNRCSS['add-image-input']}
+                  onClick={() => { handleUploadedImages(inputField); }}
+                  value="upload image"
+                />
+                )}
               {images.length > 0
               && (
                 <div>
