@@ -29,23 +29,6 @@ function ReviewAndRatingForm({RNRCSS}) {
   });
   const [triggerReview, { data, isSuccess }] = usePostNewReviewMutation();
   const postObj = useSelector(state => state.reviews.reviewPostObj);
-  // const submitReview = () => {
-  //   dispatch(changeState(reviewPropsObj));
-  // }
-  // const UpdateReviewPropsObj = () => {
-  //   setReviewPropsObj((prevState) => ({
-  //     ...prevState,
-  //     characteristics,
-  //   }));
-  //   console.log('radio buttons changed', reviewPropsObj.characteristics);
-  // };
-  // const handleCharChange = (rating, charName) => {
-  //   setCharacteristics((prevState) => ({
-  //     ...prevState,
-  //     [charId[charName]['id']]: rating,
-  //   }));
-  //   UpdateReviewPropsObj();
-  // };
   const handleCharChange = (rating, charName) => {
     const propertyChar = charId[charName]['id'];
     setCharacteristics((prevState) => ({
@@ -248,9 +231,9 @@ function ReviewAndRatingForm({RNRCSS}) {
                 />
               </div>
               <div>
-                Minimum required characters left: {'#number'}
-                 As the user types, the count of characters should update.
-                 After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
+              {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
+
+
               </div>
               <div>
                 <AddImageReviews uploadImageHandler={uploadImageHandler} />
