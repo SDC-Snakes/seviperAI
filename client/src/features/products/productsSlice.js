@@ -7,6 +7,7 @@ const initialState = {
   details: {},
   selectedImage: '',
   expanded: false,
+  zoom: false,
   sku: '',
   quantitySelected: 1,
   imageIndex: 0,
@@ -47,8 +48,10 @@ const productsSlice = createSlice({
       .addMatcher(api.endpoints.getProductInfo.matchFulfilled, (state, action) => {
         state.styles = action.payload.styles.results;
         state.details = action.payload.details;
-        state.selectedStyle = state.styles[0];
-        state.selectedImage = state.styles[0].photos[0].url;
+        if (state.styles.length > 0) {
+          state.selectedStyle = state.styles[0];
+          state.selectedImage = state.styles[0].photos[0].url;
+        }
       });
   },
 });

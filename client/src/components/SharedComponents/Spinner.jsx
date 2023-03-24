@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useGetFirstProductQuery } from '../../features/api/apiSlice';
+import React from 'react';
+import { FaShoppingCart, FaCircleNotch } from 'react-icons/fa';
 
-function Spinner() {
-  const navigate = useNavigate();
-
-  const { data: products, isSuccess } = useGetFirstProductQuery();
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(`/${products[0].id}`);
-    }
-  }, [isSuccess]);
-
+function Spinner({ context }) {
   return (
-    <div>
-      Loading...
-    </div>
+    context === 'landing'
+      ? (
+        <div className="center">
+          <div className="loading-spinner">
+            <FaShoppingCart size={50} fill="#804BAC" />
+          </div>
+          <br />
+          <br />
+          <h1>Loading...</h1>
+        </div>
+      )
+      : (
+        <div className="center">
+          <div className="loading-spinner">
+            <FaCircleNotch size={50} fill="#804BAC" />
+          </div>
+          <br />
+          <br />
+          <h1>Loading...</h1>
+        </div>
+      )
   );
 }
 

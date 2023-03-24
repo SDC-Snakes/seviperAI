@@ -41,7 +41,7 @@ test('products details render after making a call to the API', async () => {
       reviews: stateStub.reviews,
     },
   });
-  screen.debug();
+  // screen.debug();
 
   expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
 
@@ -50,3 +50,5 @@ test('products details render after making a call to the API', async () => {
   // expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
   // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });
+
+// Simulate clicking expand and ensure product details no longer display.

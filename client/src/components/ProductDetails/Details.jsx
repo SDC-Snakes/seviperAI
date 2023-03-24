@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
-import { FaHeart, FaTwitter, FaPinterest, FaFacebookF } from 'react-icons/fa';
+import {
+ FaHeart, FaTwitter, FaPinterest, FaFacebookF
+} from 'react-icons/fa';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
+import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
-  let { selectedStyle, details, sku, quantitySelected } = useSelector((state) => state.products);
+  const {
+    selectedStyle,
+    details,
+    sku,
+    quantitySelected,
+  } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
-  const [trigger, { data, isSuccess }] = useAddToCartMutation();
+  const [trigger] = useAddToCartMutation();
+  const sizeRef = useRef(null);
 
   if (quantity > 15) {
     quantity = 15;
@@ -23,16 +32,46 @@ function Details({ handleScroll }) {
       const res = await trigger(sku);
       if (res.data === 'Content created') {
         toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
+        dispatch(handleStateUpdate({ name: 'sku', value: 'selectSize' }));
+        sizeRef.value = 'selectSize';
       } else {
         toast.error('Unable to add to cart');
       }
     } else {
+      sizeRef.current.focus();
+      sizeRef.current.size = 6;
       toast.error('Unable to add to cart: please select a size');
     }
   };
 
+  const handleOutfitClick = () => {
+    if (!JSON.parse(localStorage.getItem(details.id))) {
+      dispatch(newAddToOutfit({ details, selectedStyle, meta }));
+    }
+    dispatch(newOutfitList());
+  };
+
   const handleRnrClick = () => {
     handleScroll();
+  };
+
+  const handleSizeClick = (e) => {
+    if (e.target.size > 0) {
+      sizeRef.current.size = 0;
+    }
+    dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value }));
+  };
+
+  const checkStock = (productSkus) => {
+    const values = Object.values(productSkus);
+
+    if (values.length > 0) {
+      const stock = values.reduce((accum, val) => accum + val.quantity, 0);
+      if (stock > 0) {
+        return true;
+      }
+    }
+    return false;
   };
 
   return (
@@ -60,8 +99,8 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
-          <option value="selectSize">Select Size</option>
+        <select name="sku" onChange={handleSizeClick} disabled={!checkStock(selectedStyle.skus)} id="sizeBtn" ref={sizeRef} value={sku}>
+          <option value="selectSize">{checkStock(selectedStyle.skus) ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
               <option
@@ -86,13 +125,13 @@ function Details({ handleScroll }) {
         <button type="button" onClick={handleCartClick}>
           Add to cart
         </button>
-        <button type="button">
+        <button type="button" onClick={handleOutfitClick}>
           <FaHeart />
         </button>
       </div>
-      <FaTwitter />
-      <FaPinterest />
-      <FaFacebookF />
+      <a href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter /></a>
+      <a href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF /></a>
+      <a href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest /></a>
     </div>
   );
 }

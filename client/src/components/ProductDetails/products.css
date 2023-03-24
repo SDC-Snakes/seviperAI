@@ -5,7 +5,7 @@ button {
 .inline {
   display: flex;
   justify-content: space-around;
-  margin: 10px 0px;
+  margin: 0px 0px;
   background-color: #C2C2C2;
   width: 60vw;
 }
@@ -13,10 +13,27 @@ button {
 .expanded {
   display: flex;
   justify-content: space-around;
-  margin: 10px 0px;
+  margin: 0px 0px;
   background-color: #C2C2C2;
   width: 98vw;
+  height: 60vh;
+}
+
+.expandedImage {
   cursor: zoom-in;
+  margin: 0 0px;
+  max-height: 59vh;
+  max-width: 80vw;
+}
+
+.noClick {
+  cursor: default;
+}
+
+.imgContainer {
+  z-index: '2';
+  border: 1px solid black;
+  background: none;
 }
 
 .mainDiv {
@@ -123,4 +140,8 @@ button {
   z-index: 1;
   position: absolute;
   opacity: 0;
+}
+
+.chevron {
+  cursor: pointer;
 }

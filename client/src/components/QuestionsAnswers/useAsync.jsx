@@ -36,7 +36,7 @@ function useAsync(reqObjs, deps = []) {
 
   const sendRequestAsync = (promises) => {
     dispatch({ type: 'LOADING' });
-    Promise.all(promises)
+    Promise.all(promises())
       .then((response) => {
         dispatch({
           type: 'SUCCESS',

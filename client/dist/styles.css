@@ -166,3 +166,33 @@ input[name="rating"] {
   background-color: green;
 }
 
+.navbar {
+  background-color: #525252;
+  color: var(--main-color);
+}
+
+.headline {
+  background-color: #C2C2C2;
+  color: var(--sec-color);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+display: flex;
+align-items: center;
+justify-content: center;
+animation: spinner 1.5s linear infinite;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
