@@ -106,7 +106,6 @@ function QuestionsAnswers() {
                 qnaStyles={qnaStyles}
                 onAdd={onAdd}
                 productInfo={productInfo}
-                questionInfo={questionInfo}
                 form="question"
               />
             )}
