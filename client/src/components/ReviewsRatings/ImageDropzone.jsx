@@ -3,7 +3,6 @@ import { useDropzone } from 'react-dropzone';
 
 function ImageDropzone({ handleUploadedImages }) {
   const [images, setImages] = useState([]);
-  console.log('handle', handleUploadedImages)
 
   const onDrop = useCallback(acceptedFiles => {
     acceptedFiles.forEach(file => {

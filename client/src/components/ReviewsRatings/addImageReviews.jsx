@@ -21,7 +21,8 @@ function AddImageReviews({uploadImageHandler}) {
     <>
       <input
         type="submit"
-        onClick={() => {
+        onClick={(event) => {
+          event.preventDefault();
           uploadImageHandler(images);
           toggleModal(true);
         }}
@@ -69,7 +70,8 @@ function AddImageReviews({uploadImageHandler}) {
               />
               <input
                 type="submit"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   uploadImageHandler(images);
                   toggleModal(false);
                 }}
