@@ -16,7 +16,8 @@ function QuestionEntry({ question }) {
         </span>
         <HelpfulModule
           count={question.question_helpfulness}
-          onClick={() => console.log(question)}
+          itemId={question.question_id}
+          item="questions"
         />
         <input
           type="button"

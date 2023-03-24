@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Search from './subComponents/Search';
@@ -15,7 +15,7 @@ export const SendRequestAsync = React.createContext(null);
 function QuestionsAnswers() {
   const params = useParams(); // get productId
   // need to declare all the state variables on the top
-  const [numberOfQs, setNumberOfQs] = useState(2);
+  const [numberOfQs, setNumberOfQs] = useState(4);
   // visibility state variable for answer modal window
   const [answerFormVisible, setAnswerFormVisible] = useState(false);
   const [questionFormVisible, setQuestionFormVisible] = useState(false);
@@ -26,10 +26,11 @@ function QuestionsAnswers() {
   });
   // state var to control re-fetch data
   const [reload, setReload] = useState(false);
-
+  // show only 4 questions when reloaded
+  useEffect(() => setNumberOfQs(4), [reload]);
   // fetching initial data
   /// handle loading and error
-  const reqObjs = [
+  const reqObjs = () => [
     // questions for a product
     axios.get(`http://localhost:${process.env.PORT}/qa/questions/`, {
       params: {

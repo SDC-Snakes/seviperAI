@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useAsync from '../useAsync';
 
 function AnswerForm({
   qnaStyles, onAdd, productInfo, questionInfo,
 }) {
-  const [reqObjs, setReqObjs] = useState([]);
+  const [reqObjs, setReqObjs] = useState(Function);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     if (response !== null && response[0] && response[0].status === 201) {
@@ -17,13 +18,16 @@ function AnswerForm({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setReqObjs(() => ([
-      axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
-        body: e.target[0].value,
-        name: e.target[1].value,
-        email: e.target[2].value,
-      }),
-    ]));
+    firstLoad.current = false;
+    setReqObjs(() => function postRequest() {
+      return [
+        axios.post(`http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`, {
+          body: e.target[0].value,
+          name: e.target[1].value,
+          email: e.target[2].value,
+        }),
+      ];
+    });
   };
   // if (response !== null && response[0] && response[0].status === 201) {
   //   alert('Thank you for your answer!')
@@ -60,7 +64,7 @@ function AnswerForm({
         </div>
         <input type="submit" value="Submit Answer" />
         {loading && <div> Submitting the answer...</div>}
-        {error && <div>Error has occurred. Please try again.</div>}
+        {!firstLoad.current && error && <div>Error has occurred. Please try again.</div>}
       </form>
       <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAdd('answer', false); }} value="X" />
     </div>
