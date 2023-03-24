@@ -42,16 +42,25 @@ function QuestionForm({
       </h6>
       <form onSubmit={onSubmit}>
         <div className="question-form-group">
-          <label htmlFor="question-input">Question:</label>
+          <label htmlFor="question-input">
+            Question
+            <small style={{ color: 'red' }}>*</small>
+            :</label>
           <input type="text" id="question-input" name="question" rows="3" required maxLength="1000" />
         </div>
         <div className="question-form-group">
-          <label htmlFor="nickname-input">Nickname:</label>
+          <label htmlFor="nickname-input">
+            Nickname
+            <small style={{ color: 'red' }}>*</small>
+            :</label>
           <input type="text" id="nickname-input" required maxLength="60" placeholder="Example: jackson11!" />
           <p>For privacy reasons, do not use your full name or email address</p>
         </div>
         <div className="question-form-group">
-          <label htmlFor="email-input">Email:</label>
+          <label htmlFor="email-input">
+            Email
+            <small style={{ color: 'red' }}>*</small>
+            :</label>
           <input type="email" id="email-input" name="email" required maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
@@ -65,7 +74,8 @@ function QuestionForm({
         </div>
         <input type="submit" value="Submit" />
         {loading && <div> Submitting your question...</div>}
-        {!firstLoad.currnt && error && <div>Error has occurred. Please try again.</div>}
+        {!firstLoad.current && error
+          && <div>Error has occurred. Please check your information.</div>}
       </form>
       <input type="button" className={qnaStyles['close-modal']} onClick={() => { onAdd('question', false); }} value="X" />
     </div>
