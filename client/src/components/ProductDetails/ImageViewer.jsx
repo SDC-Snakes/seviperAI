@@ -81,7 +81,7 @@ function ImageViewer() {
   };
 
   return (
-    zoom
+    zoom && !expanded
       ? (
         <div className="imageViewPort expanded center">
           <button className="imgContainer" type="button" onClick={handleZoom} onMouseMove={mousePos} style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px`, overflow: 'hidden' }}>
@@ -108,18 +108,18 @@ function ImageViewer() {
           </button>
 
           <div className="sideGrid">
-            {page > 0 ? <FaChevronUp onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
+            {page > 0 ? <FaChevronUp className="chevron" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
             {sideImages()}
             {page < ((selectedStyle.photos.length / 7) - 1)
-              ? <FaChevronDown onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
+              ? <FaChevronDown className="chevron" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
               : null}
           </div>
           <div className="center">
-            {imageIndex > 0 ? <FaChevronLeft onClick={() => handleHorizontalScroll('left')} /> : null}
-            <button className="buttonWrap" type="button" onClick={expanded ? handleZoom : null} ref={imgRef}>
+            {imageIndex > 0 ? <FaChevronLeft className="chevron" onClick={() => handleHorizontalScroll('left')} /> : null}
+            <button className={expanded ? 'buttonWrap' : 'buttonWrap noClick'} type="button" onClick={expanded ? handleZoom : null} ref={imgRef}>
               <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
             </button>
-            {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight onClick={() => handleHorizontalScroll('right')} /> : null}
+            {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" onClick={() => handleHorizontalScroll('right')} /> : null}
           </div>
         </div>
       )

@@ -6,6 +6,7 @@ import Details from './Details';
 import Description from './Description';
 import './products.css';
 import { useGetProductInfoQuery } from '../../features/api/apiSlice';
+import Spinner from '../SharedComponents/Spinner';
 
 function ProductDetails({ handleScroll }) {
   const params = useParams();
@@ -29,7 +30,7 @@ function ProductDetails({ handleScroll }) {
   }, [productInfo, isFetching, error]);
 
   if (isFetching || !productInfo) {
-    return <div>loading...</div>;
+    return (<div><Spinner context="details" /></div>);
   }
 
   return (

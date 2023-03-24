@@ -26,6 +26,10 @@ button {
   max-width: 80vw;
 }
 
+.noClick {
+  cursor: default;
+}
+
 .imgContainer {
   z-index: '2';
   border: 1px solid black;
@@ -136,4 +140,8 @@ button {
   z-index: 1;
   position: absolute;
   opacity: 0;
+}
+
+.chevron {
+  cursor: pointer;
 }
