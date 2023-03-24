@@ -19,7 +19,7 @@ function AverageRatings({RNRCSS}) {
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
-
+  console.log('meta', meta)
   // recommended percentage calculation
   // eslint-disable-next-line max-len
   const recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100;
@@ -38,7 +38,7 @@ function AverageRatings({RNRCSS}) {
           </h4>
           {barRating.map((filter, index) => (
             <span
-              className ={RNRCSS['reviews-filter']}
+              className={RNRCSS['reviews-filter']}
               key={index.toString()}
               value={filter}
               onClick={()=>{ dispatch(newSetRating(filter))}}>
@@ -49,9 +49,10 @@ function AverageRatings({RNRCSS}) {
           ))}
           <div>
             <input
-            className ={RNRCSS['reviews-filter-reset-input']}
-
-            type="submit" value="reset filters" onClick={()=>{dispatch(newResetRating())}} />
+              className={RNRCSS['reviews-filter-reset-input']}
+              type="submit"
+              value="reset filters"
+              onClick={()=>{dispatch(newResetRating())}} />
           </div>
         </div>
       )}
