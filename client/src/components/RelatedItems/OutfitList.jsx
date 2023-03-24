@@ -5,7 +5,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import FormatCard from './FormatCard';
 import itemStyles from './Items.module.css';
 
-function OutfitList({ relatedIndex }) {
+function OutfitList({ outfitIndex }) {
   const dispatch = useDispatch();
 
   // Generate outfitlist upon page load
@@ -43,7 +43,7 @@ function OutfitList({ relatedIndex }) {
   function renderList(item, index) {
     return (
       <div key={index}>
-        {relatedIndex <= index && (
+        {outfitIndex <= index && (
           <FormatCard
             stars={<QuarterStarsAverageRating productRating={item.meta.ratings} />}
             name={item.details.name}
