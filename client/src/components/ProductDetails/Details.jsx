@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,8 @@ function Details({ handleScroll }) {
   const { meta } = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
-  const [trigger, { data, isSuccess }] = useAddToCartMutation();
+  const [trigger] = useAddToCartMutation();
+  const sizeRef = useRef(null);
 
   if (quantity > 15) {
     quantity = 15;
@@ -31,10 +32,14 @@ function Details({ handleScroll }) {
       const res = await trigger(sku);
       if (res.data === 'Content created') {
         toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
+        dispatch(handleStateUpdate({ name: 'sku', value: 'selectSize' }));
+        sizeRef.value = 'selectSize';
       } else {
         toast.error('Unable to add to cart');
       }
     } else {
+      sizeRef.current.focus();
+      sizeRef.current.size = 6;
       toast.error('Unable to add to cart: please select a size');
     }
   };
@@ -44,13 +49,17 @@ function Details({ handleScroll }) {
       dispatch(newAddToOutfit({ details, selectedStyle, meta }));
     }
     dispatch(newOutfitList());
-    // {details, styles, ratings}
-    // dispatch(addToOutfit({ details, selectedStyle, ratings: meta }));
-    console.log({ details, styles: { results: [selectedStyle] }, ratings: meta });
   };
 
   const handleRnrClick = () => {
     handleScroll();
+  };
+
+  const handleSizeClick = (e) => {
+    if (e.target.size > 0) {
+      sizeRef.current.size = 0;
+    }
+    dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value }));
   };
 
   const checkStock = (productSkus) => {
@@ -90,7 +99,7 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }} disabled={!checkStock(selectedStyle.skus)} id="sizeBtn">
+        <select name="sku" onChange={handleSizeClick} disabled={!checkStock(selectedStyle.skus)} id="sizeBtn" ref={sizeRef} value={sku}>
           <option value="selectSize">{checkStock(selectedStyle.skus) ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (

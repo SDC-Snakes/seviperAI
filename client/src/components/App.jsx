@@ -4,7 +4,7 @@ import ProductDetails from './ProductDetails/ProductDetails';
 import ReviewsAndRatings from './ReviewsRatings/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
-import Spinner from './SharedComponents/Spinner';
+import Landing from './SharedComponents/Landing';
 import Navbar from './SharedComponents/Navbar';
 import SiteAnnouncement from './SharedComponents/SiteAnnouncement';
 import { ToastContainer } from 'react-toastify';
@@ -23,7 +23,8 @@ function App() {
         <Navbar />
         <SiteAnnouncement />
         <Routes>
-          <Route path="/" element={<Spinner />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/NotFound" element={<div>404 not found...</div>} />
           <Route
             path="/:productId"
             element={(
@@ -37,7 +38,6 @@ function App() {
               </>
           )}
           />
-          <Route path="/NotFound" element={<div>404 not found...</div>} />
         </Routes>
       </Router>
     </div>

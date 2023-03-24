@@ -13,7 +13,10 @@ function AverageRatings({RNRCSS}) {
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   const values = Object.values(obj);
-  const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)));
+  if (values.length === 0) {
+    return <div>Loading...</div>;
+  }
+  const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
 
