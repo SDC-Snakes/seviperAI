@@ -4,17 +4,16 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // this is the Review Tile component
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import QuarterIncStarRating from './QuarterIncStarRating';
 import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
+import { useHelpfulReviewMutation, useReportReviewMutation } from '../../features/api/apiSlice';
 
 function ReviewTile({ reviewsObj }) {
-  const barRating = useSelector(state => state.reviews.ratingBarSelect);
-  const [helpful, setHelpful] = useState('No');
+const [helpful, setHelpful] = useState({});
   // send a post request with the helpful state to the API when helpful is 'yes'
 
   const [modalImage, setModalImage] = useState(false);
@@ -25,7 +24,18 @@ function ReviewTile({ reviewsObj }) {
   const togglePhotoState = (photo) => (
     setPhotoState(photo)
   );
+  const [trigger, { data, isSuccess }]  = useHelpfulReviewMutation();
+  const [triggerReport, { dataReport, isSuccessReport }]  = useReportReviewMutation();
 
+  const helpfulClickHandler = () => {
+    trigger((reviewsObj.review_id));
+    // will be used later to store session id's to prevent submitting a
+    // put request more than once
+    // setHelpful('yes');
+  };
+  const reportClickHandler = () => {
+    triggerReport((reviewsObj.review_id));
+  };
   return (
     <div className={RNRCSS['review-tile-in-reviews']}>
       {reviewsObj.rating}
@@ -76,13 +86,15 @@ function ReviewTile({ reviewsObj }) {
 
       <div>
         Helpful?
-        <span onClick={() => { setHelpful('yes'); }}>
+        <span onClick={helpfulClickHandler}>
           Yes
           {reviewsObj.helpfulness}
         </span>
         |
         <span>No</span>
-        <Report />
+        <span onClick={reportClickHandler}>
+          <Report />
+        </span>
       </div>
     </div>
   );

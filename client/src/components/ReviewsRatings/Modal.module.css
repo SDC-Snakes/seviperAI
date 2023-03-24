@@ -20,6 +20,7 @@ body.active-modal {
 .overlay {
   background: rgba(49,49,49,0.8);
 }
+
 .modal-content {
   position: absolute;
   top: 40%;
@@ -92,6 +93,11 @@ body.active-modal {
 
 /* images in reviewTile, thumbnail images */
 .thumbnail-review-image {
+  height:40px;
+  margin-right: 10px;
+}
+
+.thumbnail-uploaded-review-image {
   height:40px;
   margin-right: 10px;
 }
