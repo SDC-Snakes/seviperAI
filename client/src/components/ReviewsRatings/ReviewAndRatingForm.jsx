@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { usePostNewReviewMutation } from '../../features/api/apiSlice';
 import StarRating from './StarRating';
+import AddImageReviews from './AddImageReviews';
 
 function ReviewAndRatingForm({RNRCSS}) {
   const params = useParams();
@@ -72,10 +73,18 @@ function ReviewAndRatingForm({RNRCSS}) {
   const handleInputChange = (event, propertyName) => {
     setReviewPropsObj({ ...reviewPropsObj, [propertyName]: event.target.value });
   };
+  const uploadImageHandler = (imagesArr) => {
+    setReviewPropsObj(prevState => ({
+      ...prevState,
+      photos: [...prevState.photos, ...imagesArr],
+    }));
+  };
+
   const submitHandler = () => {
     triggerReview(reviewPropsObj);
     toggleModal(false);
   };
+
 
   return (
     <>
@@ -244,7 +253,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                  After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
               </div>
               <div>
-                <input type="submit" value="Add Images" />
+                <AddImageReviews uploadImageHandler={uploadImageHandler} />
               </div>
               <div>
                 <input
