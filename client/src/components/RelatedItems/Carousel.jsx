@@ -6,6 +6,8 @@ import OutfitList from './OutfitList';
 import itemStyles from './Items.module.css';
 import { newRelatedCarouselIndex, newOutfitCarouselIndex } from '../../features/related/relatedSlice';
 
+// PRODUCT 41019 throws errors for the quarter stars
+
 function Carousel() {
   const {
     relatedIndex,

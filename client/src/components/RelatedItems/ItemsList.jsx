@@ -6,7 +6,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import { useGetRelatedProductInfoQuery } from '../../features/api/apiSlice';
 import itemStyles from './Items.module.css';
 
-function ItemsList({ relatedIndex, width, cardsShowing }) {
+function ItemsList({ relatedIndex }) {
   const params = useParams();
   const {
     data: relatedProducts,
@@ -61,12 +61,12 @@ function ItemsList({ relatedIndex, width, cardsShowing }) {
     return <div>loading...</div>;
   }
 
-  return (
+  return relatedProducts && (
     <div className={itemStyles['items-list-wrapper']}>
       <ComparisonModal />
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
       <div className={itemStyles['items-list-content']}>
-        {relatedProducts.map((item, index) => renderList(item, index))}
+        { relatedProducts.map((item, index) => renderList(item, index)) }
       </div>
     </div>
   );

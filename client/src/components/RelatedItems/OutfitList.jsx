@@ -62,7 +62,7 @@ function OutfitList({ outfitIndex }) {
     );
   }
 
-  return (
+  return outfitList && (
     <div className={itemStyles['items-list-wrapper']}>
       <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list-content']}>
