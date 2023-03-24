@@ -37,7 +37,6 @@ function ItemsList({ relatedIndex, width, cardsShowing }) {
   // };
 
   function renderList(item, index) {
-    console.log('itemRating: ', Object.keys);
     return (
       <div key={index}>
         {relatedIndex <= index && (

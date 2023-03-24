@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ItemsList from './ItemsList';
 import OutfitList from './OutfitList';
 import itemStyles from './Items.module.css';
-import { newRelatedCarouselIndex, newOutfitCarouselIndex, newOutfitList } from '../../features/related/relatedSlice';
+import { newRelatedCarouselIndex, newOutfitCarouselIndex } from '../../features/related/relatedSlice';
 
 function Carousel() {
   const {
@@ -31,14 +31,15 @@ function Carousel() {
     dispatch(newOutfitCarouselIndex(outfitIndex === 0 ? outfitList.length - 1 : outfitIndex - 1));
   }
 
-  // useEffect(() => {
-  //   prevSlide();
-  // }, []);
+  // Re-renders outfit list when a user deletes an item
+  useEffect(() => {
+    dispatch(newOutfitCarouselIndex(outfitIndex > 0 ? outfitIndex - 1 : outfitIndex));
+  }, [outfitList]);
 
   return (
     <div>
       <div className={`${itemStyles['items-list-container']} ${itemStyles['items-list-related']}`}>
-        {relatedIndex !== 0 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide('related')} />}
+        {relatedIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide('related')} />}
 
         <ItemsList relatedIndex={relatedIndex} />
 
@@ -46,11 +47,11 @@ function Carousel() {
         && <FaChevronRight className={itemStyles['right-arrow']} onClick={() => nextSlide('related')} />}
       </div>
       <div className={`${itemStyles['items-list-container']} ${itemStyles['items-list-outfit']}`}>
-        {outfitIndex !== 0 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide()} />}
+        {outfitIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide()} />}
 
         <OutfitList outfitIndex={outfitIndex} />
 
-        {(outfitList.length >= 4 && outfitIndex !== outfitList.length - 4)
+        {(outfitList.length > 4 && outfitIndex !== outfitList.length - 4)
         && <FaChevronRight className={itemStyles['right-arrow']} onClick={() => nextSlide()} />}
       </div>
     </div>

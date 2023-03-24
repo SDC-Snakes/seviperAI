@@ -45,7 +45,9 @@ function OutfitList({ outfitIndex }) {
       <div key={index}>
         {outfitIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating productRating={item.meta.ratings} />}
+            stars={Object.keys(item.meta.ratings).length > 0
+              ? <QuarterStarsAverageRating productRating={item.meta.ratings} />
+              : <p>rating unavailable</p>}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
