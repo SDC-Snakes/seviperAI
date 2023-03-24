@@ -13,11 +13,11 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 function ReviewsAndRatings() {
   const params = useParams();
   const [sortState, setSortState] = useState('relevant');
-  let count = 42;
+  let count = 5;
   // calculate the total number of reviews using the meta data?
   // const { meta } = useSelector((state) => state.reviews);
   // const count = Object.values(meta.ratings).reduce((a, b) => (Number(a) + Number(b)));
-  // console.log("count of review", count)
+  // console.log("meta of review", meta)
 
   const {
     data: productReviews,
@@ -59,6 +59,7 @@ function ReviewsAndRatings() {
       </div>
     );
   }
+
 
   return (
     <div className={RNRCSS['reviewsAndRatings-container-main']}>
