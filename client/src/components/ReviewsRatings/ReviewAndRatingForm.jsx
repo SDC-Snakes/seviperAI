@@ -231,9 +231,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                 />
               </div>
               <div>
-              {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
-
-
+                {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
               </div>
               <div>
                 <AddImageReviews uploadImageHandler={uploadImageHandler} />
@@ -266,9 +264,9 @@ function ReviewAndRatingForm({RNRCSS}) {
               <input
                 type="submit"
                 className={RNRCSS['close-modal']}
-                onClick={() => { toggleModal(false);
-                  console.log('input changed', reviewPropsObj)
-                 }}
+                onClick={() => {
+                  toggleModal(false);
+                }}
                 value="X"
               />
             </div>
