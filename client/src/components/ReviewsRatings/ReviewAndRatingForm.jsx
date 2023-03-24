@@ -1,94 +1,102 @@
 // this is the Review And Rating form, used to submit new reviews and ratings for a product
-
-//<star rating component>
-//<addImage component>
-
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { changeState } from '../../features/reviews/reviewsSlice';
+import { usePostNewReviewMutation } from '../../features/api/apiSlice';
 import StarRating from './StarRating';
-// import './Modal.module.css';
-// reviewPostObj: {
-//   product_id: 0,
-//   rating: 0,
-//   summary: '',
-//   body: '',
-//   recommend: false,
-//   name: '',
-//   email: '',
-//   photos: [],
-//   characteristics: {},
-// },
+
 function ReviewAndRatingForm({RNRCSS}) {
   const params = useParams();
-
-  const dispatch = useDispatch();
+  const { meta } = useSelector((state) => state.reviews);
+  const charId = meta.characteristics;
   const [modal, setModal] = useState(false);
-  const [recommendOption, setrecommendOption] = useState("");
-  const [characteristics, setCharacteristics] = useState({
-    Size: '',
-    Width: '',
-    Comfort: '',
-    Quality: '',
-    Length: '',
-    Fit: '',
-  });
+  const charsPropsObj = {};
+  for (const key in charId) {
+    charsPropsObj[charId[key]['id'] ]=1
+  }
+  const [characteristics, setCharacteristics] = useState(charsPropsObj);
   const [reviewPropsObj, setReviewPropsObj] = useState({
-    product_id: params.productId,
-    rating: 0,
+    product_id: parseInt(params.productId, 10),
+    rating: 1,
     summary: '',
     body: '',
-    recommend: recommendOption,
+    recommend: true,
     name: '',
     email: '',
-    photos: [],
+    photos: ['testlink'],
     characteristics,
   });
-
+  const [triggerReview, { data, isSuccess }] = usePostNewReviewMutation();
   const postObj = useSelector(state => state.reviews.reviewPostObj);
   // const submitReview = () => {
   //   dispatch(changeState(reviewPropsObj));
   // }
-  const handleCharChange = (e, charName) => {
+  // const UpdateReviewPropsObj = () => {
+  //   setReviewPropsObj((prevState) => ({
+  //     ...prevState,
+  //     characteristics,
+  //   }));
+  //   console.log('radio buttons changed', reviewPropsObj.characteristics);
+  // };
+  // const handleCharChange = (rating, charName) => {
+  //   setCharacteristics((prevState) => ({
+  //     ...prevState,
+  //     [charId[charName]['id']]: rating,
+  //   }));
+  //   UpdateReviewPropsObj();
+  // };
+  const handleCharChange = (rating, charName) => {
+    const propertyChar = charId[charName]['id'];
     setCharacteristics((prevState) => ({
       ...prevState,
-      [charName]: e.target.value,
+      [propertyChar]: rating,
     }));
-    console.log('radio buttons', characteristics)
+    setReviewPropsObj((prevState) => ({
+      ...prevState,
+      characteristics: {
+        ...prevState.characteristics,
+        [propertyChar]: rating,
+      },
+    }));
+    console.log('radio buttons changed', reviewPropsObj.characteristics);
   };
-
   const toggleModal = (inputBool) => {
     setModal(inputBool);
   };
-  const handleOptionChange = (event) => {
-    setrecommendOption(event.target.value);
+  const handleStarRatingChange = (starRating) => {
+    setReviewPropsObj({ ...reviewPropsObj, rating: starRating });
+  };
+  const handleOptionChange = (bool) => {
+    setReviewPropsObj({ ...reviewPropsObj, recommend: bool });
   };
   const handleInputChange = (event, propertyName) => {
-    setReviewPropsObj({...reviewPropsObj, [propertyName]: event.target.value})
-  }
+    setReviewPropsObj({ ...reviewPropsObj, [propertyName]: event.target.value });
+  };
+  const submitHandler = () => {
+    triggerReview(reviewPropsObj);
+    toggleModal(false);
+  };
+
   return (
     <>
-      <input type="submit" onClick={() => { toggleModal(true); }} className={RNRCSS["btn-modal"]} value="Add a review" />
+      <input type="submit" onClick={() => { toggleModal(true); }} className={RNRCSS['btn-modal']} value="Add a review" />
 
       {modal && (
-        <div className={RNRCSS["modal"]}>
+        <div className={RNRCSS['modal']}>
           <div className={RNRCSS["overlay"]}>
             <div className={RNRCSS["modal-content"]}>
               <h2> Submit a Review</h2>
               <p>
                 please fill out the fields below to submit a product review
               </p>
-              <input value="" placeholder="title" />
-              <div><StarRating /></div>
+              <div><StarRating handleStarRatingChange={handleStarRatingChange} /></div>
               <div>
                 Do you recommend this product?
                 <label>
                   <input
                     type="radio"
-                    value="yes"
-                    checked={recommendOption === 'yes'}
-                    onChange={handleOptionChange}
+                    checked={reviewPropsObj.recommend === true}
+                    onChange={() => (handleOptionChange(true))}
                   />
                   Yes
                 </label>
@@ -96,117 +104,142 @@ function ReviewAndRatingForm({RNRCSS}) {
                 <label>
                   <input
                     type="radio"
-                    value="no"
-                    checked={recommendOption === 'no'}
-                    onChange={handleOptionChange}
+                    checked={reviewPropsObj.recommend === false}
+                    onChange={() => (handleOptionChange(false))}
                   />
                   No
                 </label>
               </div>
               <div className="characteristicsRadioButtons">
+                {meta.characteristics.Size
+                && (
                 <div className="Size-Radio-Button">
                   Size
-                  {['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'].map((element) => (
-                    <label>
+                  {['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Size === element}
-                        onChange={(e) => { handleCharChange(e, 'Size'); }}
+                        checked={characteristics[charId.Size.id] === index+1}
+                        onChange={() => { handleCharChange(index+1, 'Size'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
+                {meta.characteristics.Width
+                && (
                 <div className="Width-Radio-Button">
                   Width
-                  {['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'].map((element) => (
-                    <label>
+                  {['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Width === element}
-                        onChange={(e) => { handleCharChange(e, 'Width'); }}
+                        checked={characteristics[charId.Width.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Width'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
+                {meta.characteristics.Comfort
+                && (
                 <div className="Comfort-Radio-Button">
                   Comfortable
-                  {['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'].map((element) => (
-                    <label>
+                  {['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Comfort === element}
-                        onChange={(e) => { handleCharChange(e, 'Comfort'); }}
+                        checked={characteristics[charId.Comfort.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Comfort'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
+                {meta.characteristics.Quality
+                && (
                 <div className="Quality-Radio-Button">
                   Quality
-                  {['Poor', 'Below average', 'What I expected', 'Pretty Great', 'Perfect'].map((element) => (
-                    <label>
+                  {['Poor', 'Below average', 'What I expected', 'Pretty Great', 'Perfect'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Quality === element}
-                        onChange={(e) => { handleCharChange(e, 'Quality'); }}
+                        checked={characteristics[charId.Quality.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Quality'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
+                {meta.characteristics.Length
+                && (
                 <div className="Length-Radio-Button">
                   Length
-                  {['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'].map((element) => (
-                    <label>
+                  {['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Length === element}
-                        onChange={(e) => { handleCharChange(e, 'Length'); }}
+                        checked={characteristics[charId.Length.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Length'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
+                {meta.characteristics.Fit
+                && (
                 <div className="Fit-Radio-Button">
                   Fit
-                  {['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'].map((element) => (
-                    <label>
+                  {['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'].map((element, index) => (
+                    <label key={index.toString()}>
                       <input
                         type="radio"
                         value={element}
-                        checked={characteristics.Fit === element}
-                        onChange={(e) => { handleCharChange(e, 'Fit'); }}
+                        checked={characteristics[charId.Fit.id] === index + 1}
+                        onChange={() => { handleCharChange(index + 1, 'Fit'); }}
                       />
                       {element}
                     </label>
                   ))}
                 </div>
+                )}
 
-              </div>
-              <div>
-                <input value={reviewPropsObj.summary} onChange={(e) => { handleInputChange(e, 'summary'); }} placeholder="Example: Best purchase ever!" minLength="1" maxLength="60" />
               </div>
               <div>
                 <input
-                  value={reviewPropsObj.body}
-                  onChange={(e) => { handleInputChange(e, 'body'); }} placeholder="Why did you like the product or not?"
-                  minLength="50"
-                  maxLength="1000" />
+                  placeholder="Example: Best purchase ever!"
+                  value={reviewPropsObj.summary}
+                  onChange={(e) => { handleInputChange(e, 'summary'); }}
+                  minLength="1"
+                  maxLength="60"
+                />
               </div>
               <div>
-                Minimum required characters left: {'Number'}
+                <input
+                  placeholder="Why did you like the product or not?"
+                  value={reviewPropsObj.body}
+                  onChange={(e) => { handleInputChange(e, 'body'); }}
+                  minLength="50"
+                  maxLength="1000"
+                />
+              </div>
+              <div>
+                Minimum required characters left: {'#number'}
                  As the user types, the count of characters should update.
                  After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
               </div>
@@ -215,26 +248,37 @@ function ReviewAndRatingForm({RNRCSS}) {
               </div>
               <div>
                 <input
-                value={reviewPropsObj.name}
-                onChange={(e) => { handleInputChange(e, 'name'); }} placeholder="Example: jackson11!" />
+                  value={reviewPropsObj.name}
+                  onChange={(e) => { handleInputChange(e, 'name'); }}
+                  placeholder="Example: jackson11!"
+                />
               </div>
               <div>
                 For privacy reasons, do not use your full name or email address
               </div>
               <div>
                 <input
-                value={reviewPropsObj.email}
-                onChange={(e) => { handleInputChange(e, 'email'); }}
-                placeholder="Example: jackson11@email.com" minLength="60" />
+                  value={reviewPropsObj.email}
+                  onChange={(e) => { handleInputChange(e, 'email'); }}
+                  placeholder="Example: jackson11@email.com"
+                  minLength="60"
+                />
               </div>
               <div>
                 For authentication reasons, you will not be emailed
               </div>
               <div>
-                <input type="submit" value="Submit Review" />
+                <input type="submit" value="Submit Review" onClick={submitHandler} />
               </div>
 
-              <input type="submit" className={RNRCSS['close-modal']} onClick={() => { toggleModal(false); }} value="X" />
+              <input
+                type="submit"
+                className={RNRCSS['close-modal']}
+                onClick={() => { toggleModal(false);
+                  console.log('input changed', reviewPropsObj)
+                 }}
+                value="X"
+              />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
-function StarRating() {
+function StarRating({handleStarRatingChange}) {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const ratingValues = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
@@ -17,7 +17,10 @@ function StarRating() {
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => (setRating(ratingValue))}
+              onClick={() => {
+                setRating(ratingValue);
+                handleStarRatingChange(ratingValue);
+              }}
             />
 
             <FaStar
@@ -36,14 +39,3 @@ function StarRating() {
 }
 
 export default StarRating;
-
-// hide the radio buttons with css
-// input[type='radio'] {
-//  display:none;
-// }
-// change the mouse curser to pointer on hover
-// .star{
-//   cursor: pointer;
-//   transition: color 200ms;
-// }
-

@@ -8,7 +8,7 @@ import Dropdown from './SortReviews';
 import ReviewTile from './ReviewTile';
 import ReviewAndRatingForm from './ReviewAndRatingForm';
 
-function Reviews({RNRCSS, handleSortState}) {
+function Reviews({RNRCSS, handleSortState, sortState}) {
   const barRating = useSelector(state => state.reviews.ratingBarSelect);
   const { reviews } = useSelector((state) => state.reviews);
   const [numberReviews, setNumberReviews] = useState(2);
@@ -22,7 +22,7 @@ function Reviews({RNRCSS, handleSortState}) {
     <>
       <div className={RNRCSS['reviews-container-right']}>
         <h3>Product Reviews</h3>
-        <Dropdown handleSortState={handleSortState} />
+        <Dropdown handleSortState={handleSortState} sortState={sortState}/>
         <div className={RNRCSS['reviews-block']} style={{ overflow: 'auto', maxHeight: '500px' }}>
           {filteredArr.map((review, index) => {
             if (index < numberReviews) {
