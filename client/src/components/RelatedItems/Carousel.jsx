@@ -23,7 +23,9 @@ function Carousel() {
       <div className={itemStyles['items-list-container']}>
         {relatedIndex !== 0 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={prevSlide} />}
         <ItemsList relatedIndex={relatedIndex} />
-        {relatedIndex !== related.length - 5 && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />}
+        {(related.length >= 5 && relatedIndex !== related.length - 5)
+        && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />}
+        {/* {relatedIndex !== related.length - 5 && <FaChevronRight className={itemStyles['right-arrow']} onClick={nextSlide} />} */}
       </div>
       <div>
         <FaChevronLeft />
