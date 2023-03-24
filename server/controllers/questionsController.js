@@ -1,10 +1,22 @@
 const axios = require('axios');
+const uuid = require('uuid');
+
+// making in-memory temporary session storage on server
+// it's ideal to store the info in main db
+const sessions = {};
 
 module.exports = {
   get: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
     const page = req.query.page || 1;
     const count = req.query.count || 5;
+    // when it's loaded, check for sessionID
+    /// if it's the first time, create one.
+    const sessionID = req.cookies.sessionID || uuid.v4();
+    // if it's new, create a new Set to store data;
+    sessions[sessionID] = sessions[sessionID] || { helpfulQuestions: new Set() };
+    // set session cookie
+    res.cookie('sessionID', sessionID, { httpOnly: true });
     if (req.query.product_id) {
       axios.get(`${process.env.ATLIER_API_ROUTE}/qa/questions/?product_id=${req.query.product_id}&page=${req.query.page}&count=${req.query.count}`, {
         headers: {
@@ -66,22 +78,25 @@ module.exports = {
       });
   },
   putQuestionHelpful: (req, res) => {
-    console.log(req);
-    axios.put(
-      `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`,
-      null,
-      {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
+    if (sessions[req.cookies.sessionID].helpfulQuestions.has(req.params.question_id)) {
+      axios.put(
+        `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`,
+        null,
+        {
+          headers: {
+            Authorization: process.env.GITHUB_API_KEY,
+          },
         },
-      },
-    )
-      .then(() => {
-        res.status(204).send('Marked as helpful');
-      })
-      .catch((err) => {
-        res.status(422).send(err);
-      });
+      )
+        .then(() => {
+          res.status(204).send('Marked as helpful');
+        })
+        .catch((err) => {
+          res.status(422).send(err);
+        });
+    } else {
+      res.status(208).send('Already marked as helpful');
+    }
   },
   putAnswerHelpful: (req, res) => {
     console.log(req.params);

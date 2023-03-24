@@ -1,14 +1,20 @@
+require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const uuid = require('uuid');
 const morgan = require('morgan');
 const path = require('path');
 const router = require('./routes');
-require('dotenv').config();
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(morgan('dev'));
+
+// temporary session storage
+const sessions = {};
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -19,7 +25,9 @@ app.use('/cart', router.cart);
 app.use('/interactions', router.interactions);
 
 app.get('*', (req, res) => {
+
   res.sendFile(path.join(__dirname, '../client/dist/'));
+  // res.send({ message: 'Login successful' })
 });
 
 const PORT = process.env.PORT || 8080;
@@ -27,3 +35,5 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
+
+module.exports.sessions = sessions;
