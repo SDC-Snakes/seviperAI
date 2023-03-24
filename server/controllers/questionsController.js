@@ -14,7 +14,8 @@ module.exports = {
     /// if it's the first time, create one.
     const sessionID = req.cookies.sessionID || uuid.v4();
     // if it's new, create a new Set to store data;
-    sessions[sessionID] = sessions[sessionID] || { helpfulQuestions: new Set() };
+    sessions[sessionID] = sessions[sessionID]
+      || { helpfulQuestions: new Set(), helpfulAnswers: new Set() };
     // set session cookie
     res.cookie('sessionID', sessionID, { httpOnly: true });
     if (req.query.product_id) {
@@ -78,7 +79,7 @@ module.exports = {
       });
   },
   putQuestionHelpful: (req, res) => {
-    if (sessions[req.cookies.sessionID].helpfulQuestions.has(req.params.question_id)) {
+    if (!sessions[req.cookies.sessionID].helpfulQuestions.has(req.params.question_id)) {
       axios.put(
         `${process.env.ATLIER_API_ROUTE}/qa/questions/${req.params.question_id}/helpful`,
         null,
@@ -89,6 +90,7 @@ module.exports = {
         },
       )
         .then(() => {
+          sessions[req.cookies.sessionID].helpfulQuestions.add(req.params.question_id);
           res.status(204).send('Marked as helpful');
         })
         .catch((err) => {
@@ -99,22 +101,26 @@ module.exports = {
     }
   },
   putAnswerHelpful: (req, res) => {
-    console.log(req.params);
-    axios.put(
-      `${process.env.ATLIER_API_ROUTE}/qa/answers/${req.params.answer_id}/helpful`,
-      null,
-      {
-        headers: {
-          Authorization: process.env.GITHUB_API_KEY,
+    if (!sessions[req.cookies.sessionID].helpfulAnswers.has(req.params.answer_id)) {
+      axios.put(
+        `${process.env.ATLIER_API_ROUTE}/qa/answers/${req.params.answer_id}/helpful`,
+        null,
+        {
+          headers: {
+            Authorization: process.env.GITHUB_API_KEY,
+          },
         },
-      },
-    )
-      .then(() => {
-        res.status(204).send('Marked as helpful');
-      })
-      .catch((err) => {
-        res.status(422).send(err);
-      });
+      )
+        .then(() => {
+          sessions[req.cookies.sessionID].helpfulAnswers.add(req.params.answer_id);
+          res.status(204).send('Marked as helpful');
+        })
+        .catch((err) => {
+          res.status(422).send(err);
+        });
+    } else {
+      res.status(208).send('Already marked as helpful');
+    }
   },
   putAnswerReport: (req, res) => {
     axios.put(

@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const uuid = require('uuid');
 const morgan = require('morgan');
 const path = require('path');
 const router = require('./routes');
@@ -25,7 +24,6 @@ app.use('/cart', router.cart);
 app.use('/interactions', router.interactions);
 
 app.get('*', (req, res) => {
-
   res.sendFile(path.join(__dirname, '../client/dist/'));
   // res.send({ message: 'Login successful' })
 });
