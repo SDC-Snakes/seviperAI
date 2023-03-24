@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { QnaStyles } from '../QuestionsAnswers'
 import HelpfulModule from './HelpfulModule';
 
 function AnswerEntry({ answer }) {
+  const qnaStyles = useContext(QnaStyles);
   return (
-    <span className="answer-entry">
-      <div className="answer-text">
+    <span>
+      <div className={qnaStyles['qna-tile']}>
         {answer.body}
       </div>
       <HelpfulModule count={answer.helpfulness} onClick={() => console.log('helpful ANSWER')} />
