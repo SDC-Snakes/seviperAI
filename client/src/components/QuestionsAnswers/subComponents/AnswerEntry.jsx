@@ -12,6 +12,9 @@ function AnswerEntry({ answer }) {
   const [reportButtonStatus, setReportButtonStatus] = useState(false);
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
 
+  // deconstruct answer prop
+  const { answerer_name, body, date, helpfulness, id } = answer;
+
   useEffect(() => {
     if (response !== null && response[0] && response[0].status === 204) {
       setReportButtonText('Reported');
@@ -27,17 +30,21 @@ function AnswerEntry({ answer }) {
       ];
     });
   };
-  console.log(answer);
+  console.log(answer.answerer_name);
 
   return (
     <span>
       <div className={qnaStyles['qna-tile']}>
-        <div>{answer.body}</div>
+        <div>{body}</div>
         <div>
-          <span>{answer.answerer_name}</span>
+          <span>
+            {answerer_name === 'Seller'
+              ? <strong>{answerer_name}</strong>
+              : <text>{answerer_name}</text>}
+          </span>
           <span>
             <small>
-              {format(new Date(answer.date), 'MMMM dd yyyy')}
+              {format(new Date(date), 'MMMM dd yyyy')}
             </small>
 
           </span>
@@ -45,8 +52,8 @@ function AnswerEntry({ answer }) {
 
       </div>
       <HelpfulModule
-        count={answer.helpfulness}
-        itemId={answer.id}
+        count={helpfulness}
+        itemId={id}
         item="answers"
       />
       <input

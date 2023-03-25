@@ -69,7 +69,7 @@ function QnaForm({
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <input type="textarea" id="input" name="input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
+          <textarea id="input" name="input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
         </div>
         <div className="form-group">
           <label htmlFor="nickname-input">
