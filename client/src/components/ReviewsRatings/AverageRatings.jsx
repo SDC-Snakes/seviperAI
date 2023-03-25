@@ -19,7 +19,7 @@ function AverageRatings({RNRCSS}) {
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
-  console.log('meta', meta)
+  // console.log('meta', meta)
   // recommended percentage calculation
   // eslint-disable-next-line max-len
   const recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import itemStyles from './Items.module.css';
 import {
   newModalState,
@@ -11,15 +12,18 @@ import {
   newOutfitList,
 } from '../../features/related/relatedSlice';
 
-function FormatCard({ name, image, price, category, stars, outfit, item }) {
+function FormatCard({ name, image, price, category, stars, outfit, item, salePrice }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let { details } = useSelector((state) => state.products);
 
+  // itemData is passed as a prop 'item' from the corresponding list
   function removeFromOutfit(itemData) {
     dispatch(newRemoveFromOutfit(itemData));
     dispatch(newOutfitList());
   }
 
+  // Generates data for modal based on card selected
   function handleModalClick(e, itemData) {
     e.preventDefault();
     dispatch(newModalState());
@@ -29,19 +33,32 @@ function FormatCard({ name, image, price, category, stars, outfit, item }) {
     dispatch(generateProductFeatures(details.features));
   }
 
+  // Refreshes page to selected related item
+  function navigateToRelatedItem(e, productId) {
+    e.preventDefault();
+    navigate(`/${productId}`);
+  }
+
   return (
-    <div className={itemStyles['items-card']}>
+    <div className={itemStyles['items-card']} onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
       <i className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
-        onClick={(e) => {handleModalClick(e, item)}}/>
+        onClick={(e) => {handleModalClick(e, item)}}
+      />
       {outfit && <i className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
-        onClick={() => removeFromOutfit(item)}/>}
+        onClick={() => removeFromOutfit(item)}
+      />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div>{stars}</div>
       <p className={itemStyles['product-category']}>{category}</p>
       <h6 className={itemStyles['product-name']}>{name}</h6>
-      <p className={itemStyles['card-price']}>{price}</p>
+      {salePrice ? (
+        <div className={itemStyles['card-price']}>
+          <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
+          <p><s>{`$${price}`}</s></p>
+        </div>
+      ) : <p>{`$${price}`}</p>}
     </div>
   );
 }
