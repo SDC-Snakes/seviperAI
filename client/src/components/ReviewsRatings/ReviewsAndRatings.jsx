@@ -16,12 +16,14 @@ function ReviewsAndRatings() {
   const {
     data: metaReviews,
     isFetchingMeta,
+    isError,
   } = useGetMetaReviewsQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: false,
   });
-  let count;
-  metaReviews? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b))): count = 5;
-
+  let count = 5;
+  if (metaReviews) {
+    Object.keys(metaReviews.ratings).length>0? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b))): count = 5;
+  }
   const {
     data: productReviews,
     isFetching,
