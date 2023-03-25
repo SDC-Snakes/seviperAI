@@ -5,6 +5,9 @@ import { FaStar } from 'react-icons/fa';
 // setState is not being utilized, might need to be removed or replaced when implementing redux
 function QuarterIncStarRating({averageRating}) {
   // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
+  if (!averageRating) {
+    return <span>unable to retrieve rating</span>;
+  }
   const ratingNum = averageRating;
   const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
   const [remainder, setRemainder] = useState(`${(Math.round(((ratingNum - fullStarsNum)) * 4) / 4) * 100}%`);
