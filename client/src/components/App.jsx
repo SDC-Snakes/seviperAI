@@ -12,15 +12,23 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const rnrRef = React.useRef(null);
-  const handleScroll = () => {
-    rnrRef.current.scrollIntoView();
+  const qnaRef = React.useRef(null);
+  const relatedRef = React.useRef(null);
+  const handleScroll = (element) => {
+    if (element === 'related') {
+      relatedRef.current.scrollIntoView();
+    } else if (element === 'qna') {
+      qnaRef.current.scrollIntoView();
+    } else if (element === 'rnr') {
+      rnrRef.current.scrollIntoView();
+    }
   };
 
   return (
     <div>
       <ToastContainer />
       <Router>
-        <Navbar />
+        <Navbar handleScroll={handleScroll} />
         <SiteAnnouncement />
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -30,8 +38,12 @@ function App() {
             element={(
               <>
                 <ProductDetails handleScroll={handleScroll} />
-                <RelatedItems />
-                <QuestionsAnswers />
+                <div ref={relatedRef}>
+                  <RelatedItems />
+                </div>
+                <div ref={qnaRef}>
+                  <QuestionsAnswers />
+                </div>
                 <div ref={rnrRef}>
                   <ReviewsAndRatings />
                 </div>

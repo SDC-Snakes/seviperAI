@@ -72,7 +72,7 @@ function Details({ handleScroll }) {
   };
 
   const handleRnrClick = () => {
-    handleScroll();
+    handleScroll('rnr');
   };
 
   const handleSizeClick = (e) => {
