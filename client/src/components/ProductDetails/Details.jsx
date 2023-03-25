@@ -12,7 +12,7 @@ import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
   const [stock, setStock] = useState(true);
-  const [ update, { data } ] = api.endpoints.getProductInfo.useLazyQuery();
+  const [update] = api.endpoints.getProductInfo.useLazyQuery();
   const {
     selectedStyle,
     details,
@@ -83,7 +83,7 @@ function Details({ handleScroll }) {
   };
 
   return (
-    <div>
+    <div className="detailsBar">
       <div>
         <QuarterStarsAverageRating productRating={meta.ratings} />
         <button type="button" onClick={handleRnrClick}>See all reviews</button>

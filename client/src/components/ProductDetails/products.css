@@ -42,6 +42,8 @@ button {
 
 .detailsDiv {
   width: 40vw;
+  padding: 5px;
+  display: grid;
 }
 
 .center {
