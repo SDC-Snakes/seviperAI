@@ -12,9 +12,13 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 
 function ReviewsAndRatings() {
   const params = useParams();
-  const { reviews } = useSelector((state) => state.reviews);
-  const count = 20;
   const [sortState, setSortState] = useState('relevant');
+  let count = 5;
+  // calculate the total number of reviews using the meta data?
+  // const { meta } = useSelector((state) => state.reviews);
+  // const count = Object.values(meta.ratings).reduce((a, b) => (Number(a) + Number(b)));
+  // console.log("meta of review", meta)
+
   const {
     data: productReviews,
     isFetching,
@@ -56,13 +60,14 @@ function ReviewsAndRatings() {
     );
   }
 
+
   return (
     <div className={RNRCSS['reviewsAndRatings-container-main']}>
       <div>
         <h1>Ratings & Reviews</h1>
         <Search />
         <AverageRatings RNRCSS={RNRCSS} />
-        <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} />
+        <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} sortState={sortState} />
       </div>
 
     </div>
