@@ -106,8 +106,8 @@ function Details({ handleScroll }) {
       <div>
         <StyleList />
       </div>
-      <div>
-        <select name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
+      <div className="dropdowns">
+        <select className="size-selector" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
           <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
@@ -121,7 +121,7 @@ function Details({ handleScroll }) {
             ),
           )}
         </select>
-        <select name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
+        <select className="qty-selector" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           {quantity
             ? Array.from({ length: quantity }, (_, i) => i + 1).map(
               (qty) => (<option key={qty} value={qty}>{qty}</option>),
@@ -129,17 +129,19 @@ function Details({ handleScroll }) {
             : <option>-</option>}
         </select>
       </div>
-      <div>
-        <button type="button" onClick={handleCartClick}>
+      <div className="dropdowns">
+        <button className="cart-btn" type="button" onClick={handleCartClick}>
           Add to cart
         </button>
-        <button type="button" onClick={handleOutfitClick}>
+        <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
           <FaHeart />
         </button>
       </div>
-      <a href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter /></a>
-      <a href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF /></a>
-      <a href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest /></a>
+      <div className="socials">
+        <a className="social-icon center" href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter className="twitter" /></a>
+        <a className="social-icon center" href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF className="facebook" /></a>
+        <a className="social-icon center" href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest className="pinterest" /></a>
+      </div>
     </div>
   );
 }

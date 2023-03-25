@@ -44,9 +44,9 @@ function App() {
                 <div ref={qnaRef}>
                   <QuestionsAnswers />
                 </div>
-                {/* <div ref={rnrRef}>
+                <div ref={rnrRef}>
                   <ReviewsAndRatings />
-                </div> */}
+                </div>
               </>
           )}
           />

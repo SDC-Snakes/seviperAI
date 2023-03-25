@@ -7,7 +7,8 @@ function Description({ details }) {
 
   return (
     <div className="flex">
-      <div>
+      <div className="description-card center">
+        <h3>{details.slogan}</h3>
         {details.description}
       </div>
       <div>
