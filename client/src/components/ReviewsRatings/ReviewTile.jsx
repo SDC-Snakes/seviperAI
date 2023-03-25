@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -18,6 +19,7 @@ const [helpful, setHelpful] = useState({});
 
   const [modalImage, setModalImage] = useState(false);
   const [photoState, setPhotoState] = useState('');
+  const [showFull, setShowFull] = useState(false);
   const toggleModalImage = (inputBool) => (
     setModalImage(inputBool)
   );
@@ -47,7 +49,25 @@ const [helpful, setHelpful] = useState({});
         {/* Review Title Summary: */}
         {reviewsObj.summary}
       </h5>
-      <p>{reviewsObj.body}</p>
+      <p>
+        {`${reviewsObj.body.slice(0, 250)}`}
+        {showFull && reviewsObj.body.slice(250)}
+        {reviewsObj.body.length > 250 && (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
+          <a
+            href="#"
+            className="read-more-link"
+            role="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowFull(!showFull);
+            }}
+          >
+            {showFull ? ' ...Show less' : ' ...Show more'}
+          </a>
+        )}
+
+      </p>
       {reviewsObj.photos.map((photo) => (
         <span key={photo.id}>
           <img
