@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import useAsync from '../useAsync';
-import { QnaStyles } from '../QuestionsAnswers'
+import { QnaStyles } from '../QuestionsAnswers';
 import HelpfulModule from './HelpfulModule';
 
 function AnswerEntry({ answer }) {
@@ -33,7 +33,15 @@ function AnswerEntry({ answer }) {
     <span>
       <div className={qnaStyles['qna-tile']}>
         <div>{answer.body}</div>
-        <div>a</div>
+        <div>
+          <span>{answer.answerer_name}</span>
+          <span>
+            <small>
+              {format(new Date(answer.date), 'MMMM dd yyyy')}
+            </small>
+
+          </span>
+        </div>
 
       </div>
       <HelpfulModule
@@ -42,11 +50,11 @@ function AnswerEntry({ answer }) {
         item="answers"
       />
       <input
-      type="button"
-      className="report-button"
-      value={reportButtonText}
-      onClick={onReport}
-      disabled={reportButtonStatus}
+        type="button"
+        className="report-button"
+        value={reportButtonText}
+        onClick={onReport}
+        disabled={reportButtonStatus}
       />
     </span>
   );
