@@ -27,7 +27,7 @@ function ComparisonModal() {
     dispatch(newModalState());
   }
 
-  return modalOpen ? (
+  return modalOpen && (
     <div className={itemStyles.modal}>
       <div className={itemStyles.overlay} onClick={closeModal} />
         <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
@@ -43,7 +43,7 @@ function ComparisonModal() {
           </tbody>
         </table>
     </div>
-  ) : null;
+  );
 }
 
 export default ComparisonModal;
