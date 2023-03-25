@@ -4,7 +4,9 @@ import QuarterIncStarRating from './QuarterIncStarRating';
 function QuarterStarsAverageRating({ productRating }) {
   let sum = 0;
   let numOfRatings = 0;
-
+  if (!productRating) {
+    return <span>unable to retrieve rating</span>;
+  }
   for (const key in productRating) {
     sum+= (Number(key) * Number(productRating[key]));
     numOfRatings += Number(productRating[key]);
