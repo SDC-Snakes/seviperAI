@@ -66,8 +66,10 @@ function OutfitList({ outfitIndex }) {
     <div className={itemStyles['items-list-wrapper']}>
       <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list-content']}>
-        <div className={itemStyles['items-card']}>
-          <span onClick={() => handleAddToOutfit(currentProduct)}>Add to outfit</span>
+        <div className={`${itemStyles['items-card']} ${itemStyles['items-card-plus']}`}
+          onClick={() => handleAddToOutfit(currentProduct)}>
+          <i className={`fa-solid fa-circle-plus ${itemStyles['items-plus']}`} />
+          <div className={itemStyles['items-text']}>Add to outfit</div>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}
       </div>
