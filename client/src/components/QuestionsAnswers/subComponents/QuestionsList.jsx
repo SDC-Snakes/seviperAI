@@ -7,7 +7,7 @@ function QuestionsList({ questions, numberOfQs, query }) {
   questions = questions.filter((question) => question.question_body.toLowerCase().includes(query.toLowerCase()))
 
   return (
-    <div className={qnaStyles['questions-list-container']}id="questions-list">
+    <div className={qnaStyles['questions-list-container']}id="questions-list" style={{ overflow: 'auto', maxHeight: '800px' }}>
       {questions.slice(0, numberOfQs).map((question) => (
         <QnASet
           question={question}

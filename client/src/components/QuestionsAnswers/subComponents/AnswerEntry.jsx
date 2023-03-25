@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { format } from 'date-fns';
 import useAsync from '../useAsync';
 import { QnaStyles } from '../QuestionsAnswers'
 import HelpfulModule from './HelpfulModule';
@@ -26,11 +27,14 @@ function AnswerEntry({ answer }) {
       ];
     });
   };
+  console.log(answer);
 
   return (
     <span>
       <div className={qnaStyles['qna-tile']}>
-        {answer.body}
+        <div>{answer.body}</div>
+        <div>a</div>
+
       </div>
       <HelpfulModule
         count={answer.helpfulness}

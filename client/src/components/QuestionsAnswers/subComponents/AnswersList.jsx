@@ -12,7 +12,7 @@ function AnswersList({ answers }) {
     setFolded(!folded);
   };
   return answersList.length > 0 && (
-    <div className="answer-list">
+    <div className="answer-list" style={{ overflow: 'auto', maxHeight: '400px' }}>
       <span className="a">
         A:
       </span>
