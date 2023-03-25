@@ -8,7 +8,10 @@ import AddImageReviews from './AddImageReviews';
 
 function ReviewAndRatingForm({RNRCSS}) {
   const params = useParams();
-  const { meta } = useSelector((state) => state.reviews);
+  const { meta, reviews } = useSelector((state) => state.reviews);
+  const {
+    details,
+  } = useSelector((state) => state.products);
   const charId = meta.characteristics;
   const [modal, setModal] = useState(false);
   const charsPropsObj = {};
@@ -77,13 +80,14 @@ function ReviewAndRatingForm({RNRCSS}) {
           <div className={RNRCSS["overlay"]}>
             <div className={RNRCSS["modal-content"]}>
               <form onSubmit={onSubmit}>
-                <h2> Submit a Review</h2>
-                <p>
-                  please fill out the fields below to submit a product review
-                </p>
+                <h2> Write Your Review</h2>
+                <h4>
+                  About the {details.name}
+                </h4>
+                <h6>Overall rating </h6>
                 <div><StarRating handleStarRatingChange={handleStarRatingChange} /></div>
                 <div>
-                  Do you recommend this product?
+                  <h6>Do you recommend this product? </h6>
                   <label>
                     <input
                       type="radio"
@@ -103,6 +107,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                   </label>
                 </div>
                 <div className="characteristicsRadioButtons">
+                <h6>Characteristics </h6>
                   {meta.characteristics.Size
                   && (
                   <div className="Size-Radio-Button">
@@ -213,6 +218,7 @@ function ReviewAndRatingForm({RNRCSS}) {
 
                 </div>
                 <div>
+                  <h6>Review summary</h6>
                   <input
                     placeholder="Example: Best purchase ever!"
                     value={reviewPropsObj.summary}
@@ -221,6 +227,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                   />
                 </div>
                 <div>
+                  <h6>Review body</h6>
                   <input
                     placeholder="Why did you like the product or not?"
                     value={reviewPropsObj.body}
@@ -234,9 +241,11 @@ function ReviewAndRatingForm({RNRCSS}) {
                   {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
                 </div>
                 <div>
+                  <h6> Upload your photos</h6>
                   <AddImageReviews uploadImageHandler={uploadImageHandler} />
                 </div>
                 <div>
+                  <h6>What is your nickname</h6>
                   <input
                     value={reviewPropsObj.name}
                     onChange={(e) => { handleInputChange(e, 'name'); }}
@@ -249,6 +258,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                   For privacy reasons, do not use your full name or email address
                 </div>
                 <div>
+                  <h6>Your email</h6>
                   <input
                     type="email"
                     value={reviewPropsObj.email}
