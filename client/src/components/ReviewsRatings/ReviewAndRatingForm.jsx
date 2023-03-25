@@ -9,9 +9,7 @@ import AddImageReviews from './AddImageReviews';
 function ReviewAndRatingForm({RNRCSS}) {
   const params = useParams();
   const { meta, reviews } = useSelector((state) => state.reviews);
-  const {
-    details,
-  } = useSelector((state) => state.products);
+  const { details } = useSelector((state) => state.products);
   const charId = meta.characteristics;
   const [modal, setModal] = useState(false);
   const charsPropsObj = {};
