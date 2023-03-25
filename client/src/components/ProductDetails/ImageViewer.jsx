@@ -50,16 +50,18 @@ function ImageViewer() {
     }
   };
 
-  const sideImages = () => selectedStyle.photos.map((photo, ind) => {
-    if (ind - (7 * page) >= 0 && ind - (7 * page) <= 6) {
-      return (
-        <button className="buttonWrap" onClick={() => handleImageClick(photo, ind)} type="button" key={nanoid()}>
-          <img className={photo.url === selectedStyle.photos[imageIndex].url ? 'selectedSideImage' : 'sideImage'} src={photo.thumbnail_url ? photo.thumbnail_url : errorImage} alt="ImageView" height="40" width="auto" />
-        </button>
-      );
-    }
-    return null;
-  });
+  const sideImages = () => (
+    selectedStyle.photos.map((photo, ind) => {
+      if (ind - (7 * page) >= 0 && ind - (7 * page) <= 6) {
+        return (
+          <button className="buttonWrap" onClick={() => handleImageClick(photo, ind)} type="button" key={nanoid()}>
+            <img className={photo.url === selectedStyle.photos[imageIndex].url ? 'selectedSideImage' : 'sideImage'} src={photo.thumbnail_url ? photo.thumbnail_url : errorImage} alt="ImageView" height="40" width="auto" />
+          </button>
+        );
+      }
+      return null;
+    })
+  );
 
   const handleZoom = () => {
     if (zoom === false) {

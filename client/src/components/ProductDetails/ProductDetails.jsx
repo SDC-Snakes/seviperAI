@@ -16,6 +16,7 @@ function ProductDetails({ handleScroll }) {
   const {
     data: productInfo,
     isFetching,
+    isError,
     error,
   } = useGetProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
@@ -24,10 +25,10 @@ function ProductDetails({ handleScroll }) {
   // console.log(productInfo.styles.results);
 
   useEffect(() => {
-    if (error) {
+    if (error || isError) {
       navigate('/NotFound');
     }
-  }, [productInfo, isFetching, error]);
+  }, [productInfo, isFetching, error, isError]);
 
   if (isFetching || !productInfo) {
     return (<div><Spinner context="details" /></div>);
