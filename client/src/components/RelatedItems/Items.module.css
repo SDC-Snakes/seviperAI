@@ -1,3 +1,8 @@
+
+body {
+  --shadow-color: hsl(0deg 0% 0% / 26%);
+}
+
 /**** Related item list ****/
 
 .items-list-container {
@@ -34,6 +39,13 @@
   border: solid;
   border-width: 1px;
   margin: 20px;
+  transition: transform .25s ease;
+}
+
+.items-card:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px var(--shadow-color);
+  transform: scale(1.05);
 }
 
 .items-card-img {
@@ -54,8 +66,16 @@
   right: 10px;
 }
 
+.items-modal:hover {
+  cursor: cell;
+}
+
 .items-xmark {
   left: 10px;
+}
+
+.items-xmark:hover {
+  cursor: not-allowed;
 }
 
 .card-price {
@@ -73,8 +93,12 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2rem;
+  font-size: 18px;
   z-index: 1;
+}
+
+.left-arrow:hover , .right-arrow:hover {
+  cursor: pointer;
 }
 
 .left-arrow {
@@ -126,7 +150,6 @@ body.active-modal {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   background: #fff;
-  --shadow-color: hsl(0deg 0% 0% / 26%);
   filter: drop-shadow(0px 2px 8px var(--shadow-color))
 }
 
