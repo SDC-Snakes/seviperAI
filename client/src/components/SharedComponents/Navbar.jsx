@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Navbar() {
+function Navbar({ handleScroll }) {
   return (
     <div className="flex navbar">
       <h1>WiredWardrode</h1>
