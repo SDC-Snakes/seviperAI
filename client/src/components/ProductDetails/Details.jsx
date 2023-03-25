@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
 import {
- FaHeart, FaTwitter, FaPinterest, FaFacebookF
+  FaHeart, FaTwitter, FaPinterest, FaFacebookF
 } from 'react-icons/fa';
-import { useAddToCartMutation } from '../../features/api/apiSlice';
+import { useAddToCartMutation, api } from '../../features/api/apiSlice';
 import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
+  const [stock, setStock] = useState(true);
+  const [ update, { data } ] = api.endpoints.getProductInfo.useLazyQuery();
   const {
     selectedStyle,
     details,
@@ -18,10 +20,25 @@ function Details({ handleScroll }) {
     quantitySelected,
   } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
+
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
   const [trigger] = useAddToCartMutation();
   const sizeRef = useRef(null);
+
+  const checkStock = () => {
+    const values = Object.values(selectedStyle.skus);
+
+    if (values.length > 0) {
+      const inStock = values.reduce((accum, val) => accum + val.quantity, 0);
+      return !!inStock;
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    setStock(checkStock());
+  }, []);
 
   if (quantity > 15) {
     quantity = 15;
@@ -33,10 +50,13 @@ function Details({ handleScroll }) {
       if (res.data === 'Content created') {
         toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
         dispatch(handleStateUpdate({ name: 'sku', value: 'selectSize' }));
+        update(details.id);
         sizeRef.value = 'selectSize';
       } else {
         toast.error('Unable to add to cart');
       }
+    } else if (!stock) {
+      toast.error('Sorry, this item is out of stock. Please check back later. We apologize for the inconvenience!');
     } else {
       sizeRef.current.focus();
       sizeRef.current.size = 6;
@@ -60,18 +80,6 @@ function Details({ handleScroll }) {
       sizeRef.current.size = 0;
     }
     dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value }));
-  };
-
-  const checkStock = (productSkus) => {
-    const values = Object.values(productSkus);
-
-    if (values.length > 0) {
-      const stock = values.reduce((accum, val) => accum + val.quantity, 0);
-      if (stock > 0) {
-        return true;
-      }
-    }
-    return false;
   };
 
   return (
@@ -99,8 +107,8 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div>
-        <select name="sku" onChange={handleSizeClick} disabled={!checkStock(selectedStyle.skus)} id="sizeBtn" ref={sizeRef} value={sku}>
-          <option value="selectSize">{checkStock(selectedStyle.skus) ? 'Select Size' : 'Out Of Stock'}</option>
+        <select name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
+          <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
               <option
