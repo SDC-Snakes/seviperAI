@@ -46,13 +46,10 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(api.endpoints.getProductInfo.matchFulfilled, (state, action) => {
-        console.log('Payload', action.payload)
         state.styles = action.payload.styles.results;
         state.details = action.payload.details;
-        if (state.styles.length > 0) {
-          state.selectedStyle = state.styles[0];
-          state.selectedImage = state.styles[0].photos[0].url;
-        }
+        state.selectedStyle = state.styles[0];
+        state.selectedImage = state.styles[0].photos[0].url;
       });
   },
 });
