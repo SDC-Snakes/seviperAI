@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {toast} from 'react-toastify';
 import { api } from '../api/apiSlice';
 
 const initialState = {
@@ -36,8 +37,12 @@ function setOutfitList(state = initialState, action) {
   state.outfitList = Object.values({ ...localStorage }).map((item) => JSON.parse(item));
 }
 function addToOutfit(state = initialState, action) {
-  localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
-  state.outfitList.unshift(action.payload);
+  if (!JSON.parse(localStorage.getItem(action.payload.details.id))) {
+    localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
+    state.outfitList.unshift(action.payload);
+  } else {
+    toast.error('Item already in outfit');
+  }
 }
 function removeFromOutfit(state = initialState, action) {
   localStorage.removeItem(action.payload.details.id);

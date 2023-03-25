@@ -45,10 +45,7 @@ function Details({ handleScroll }) {
   };
 
   const handleOutfitClick = () => {
-    if (!JSON.parse(localStorage.getItem(details.id))) {
-      dispatch(newAddToOutfit({ details, selectedStyle, meta }));
-    }
-    dispatch(newOutfitList());
+    dispatch(newAddToOutfit({ details, selectedStyle, meta }));
   };
 
   const handleRnrClick = () => {
