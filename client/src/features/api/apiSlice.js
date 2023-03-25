@@ -39,7 +39,7 @@ export const api = createApi({
         const details = await fetchWithBQ(`/products/${productId}`);
         if (details.error) return { error: details.error };
         const styles = await fetchWithBQ(`/products/${productId}/styles`);
-        return styles.data && styles.results
+        return styles.data && styles.data.results
           ? { data: { details: details.data, styles: styles.data } } : { error: 'Error fetching styles' };
       },
     }),
