@@ -15,7 +15,7 @@ export const SendRequestAsync = React.createContext(null);
 function QuestionsAnswers() {
   const params = useParams(); // get productId
   // need to declare all the state variables on the top
-  const [numberOfQs, setNumberOfQs] = useState(4);
+  const [numberOfQs, setNumberOfQs] = useState(2);
   // visibility state variable for answer modal window
   const [answerFormVisible, setAnswerFormVisible] = useState(false);
   const [questionFormVisible, setQuestionFormVisible] = useState(false);
@@ -77,7 +77,6 @@ function QuestionsAnswers() {
   // live search function
   const onSearch = (e) => {
     if (e.target.value.length >= 3) {
-      console.log(e.target.value);
       clearTimeout(timeoutID);
       const timeoutID2 = setTimeout(() => setQuery(e.target.value), 200);
       setTimeoutID(timeoutID2);
@@ -93,10 +92,15 @@ function QuestionsAnswers() {
         <div className={qnaStyles['qna-container-main']}>
           <h2>Main Q&A Div</h2>
           <Search onSearch={onSearch} />
-          <QuestionsList
-          questions={questions}
-          numberOfQs={numberOfQs}
-          query={query} />
+          {questions.length === 0
+            ? <div> Have a question about our products? Ask us here! </div>
+            : (
+              <QuestionsList
+                questions={questions}
+                numberOfQs={numberOfQs}
+                query={query}
+              />
+            )}
           {/* show more questions button only when there are more */}
           <div>
             {numberOfQs < questions.length
