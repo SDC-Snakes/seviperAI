@@ -4,7 +4,6 @@ import AnswerEntry from './AnswerEntry';
 function AnswersList({ answers }) {
   const [answersList, setAnswersList] = useState(
     Object.values(answers).sort((a, b) => {
-      console.log((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'));
       return ((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller')
         || b.helpfulness - a.helpfulness);
     }),

@@ -30,7 +30,6 @@ function AnswerEntry({ answer }) {
       ];
     });
   };
-  console.log(answer.answerer_name);
 
   return (
     <span>
@@ -40,7 +39,7 @@ function AnswerEntry({ answer }) {
           <span>
             {answerer_name === 'Seller'
               ? <strong>{answerer_name}</strong>
-              : <text>{answerer_name}</text>}
+              : <span>{answerer_name}</span>}
           </span>
           <span>
             <small>
