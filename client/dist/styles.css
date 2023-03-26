@@ -147,8 +147,15 @@ input[name="rating"] {
 .rating-bar-container {
   display: flex;
   width: 90%;
-  margin-top: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
  }
+
+ .rating-bar-container:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px var(--shadow-color);
+  transform: scale(1.05);
+}
 
 .rating-bar {
   width: 100%;
