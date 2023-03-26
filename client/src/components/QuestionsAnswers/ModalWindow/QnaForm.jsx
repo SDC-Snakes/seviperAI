@@ -21,7 +21,6 @@ function QnaForm({
   const onSubmit = (e) => {
     e.preventDefault();
     // change firstLoad to show error message if the request fails
-    console.log(e);
     firstLoad.current = false;
     function isValidEmail(email) {
       // Regular expression for validating an email address
@@ -32,7 +31,6 @@ function QnaForm({
 
     const [body, name, email] = Array(3).fill(0)
       .map((item, index) => e.target[index].value);
-    console.log(body, name, email);
     const errorMsg = `${body.trim().length === 0 ? `\n- ${formType}` : ''}`
     + `${name.trim().length === 0 ? '\n- nickname' : ''}`
     + `${!isValidEmail(email) ? '\n- valid email' : ''}`;
