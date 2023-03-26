@@ -9,6 +9,8 @@ import Search from './SearchBarReviews';
 import Reviews from './Reviews';
 import RNRCSS from './Modal.module.css';
 import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../features/api/apiSlice';
+import Spinner from '../SharedComponents/Spinner';
+
 
 function ReviewsAndRatings() {
   const params = useParams();
@@ -49,11 +51,11 @@ function ReviewsAndRatings() {
         <Search />
         <aside className={RNRCSS['average-ratings-left']}>
           <h3>Product Ratings</h3>
-          <h3>Loading...</h3>
+          <div><Spinner context="Ratings" /></div>
         </aside>
         <div className={RNRCSS['reviews-container-right']}>
           <h3>Product Reviews</h3>
-          <h3>Loading...</h3>
+          <div><Spinner context="Reviews" /></div>
         </div>
       </div>
     );

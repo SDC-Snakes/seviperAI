@@ -153,8 +153,6 @@ input[name="rating"] {
 
  .rating-bar-container:hover {
   cursor: pointer;
-  box-shadow: 2px 2px 10px var(--shadow-color);
-  transform: scale(1.05);
 }
 
 .rating-bar {
@@ -165,6 +163,11 @@ input[name="rating"] {
   margin-bottom: 10px;
   margin-left: 10px;
 
+}
+.rating-bar:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px var(--shadow-color);
+  transform: scale(1.05);
 }
 
 .rating-bar-fill {

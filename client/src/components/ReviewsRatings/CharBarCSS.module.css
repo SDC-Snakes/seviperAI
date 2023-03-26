@@ -1,6 +1,8 @@
 /***** Rating Bar *****/
 .char-bar-label {
-  margin-top: 5px;
+  margin-top: 10px;
+  font-size: 10px;
+  margin-left: 2%;
 }
 .char-bar-container {
   display: flex;
@@ -35,20 +37,20 @@
 
 .char-1 {
   position: absolute;
-  margin-top: 2px;
-  font-size: 10px;
+  margin-top: 5px;
+  font-size: 8px;
   bottom: 0;
   left: 5%;
 }
 
 .char-5 {
   position: absolute;
-  margin-top: 2px;
-  font-size: 10px;
+  margin-top: 5px;
+  font-size: 8px;
   bottom: 0;
   right: 5%;
 }
 .char-major-container {
   position: relative;
-
+  font-size: 12px;
 }
