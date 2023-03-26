@@ -1,11 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/';
-import userEvent from '@testing-library/user-event';
-// import ItemsList from '../ItemsList';
 import FormatCard from '../src/components/RelatedItems/FormatCard';
 import Dropdown from '../src/components/ReviewsRatings/SortReviews';
-import proxyItemList from './proxies/proxyItemList';
 import { renderWithProviders } from '../src/components/ProductDetails/__tests__/utils/test-utils';
 import stateStub from '../src/components/ProductDetails/__tests__/proxies/stateProxy';
 
