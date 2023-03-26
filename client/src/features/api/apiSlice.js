@@ -39,8 +39,8 @@ export const api = createApi({
         const details = await fetchWithBQ(`/products/${productId}`);
         if (details.error) return { error: details.error };
         const styles = await fetchWithBQ(`/products/${productId}/styles`);
-        return styles.data
-          ? { data: { details: details.data, styles: styles.data } } : { error: styles.error };
+        return styles.data && styles.data.results && styles.data.results.length
+          ? { data: { details: details.data, styles: styles.data } } : { error: 'Error fetching styles' };
       },
     }),
     getRelatedProductInfo: build.query({
@@ -51,7 +51,9 @@ export const api = createApi({
           const relatedItem = {};
           relatedItem.product_id = item;
           const itemDetails = await fetchWithBQ(`/products/${item}`);
-          itemDetails.data ? relatedItem.details = itemDetails.data : relatedItem.detailsError = itemDetails.error;
+          itemDetails.data
+            ? relatedItem.details = itemDetails.data
+            : relatedItem.detailsError = itemDetails.error;
           const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
           ratingsDetails.data ? relatedItem.ratings = ratingsDetails.data : relatedItem.ratingsError = ratingsDetails.error;
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);

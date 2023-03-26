@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Search() {
+function Search({ onSearch }) {
   return (
     <div id="search">
       SEARCH DIV
-      <input type="text" placeholder="Search..." />
+      <input type="text" placeholder="Search..." onChange={onSearch}/>
     </div>
   );
 }

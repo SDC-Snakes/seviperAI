@@ -1,7 +1,7 @@
 // this is the Average ratings and reviews component
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { newSetRating , newResetRating } from '../../features/reviews/reviewsSlice';
+import { newSetRating, newResetRating } from '../../features/reviews/reviewsSlice';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';

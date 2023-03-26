@@ -2,7 +2,7 @@ import React from 'react';
 import { newSelectedStyle, newSelectedImage, handleStateUpdate } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import errorImage from '../SharedComponents/errorImage.jpg';
-import { FaCheck } from 'react-icons/fa';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 function StyleImage({ image, style }) {
   const { selectedStyle, imageIndex, page } = useSelector((state) => state.products);
@@ -24,10 +24,10 @@ function StyleImage({ image, style }) {
   };
 
   return (
-    <div className="flex">
-      <button className="buttonWrap" onClick={handleClick} type="button">
-        <img className={current ? 'selected' : 'circleImage'} src={image || errorImage} alt="ImageView" height="40" width="auto" />
-        <FaCheck className={current ? 'visible' : 'invisible'} />
+    <div className="flex circleDiv">
+      <button className="buttonWrap circle-btn" onClick={handleClick} type="button">
+        {current ? <FaRegCheckCircle className="visible fa-check" size="20px" /> : null}
+        <img className={current ? 'selected' : 'circleImage'} src={image || errorImage} alt="ImageView" height="60" width="auto" />
       </button>
     </div>
   );

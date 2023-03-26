@@ -95,3 +95,8 @@ body.active-modal {
   height:40px;
   margin-right: 10px;
 }
+
+/* Seller setting */
+strong {
+  font-size: 150%;
+}
