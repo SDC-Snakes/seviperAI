@@ -13,24 +13,22 @@ import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../feature
 function ReviewsAndRatings() {
   const params = useParams();
   const [sortState, setSortState] = useState('relevant');
+  const {
+    data: metaReviews,
+    isFetchingMeta,
+    isError,
+  } = useGetMetaReviewsQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: false,
+  });
   let count = 5;
-  // calculate the total number of reviews using the meta data?
-  // const { meta } = useSelector((state) => state.reviews);
-  // const count = Object.values(meta.ratings).reduce((a, b) => (Number(a) + Number(b)));
-  // console.log("meta of review", meta)
-
+  if (metaReviews) {
+    Object.keys(metaReviews.ratings).length>0? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b))): count = 5;
+  }
   const {
     data: productReviews,
     isFetching,
     refetch,
   } = useGetProductReviewsQuery({ id: params.productId, count, sortState }, {
-    refetchOnMountOrArgChange: false,
-  });
-
-  const {
-    data: metaReviews,
-    isFetchingMeta,
-  } = useGetMetaReviewsQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: false,
   });
 
@@ -59,7 +57,6 @@ function ReviewsAndRatings() {
       </div>
     );
   }
-
 
   return (
     <div className={RNRCSS['reviewsAndRatings-container-main']}>
