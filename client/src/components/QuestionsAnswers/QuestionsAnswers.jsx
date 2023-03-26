@@ -77,7 +77,6 @@ function QuestionsAnswers() {
   // live search function
   const onSearch = (e) => {
     if (e.target.value.length >= 3) {
-      console.log(e.target.value);
       clearTimeout(timeoutID);
       const timeoutID2 = setTimeout(() => setQuery(e.target.value), 200);
       setTimeoutID(timeoutID2);
