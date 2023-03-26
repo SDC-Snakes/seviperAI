@@ -40,8 +40,9 @@ function addToOutfit(state = initialState, action) {
   if (!JSON.parse(localStorage.getItem(action.payload.details.id))) {
     localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
     state.outfitList.unshift(action.payload);
+    toast.success(`${action.payload.details.name} has been added to Your Outfit 😎`);
   } else {
-    toast.error('Item already in outfit');
+    toast.error(`${action.payload.details.name} is already in Your Outfit ⛔`);
   }
 }
 function removeFromOutfit(state = initialState, action) {
@@ -49,6 +50,7 @@ function removeFromOutfit(state = initialState, action) {
   const index = state.outfitList.indexOf(action.payload);
   if (index > -1) {
     state.outfitList.splice(index, 1);
+    toast.success(`${action.payload.details.name} removed from Your Outfit 😎`);
   }
 }
 

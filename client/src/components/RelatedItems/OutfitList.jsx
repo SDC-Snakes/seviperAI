@@ -35,6 +35,7 @@ function OutfitList({ outfitIndex }) {
   }
 
   function renderList(item, index) {
+    console.log(item.details.name, item.meta.ratings);
     return (
       <div key={index}>
         {outfitIndex <= index && (
