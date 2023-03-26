@@ -5,7 +5,6 @@ const initialState = {
   related: [],
   relatedIndex: 0,
   outfitIndex: 0,
-  outfitLength: 0,
   modalOpen: false,
   relatedProductFeatures: {},
   relatedProductName: null,
@@ -15,17 +14,17 @@ const initialState = {
 };
 
 function moveRelatedCarousel(state = initialState, action) {
-  return { ...state, relatedIndex: action.payload };
+  state.relatedIndex = action.payload;
 }
 function moveOutfitCarousel(state = initialState, action) {
-  return { ...state, outfitIndex: action.payload };
+  state.outfitIndex = action.payload;
 }
 function toggleModal(state = initialState, action) {
   const toggle = (input) => !input;
   state.modalOpen = toggle(state.modalOpen);
 }
 function setRelatedProductFeatures(state = initialState, action) {
-  return { ...state, relatedProductFeatures: action.payload };
+  state.relatedProductFeatures = action.payload;
 }
 function setRelatedProductName(state = initialState, action) {
   state.relatedProductName = action.payload;
@@ -38,7 +37,7 @@ function setOutfitList(state = initialState, action) {
 }
 function addToOutfit(state = initialState, action) {
   localStorage.setItem(action.payload.details.id, JSON.stringify(action.payload));
-  state.outfitList.push(action.payload);
+  state.outfitList.unshift(action.payload);
 }
 function removeFromOutfit(state = initialState, action) {
   localStorage.removeItem(action.payload.details.id);

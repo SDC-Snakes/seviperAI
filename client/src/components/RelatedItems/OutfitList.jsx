@@ -5,7 +5,7 @@ import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRati
 import FormatCard from './FormatCard';
 import itemStyles from './Items.module.css';
 
-function OutfitList({ relatedIndex }) {
+function OutfitList({ outfitIndex }) {
   const dispatch = useDispatch();
 
   // Generate outfitlist upon page load
@@ -43,15 +43,18 @@ function OutfitList({ relatedIndex }) {
   function renderList(item, index) {
     return (
       <div key={index}>
-        {relatedIndex <= index && (
+        {outfitIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating productRating={item.meta.ratings} />}
+            stars={Object.keys(item.meta.ratings).length > 0
+              ? <QuarterStarsAverageRating productRating={item.meta.ratings} />
+              : <p>rating unavailable</p>}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
             price={item.details.default_price}
+            salePrice={item.selectedStyle.sale_price}
             itemStyles={itemStyles}
-            outfit={true}
+            outfit="outfit"
             item={item}
           />
         )}
@@ -59,12 +62,14 @@ function OutfitList({ relatedIndex }) {
     );
   }
 
-  return (
+  return outfitList && (
     <div className={itemStyles['items-list-wrapper']}>
-      <span className={itemStyles['items-list-title']}>Outfit List</span>
+      <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list-content']}>
-        <div className={itemStyles['items-card']} onClick={() => handleAddToOutfit(currentProduct)}>
-          <span>Add to outfit</span>
+        <div className={`${itemStyles['items-card']} ${itemStyles['items-card-plus']}`}
+          onClick={() => handleAddToOutfit(currentProduct)}>
+          <i className={`fa-solid fa-circle-plus ${itemStyles['items-plus']}`} />
+          <div className={itemStyles['items-text']}>Add to outfit</div>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}
       </div>

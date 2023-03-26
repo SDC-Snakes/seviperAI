@@ -15,6 +15,7 @@ function ItemsList({ relatedIndex }) {
     refetchOnMountOrArgChange: true,
   });
 
+  // Finds first available image for the primary style
   function findImage(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
       const style = item.photos.results[i];
@@ -40,11 +41,14 @@ function ItemsList({ relatedIndex }) {
       <div key={index}>
         {relatedIndex <= index && (
           <FormatCard
-            stars={<QuarterStarsAverageRating productRating={item.ratings.ratings} />}
+            stars={Object.keys(item.ratings.ratings).length > 0
+              ? <QuarterStarsAverageRating productRating={item.ratings.ratings} />
+              : <p>rating unavailable</p>}
             name={item.details.name}
             category={item.details.category}
             image={findImage(item)}
             price={item.details.default_price}
+            salePrice={item.details.sale_price}
             itemStyles={itemStyles}
             item={item}
           />
@@ -57,12 +61,12 @@ function ItemsList({ relatedIndex }) {
     return <div>loading...</div>;
   }
 
-  return (
+  return relatedProducts && (
     <div className={itemStyles['items-list-wrapper']}>
       <ComparisonModal />
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
       <div className={itemStyles['items-list-content']}>
-        {relatedProducts.map((item, index) => renderList(item, index))}
+        { relatedProducts.map((item, index) => renderList(item, index)) }
       </div>
     </div>
   );

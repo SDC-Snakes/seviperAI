@@ -1,9 +1,14 @@
+
+body {
+  --shadow-color: hsl(0deg 0% 0% / 26%);
+}
+
 /**** Related item list ****/
 
 .items-list-container {
   position: relative;
   padding-left: 20px;
-  max-width: 1225px;
+  max-width: 1215px;
 }
 
 .items-list-wrapper {
@@ -25,37 +30,90 @@
   font-size: 36px;
 }
 
-/**** Related item card ****/
+/**** Related item & outfit cards ****/
 
 .items-card {
   position: relative;
   width: 200px;
   height: 300px;
-  border: solid;
+  /* border: solid; */
   border-width: 1px;
+  border-radius: 5px;
   margin: 20px;
+  transition: transform .25s ease;
+}
+
+.items-card:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px var(--shadow-color);
+  transform: scale(1.05);
+}
+
+.items-card-plus {
+  display: flex;
+  justify-content: center;
+  background-color: #f4edf9;
 }
 
 .items-card-img {
   width: 100%;
   height: 75%;
   object-fit: cover;
+  border-radius: 5px;
+}
+
+.items-card-img:not(:hover) {
+  /* width: 100%; */
+  /* height: 75%; */
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .items-icon {
-  font-size: 20px;
+  font-size: 18px;
   position: absolute;
   top: 10px;
   color: #fff;
-  filter: drop-shadow(0px 2px 10px var(--main2-color))
+  filter: drop-shadow(0px 2px 10px var(--shadow-color))
 }
 
 .items-modal {
   right: 10px;
 }
 
+.items-modal:hover {
+  cursor: cell;
+}
+
 .items-xmark {
   left: 10px;
+}
+
+.items-xmark:hover {
+  cursor: not-allowed;
+}
+
+.items-plus {
+  color: var(--main1-color);
+  font-size: 50px;
+  position: absolute;
+  top: 30%;
+}
+
+.items-text {
+  position: absolute;
+  top: 55%;
+  color: var(--main2-color)
+}
+
+.card-price {
+  display: flex;
+}
+
+.card-price-sale {
+  color: #fc3c3c;
+  padding-right: 8px;
 }
 
 /**** Carousel ****/
@@ -64,8 +122,12 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2rem;
+  font-size: 18px;
   z-index: 1;
+}
+
+.left-arrow:hover , .right-arrow:hover {
+  cursor: pointer;
 }
 
 .left-arrow {
@@ -101,7 +163,6 @@ body.active-modal {
   bottom: 0;
   overflow: hidden;
   position: fixed;
-
 }
 
 .modal-content {
@@ -117,7 +178,6 @@ body.active-modal {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   background: #fff;
-  --shadow-color: hsl(0deg 0% 0% / 26%);
   filter: drop-shadow(0px 2px 8px var(--shadow-color))
 }
 
