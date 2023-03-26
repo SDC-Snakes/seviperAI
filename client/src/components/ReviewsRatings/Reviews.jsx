@@ -12,7 +12,6 @@ function Reviews({RNRCSS, handleSortState, sortState}) {
   const barRating = useSelector(state => state.reviews.ratingBarSelect);
   const { reviews } = useSelector((state) => state.reviews);
   const [numberReviews, setNumberReviews] = useState(2);
-  // console.log('review', reviews)
   const addReviews = () => {
     setNumberReviews(numberReviews + 2);
   };

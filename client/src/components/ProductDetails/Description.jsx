@@ -1,16 +1,17 @@
 import React from 'react';
 // import { useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit';
 
 function Description({ details }) {
   // let { details } = useSelector((state) => state.products);
 
   return (
     <div className="flex">
-      <div>
+      <div className="description-card center">
+        <h3>{details.slogan}</h3>
         {details.description}
       </div>
-      <div>
+      <div className="features-card center">
         <ol>
           {details.features.map((item) => {
             const { feature, value } = item;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Search from './subComponents/Search';
@@ -15,17 +15,17 @@ export const SendRequestAsync = React.createContext(null);
 function QuestionsAnswers() {
   const params = useParams(); // get productId
   // need to declare all the state variables on the top
-  const [numberOfQs, setNumberOfQs] = useState(4);
+  const [numberOfQs, setNumberOfQs] = useState(2);
   // visibility state variable for answer modal window
   const [answerFormVisible, setAnswerFormVisible] = useState(false);
   const [questionFormVisible, setQuestionFormVisible] = useState(false);
   // question state vars for answer modal
-  const [questionInfo, setQuestionInfo] = useState({
-    id: '',
-    body: '',
-  });
+  const [questionInfo, setQuestionInfo] = useState({ id: '', body: '' });
   // state var to control re-fetch data
   const [reload, setReload] = useState(false);
+  // search query
+  const [query, setQuery] = useState('');
+  const [timeoutID, setTimeoutID] = useState(null);
   // show only 4 questions when reloaded
   useEffect(() => setNumberOfQs(4), [reload]);
   // fetching initial data
@@ -74,14 +74,33 @@ function QuestionsAnswers() {
     }
   };
 
+  // live search function
+  const onSearch = (e) => {
+    if (e.target.value.length >= 3) {
+      clearTimeout(timeoutID);
+      const timeoutID2 = setTimeout(() => setQuery(e.target.value), 200);
+      setTimeoutID(timeoutID2);
+    } else {
+      setQuery('');
+    }
+  }
+
   return (
 
     <QnaStyles.Provider value={qnaStyles}>
       <OnAddAnswer.Provider value={onAdd}>
         <div className={qnaStyles['qna-container-main']}>
           <h2>Main Q&A Div</h2>
-          <Search />
-          <QuestionsList questions={questions} numberOfQs={numberOfQs} />
+          <Search onSearch={onSearch} />
+          {questions.length === 0
+            ? <div> Have a question about our products? Ask us here! </div>
+            : (
+              <QuestionsList
+                questions={questions}
+                numberOfQs={numberOfQs}
+                query={query}
+              />
+            )}
           {/* show more questions button only when there are more */}
           <div>
             {numberOfQs < questions.length
@@ -104,7 +123,6 @@ function QuestionsAnswers() {
                 qnaStyles={qnaStyles}
                 onAdd={onAdd}
                 productInfo={productInfo}
-                questionInfo={questionInfo}
                 form="question"
               />
             )}

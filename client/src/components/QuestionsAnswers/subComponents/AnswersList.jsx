@@ -3,7 +3,10 @@ import AnswerEntry from './AnswerEntry';
 
 function AnswersList({ answers }) {
   const [answersList, setAnswersList] = useState(
-    Object.values(answers).sort((a, b) => b.helpfulness - a.helpfulness),
+    Object.values(answers).sort((a, b) => {
+      return ((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller')
+        || b.helpfulness - a.helpfulness);
+    }),
   );
   const [numberOfAs, setNumberOfAs] = useState(2);
   const [folded, setFolded] = useState(true);
@@ -12,7 +15,7 @@ function AnswersList({ answers }) {
     setFolded(!folded);
   };
   return answersList.length > 0 && (
-    <div className="answer-list">
+    <div className="answer-list" style={{ overflow: 'auto', maxHeight: '400px' }}>
       <span className="a">
         A:
       </span>

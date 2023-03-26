@@ -1,7 +1,7 @@
 // this is the Average ratings and reviews component
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { newSetRating , newResetRating } from '../../features/reviews/reviewsSlice';
+import { newSetRating, newResetRating } from '../../features/reviews/reviewsSlice';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
@@ -19,7 +19,6 @@ function AverageRatings({RNRCSS}) {
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
-  // console.log('meta', meta)
   // recommended percentage calculation
   // eslint-disable-next-line max-len
   const recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100;

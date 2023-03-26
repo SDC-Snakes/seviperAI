@@ -3,16 +3,31 @@ import { useDropzone } from 'react-dropzone';
 
 function ImageDropzone({ handleUploadedImages }) {
   const [images, setImages] = useState([]);
-  console.log('handle', handleUploadedImages)
 
   const onDrop = useCallback(acceptedFiles => {
     acceptedFiles.forEach(file => {
       const reader = new FileReader();
 
       reader.onload = () => {
-        // Add the image to the state
+        // Upload the image to Imgur
         const dataUrl = reader.result;
-        setImages(prevImages => [...prevImages, dataUrl]);
+        fetch('https://api.imgur.com/3/image', {
+          method: 'POST',
+          headers: {
+            Authorization: 'Client-ID 9fb7e41cbbbd831',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ image: dataUrl }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Add the link to the uploaded image to the state
+            const imageUrl = data.data.link;
+            setImages(prevImages => [...prevImages, imageUrl]);
+          })
+          .then(() => handleUploadedImages(images[images.length-1]))
+          .catch((err)=>console.log(err))
+
       };
 
       reader.readAsDataURL(file);
@@ -20,11 +35,6 @@ function ImageDropzone({ handleUploadedImages }) {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  // useEffect(() => {
-  //   console.log('images urls in drop', images)
-  //   handleUploadedImages(images[0]);
-  // }, [images,handleUploadedImages]);
 
   return (
     <div
