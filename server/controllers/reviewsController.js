@@ -26,6 +26,8 @@ module.exports = {
       },
     })
       .then((response) => {
+        // Object.keys(response).length === 0 ?
+        //   res.status(404).send('no ratings available'):
         res.status(200).send(response.data);
       })
       .catch((err) => {
@@ -34,8 +36,6 @@ module.exports = {
   },
   post: (req, res) => {
     // Finding a way to add query params in axios config would be cleaner
-    console.log('Postreq req.query: ', req.body)
-
     axios.post(
       `${process.env.ATLIER_API_ROUTE}/reviews`,
       req.body,

@@ -8,8 +8,11 @@ function AddImageReviews({uploadImageHandler}) {
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
   const handleUploadedImages = () => {
-    setImages((prevState) => [...prevState, inputField]);
-    setInputField('');
+    if (inputField.length > 1) {
+      setImages((prevState) => [...prevState, inputField]);
+      setInputField('');
+    }
+    console.log('images', images)
   };
   const handleInputFieldChange = (e) => {
     setInputField(e.target.value);
@@ -45,7 +48,10 @@ function AddImageReviews({uploadImageHandler}) {
                 <input
                   type="submit"
                   className={RNRCSS['add-image-input']}
-                  onClick={() => { handleUploadedImages(inputField); }}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleUploadedImages(inputField);
+                  }}
                   value="upload image"
                 />
                 )}
