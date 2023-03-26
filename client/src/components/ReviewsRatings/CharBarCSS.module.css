@@ -20,9 +20,7 @@
   border-radius: 10px;
   background-color: #e4e5e9;
   margin-bottom: 10px;
-   flex-direction: row; /* default direction */
-
-
+  flex-direction: row;
 }
 
 .char-bar-icon {
@@ -33,14 +31,24 @@
   border-radius: 10px;
    color: grey;
 }
+
+
 .char-1 {
-  margin-left: 4%;
+  position: absolute;
+  margin-top: 2px;
   font-size: 10px;
+  bottom: 0;
+  left: 5%;
 }
+
 .char-5 {
-  margin-left: 40%;
+  position: absolute;
+  margin-top: 2px;
   font-size: 10px;
+  bottom: 0;
+  right: 5%;
 }
 .char-major-container {
-  display: flex;
+  position: relative;
+
 }

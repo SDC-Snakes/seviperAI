@@ -18,7 +18,10 @@ function CharBar() {
   return (
     <div>
       {charKeys.map((char) => (
-        <div className={charCSS['char-major-container']} key={charObj[char].id}>
+        <div
+          className={charCSS['char-major-container']}
+          key={charObj[char].id}
+        >
           <div className={charCSS['char-bar-label']}>
             {`(${char})`}
           </div>
@@ -28,9 +31,12 @@ function CharBar() {
             </div>
           </div>
           <div>
-            <span className={charCSS['char-1']}>{charRateValues[char][0]}</span>
-            <span className={charCSS['char-5']}>{charRateValues[char][1]}</span>
-
+            <span className={charCSS['char-1']}>
+              {charRateValues[char][0]}
+            </span>
+            <span className={charCSS['char-5']}>
+              {charRateValues[char][1]}
+            </span>
           </div>
         </div>
       ))}
