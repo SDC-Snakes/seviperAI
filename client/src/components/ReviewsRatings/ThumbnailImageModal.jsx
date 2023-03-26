@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 function ThumbnailImageModal({ RNRCSS, toggleModalImage, photo }) {
   return (
-    <div className={RNRCSS['modal']}>
-      <div className={RNRCSS['overlay']}>
+    <div className={RNRCSS.modal}>
+      <div className={RNRCSS.overlay}>
         <div className={RNRCSS['modal-content']}>
           <h2> Image enlarged View</h2>
           <img
@@ -15,8 +18,6 @@ function ThumbnailImageModal({ RNRCSS, toggleModalImage, photo }) {
             width="auto"
             onClick={() => { toggleModalImage(true); }}
           />
-          {/* usee the 'close-modal' class name to add css properties to
-          determine the size of the image in the modal window */}
           <input type="submit" className={RNRCSS['close-modal']} onClick={() => { toggleModalImage(false); }} value="X" />
         </div>
       </div>

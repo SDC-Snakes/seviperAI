@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 function ImageDropzone({ handleUploadedImages }) {
   const [images, setImages] = useState([]);
 
-  const onDrop = useCallback(acceptedFiles => {
-    acceptedFiles.forEach(file => {
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -19,15 +20,14 @@ function ImageDropzone({ handleUploadedImages }) {
           },
           body: JSON.stringify({ image: dataUrl }),
         })
-          .then(response => response.json())
-          .then(data => {
+          .then((response) => response.json())
+          .then((data) => {
             // Add the link to the uploaded image to the state
             const imageUrl = data.data.link;
-            setImages(prevImages => [...prevImages, imageUrl]);
+            setImages((prevImages) => [...prevImages, imageUrl]);
           })
-          .then(() => handleUploadedImages(images[images.length-1]))
-          .catch((err)=>console.log(err))
-
+          .then(() => handleUploadedImages(images[images.length - 1]))
+          .catch((err) => console.log(err));
       };
 
       reader.readAsDataURL(file);

@@ -1,10 +1,3 @@
-// this component will render the characteristics bars for the current product
-// use meta data
-// not all characteristics are relevant for each product
-// will need similar css styling to that of rating bars
-// first off handle data
-// then css
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaSortDown } from 'react-icons/fa';

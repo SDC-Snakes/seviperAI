@@ -16,7 +16,6 @@ function ReviewsAndRatings() {
   const {
     data: metaReviews,
     isFetchingMeta,
-    isError,
   } = useGetMetaReviewsQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: false,
   });
