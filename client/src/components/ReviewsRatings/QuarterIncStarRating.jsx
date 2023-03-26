@@ -5,13 +5,13 @@ import { FaStar } from 'react-icons/fa';
 // setState is not being utilized, might need to be removed or replaced when implementing redux
 function QuarterIncStarRating({averageRating}) {
   // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
-  if (!averageRating) {
-    return <span>unable to retrieve rating</span>;
+  if (!averageRating ) {
+    return (<span> unable to fetch stars</span>)
   }
-  const ratingNum = averageRating;
-  const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
-  const [remainder, setRemainder] = useState(`${(Math.round(((ratingNum - fullStarsNum)) * 4) / 4) * 100}%`);
-  const [greyStars, setGreyStars] = useState(5 - (Math.ceil(ratingNum)));
+  // const ratingNum = averageRating ;
+  const [fullStarsNum, setFullStarsNum] = useState(Math.floor(averageRating));
+  const [remainder, setRemainder] = useState(`${(Math.round(((averageRating - fullStarsNum)) * 4) / 4) * 100}%`);
+  const [greyStars, setGreyStars] = useState(5 - (Math.ceil(averageRating)));
 
   return (
 
@@ -21,7 +21,7 @@ function QuarterIncStarRating({averageRating}) {
           <FaStar style={{ color: '#ffc107' }} />
         </span>
       ))}
-      { (ratingNum - fullStarsNum) !== 0 && (
+      { (averageRating - fullStarsNum) !== 0 && (
         <span key="fraction_star ">
           <svg width="0" height="0">
             <linearGradient id="gradient-colored" x1="0%" y1="0%" x2="100%" y2="0%">

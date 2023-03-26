@@ -13,7 +13,7 @@ function QuarterStarsAverageRating({ productRating }) {
   }
 
   const averageRating = sum / numOfRatings;
-
+  console.log('averageRating', averageRating)
   return (
     <span>
       {Math.round(averageRating * 10) / 10} <QuarterIncStarRating averageRating={averageRating} />

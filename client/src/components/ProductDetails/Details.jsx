@@ -77,7 +77,7 @@ function Details({ handleScroll }) {
   return (
     <div>
       <div>
-        <QuarterStarsAverageRating productRating={meta.ratings} />
+        {/* <QuarterStarsAverageRating productRating={meta.ratings} /> */}
         <button type="button" onClick={handleRnrClick}>See all reviews</button>
       </div>
       <h3>

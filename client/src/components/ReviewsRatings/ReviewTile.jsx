@@ -49,8 +49,9 @@ const [helpful, setHelpful] = useState({});
         {/* Review Title Summary: */}
         {reviewsObj.summary}
       </h5>
-      <p>
-        {`${reviewsObj.body.slice(0, 250)}`}
+      <div style={{ maxWidth: '90%' }}>
+
+        {reviewsObj.body.slice(0, 250)}
         {showFull && reviewsObj.body.slice(250)}
         {reviewsObj.body.length > 250 && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -66,8 +67,7 @@ const [helpful, setHelpful] = useState({});
             {showFull ? ' ...Show less' : ' ...Show more'}
           </a>
         )}
-
-      </p>
+      </div>
       {reviewsObj.photos.map((photo) => (
         <span key={photo.id}>
           <img
