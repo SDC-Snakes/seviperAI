@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 // this is the Average ratings and reviews component
@@ -9,7 +10,7 @@ import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
 
-function AverageRatings({RNRCSS}) {
+function AverageRatings({ RNRCSS }) {
   const dispatch = useDispatch();
   const barRating = useSelector((state) => state.reviews.ratingBarSelect);
   const { meta } = useSelector((state) => state.reviews);
@@ -28,7 +29,8 @@ function AverageRatings({RNRCSS}) {
       <h3>Product Ratings</h3>
       <QuarterStarsAverageRating productRating={obj} />
       <div>
-        Total number of reviews: {totalNumRatings}
+        Total number of reviews:
+        {totalNumRatings}
       </div>
       <h4>Rating Breakdown</h4>
       {barRating.length > 0 && (

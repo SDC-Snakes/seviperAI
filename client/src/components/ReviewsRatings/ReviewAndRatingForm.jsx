@@ -1,3 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/prop-types */
+/* eslint-disable dot-notation */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 // this is the Review And Rating form, used to submit new reviews and ratings for a product
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -6,15 +12,15 @@ import { usePostNewReviewMutation } from '../../features/api/apiSlice';
 import StarRating from './StarRating';
 import AddImageReviews from './AddImageReviews';
 
-function ReviewAndRatingForm({RNRCSS}) {
+function ReviewAndRatingForm({ RNRCSS }) {
   const params = useParams();
-  const { meta, reviews } = useSelector((state) => state.reviews);
+  const { meta } = useSelector((state) => state.reviews);
   const { details } = useSelector((state) => state.products);
   const charId = meta.characteristics;
   const [modal, setModal] = useState(false);
   const charsPropsObj = {};
   for (const key in charId) {
-    charsPropsObj[charId[key]['id'] ]=1
+    charsPropsObj[charId[key]['id']] = 1;
   }
   const [characteristics, setCharacteristics] = useState(charsPropsObj);
   const [reviewPropsObj, setReviewPropsObj] = useState({
@@ -29,7 +35,6 @@ function ReviewAndRatingForm({RNRCSS}) {
     characteristics,
   });
   const [triggerReview, { data, isSuccess }] = usePostNewReviewMutation();
-  const postObj = useSelector(state => state.reviews.reviewPostObj);
   const handleCharChange = (rating, charName) => {
     const propertyChar = charId[charName]['id'];
     setCharacteristics((prevState) => ({
@@ -57,7 +62,7 @@ function ReviewAndRatingForm({RNRCSS}) {
     setReviewPropsObj({ ...reviewPropsObj, [propertyName]: event.target.value });
   };
   const uploadImageHandler = (imagesArr) => {
-    setReviewPropsObj(prevState => ({
+    setReviewPropsObj((prevState) => ({
       ...prevState,
       photos: [...prevState.photos, ...imagesArr],
     }));
@@ -75,8 +80,8 @@ function ReviewAndRatingForm({RNRCSS}) {
 
       {modal && (
         <div className={RNRCSS['modal']}>
-          <div className={RNRCSS["overlay"]}>
-            <div className={RNRCSS["modal-content"]}>
+          <div className={RNRCSS['overlay']}>
+            <div className={RNRCSS['modal-content']}>
               <form onSubmit={onSubmit}>
                 <h2> Write Your Review</h2>
                 <h4>
@@ -105,7 +110,7 @@ function ReviewAndRatingForm({RNRCSS}) {
                   </label>
                 </div>
                 <div className="characteristicsRadioButtons">
-                <h6>Characteristics </h6>
+                  <h6>Characteristics </h6>
                   {meta.characteristics.Size
                   && (
                   <div className="Size-Radio-Button">

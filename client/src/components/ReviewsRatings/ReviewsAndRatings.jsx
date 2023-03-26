@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-no-bind */
 // this is the main reviews and ratings widget
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import AverageRatings from './AverageRatings';
 import Search from './SearchBarReviews';
 import Reviews from './Reviews';
@@ -21,7 +21,9 @@ function ReviewsAndRatings() {
   });
   let count = 5;
   if (metaReviews) {
-    Object.keys(metaReviews.ratings).length>0? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b))): count = 5;
+    Object.keys(metaReviews.ratings).length > 0
+      ? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b)))
+      : count = 5;
   }
   const {
     data: productReviews,

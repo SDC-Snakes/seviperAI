@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 
-function QuarterIncStarRating({averageRating}) {
+function QuarterIncStarRating({ averageRating }) {
   if (!averageRating) {
     return (<span> unable to fetch stars</span>);
   }

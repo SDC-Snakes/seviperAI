@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import RNRCSS from './Modal.module.css';
 import ImageDropzone from './ImageDropzone';
 
-function AddImageReviews({uploadImageHandler}) {
+function AddImageReviews({ uploadImageHandler }) {
   const [modal, setModal] = useState(false);
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
@@ -31,8 +32,8 @@ function AddImageReviews({uploadImageHandler}) {
       />
       {modal
       && (
-        <div className={RNRCSS['modal']}>
-          <div className={RNRCSS['overlay']}>
+        <div className={RNRCSS.modal}>
+          <div className={RNRCSS.overlay}>
             <div className={RNRCSS['modal-content']}>
               <h2> Add images to your review!</h2>
               <input
