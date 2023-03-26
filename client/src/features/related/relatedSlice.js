@@ -50,8 +50,8 @@ function removeFromOutfit(state = initialState, action) {
   const index = state.outfitList.indexOf(action.payload);
   if (index > -1) {
     state.outfitList.splice(index, 1);
-    toast.success(`${action.payload.details.name} removed from Your Outfit 😎`);
   }
+  toast.success(`${action.payload.details.name} has been removed from Your Outfit 💔`);
 }
 
 function generateCombinedProductFeatures(state = initialState, action) {
