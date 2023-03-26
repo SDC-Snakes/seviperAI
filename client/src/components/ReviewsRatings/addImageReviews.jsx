@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import RNRCSS from './Modal.module.css';
 import ImageDropzone from './ImageDropzone';
 
@@ -57,12 +58,12 @@ function AddImageReviews({ uploadImageHandler }) {
               {images.length > 0
               && (
                 <div>
-                  {images.map((image, index) => (
+                  {images.map((image) => (
                     <img
                       className={RNRCSS['thumbnail-uploaded-review-image']}
                       src={image}
                       alt={`${image}`}
-                      key={index.toString()}
+                      key={nanoid()}
                     />
                   ))}
                 </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
