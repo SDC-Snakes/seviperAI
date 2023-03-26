@@ -8,7 +8,6 @@ function AddImageReviews({uploadImageHandler}) {
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
   const handleUploadedImages = () => {
-    event.preventDefault()
     if (inputField.length > 1) {
       setImages((prevState) => [...prevState, inputField]);
       setInputField('');
