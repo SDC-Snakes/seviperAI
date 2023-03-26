@@ -3,8 +3,12 @@ import React from 'react';
 function Search({ onSearch }) {
   return (
     <div id="search">
-      SEARCH DIV
-      <input type="text" placeholder="Search..." onChange={onSearch}/>
+      <input
+        type="text"
+        placeholder="Have a question? Search for answers…"
+        onChange={onSearch}
+        style={{ width: "500px" }}
+      />
     </div>
   );
 }
