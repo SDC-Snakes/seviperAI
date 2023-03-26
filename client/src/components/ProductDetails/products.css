@@ -220,9 +220,20 @@ button {
   height: 30px;
   width: 30px;
 }
+
 .description-card {
   flex-direction: column;
   padding: 5px;
   width: 60vw;
   border-right: 4px solid #804BAC;
+}
+
+.description-card h3 {
+  color: #804BAC;
+}
+
+.features-card {
+  flex-direction: column;
+  padding: 5px;
+  width: 40vw;
 }
