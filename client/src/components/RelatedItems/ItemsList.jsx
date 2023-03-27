@@ -37,7 +37,6 @@ function ItemsList({ relatedIndex }) {
   // };
 
   function renderList(item, index) {
-    console.log(item);
     return (
       <div key={index}>
         {relatedIndex <= index && (
