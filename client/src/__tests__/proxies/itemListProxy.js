@@ -1,6 +1,12 @@
 const itemListStub = {
-  product_id: 40346,
-  details: {
+  relatedIDs: [
+    40348,
+    40352,
+    40350,
+    40345,
+    40344,
+  ],
+  relatedProductDetails: {
     id: 40346,
     campus: 'hr-rfp',
     name: 'Morning Joggers',
@@ -21,39 +27,7 @@ const itemListStub = {
       },
     ],
   },
-  ratings: {
-    product_id: '40346',
-    ratings: {
-      1: '22',
-      2: '52',
-      3: '46',
-      4: '36',
-      5: '86',
-    },
-    recommended: {
-      false: '67',
-      true: '175',
-    },
-    characteristics: {
-      Fit: {
-        id: 135224,
-        value: '2.6860465116279070',
-      },
-      Length: {
-        id: 135225,
-        value: '3.1329787234042553',
-      },
-      Comfort: {
-        id: 135226,
-        value: '3.0423280423280423',
-      },
-      Quality: {
-        id: 135227,
-        value: '3.4076086956521739',
-      },
-    },
-  },
-  photos: {
+  relatedProductPhotos: {
     product_id: '40346',
     results: [
       {
@@ -411,6 +385,70 @@ const itemListStub = {
         },
       },
     ],
+    relatedProductReviews: {
+      product_id: '40346',
+      ratings: {
+        1: '22',
+        2: '52',
+        3: '46',
+        4: '36',
+        5: '86',
+      },
+      recommended: {
+        false: '67',
+        true: '175',
+      },
+      characteristics: {
+        Fit: {
+          id: 135224,
+          value: '2.6860465116279070',
+        },
+        Length: {
+          id: 135225,
+          value: '3.1329787234042553',
+        },
+        Comfort: {
+          id: 135226,
+          value: '3.0423280423280423',
+        },
+        Quality: {
+          id: 135227,
+          value: '3.4076086956521739',
+        },
+      },
+    },
+  },
+  relatedProductRatings: {
+    product_id: '40346',
+    ratings: {
+      1: '22',
+      2: '52',
+      3: '46',
+      4: '36',
+      5: '86',
+    },
+    recommended: {
+      false: '67',
+      true: '175',
+    },
+    characteristics: {
+      Fit: {
+        id: 135224,
+        value: '2.6860465116279070',
+      },
+      Length: {
+        id: 135225,
+        value: '3.1329787234042553',
+      },
+      Comfort: {
+        id: 135226,
+        value: '3.0423280423280423',
+      },
+      Quality: {
+        id: 135227,
+        value: '3.4076086956521739',
+      },
+    },
   },
 };
 

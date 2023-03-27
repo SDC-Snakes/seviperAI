@@ -56,7 +56,7 @@ export const api = createApi({
           const itemDetails = await fetchWithBQ(`/products/${item}`);
           const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
           const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
-          // Saving the data and managing errors
+          // Compiles data for each related item into an object
           itemDetails.data
             ? relatedItem.details = itemDetails.data
             : relatedItem.detailsError = itemDetails.error;
