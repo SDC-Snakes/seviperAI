@@ -20,15 +20,9 @@ function OutfitList({ outfitIndex }) {
   const currentProduct = { details, selectedStyle, meta };
 
   // Add item to outfit card
-  function handleAddToOutfit(productData) {
-    if (!JSON.parse(localStorage.getItem(productData.details.id))) {
-      dispatch(newAddToOutfit(productData));
-    }
-    dispatch(newOutfitList());
-    return (
-      <div>Item already in outfit</div>
-    );
-  }
+  // function handleAddToOutfit(productData) {
+  //   dispatch(newAddToOutfit(productData));
+  // }
 
   // Searches item data for first photo
   function findImage(item) {
@@ -41,6 +35,7 @@ function OutfitList({ outfitIndex }) {
   }
 
   function renderList(item, index) {
+    console.log(item.details.name, item.meta.ratings);
     return (
       <div key={index}>
         {outfitIndex <= index && (
@@ -67,7 +62,7 @@ function OutfitList({ outfitIndex }) {
       <span className={itemStyles['items-list-title']}>Your outfit</span>
       <div className={itemStyles['items-list-content']}>
         <div className={`${itemStyles['items-card']} ${itemStyles['items-card-plus']}`}
-          onClick={() => handleAddToOutfit(currentProduct)}>
+          onClick={() => dispatch(newAddToOutfit(currentProduct))}>
           <i className={`fa-solid fa-circle-plus ${itemStyles['items-plus']}`} />
           <div className={itemStyles['items-text']}>Add to outfit</div>
         </div>
