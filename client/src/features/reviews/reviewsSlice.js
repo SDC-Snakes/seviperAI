@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* eslint-disable no-param-reassign */
+/* eslint-disable default-param-last */
+import { createSlice } from '@reduxjs/toolkit';
 import { api } from '../api/apiSlice';
 
 const initialState = {
@@ -19,10 +21,6 @@ const initialState = {
     characteristics: {},
   },
 };
-// eslint-disable-next-line default-param-last
-function setRating(state = initialState, action) {
-  return { ...state, ratingBarSelect: action.payload };
-}
 
 function updateState(state = initialState, action) {
   return { ...state, [action.payload.name]: action.payload.value };
@@ -41,7 +39,7 @@ const reviewsSlice = createSlice({
         state.ratingBarSelect = state.ratingBarSelect.filter((rating) => rating !== action.payload);
       }
     },
-    newResetRating: (state, action) => {
+    newResetRating: (state) => {
       state.ratingBarSelect = [];
     },
     newReviewTileCount: (state) => {

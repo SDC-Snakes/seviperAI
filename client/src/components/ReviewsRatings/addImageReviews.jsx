@@ -1,9 +1,10 @@
-// this is the add image component, it's used to add images to the review form before submit
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import RNRCSS from './Modal.module.css';
 import ImageDropzone from './ImageDropzone';
 
-function AddImageReviews({uploadImageHandler}) {
+function AddImageReviews({ uploadImageHandler }) {
   const [modal, setModal] = useState(false);
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
@@ -12,7 +13,6 @@ function AddImageReviews({uploadImageHandler}) {
       setImages((prevState) => [...prevState, inputField]);
       setInputField('');
     }
-    console.log('images', images)
   };
   const handleInputFieldChange = (e) => {
     setInputField(e.target.value);
@@ -33,8 +33,8 @@ function AddImageReviews({uploadImageHandler}) {
       />
       {modal
       && (
-        <div className={RNRCSS['modal']}>
-          <div className={RNRCSS['overlay']}>
+        <div className={RNRCSS.modal}>
+          <div className={RNRCSS.overlay}>
             <div className={RNRCSS['modal-content']}>
               <h2> Add images to your review!</h2>
               <input
@@ -58,12 +58,12 @@ function AddImageReviews({uploadImageHandler}) {
               {images.length > 0
               && (
                 <div>
-                  {images.map((image, index) => (
+                  {images.map((image) => (
                     <img
                       className={RNRCSS['thumbnail-uploaded-review-image']}
                       src={image}
                       alt={`${image}`}
-                      key={index.toString()}
+                      key={nanoid()}
                     />
                   ))}
                 </div>
