@@ -36,9 +36,9 @@ function ReviewTile({ reviewsObj }) {
     <div className={RNRCSS['review-tile-in-reviews']}>
       {reviewsObj.rating}
       <QuarterIncStarRating averageRating={reviewsObj.rating} />
-      <small>
+      <span className={RNRCSS['date-tile-in-reviews']}>
         { format(new Date(reviewsObj.date), 'MMMM dd yyyy') }
-      </small>
+      </span>
       <h5>
         {/* Review Title Summary: */}
         {reviewsObj.summary}

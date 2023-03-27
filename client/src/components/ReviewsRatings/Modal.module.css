@@ -100,3 +100,12 @@ body.active-modal {
   .reviews-filter {
     margin-right: 10px;
   }
+
+    /* review tile contents */
+    .review-tile-in-reviews {
+      justify-content: center;
+    }
+
+    .date-tile-in-reviews {
+      margin-left: 80%;
+    }
