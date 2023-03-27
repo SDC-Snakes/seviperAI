@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FormatCard from '../../components/RelatedItems/FormatCard';
 import Dropdown from '../../components/ReviewsRatings/SortReviews';
 import RelatedItems from '../../components/RelatedItems/RelatedItems';
+import itemListStub from '../proxies/itemListProxy';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 
