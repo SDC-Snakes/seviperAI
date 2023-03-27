@@ -3,11 +3,11 @@ import { render } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 // As a basic setup, import your same slice reducers
-import productsReducer from '../../../../features/products/productsSlice';
-import questionsReducer from '../../../../features/questions/questionsSlice';
-import relatedReducer from '../../../../features/related/relatedSlice';
-import reviewsReducer from '../../../../features/reviews/reviewsSlice';
-import { api } from '../../../../features/api/apiSlice';
+import productsReducer from '../../features/products/productsSlice';
+import questionsReducer from '../../features/questions/questionsSlice';
+import relatedReducer from '../../features/related/relatedSlice';
+import reviewsReducer from '../../features/reviews/reviewsSlice';
+import { api } from '../../features/api/apiSlice';
 
 // eslint-disable-next-line import/prefer-default-export
 export function renderWithProviders(

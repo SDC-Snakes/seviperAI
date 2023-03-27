@@ -4,10 +4,10 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { renderWithProviders } from './utils/test-utils';
-import stateStub from './proxies/stateProxy';
+import { renderWithProviders } from '../utils/test-utils';
+import stateStub from '../proxies/stateProxy';
 
-import Search from '../subComponents/Search';
+import Search from '../../components/QuestionsAnswers/subComponents/Search';
 
 // eslint-disable-next-line import/prefer-default-export
 // export const handlers = [

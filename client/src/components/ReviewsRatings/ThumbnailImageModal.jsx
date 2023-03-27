@@ -8,7 +8,6 @@ function ThumbnailImageModal({ RNRCSS, toggleModalImage, photo }) {
     <div className={RNRCSS.modal}>
       <div className={RNRCSS.overlay}>
         <div className={RNRCSS['modal-content']}>
-          <h2> Image enlarged View</h2>
           <img
             className={RNRCSS['modal-image-full-size']}
             key={photo.id}
