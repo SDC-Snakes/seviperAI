@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
@@ -108,32 +108,25 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,7 +136,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,30 +145,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react';
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable react/prop-types */
+import React from 'react';
 import { FaStar } from 'react-icons/fa';
-// once the data is retreived from the API,
-// ratingNum has to be replaced by the incoming review rating.
-// setState is not being utilized, might need to be removed or replaced when implementing redux
-function QuarterIncStarRating({averageRating}) {
-  // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
-  const ratingNum = averageRating;
-  const [fullStarsNum, setFullStarsNum] = useState(Math.floor(ratingNum));
-  const [remainder, setRemainder] = useState(`${(Math.round(((ratingNum - fullStarsNum)) * 4) / 4) * 100}%`);
-  const [greyStars, setGreyStars] = useState(5 - (Math.ceil(ratingNum)));
+import { nanoid } from '@reduxjs/toolkit';
 &nbsp;
+function QuarterIncStarRating({ averageRating }) {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!averageRating) {
+<span class="cstat-no" title="statement not covered" >    return (&lt;span&gt; unable to fetch stars&lt;/span&gt;);</span>
+  }
+  const fullStarsNum = Math.floor(averageRating);
+  const remainder = `${(Math.round(((averageRating - fullStarsNum)) * 4) / 4) * 100}%`;
+  const greyStars = 5 - (Math.ceil(averageRating));
+  const starKey = nanoid();
   return (
 &nbsp;
     &lt;span&gt;
-      {[...Array(fullStarsNum)].map((_, index) =&gt; (
-        &lt;span key={`yellow_star ${index}`}&gt;
+      {[...Array(fullStarsNum)].map(() =&gt; (
+        &lt;span key={`yellow_star ${nanoid()}`}&gt;
           &lt;FaStar style={{ color: '#ffc107' }} /&gt;
         &lt;/span&gt;
       ))}
-      { (ratingNum - fullStarsNum) !== 0 &amp;&amp; (
+      { (averageRating - fullStarsNum) !== 0 &amp;&amp; (
         &lt;span key="fraction_star "&gt;
           &lt;svg width="0" height="0"&gt;
-            &lt;linearGradient id="gradient-colored" x1="0%" y1="0%" x2="100%" y2="0%"&gt;
+            &lt;linearGradient id={starKey} x1="0%" y1="0%" x2="100%" y2="0%"&gt;
 &nbsp;
               &lt;stop offset="0%" stopColor="#ffc107" /&gt;
               &lt;stop offset={remainder} stopColor="#ffc107" /&gt;
@@ -184,11 +187,11 @@ function QuarterIncStarRating({averageRating}) {
               &lt;stop offset="100%" stopColor="#e4e5e9" /&gt;
             &lt;/linearGradient&gt;
           &lt;/svg&gt;
-          &lt;FaStar style={{ fill: 'url(#gradient-colored)' }} /&gt;
+          &lt;FaStar style={{ fill: `url(#${starKey})` }} /&gt;
         &lt;/span&gt;
       )}
-      {[...Array(greyStars)].map((_, index) =&gt; (
-        &lt;span key={`grey_star_${index}`}&gt;
+      {[...Array(greyStars)].map(() =&gt; (
+        &lt;span key={`grey_star_${nanoid()}`}&gt;
           &lt;FaStar style={{ color: '#e4e5e9' }} /&gt;
         &lt;/span&gt;
       ))}
@@ -205,7 +208,7 @@ export default QuarterIncStarRating;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-23T16:15:32.314Z
+                at 2023-03-27T23:02:34.107Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

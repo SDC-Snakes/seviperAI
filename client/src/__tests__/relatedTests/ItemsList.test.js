@@ -9,12 +9,14 @@ import RelatedItems from '../../components/RelatedItems/RelatedItems';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 import {
+  relatedItem,
   relatedIds,
   relatedProductPhotos,
   relatedProductDetails,
   relatedProductRatings,
 } from '../proxies/itemListProxy';
 
+console.log(relatedItem);
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
   rest.get('/products/:productId/related', (req, res, ctx) => res(
@@ -30,7 +32,7 @@ export const handlers = [
     ctx.delay(150),
   )),
   rest.get('/reviews/meta', (req, res, ctx) => {
-    const productRatings = req.url.searchParams.get('product_id');
+    const productRatings = req.url.searchParams.getAll('product_id');
     return res(
       ctx.json(productRatings),
       ctx.delay(150),
@@ -40,10 +42,60 @@ export const handlers = [
 
 const server = setupServer(...handlers);
 
-test('renders a product\'s information to its card', () => {
-  renderWithProviders(<Router><FormatCard /></Router>, {
+test('renders a product\'s information to its card', async () => {
+  const proxyName = relatedItem.details.name;
+  const proxyCategory = relatedItem.details.category;
+  const proxyImageURL = relatedItem.photos.results[0].photos[0].url;
+  const proxyPrice = relatedItem.details.default_price;
+  const proxySalePrice = relatedItem.details.sale_price;
+
+  renderWithProviders(
+  <Router>
+    <FormatCard
+      name={proxyName}
+      category={proxyCategory}
+      image={proxyImageURL}
+      price={proxyPrice}
+      salePrice={proxySalePrice} />
+  </Router>,
+  {
     preloadedState: {
       products: stateStub.products,
+      related: relatedItem,
     },
-  });
+  },
+  );
+  expect(await screen.findByText(proxyName)).toBeInTheDocument();
+  expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
+  expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+  expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
+});
+
+test('renders a product\'s information to its card', async () => {
+  const proxyName = relatedItem.details.name;
+  const proxyCategory = relatedItem.details.category;
+  const proxyImageURL = relatedItem.photos.results[0].photos[0].url;
+  const proxyPrice = relatedItem.details.default_price;
+  const proxySalePrice = relatedItem.details.sale_price;
+
+  renderWithProviders(
+  <Router>
+    <FormatCard
+      name={proxyName}
+      category={proxyCategory}
+      image={proxyImageURL}
+      price={proxyPrice}
+      salePrice={proxySalePrice} />
+  </Router>,
+  {
+    preloadedState: {
+      products: stateStub.products,
+      related: relatedItem,
+    },
+  },
+  );
+  expect(await screen.findByText(proxyName)).toBeInTheDocument();
+  expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
+  expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+  expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
 });
