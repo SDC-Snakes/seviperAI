@@ -52,9 +52,26 @@ test('products details render after making a call to the API', async () => {
   expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
 
   // Check that loading state is not displayed
-  // expect(screen.queryByText('Loading...')).toBeNull();
-  // expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
-  // expect(screen.getByText('Some other string')).toBeInTheDocument();
+  expect(screen.queryByText('Loading...')).toBeNull();
 });
 
-// Simulate clicking expand and ensure product details no longer display.
+test('products details render disappear after clicking expand button', async () => {
+  renderWithProviders(
+    <Router>
+      <ProductDetails handleScroll={() => console.log('testScroll')} />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        reviews: stateStub.reviews,
+      },
+    },
+  );
+  // screen.debug();
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+
+  // Check that loading state is not displayed
+  expect(screen.queryByText('Loading...')).toBeNull();
+});
+
