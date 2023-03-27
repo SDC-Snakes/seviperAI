@@ -5,6 +5,7 @@ import FormatCard from '../../components/RelatedItems/FormatCard';
 import Dropdown from '../../components/ReviewsRatings/SortReviews';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 test('renders Dropdown from Reviews to the page', () => {
   render(<Dropdown />);
@@ -12,7 +13,7 @@ test('renders Dropdown from Reviews to the page', () => {
 });
 
 test('renders a product\'s information to its card', () => {
-  renderWithProviders(<FormatCard />, {
+  renderWithProviders(<Router><FormatCard /></Router>, {
     preloadedState: {
       products: stateStub.products,
     },
