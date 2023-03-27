@@ -26,10 +26,7 @@ function Reviews({ RNRCSS, handleSortState, sortState }) {
         handleSortState={handleSortState}
         sortState={sortState}
       />
-      <div
-        className={RNRCSS['reviews-block']}
-        style={{ overflow: 'auto', maxHeight: '500px' }}
-      >
+      <div className={RNRCSS['reviews-block']}>
         {filteredArr.map((review, index) => {
           if (index < numberReviews) {
             return (
@@ -44,7 +41,15 @@ function Reviews({ RNRCSS, handleSortState, sortState }) {
         })}
       </div>
 
-      {filteredArr.length - numberReviews >= 1 && <input type="submit" value="MORE REVIEWS" onClick={addReviews} />}
+      {filteredArr.length - numberReviews >= 1
+      && (
+        <input
+          className={RNRCSS['add-more-reviews-button']}
+          type="submit"
+          value="MORE REVIEWS"
+          onClick={addReviews}
+        />
+      )}
       <ReviewAndRatingForm RNRCSS={RNRCSS} />
     </div>
   );
