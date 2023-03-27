@@ -14,13 +14,13 @@ function ImageDropzone({ handleUploadedImages }) {
         // Upload the image to Imgur
         const dataUrl = reader.result;
         fetch('https://api.imgur.com/3/image', {
-          method: 'POST',
-          headers: {
-            Authorization: 'Client-ID 9fb7e41cbbbd831',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ image: dataUrl }),
-        })
+            method: 'POST',
+            headers: {
+              Authorization: 'Client-ID 9fb7e41cbbbd831',
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `image=${encodeURIComponent(dataUrl)}`,
+          })
           .then((response) => response.json())
           .then((data) => {
             // Add the link to the uploaded image to the state
