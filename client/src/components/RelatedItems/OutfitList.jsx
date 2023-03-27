@@ -20,9 +20,9 @@ function OutfitList({ outfitIndex }) {
   const currentProduct = { details, selectedStyle, meta };
 
   // Add item to outfit card
-  // function handleAddToOutfit(productData) {
-  //   dispatch(newAddToOutfit(productData));
-  // }
+  function handleAddToOutfit(productData) {
+    dispatch(newAddToOutfit(productData));
+  }
 
   // Searches item data for first photo
   function findImage(item) {
@@ -34,8 +34,8 @@ function OutfitList({ outfitIndex }) {
     }
   }
 
+  // Produces a card for each item in the outfit
   function renderList(item, index) {
-    console.log(item.details.name, item.meta.ratings);
     return (
       <div key={index}>
         {outfitIndex <= index && (

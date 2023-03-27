@@ -8,6 +8,8 @@ import itemStyles from './Items.module.css';
 
 function ItemsList({ relatedIndex }) {
   const params = useParams();
+
+  // Fetches related item data from API
   const {
     data: relatedProducts,
     isFetching,
@@ -36,6 +38,7 @@ function ItemsList({ relatedIndex }) {
   //   };
   // };
 
+  // Produces a card for each related item
   function renderList(item, index) {
     return (
       <div key={index}>
@@ -57,6 +60,7 @@ function ItemsList({ relatedIndex }) {
     );
   }
 
+  // Displays while the data is still being loaded
   if (isFetching) {
     return <div>loading...</div>;
   }
