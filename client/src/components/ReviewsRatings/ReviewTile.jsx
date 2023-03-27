@@ -1,22 +1,16 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-// this is the Review Tile component
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import QuarterIncStarRating from './QuarterIncStarRating';
-import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
 import { useHelpfulReviewMutation, useReportReviewMutation } from '../../features/api/apiSlice';
 
 function ReviewTile({ reviewsObj }) {
-const [helpful, setHelpful] = useState({});
-  // send a post request with the helpful state to the API when helpful is 'yes'
-
   const [modalImage, setModalImage] = useState(false);
   const [photoState, setPhotoState] = useState('');
   const [showFull, setShowFull] = useState(false);
@@ -26,8 +20,8 @@ const [helpful, setHelpful] = useState({});
   const togglePhotoState = (photo) => (
     setPhotoState(photo)
   );
-  const [trigger, { data, isSuccess }]  = useHelpfulReviewMutation();
-  const [triggerReport, { dataReport, isSuccessReport }]  = useReportReviewMutation();
+  const [trigger, { data, isSuccess }] = useHelpfulReviewMutation();
+  const [triggerReport, { dataReport, isSuccessReport }] = useReportReviewMutation();
 
   const helpfulClickHandler = () => {
     trigger((reviewsObj.review_id));
@@ -82,8 +76,14 @@ const [helpful, setHelpful] = useState({});
           />
         </span>
       ))}
-      {modalImage && (<ThumbnailImageModal RNRCSS={RNRCSS} toggleModalImage={toggleModalImage} photo={photoState} />)}
-      {/* if user recommends the product return text and a checkmark */}
+      {modalImage
+      && (
+      <ThumbnailImageModal
+        RNRCSS={RNRCSS}
+        toggleModalImage={toggleModalImage}
+        photo={photoState}
+      />
+      )}
       { reviewsObj.recommend
       && (
       <div>
@@ -112,9 +112,9 @@ const [helpful, setHelpful] = useState({});
         </span>
         |
         <span>No</span>
-        <span onClick={reportClickHandler}>
-          <Report />
-        </span>
+        <div onClick={reportClickHandler}>
+          Report
+        </div>
       </div>
     </div>
   );

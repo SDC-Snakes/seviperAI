@@ -1,14 +1,16 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-no-bind */
 // this is the main reviews and ratings widget
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import AverageRatings from './AverageRatings';
 import Search from './SearchBarReviews';
 import Reviews from './Reviews';
 import RNRCSS from './Modal.module.css';
 import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../features/api/apiSlice';
+import Spinner from '../SharedComponents/Spinner';
+
 
 function ReviewsAndRatings() {
   const params = useParams();
@@ -16,13 +18,14 @@ function ReviewsAndRatings() {
   const {
     data: metaReviews,
     isFetchingMeta,
-    isError,
   } = useGetMetaReviewsQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: false,
   });
   let count = 5;
   if (metaReviews) {
-    Object.keys(metaReviews.ratings).length>0? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b))): count = 5;
+    Object.keys(metaReviews.ratings).length > 0
+      ? count = Object.values(metaReviews.ratings).reduce((a, b) => (Number(a) + Number(b)))
+      : count = 5;
   }
   const {
     data: productReviews,
@@ -48,11 +51,11 @@ function ReviewsAndRatings() {
         <Search />
         <aside className={RNRCSS['average-ratings-left']}>
           <h3>Product Ratings</h3>
-          <h3>Loading...</h3>
+          <div><Spinner context="Ratings" /></div>
         </aside>
         <div className={RNRCSS['reviews-container-right']}>
           <h3>Product Reviews</h3>
-          <h3>Loading...</h3>
+          <div><Spinner context="Reviews" /></div>
         </div>
       </div>
     );

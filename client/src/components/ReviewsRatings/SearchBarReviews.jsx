@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 // this is the Search Bar component for reviews and ratings
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-function Search({handleSearch}) {
+function Search({ handleSearch }) {
   const [searchInput, setSearchInput] = useState('');
   const SearchFunc = (e) => {
     setSearchInput(e.target.value);
