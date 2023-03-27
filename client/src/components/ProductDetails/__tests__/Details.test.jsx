@@ -26,7 +26,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('products details render', async () => {
-  renderWithProviders(<Details />, {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')}/>, {
     preloadedState: {
       products: stateStub.products,
       reviews: stateStub.reviews,
