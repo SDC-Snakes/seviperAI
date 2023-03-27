@@ -90,7 +90,7 @@ function QuestionsAnswers() {
     <QnaStyles.Provider value={qnaStyles}>
       <OnAddAnswer.Provider value={onAdd}>
         <div className={qnaStyles['qna-container-main']}>
-          <h2>Main Q&A Div</h2>
+          <h4>Questions & Answers</h4>
           <Search onSearch={onSearch} />
           {questions.length === 0
             ? <div> Have a question about our products? Ask us here! </div>
