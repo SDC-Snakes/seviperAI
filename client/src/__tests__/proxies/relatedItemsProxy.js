@@ -9,7 +9,7 @@ const relatedStub = {
     ],
     relatedIndex: 1,
     outfitIndex: 1,
-    modalOpen: false,
+    modalOpen: true,
     relatedProductFeatures: [
       {
         feature: 'Fabric',

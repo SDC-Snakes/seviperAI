@@ -43,7 +43,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
     <div className={itemStyles['items-card']} data-testid="card" onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
       <i className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
-        onClick={(e) => {handleModalClick(e, item)}}
+        onClick={(e) => {handleModalClick(e, item)}} aria-label={'icon'}
       />
       {outfit && <i className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}

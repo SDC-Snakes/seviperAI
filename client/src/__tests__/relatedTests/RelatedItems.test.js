@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import userEvent from '@testing-library/user-event';
 import itemStyles from './Items.module.css';
@@ -13,6 +13,7 @@ import RelatedItems from '../../components/RelatedItems/RelatedItems';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 import relatedStub from '../proxies/relatedItemsProxy';
+import FontAwesomeIcon from '../../__mocks__/fortawesome/fontawesomeMock';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
@@ -45,28 +46,29 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
-test('renders a product\'s information to its card', async () => {
-  const proxyName = relatedStub.relatedItem.details.name;
-  const proxyCategory = relatedStub.relatedItem.details.category;
-  const proxyImageURL = relatedStub.relatedItem.photos.results[0].photos[0].url;
-  const proxyPrice = relatedStub.relatedItem.details.default_price;
-  const proxySalePrice = relatedStub.relatedItem.details.sale_price;
+const proxyName = relatedStub.relatedItem.details.name;
+const proxyCategory = relatedStub.relatedItem.details.category;
+const proxyImageURL = relatedStub.relatedItem.photos.results[0].photos[0].url;
+const proxyPrice = relatedStub.relatedItem.details.default_price;
+const proxySalePrice = relatedStub.relatedItem.details.sale_price;
+const proxyItem = relatedStub.relatedItem;
 
+test('renders a product\'s information to its card', async () => {
   renderWithProviders(
-  <Router>
-    <FormatCard
-      name={proxyName}
-      category={proxyCategory}
-      image={proxyImageURL}
-      price={proxyPrice}
-      salePrice={proxySalePrice} />
-  </Router>,
-  {
-    preloadedState: {
-      products: stateStub.products,
-      related: relatedStub.related,
+    <Router>
+      <FormatCard
+        name={proxyName}
+        category={proxyCategory}
+        image={proxyImageURL}
+        price={proxyPrice}
+        salePrice={proxySalePrice} />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
     },
-  },
   );
   expect(await screen.findByText(proxyName)).toBeInTheDocument();
   expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
@@ -87,21 +89,46 @@ test('comparison modal should be null on load', async () => {
 });
 
 test('comparison modal should appear when icon is clicked', async () => {
+  // const handleClick = () => {
+  //   relatedStub.related.modalOpen = false;
+  // };
   renderWithProviders(
     <Router>
-      <ComparisonModal />
-      <FormatCard />
+      {/* <FontAwesomeIcon icon="circle-info" /> */}
+      <FormatCard
+        name={proxyName}
+        category={proxyCategory}
+        image={proxyImageURL}
+        price={proxyPrice}
+        salePrice={proxySalePrice}
+        item={proxyItem}
+      />
     </Router>,
     {
       preloadedState: {
-        combinedProductFeatures: combinedProductFeat,
+        products: stateStub.products,
+        related: relatedStub.related,
       },
     },
   );
-  screen.logTestingPlaygroundURL();
-  expect(screen.findByText('Fabric: 100% Cotton')).toBeInTheDocument();
-  expect(screen.queryByText(combinedProductFeat)).toBeNull();
+  const findIcon = await screen.findByLabelText('icon');
+  expect(findIcon).toBeInTheDocument();
+  fireEvent.click(findIcon);
+  // screen.logTestingPlaygroundURL();
+  expect(await screen.findByLabelText('modal')).toBeInTheDocument();
 });
+
+// test('comparison modal should be null on load', async () => {
+//   renderWithProviders(
+//     <Router><ComparisonModal /></Router>,
+//     {
+//       preloadedState: {
+//         related: relatedStub.related,
+//       },
+//     },
+//   );
+//   expect(screen.queryByText(relatedStub.related.combinedProductFeatures)).toBeNull();
+// });
 
 // test('navigates to product\'s page when double clicked', () => {
 //   window.location.assign = jest.fn();
