@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/';
+import userEvent from '@testing-library/user-event';
+import itemStyles from './Items.module.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -16,7 +18,6 @@ import {
   relatedProductRatings,
 } from '../proxies/itemListProxy';
 
-console.log(relatedItem);
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
   rest.get('/products/:productId/related', (req, res, ctx) => res(
@@ -71,31 +72,28 @@ test('renders a product\'s information to its card', async () => {
   expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
 });
 
-test('renders a product\'s information to its card', async () => {
-  const proxyName = relatedItem.details.name;
-  const proxyCategory = relatedItem.details.category;
-  const proxyImageURL = relatedItem.photos.results[0].photos[0].url;
-  const proxyPrice = relatedItem.details.default_price;
-  const proxySalePrice = relatedItem.details.sale_price;
-
+test('navigates to product\'s page when double clicked', () => {
+  window.location.assign = jest.fn();
   renderWithProviders(
-  <Router>
-    <FormatCard
-      name={proxyName}
-      category={proxyCategory}
-      image={proxyImageURL}
-      price={proxyPrice}
-      salePrice={proxySalePrice} />
-  </Router>,
-  {
-    preloadedState: {
-      products: stateStub.products,
-      related: relatedItem,
-    },
-  },
+    <Router>
+      <FormatCard className={itemStyles['items-card']} onDoubleClick={window.location.assign} />
+    </Router>,
   );
-  expect(await screen.findByText(proxyName)).toBeInTheDocument();
-  expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
-  expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
-  expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
+  const cardComponent = screen.getByTestId("card");
+
+  userEvent.dblClick(cardComponent);
+  expect(window.location.pathname).toContain(`/${relatedItem.product_id}`);
 });
+
+// test('navigates to product\'s page when double clicked', async () => {
+//   const doubleClick = jest.fn();
+//   renderWithProviders(
+//     <Router>
+//       <FormatCard className={itemStyles['items-card']} onDoubleClick={doubleClick} />
+//     </Router>,
+//   );
+//   const cardComponent = screen.getByTestId("card");
+
+//   userEvent.dblClick(cardComponent);
+//   expect(window.location.pathname).toContain(`/${relatedItem.product_id}`);
+// });
