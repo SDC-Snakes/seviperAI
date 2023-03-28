@@ -40,7 +40,6 @@ function ImageDropzone({ handleDropedInImages }) {
     });
   }, []);
 
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
