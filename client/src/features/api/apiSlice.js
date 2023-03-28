@@ -35,7 +35,7 @@ export const api = createApi({
       query: (productId) => `/products/${productId}/related`,
     }),
     getQuestions: build.query({
-      query: ({productId, page, count}) => `/qa/questions?product_id=${productId}&page=${page}&count=${count}`,
+      query: ({ productId, page, count }) => `/qa/questions?product_id=${productId}&page=${page}&count=${count}`,
     }),
     getProductInfo: build.query({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
@@ -94,6 +94,34 @@ export const api = createApi({
         body: {review_id: review_id},
       }),
     }),
+    postNewQuestion: build.mutation({
+      query: (obj) => ({
+        url: '/qa/questions',
+        method: 'POST',
+        body: obj,
+      }),
+    }),
+    postNewAnswer: build.mutation({
+      query: ({body, questionId}) => ({
+        url: `/qa/questions/${questionId}/answers`,
+        method: 'POST',
+        body: body,
+      }),
+    }),
+    helpfulReview: build.mutation({
+      query: (review_id) => ({
+        url: `/reviews/${review_id}/helpful`,
+        method: 'PUT',
+        body: {review_id},
+      }),
+    }),
+    reportReview: build.mutation({
+      query: (review_id) => ({
+        url: `/reviews/${review_id}/report`,
+        method: 'PUT',
+        body: {review_id: review_id},
+      }),
+    }),
   }),
   // EXAMPLE MUTATION endpoint!!!
   // updateReview: build.mutation({
@@ -120,4 +148,6 @@ export const {
   usePostNewReviewMutation,
   useHelpfulReviewMutation,
   useReportReviewMutation,
+  usePostNewQuestionMutation,
+  usePostNewAnswerMutation,
 } = api;

@@ -31,7 +31,7 @@ function QuestionsAnswers() {
   // show only 4 questions when reloaded
   useEffect(() => setNumberOfQs(4), [reload]);
 
-  //RTK QUERY
+  // RTK QUERY
   // const {
   //   data: questionsRTK,
   //   // isFetchingQuestions,
@@ -40,11 +40,12 @@ function QuestionsAnswers() {
     productId: `${params.productId}`,
     page: 1,
     count: 100,
+    reload,
   };
   const { data: questionsRTK,
     isError, isFetching}
     = useGetQuestionsQuery(questionsQueryParams, {
-      refetchOnMountOrArgChange: false,
+      refetchOnMountOrArgChange: true,
     });
   // fetching initial data
   /// handle loading and error
@@ -88,6 +89,7 @@ function QuestionsAnswers() {
       setQuestionFormVisible(visibleState);
     }
     if (refetch) {
+      console.log(reload);
       setReload(!reload);
     }
   };

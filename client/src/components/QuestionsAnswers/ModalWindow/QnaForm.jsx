@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
-import useAsync from '../useAsync';
+import { usePostNewQuestionMutation, usePostNewAnswerMutation } from '../../../features/api/apiSlice';
 
 function QnaForm({
   qnaStyles, onAdd, questionInfo,
@@ -10,13 +9,23 @@ function QnaForm({
   const [reqObjs, setReqObjs] = useState(Function);
   const productName = useSelector((state) => state.products).details.name;
   const { productId } = useParams();
-  const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
   const firstLoad = useRef(true);
   const isQuestionForm = questionInfo === undefined;
+  const [triggerQuestion,
+    { isSuccess: isSuccessQ,
+      isLoading: isLoadingQ,
+      isError: isErrorQ }]
+      = usePostNewQuestionMutation();
+  const [triggerAnswer,
+    { isSuccess: isSuccessA,
+      isLoading: isLoadingA,
+      isError: isErrorA }]
+    = usePostNewAnswerMutation();
 
   const formType = isQuestionForm ? 'question' : 'answer';
   useEffect(() => {
-    if (response && response[0] && response[0].status === 201) {
+    // if (response && response[0] && response[0].status === 201) {
+    if (isSuccessQ || isSuccessA) {
       alert(`Thank you for your ${formType}!`);
       onAdd(formType, false, true);
     }
@@ -46,12 +55,15 @@ function QnaForm({
         body,
         name,
         email,
-        ...(isQuestionForm && { product_id: productId }),
+        ...(isQuestionForm && { product_id: Number(productId) }),
       };
-      const url = isQuestionForm
-        ? `http://localhost:${process.env.PORT}/qa/questions/`
-        : `http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`;
-      setReqObjs(() => function sendReq() { return [axios.post(url, formBody)]; });
+      if (isQuestionForm) {
+        triggerQuestion(formBody);
+      } else {
+        triggerAnswer({ body: formBody, questionId: Number(questionInfo.id) });
+      }
+      // `http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`;
+      // setReqObjs(() => function sendReq() { return [axios.post(url, formBody)]; });
     }
   };
 
@@ -100,14 +112,14 @@ function QnaForm({
           </div>
         </div>
         <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} />
-        {loading && (
+        {(isLoadingQ || isLoadingA) && (
         <div>
           Submitting
           {isQuestionForm ? 'your question' : 'the answer'}
           ...
         </div>
         )}
-        {!firstLoad.current && error
+        {!firstLoad.current && (isErrorQ || isErrorA)
           && <div>Error has occurred. Please check your information.</div>}
       </form>
       <input type="button" className={qnaStyles['close-modal']} onClick={() => onAdd(formType, false)} value="X" />

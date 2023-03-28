@@ -16,7 +16,7 @@ const questionsSlice = createSlice({
     builder
       .addMatcher(api.endpoints.getQuestions.matchFulfilled, (state, action) => {
         state.results = action.payload;
-      });
+      })
   },
 });
 
