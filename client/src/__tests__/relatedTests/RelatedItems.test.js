@@ -95,6 +95,7 @@ test('comparison modal should appear when icon is clicked', async () => {
   renderWithProviders(
     <Router>
       {/* <FontAwesomeIcon icon="circle-info" /> */}
+      <ComparisonModal />
       <FormatCard
         name={proxyName}
         category={proxyCategory}
@@ -116,6 +117,25 @@ test('comparison modal should appear when icon is clicked', async () => {
   fireEvent.click(findIcon);
   // screen.logTestingPlaygroundURL();
   expect(await screen.findByLabelText('modal')).toBeInTheDocument();
+});
+
+test('carousal should move one indx when an arrow is clicked', async () => {
+  renderWithProviders(
+    <Router>
+      <Carousel />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
+    },
+  );
+  const findArrow = await screen.findByLabelText('right-arrow');
+  expect(findArrow).toBeInTheDocument();
+  // fireEvent.click(findIcon);
+  // // screen.logTestingPlaygroundURL();
+  // expect(await screen.findByLabelText('modal')).toBeInTheDocument();
 });
 
 // test('comparison modal should be null on load', async () => {
