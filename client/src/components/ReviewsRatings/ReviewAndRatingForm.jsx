@@ -32,7 +32,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
     recommend: true,
     name: '',
     email: '',
-    photos: ['testlink'],
+    photos: [],
     characteristics,
   });
   const [triggerReview, { data, isSuccess }] = usePostNewReviewMutation();
@@ -77,7 +77,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
   return (
     <>
-      <input type="submit" onClick={() => { toggleModal(true); }} className={RNRCSS['btn-modal']} value="Add a review" />
+      <input type="submit" onClick={() => { toggleModal(true); }} className={RNRCSS['add-a-review-button-in-form']} value="Add a review" />
 
       {modal && (
         <div className={RNRCSS['modal']}>

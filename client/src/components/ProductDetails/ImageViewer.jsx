@@ -113,15 +113,15 @@ function ImageViewer() {
               {page > 0 ? <FaChevronUp className="chevron" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
               {sideImages()}
               {page < ((selectedStyle.photos.length / 7) - 1)
-                ? <FaChevronDown className="chevron" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
+                ? <FaChevronDown className="chevron" aria-label="down-arrow" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
                 : null}
             </div>
             <div className="center">
-              {imageIndex > 0 ? <FaChevronLeft className="chevron" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('left')} /> : null}
+              {imageIndex > 0 ? <FaChevronLeft className="chevron" aria-label="left-arrow" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('left')} /> : null}
               <button className={expanded ? 'buttonWrap' : 'buttonWrap noClick'} type="button" aria-label="image-window" onClick={expanded ? handleZoom : null} ref={imgRef}>
                 <img className={expanded ? 'expandedImage' : 'mainImage'} aria-label="main-image" src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
               </button>
-              {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('right')} /> : null}
+              {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" data-testid="chevron-icon" aria-label="right-arrow" onClick={() => handleHorizontalScroll('right')} /> : null}
             </div>
           </div>
         </div>
