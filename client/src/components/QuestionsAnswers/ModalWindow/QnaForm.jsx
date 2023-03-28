@@ -103,14 +103,6 @@ function QnaForm({
           <input type="text" id="email-input" name="email" maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-        <div className="photos">
-          <input type="button" value="Upload Photos" />
-          <div className="photos-view">
-            <img src="image1.jpg" alt="supplement to the question/answer" />
-            <img src="image2.jpg" alt="supplement to the question/answer" />
-            <img src="image3.jpg" alt="supplement to the question/answer" />
-          </div>
-        </div>
         <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} />
         {(isLoadingQ || isLoadingA) && (
         <div>

@@ -102,24 +102,24 @@ export const api = createApi({
       }),
     }),
     postNewAnswer: build.mutation({
-      query: ({body, questionId}) => ({
+      query: ({ body, questionId }) => ({
         url: `/qa/questions/${questionId}/answers`,
         method: 'POST',
-        body: body,
+        body,
       }),
     }),
-    helpfulReview: build.mutation({
-      query: (review_id) => ({
-        url: `/reviews/${review_id}/helpful`,
+    helpfulQNA: build.mutation({
+      query: ({ item, itemId }) => ({
+        url: `/qa/${item}/${itemId}/helpful`,
         method: 'PUT',
-        body: {review_id},
+        validateStatus: (response) => response.status === 204,
       }),
     }),
-    reportReview: build.mutation({
-      query: (review_id) => ({
-        url: `/reviews/${review_id}/report`,
+    reportAnswer: build.mutation({
+      query: (answerId) => ({
+        url: `/qa/answers/${answerId}/report`,
         method: 'PUT',
-        body: {review_id: review_id},
+        validateStatus: (response) => response.status === 204,
       }),
     }),
   }),
@@ -150,4 +150,6 @@ export const {
   useReportReviewMutation,
   usePostNewQuestionMutation,
   usePostNewAnswerMutation,
+  useHelpfulQNAMutation,
+  useReportAnswerMutation,
 } = api;
