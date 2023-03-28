@@ -76,7 +76,7 @@ function QnaForm({
     <div className={qnaStyles['modal-content']}>
       <h3>{title}</h3>
       <h6>{subTitle}</h6>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} aria-label='window-form'>
         <div className="form-group">
           <label htmlFor="input">
             {isQuestionForm ? 'Question' : 'Answer'}
@@ -103,7 +103,7 @@ function QnaForm({
           <input type="text" id="email-input" name="email" maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-        <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} />
+        <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} aria-label="submit"/>
         {(isLoadingQ || isLoadingA) && (
         <div>
           Submitting
@@ -114,7 +114,12 @@ function QnaForm({
         {!firstLoad.current && (isErrorQ || isErrorA)
           && <div>Error has occurred. Please check your information.</div>}
       </form>
-      <input type="button" className={qnaStyles['close-modal']} onClick={() => onAdd(formType, false)} value="X" />
+      <input
+      type="button"
+      className={qnaStyles['close-modal']}
+      onClick={() => onAdd(formType, false)}
+      value="X"
+      />
     </div>
   );
 }

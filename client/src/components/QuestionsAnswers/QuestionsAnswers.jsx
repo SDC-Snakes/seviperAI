@@ -103,8 +103,13 @@ function QuestionsAnswers() {
           {/* show more questions button only when there are more */}
           <div>
             {numberOfQs < questions.length
-              && <input type="button" onClick={loadMoreQs} value="More Answered Questions" />}
-            <input type="button" onClick={() => { onAdd('question', true); }} value="Add a question +" />
+              && <input
+              type="button"
+              onClick={loadMoreQs}
+              value="More Answered Questions"
+              name="more-question"
+              />}
+            <input type="button" aria-label="add-question" onClick={() => { onAdd('question', true); }} value="Add a question +" />
           </div>
           {answerFormVisible
             && (

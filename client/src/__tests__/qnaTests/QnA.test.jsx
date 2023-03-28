@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
@@ -33,10 +33,8 @@ test('QnA shows loading message while it\'s loading', async () => {
   renderWithProviders(
     <Router>
       <QuestionsAnswers />
-    </Router>, {
-    preloadedState: {
-    },
-  });
+    </Router>,
+  );
   // check loading state
   expect(screen.queryByText('Loading...')).toBeInTheDocument();
   // screen.logTestingPlaygroundURL();
@@ -46,10 +44,8 @@ test('QnA shows renders when correct data is received', async () => {
   renderWithProviders(
     <Router>
       <QuestionsAnswers />
-    </Router>, {
-    preloadedState: {
-    },
-  });
+    </Router>,
+  );
   // check loading state
   expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
   // check if all the components load
@@ -66,5 +62,48 @@ test('QnA shows renders when correct data is received', async () => {
   // expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
   // screen.logTestingPlaygroundURL();
   // expect(screen.getByText('Some other string')).toBeInTheDocument();
+});
+
+test('A customer can post a question', async () => {
+  renderWithProviders(
+    <Router>
+      <QuestionsAnswers />
+    </Router>,
+  );
+  // a button to add-question renders
+  const addQuestion = await screen.findByRole('button', { name:'add-question' });
+  expect(addQuestion).toBeInTheDocument();
+  // when a button is clicked
+  fireEvent.click(addQuestion);
+  expect(await screen.findByText('Ask Your Question')).toBeInTheDocument(1);
+});
+
+test('A customer can post an answer', async () => {
+  renderWithProviders(
+    <Router>
+      <QuestionsAnswers />
+    </Router>,
+  );
+  // add a question
+  // a button to add-question renders
+  const addAnswer = await screen.findAllByRole('button', { name:'add-answer' });
+  expect(addAnswer[0]).toBeInTheDocument();
+  // when a button is clicked
+  fireEvent.click(addAnswer[0]);
+  expect(await screen.findByText('Submit your Answer')).toBeInTheDocument(1);
+  // submitting a question
+  // a button to submit renders
+  const submitAnswer = await screen.findByRole('button', { name:'submit' });
+  expect(submitAnswer).toBeInTheDocument();
+
+  const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
+  // when a button is clicked
+  const form = await screen.findByLabelText('window-form');
+  expect(form).toBeInTheDocument();
+  // fireEvent.submit(form);
+  // expect(await alertSpy).toHaveBeenCalled();
+
+  // Clean up the spy
+  alertSpy.mockRestore();
 });
 
