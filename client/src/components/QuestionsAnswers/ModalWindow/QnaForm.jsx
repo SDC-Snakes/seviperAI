@@ -41,11 +41,15 @@ function QnaForm({
       // Test the given email against the regular expression
       return emailRegex.test(email);
     }
-
-    const [body, name, email] = Array(3).fill(0)
-      .map((item, index) => e.target[index].value);
+    // const [body, name, email] = Array(3).fill(0)
+    //   .map((item, index) => e.target[index].value);
+    const {
+      body_input: { value: body },
+      nickname_input: { value: name },
+      email_input: { value: email },
+    } = e.target.elements;
     const errorMsg = `${body.trim().length === 0 ? `\n- ${formType}` : ''}`
-    + `${name.trim().length === 0 ? '\n- nickname' : ''}`
+      + `${name.trim().length === 0 ? '\n- nickname' : ''}`
     + `${!isValidEmail(email) ? '\n- valid email' : ''}`;
 
     if (errorMsg.length > 0) {
@@ -78,29 +82,29 @@ function QnaForm({
       <h6>{subTitle}</h6>
       <form onSubmit={onSubmit} aria-label='window-form'>
         <div className="form-group">
-          <label htmlFor="input">
+          <label htmlFor="body_input">
             {isQuestionForm ? 'Question' : 'Answer'}
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <textarea id="input" name="input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
+          <textarea id="body_input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
         </div>
         <div className="form-group">
-          <label htmlFor="nickname-input">
+          <label htmlFor="nickname_input">
             Nickname
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <input type="text" id="nickname-input" maxLength="60" placeholder="Example: Jack543!" />
+          <input type="text" id="nickname_input" maxLength="60" placeholder="Example: Jack543!" />
           <p>For privacy reasons, do not use your full name or email address.</p>
         </div>
         <div className="form-group">
-          <label htmlFor="email-input">
+          <label htmlFor="email_input">
             Email
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <input type="text" id="email-input" name="email" maxLength="60" placeholder="Example: jack@example.com" />
+          <input type="text" id="email_input" maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
         <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} aria-label="submit"/>

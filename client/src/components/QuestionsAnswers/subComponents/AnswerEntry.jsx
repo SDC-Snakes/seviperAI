@@ -52,6 +52,7 @@ function AnswerEntry({ answer }) {
         value={reportButtonText}
         onClick={onReport}
         disabled={reportButtonStatus}
+        aria-label="report-button"
       />
     </span>
   );

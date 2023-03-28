@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
@@ -16,6 +16,11 @@ export const handlers = [
     ctx.json(getQuestionsStub),
     ctx.delay(150),
   )),
+  // PUT request: report an answer
+  rest.put('/qa/answers/', (req, res, ctx) => res(
+    ctx.json(getQuestionsStub),
+    ctx.delay(150),
+  ))
 ];
 
 const server = setupServer(...handlers);
@@ -93,17 +98,35 @@ test('A customer can post an answer', async () => {
   expect(await screen.findByText('Submit your Answer')).toBeInTheDocument(1);
   // submitting a question
   // a button to submit renders
-  const submitAnswer = await screen.findByRole('button', { name:'submit' });
+  const submitAnswer = await screen.findByRole('button', { name: /submit/i });
   expect(submitAnswer).toBeInTheDocument();
 
   const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
   // when a button is clicked
   const form = await screen.findByLabelText('window-form');
-  expect(form).toBeInTheDocument();
-  // fireEvent.submit(form);
-  // expect(await alertSpy).toHaveBeenCalled();
 
+  expect(form).toBeInTheDocument();
+  fireEvent.click(submitAnswer);
+  // expect(await alertSpy).toHaveBeenCalled();
+  // screen.logTestingPlaygroundURL();
+
+  await waitFor(() => {
+    expect(window.alert).toHaveBeenCalled();
+  });
   // Clean up the spy
   alertSpy.mockRestore();
 });
 
+test('A customer can report an answer', async () => {
+  renderWithProviders(
+    <Router>
+      <QuestionsAnswers />
+    </Router>,
+  );
+
+  // report button is rendered
+  const reportAnswer = await screen.findAllByRole('button', { name: /report-button/i });
+  expect(reportAnswer[0]).toBeInTheDocument();
+
+
+});
