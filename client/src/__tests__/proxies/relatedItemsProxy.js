@@ -1,4 +1,4 @@
-module.exports.relatedStub = {
+const relatedStub = {
   related: {
     relatedIDs: [
       40348,
@@ -703,6 +703,8 @@ module.exports.relatedStub = {
     },
   },
 };
+
+module.exports = relatedStub;
 //   relatedProductDetails: {
 //     id: 40346,
 //     campus: 'hr-rfp',

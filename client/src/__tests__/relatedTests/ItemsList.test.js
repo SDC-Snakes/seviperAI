@@ -9,7 +9,7 @@ import { setupServer } from 'msw/node';
 import Carousel from '../../components/RelatedItems/Carousel';
 import ComparisonModal from '../../components/RelatedItems/ComparisonModal';
 import FormatCard from '../../components/RelatedItems/FormatCard';
-import relatedStub from '../../components/RelatedItems/RelatedItems';
+import RelatedItems from '../../components/RelatedItems/RelatedItems';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 import relatedStub from '../proxies/relatedItemsProxy';
@@ -46,11 +46,11 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('renders a product\'s information to its card', async () => {
-  const proxyName = relatedItem.details.name;
-  const proxyCategory = relatedItem.details.category;
-  const proxyImageURL = relatedItem.photos.results[0].photos[0].url;
-  const proxyPrice = relatedItem.details.default_price;
-  const proxySalePrice = relatedItem.details.sale_price;
+  const proxyName = relatedStub.relatedItem.details.name;
+  const proxyCategory = relatedStub.relatedItem.details.category;
+  const proxyImageURL = relatedStub.relatedItem.photos.results[0].photos[0].url;
+  const proxyPrice = relatedStub.relatedItem.details.default_price;
+  const proxySalePrice = relatedStub.relatedItem.details.sale_price;
 
   renderWithProviders(
   <Router>
@@ -64,7 +64,7 @@ test('renders a product\'s information to its card', async () => {
   {
     preloadedState: {
       products: stateStub.products,
-      related: relatedItem,
+      related: relatedStub.related,
     },
   },
   );
@@ -79,13 +79,12 @@ test('comparison modal should be null on load', async () => {
     <Router><ComparisonModal /></Router>,
     {
       preloadedState: {
-        combinedProductFeatures: combinedProductFeat,
+        related: relatedStub.related,
       },
     },
   );
-  expect(screen.queryByText(combinedProductFeat)).toBeNull();
+  expect(screen.queryByText(relatedStub.related.combinedProductFeatures)).toBeNull();
 });
-
 
 test('comparison modal should appear when icon is clicked', async () => {
   renderWithProviders(
