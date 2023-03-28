@@ -3,37 +3,43 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function ImageDropzone({ handleUploadedImages }) {
+function ImageDropzone({ handleDropedInImages }) {
   const [images, setImages] = useState([]);
-
+  const addImages = (image) => {
+    setImages((prevImages) => [...prevImages, image]);
+    handleDropedInImages([image])
+  }
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = () => {
         // Upload the image to Imgur
-        const dataUrl = reader.result;
+        const dataUrl = reader.result.split(',')[1];
+        console.log(encodeURIComponent(dataUrl))
         fetch('https://api.imgur.com/3/image', {
-            method: 'POST',
-            headers: {
-              Authorization: 'Client-ID 9fb7e41cbbbd831',
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `image=${encodeURIComponent(dataUrl)}`,
-          })
-          .then((response) => response.json())
+          method: 'POST',
+          headers: {
+            Authorization: 'Client-ID 27a348dc30933fb',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `image=${encodeURIComponent(dataUrl)}`,
+        })
           .then((data) => {
-            // Add the link to the uploaded image to the state
-            const imageUrl = data.data.link;
-            setImages((prevImages) => [...prevImages, imageUrl]);
+            return data.json()
           })
-          .then(() => handleUploadedImages(images[images.length - 1]))
+          .then((data) => {
+            const imageUrl = data.data.link;
+            console.log('imageUrl:', imageUrl);
+            addImages(imageUrl);
+          })
           .catch((err) => console.log(err));
       };
 
       reader.readAsDataURL(file);
     });
   }, []);
+
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
