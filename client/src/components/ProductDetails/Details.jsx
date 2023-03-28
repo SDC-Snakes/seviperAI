@@ -104,7 +104,7 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div className="dropdowns">
-        <select className="size-selector" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
+        <select className="size-selector" aria-label="size-select" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
           <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
@@ -118,7 +118,7 @@ function Details({ handleScroll }) {
             ),
           )}
         </select>
-        <select className="qty-selector" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
+        <select className="qty-selector" aria-label="qty-select" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           {quantity
             ? Array.from({ length: quantity }, (_, i) => i + 1).map(
               (qty) => (<option key={qty} value={qty}>{qty}</option>),

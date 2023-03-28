@@ -77,10 +77,38 @@ test('the select size dropdown is selected and opened when add to cart clicked w
   const styleImages = screen.getAllByRole('button', { name: 'style-image' });
   await userEvent.click(styleImages[1]);
   expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+  expect(screen.queryByRole('option', { name: 'Select Size' }).selected).toBeTruthy();
 
-  const option = screen.getByRole('option', { name: 'XS' });
-  await userEvent.click(option);
-  expect(screen.getByRole('option', { name: 'XS' }).selected).toBeTruthy();
+  await userEvent.click(screen.getByRole('combobox', { name: 'size-select' }), { target: { value: 'xs' } });
+
+  expect(await screen.findByRole('option', { name: 'Select Size' }).selected).toBeFalsy();
+
   await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
+
   expect(screen.getByRole('option', { name: 'Select Size' }).selected).toBeTruthy();
+});
+
+test('a quantity can be selected once a size has been selected', async () => {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  const styleImages = screen.getAllByRole('button', { name: 'style-image' });
+  await userEvent.click(styleImages[1]);
+  expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+
+  await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
+
+  await userEvent.selectOptions(screen.getByRole('combobox', { name: 'size-select' }), screen.getByRole('option', { name: 'XS' }));
+
+  expect(screen.getByRole('option', { name: 'XS' }).selected).toBe(true);
+
+  await userEvent.click(screen.getByRole('combobox', { name: 'qty-select' }), { target: { value: '1' } });
+
+  expect(await screen.findByRole('option', { name: '-' }).selected).toBeFalsy();
+  expect(screen.getByRole('option', { name: '1' }).selected).toBe(true);
 });
