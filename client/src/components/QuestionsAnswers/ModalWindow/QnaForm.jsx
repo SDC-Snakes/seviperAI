@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import useAsync from '../useAsync';
 
 function QnaForm({
-  qnaStyles, onAdd, productInfo, questionInfo,
+  qnaStyles, onAdd, questionInfo,
 }) {
   const [reqObjs, setReqObjs] = useState(Function);
+  const productName = useSelector((state) => state.products).details.name;
+  const { productId } = useParams();
   const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
   const firstLoad = useRef(true);
   const isQuestionForm = questionInfo === undefined;
@@ -42,7 +46,7 @@ function QnaForm({
         body,
         name,
         email,
-        ...(isQuestionForm && { product_id: productInfo.id }),
+        ...(isQuestionForm && { product_id: productId }),
       };
       const url = isQuestionForm
         ? `http://localhost:${process.env.PORT}/qa/questions/`
@@ -53,8 +57,8 @@ function QnaForm({
 
   const title = isQuestionForm ? 'Ask Your Question' : 'Submit your Answer';
   const subTitle = isQuestionForm
-    ? `About the ${productInfo.name}`
-    : `${productInfo.name}: ${questionInfo.body}`;
+    ? `About the ${productName}`
+    : `${productName}: ${questionInfo.body}`;
 
   return (
     <div className={qnaStyles['modal-content']}>
