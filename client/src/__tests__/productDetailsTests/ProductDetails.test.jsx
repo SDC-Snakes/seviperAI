@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
@@ -52,9 +52,45 @@ test('products details render after making a call to the API', async () => {
   expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
 
   // Check that loading state is not displayed
-  // expect(screen.queryByText('Loading...')).toBeNull();
-  // expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
-  // expect(screen.getByText('Some other string')).toBeInTheDocument();
+  expect(await screen.queryByText('Loading...')).toBeNull();
 });
 
-// Simulate clicking expand and ensure product details no longer display.
+test('products details disappear after clicking expand button', async () => {
+  renderWithProviders(
+    <Router>
+      <ProductDetails handleScroll={() => console.log('testScroll')} />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        reviews: stateStub.reviews,
+      },
+    },
+  );
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+
+  await userEvent.click(screen.queryByTestId('expandBtn'));
+
+  // Check that loading state is not displayed
+  expect(await screen.queryByText(stateStub.products.selectedStyle.name)).toBeNull();
+});
+
+test('clicking a new style should change the currently selected style', async () => {
+  renderWithProviders(
+    <Router>
+      <ProductDetails handleScroll={() => console.log('testScroll')} />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        reviews: stateStub.reviews,
+      },
+    },
+  );
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  const styleImages = screen.getAllByRole('button', { name: 'style-image' });
+  await userEvent.click(styleImages[1]);
+  expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+});
