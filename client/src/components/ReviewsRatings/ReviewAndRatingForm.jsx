@@ -84,14 +84,14 @@ function ReviewAndRatingForm({ RNRCSS }) {
           <div className={RNRCSS['overlay']}>
             <div className={RNRCSS['modal-content']}>
               <form onSubmit={onSubmit}>
-                <h2> Write Your Review</h2>
+                <h2>Write Your Review</h2>
                 <h4>
                   About the {details.name}
                 </h4>
                 <h6>Overall rating </h6>
                 <div><StarRating handleStarRatingChange={handleStarRatingChange} /></div>
                 <div>
-                  <h6>Do you recommend this product? </h6>
+                  <h6>Do you recommend this product?</h6>
                   <label>
                     <input
                       type="radio"

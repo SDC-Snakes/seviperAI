@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen } from '@testing-library/react';
+import { act, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
@@ -51,7 +51,20 @@ test('reviews render after making a call to the API', async () => {
   expect(await screen.findByText("Product Reviews")).toBeInTheDocument();
   expect(await screen.findByText("Product Ratings")).toBeInTheDocument();
   expect(await screen.findByText("Rating Breakdown")).toBeInTheDocument();
+  expect(await screen.queryAllByText("Report")[0]).toBeInTheDocument();
+  const addAReview = await screen.findByRole('button', {name:'Add a review'})
+  fireEvent.click(addAReview)
+  expect(await screen.findByText("Write Your Review")).toBeInTheDocument();
+  expect(await screen.findByText("Overall rating")).toBeInTheDocument();
+  expect(await screen.findByText("Do you recommend this product?")).toBeInTheDocument();
+  expect(await screen.findByText("For authentication reasons, you will not be emailed")).toBeInTheDocument();
+
+  // add images
+  const addImages = await screen.findByRole('button', {name:'Add images'})
+  fireEvent.click(addImages)
+  expect(await screen.findByText("Add images to your review!")).toBeInTheDocument();
 
 });
+
 
 // Simulate clicking expand and ensure product details no longer display.
