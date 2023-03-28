@@ -3,9 +3,18 @@ body.active-modal {
 }
 
 .btn-modal {
-
-  font-size: 15px;
+  border: 1px;
+  border-radius: 5px;
+  border-color: var(--main-color);
+  background-color: #fff;
+  padding: 10px 10px;
+  margin: 0 20px;
+  font-size: 12px;
 }
+
+/* .btn-modal {
+  font-size: 15px;
+} */
 
 .modal, .overlay {
   width: 100vw;
