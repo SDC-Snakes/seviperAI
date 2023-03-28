@@ -62,11 +62,13 @@ function ItemsList({ relatedIndex }) {
   }
 
   return relatedProducts && (
-    <div className={itemStyles['items-list-wrapper']}>
-      <ComparisonModal />
+    <div>
       <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
-      <div className={itemStyles['items-list-content']}>
-        { relatedProducts.map((item, index) => renderList(item, index)) }
+      <ComparisonModal />
+      <div className={itemStyles['items-list-wrapper']}>
+        <div className={itemStyles['items-list-content']}>
+          { relatedProducts.map((item, index) => renderList(item, index)) }
+        </div>
       </div>
     </div>
   );

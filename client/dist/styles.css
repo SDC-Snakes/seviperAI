@@ -90,15 +90,14 @@ body {
 }
 
 .body-no-navbar {
-  margin-left: 10%;
-  margin-right: 10%
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 h1 {
   font-size: 36px;
   line-height: 1.5em;
   margin-bottom: 22px;
-  color: var(--main-color) /* How to reference color variables, will remove later */
 }
 
 h2 {
@@ -142,7 +141,7 @@ input[name="rating"] {
   display:none;
 }
 
- .star{
+.star{
   cursor: pointer;
   transition: color 200ms;
 }
@@ -154,9 +153,9 @@ input[name="rating"] {
   width: 90%;
   margin-top: 5px;
   border-radius: 10px;
- }
+}
 
- .rating-bar-container:hover {
+.rating-bar-container:hover {
   cursor: pointer;
 }
 
