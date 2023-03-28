@@ -19,7 +19,7 @@ function HelpfulModule({ count, item, itemId }) {
       <span className="helpful-text">
         Helpful?
       </span>
-      <span className="yes-button" onClick={onClick}>
+      <span className="yes-button" onClick={onClick} aria-label='helpful-button'>
         Yes(
         {countTemp}
         )

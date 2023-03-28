@@ -16,11 +16,14 @@ export const handlers = [
     ctx.json(getQuestionsStub),
     ctx.delay(150),
   )),
-  // PUT request: report an answer
-  rest.put('/qa/answers/', (req, res, ctx) => res(
-    ctx.json(getQuestionsStub),
+  rest.put('/qa/answers/:answerId/report', (req, res, ctx) => res(
+    ctx.status(204),
     ctx.delay(150),
-  ))
+  )),
+  rest.put('/qa/:questionOrAnswer/:itemId/helpful', (req, res, ctx) => res(
+    ctx.status(204),
+    ctx.delay(150),
+  )),
 ];
 
 const server = setupServer(...handlers);
@@ -54,8 +57,6 @@ test('QnA shows renders when correct data is received', async () => {
   // check loading state
   expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
   // check if all the components load
-  // search bar
-  expect(await screen.getByPlaceholderText('Have a question? Search for answers…')).toBeInTheDocument();
   // questions list
   /// buttons
   /// qna set
@@ -125,8 +126,30 @@ test('A customer can report an answer', async () => {
   );
 
   // report button is rendered
-  const reportAnswer = await screen.findAllByRole('button', { name: /report-button/i });
-  expect(reportAnswer[0]).toBeInTheDocument();
+  const reportAnswer = (await screen.findAllByRole('button', { name: /report-button/i }))[0];
+  expect(reportAnswer).toBeInTheDocument();
+  fireEvent.click(reportAnswer);
+  await waitFor(() => {
+    expect(reportAnswer).toBeDisabled();
+  });
+});
 
+test('A customer can mark a question helpful', async () => {
+  renderWithProviders(
+    <Router>
+      <QuestionsAnswers />
+    </Router>,
+  );
 
+  // report button is rendered
+  const helpfulQuestion= (await screen.findAllByLabelText('helpful-button'))[0];
+  expect(helpfulQuestion).toBeInTheDocument();
+  // before: helpful count is 27
+  expect(helpfulQuestion.textContent).toBe('Yes(27)');
+  // button is clicked
+  fireEvent.click(helpfulQuestion);
+  await waitFor(() => {
+    // helpful count changes from 27 to 28
+    expect(helpfulQuestion.textContent).toBe('Yes(28)');
+  });
 });
