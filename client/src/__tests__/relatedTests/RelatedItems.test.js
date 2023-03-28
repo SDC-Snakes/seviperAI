@@ -122,14 +122,7 @@ test('Your outfit title renders to the page', () => {
     <Router>
       <OutfitList />
     </Router>,
-    {
-      preloadedState: {
-        products: stateStub.products,
-        related: relatedStub.related,
-      },
-    },
   );
-  screen.logTestingPlaygroundURL();
   expect(screen.getByText('Your outfit')).toBeInTheDocument();
   expect(screen.getByText('Add to outfit')).toBeInTheDocument();
 });
@@ -154,10 +147,20 @@ test('outfit cards render to the screen', () => {
       },
     },
   );
-  screen.logTestingPlaygroundURL();
   expect(screen.getByText('Kicks')).toBeInTheDocument();
   expect(document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
+});
+
+test('items list title renders to the page', async () => {
+  renderWithProviders(
+    <Router>
+      {/* <ComparisonModal /> */}
+      <ItemsList />
+    </Router>,
+  );
+  screen.logTestingPlaygroundURL();
+  expect(await screen.getByText('Other items that may interest you')).toBeInTheDocument();
 });
 
 // test('items list cards render to the screen', () => {
