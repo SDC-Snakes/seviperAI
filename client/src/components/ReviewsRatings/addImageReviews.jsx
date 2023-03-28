@@ -8,11 +8,16 @@ function AddImageReviews({ uploadImageHandler }) {
   const [modal, setModal] = useState(false);
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
-  const handleUploadedImages = () => {
-    if (inputField.length > 1) {
-      setImages((prevState) => [...prevState, inputField]);
+  const handleUploadedImages = (image) => {
+    if (inputField.length > 1 || image.length > 1) {
+      const newImage = inputField || image;
+      setImages((prevState) => [...prevState, newImage]);
       setInputField('');
     }
+  };
+  const handleDropedInImages = (image) => {
+    console.log('%%image in handleDropedInImages', image);
+    setImages((prevState) => [...prevState, image]);
   };
   const handleInputFieldChange = (e) => {
     setInputField(e.target.value);
@@ -26,7 +31,7 @@ function AddImageReviews({ uploadImageHandler }) {
         type="submit"
         onClick={(event) => {
           event.preventDefault();
-          uploadImageHandler(images);
+          //uploadImageHandler(images);
           toggleModal(true);
         }}
         value="Add images"
@@ -42,7 +47,7 @@ function AddImageReviews({ uploadImageHandler }) {
                 value={inputField}
                 onChange={handleInputFieldChange}
               />
-              <ImageDropzone handleUploadedImages={handleUploadedImages} />
+              <ImageDropzone handleDropedInImages={handleDropedInImages} />
               {images.length < 5
                 && (
                 <input
@@ -50,7 +55,7 @@ function AddImageReviews({ uploadImageHandler }) {
                   className={RNRCSS['add-image-input']}
                   onClick={(event) => {
                     event.preventDefault();
-                    handleUploadedImages(inputField);
+                    handleUploadedImages();
                   }}
                   value="upload image"
                 />
@@ -64,6 +69,7 @@ function AddImageReviews({ uploadImageHandler }) {
                       src={image}
                       alt={`${image}`}
                       key={nanoid()}
+                      referrerPolicy="no-referrer"
                     />
                   ))}
                 </div>
