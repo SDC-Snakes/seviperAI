@@ -41,7 +41,7 @@ function Carousel() {
   return (
     <div>
       <div className={`${itemStyles['items-list-container']} ${itemStyles['items-list-related']}`}>
-        {relatedIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide('related')} />}
+        {relatedIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide('related')} aria-label="left-arrow" />}
 
         <ItemsList relatedIndex={relatedIndex} />
 
@@ -49,7 +49,7 @@ function Carousel() {
         && <FaChevronRight className={itemStyles['right-arrow']} onClick={() => nextSlide('related')} />}
       </div>
       <div className={`${itemStyles['items-list-container']} ${itemStyles['items-list-outfit']}`}>
-        {outfitIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide()} />}
+        {outfitIndex >= 1 && <FaChevronLeft className={itemStyles['left-arrow']} onClick={() => prevSlide()} aira-label="right-arrow" />}
 
         <OutfitList outfitIndex={outfitIndex} />
 
