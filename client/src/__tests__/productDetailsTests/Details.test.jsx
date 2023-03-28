@@ -8,7 +8,7 @@ import stateStub from '../proxies/stateProxy';
 import Details from '../../components/ProductDetails/Details';
 
 test('products details render', async () => {
-  renderWithProviders(<Details handleScroll={() => console.log('testScroll')}/>, {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
       reviews: stateStub.reviews,
@@ -19,7 +19,7 @@ test('products details render', async () => {
 });
 
 test('the select size dropdown renders out of stock when no items in stock', async () => {
-  renderWithProviders(<Details />, {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
       reviews: stateStub.reviews,
@@ -30,7 +30,7 @@ test('the select size dropdown renders out of stock when no items in stock', asy
 });
 
 test('the select size dropdown renders size options when the item is in stock', async () => {
-  renderWithProviders(<Details />, {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
       reviews: stateStub.reviews,
@@ -41,8 +41,46 @@ test('the select size dropdown renders size options when the item is in stock', 
   const styleImages = screen.getAllByRole('button', { name: 'style-image' });
   await userEvent.click(styleImages[1]);
   expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
-  screen.logTestingPlaygroundURL();
+  // screen.logTestingPlaygroundURL();
 
-  // expect(screen.queryByText('Out Of Stock')).toBeNull();
+  expect(screen.queryByText('Out Of Stock')).toBeNull();
   expect(await screen.findByText('Select Size')).toBeInTheDocument();
+});
+
+test('the select size dropdown is selected and opened when add to cart clicked without size selection', async () => {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  const styleImages = screen.getAllByRole('button', { name: 'style-image' });
+  await userEvent.click(styleImages[1]);
+  expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+  // screen.logTestingPlaygroundURL();
+
+  await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
+  expect(await screen.findByText('S')).toBeInTheDocument();
+});
+
+test('the select size dropdown is selected and opened when add to cart clicked without size selection', async () => {
+  renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  const styleImages = screen.getAllByRole('button', { name: 'style-image' });
+  await userEvent.click(styleImages[1]);
+  expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+
+  const option = screen.getByRole('option', { name: 'XS' });
+  await userEvent.click(option);
+  expect(screen.getByRole('option', { name: 'XS' }).selected).toBeTruthy();
+  await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
+  expect(screen.getByRole('option', { name: 'Select Size' }).selected).toBeTruthy();
 });

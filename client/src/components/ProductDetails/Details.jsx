@@ -38,7 +38,7 @@ function Details({ handleScroll }) {
 
   useEffect(() => {
     setStock(checkStock());
-  }, []);
+  }, [selectedStyle]);
 
   if (quantity > 15) {
     quantity = 15;
@@ -127,7 +127,7 @@ function Details({ handleScroll }) {
         </select>
       </div>
       <div className="dropdowns">
-        <button className="cart-btn" type="button" onClick={handleCartClick}>
+        <button className="cart-btn" type="button" aria-label="cart-btn" onClick={handleCartClick}>
           Add to cart
         </button>
         <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
