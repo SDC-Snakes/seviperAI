@@ -36,7 +36,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('Search bar renders', async () => {
-  renderWithProviders(<Search />, {
+  renderWithProviders(<QuestionsAnswers />, {
     preloadedState: {
     },
   });
@@ -45,5 +45,6 @@ test('Search bar renders', async () => {
   // Check that loading state is not displayed
   // expect(screen.queryByText('Loading...')).toBeNull();
   expect(screen.getByText('SEARCH DIV')).toBeInTheDocument();
+  screen.logTestingPlaygroundURL();
   // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });
