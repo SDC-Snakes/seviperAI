@@ -11,12 +11,12 @@ function Description({ details }) {
         <h3>{details.slogan}</h3>
         {details.description}
       </div>
-      <div className="features-card center">
+      <div className="features-card">
         <ol>
           {details.features.map((item) => {
             const { feature, value } = item;
             return value ? (
-              <li className="feature-item" key={nanoid()}>
+              <li className="feature-item center" key={nanoid()}>
                 <FaRegCheckCircle />
                 &nbsp;
                 {`  ${feature}  :  ${value}`}

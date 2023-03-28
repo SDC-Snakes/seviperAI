@@ -34,16 +34,20 @@ function ReviewTile({ reviewsObj }) {
   };
   return (
     <div className={RNRCSS['review-tile-in-reviews']}>
+      <div className={RNRCSS['review-username-in-reviews-tile']}>
+        {reviewsObj.reviewer_name}
+        <span className={RNRCSS['date-tile-in-reviews']}>
+          { format(new Date(reviewsObj.date), 'MMMM dd yyyy') }
+        </span>
+      </div>
       {reviewsObj.rating}
       <QuarterIncStarRating averageRating={reviewsObj.rating} />
-      <small>
-        { format(new Date(reviewsObj.date), 'MMMM dd yyyy') }
-      </small>
-      <h5>
+
+      <div className={RNRCSS['review-title-in-reviews-tile']}>
         {/* Review Title Summary: */}
         {reviewsObj.summary}
-      </h5>
-      <div style={{ maxWidth: '90%' }}>
+      </div>
+      <div className={RNRCSS['review-body-in-reviews-tile']}>
 
         {reviewsObj.body.slice(0, 250)}
         {showFull && reviewsObj.body.slice(250)}
@@ -62,7 +66,7 @@ function ReviewTile({ reviewsObj }) {
           </a>
         )}
       </div>
-      {reviewsObj.photos.map((photo) => (
+      {reviewsObj.photos.length >= 1 && reviewsObj.photos.map((photo) => (
         <span key={photo.id}>
           <img
             className={RNRCSS['thumbnail-review-image']}
@@ -86,16 +90,11 @@ function ReviewTile({ reviewsObj }) {
       )}
       { reviewsObj.recommend
       && (
-      <div>
+      <div className={RNRCSS['recommend-product-message']}>
         <FaRegCheckCircle />
         I recommend this product
       </div>
       )}
-
-      <h6>
-        { /* Reviewer Name: */ }
-        {reviewsObj.reviewer_name}
-      </h6>
 
       {reviewsObj.response && (
       <div className={RNRCSS['response-from-seller']}>
@@ -104,15 +103,19 @@ function ReviewTile({ reviewsObj }) {
       </div>
       )}
 
-      <div>
+      <div className={RNRCSS['helpful-in-review-tile']}>
         Helpful?
-        <span onClick={helpfulClickHandler}>
-          Yes
-          {reviewsObj.helpfulness}
+        <span
+          className={RNRCSS['helpful-text-in-review-tile']}
+          onClick={helpfulClickHandler}
+        >
+          {' '}Yes{' '}
+          {' ('}{reviewsObj.helpfulness}{') '}
         </span>
-        |
-        <span>No</span>
-        <div onClick={reportClickHandler}>
+        <div
+          className={RNRCSS['report-text-in-review-tile']}
+          onClick={reportClickHandler}
+        >
           Report
         </div>
       </div>
