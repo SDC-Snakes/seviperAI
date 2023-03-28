@@ -66,7 +66,7 @@ function ReviewTile({ reviewsObj }) {
           </a>
         )}
       </div>
-      {reviewsObj.photos.map((photo) => (
+      {reviewsObj.photos.length >= 1 && reviewsObj.photos.map((photo) => (
         <span key={photo.id}>
           <img
             className={RNRCSS['thumbnail-review-image']}

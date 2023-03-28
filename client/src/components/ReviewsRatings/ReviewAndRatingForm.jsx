@@ -32,7 +32,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
     recommend: true,
     name: '',
     email: '',
-    photos: ['testlink'],
+    photos: [],
     characteristics,
   });
   const [triggerReview, { data, isSuccess }] = usePostNewReviewMutation();
