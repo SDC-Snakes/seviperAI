@@ -43,6 +43,12 @@ export const handlers = [
 
 const server = setupServer(...handlers);
 
+beforeAll(() => server.listen());
+
+afterEach(() => server.resetHandlers());
+
+afterAll(() => server.close());
+
 test('renders a product\'s information to its card', async () => {
   const proxyName = relatedItem.details.name;
   const proxyCategory = relatedItem.details.category;
