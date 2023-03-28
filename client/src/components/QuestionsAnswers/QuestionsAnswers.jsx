@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Search from './subComponents/Search';
 import QuestionsList from './subComponents/QuestionsList';
 import WindowWrapper from './ModalWindow/WindowWrapper';
-import useAsync from './useAsync';
 import qnaStyles from './qnaStyles.module.css';
 import { useGetQuestionsQuery } from '../../features/api/apiSlice';
 
@@ -49,23 +46,6 @@ function QuestionsAnswers() {
     });
   // fetching initial data
   /// handle loading and error
-  const reqObjs = () => [
-    // questions for a product
-    axios.get(`http://localhost:${process.env.PORT}/qa/questions/`, {
-      params: {
-        product_id: params.productId,
-        page: 1,
-        count: 100,
-      },
-    }),
-    // product info. for adding a question and answer
-    axios.get(`http://localhost:${process.env.PORT}/products/${params.productId}`),
-  ];
-
-  // custom hook to handle requests
-  // const { state: { loading, response, error } } = useAsync(reqObjs, [reload]);
-
-  // handle loading state;
   if (isFetching) return <div> Loading...</div>;
   if (isError) return <div> Error has occurred while loading</div>;
   if (!questionsRTK) return null;
@@ -89,7 +69,6 @@ function QuestionsAnswers() {
       setQuestionFormVisible(visibleState);
     }
     if (refetch) {
-      console.log(reload);
       setReload(!reload);
     }
   };

@@ -7,7 +7,7 @@
     "start": "node server/index.js",
     "reset-main": "git checkout main && git fetch origin && git reset --hard origin/main",
     "test": "jest",
-    "test-qna": "npx jest client/src/__tests__/qnaTests/ —collect-coverage"
+    "test-qna": "npx jest --collect-coverage client/src/__tests__/qnaTests"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
