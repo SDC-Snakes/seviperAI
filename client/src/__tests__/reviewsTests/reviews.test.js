@@ -13,11 +13,11 @@ import ReviewsAndRatings from '../../components/ReviewsRatings/ReviewsAndRatings
 
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
-  rest.get('/reviews/:productId', (req, res, ctx) => res(
-    ctx.json(reviewsStub),
+  rest.get('/reviews', (req, res, ctx) => res(
+    ctx.json(reviewsStub.reviews),
     ctx.delay(150),
   )),
-  rest.get('/reviews/meta/:productId', (req, res, ctx) => res(
+  rest.get('/reviews/meta', (req, res, ctx) => res(
     ctx.json(reviewsMetaStub),
     ctx.delay(150),
   )),
@@ -42,7 +42,7 @@ test('reviews render after making a call to the API', async () => {
     {
       preloadedState: {
         products: stateStub.products,
-        reviews: stateStub.reviews,
+        reviews: reviewsStub,
       },
     },
   );
@@ -50,6 +50,7 @@ test('reviews render after making a call to the API', async () => {
 
   expect(await screen.findByText("Product Reviews")).toBeInTheDocument();
   expect(await screen.findByText("Product Ratings")).toBeInTheDocument();
+  expect(await screen.findByText("Rating Breakdown")).toBeInTheDocument();
 
 });
 
