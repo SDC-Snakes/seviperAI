@@ -52,7 +52,7 @@ test('products details render after making a call to the API', async () => {
   expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
 
   // Check that loading state is not displayed
-  expect(await screen.queryByText('Loading...')).toBeNull();
+  expect(screen.queryByText('Loading...')).toBeNull();
 });
 
 test('products details disappear after clicking expand button', async () => {

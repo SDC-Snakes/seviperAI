@@ -122,7 +122,7 @@ const stateStub = {
             size: 'XS',
           },
           1394788: {
-            quantity: 16,
+            quantity: 18,
             size: 'S',
           },
           1394789: {

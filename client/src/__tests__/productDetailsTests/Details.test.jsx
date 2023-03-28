@@ -14,12 +14,8 @@ test('products details render', async () => {
       reviews: stateStub.reviews,
     },
   });
-  // screen.debug();
 
-  // Check that loading state is not displayed
-  // expect(screen.queryByText('Loading...')).toBeNull();
   expect(screen.getByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
-  // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });
 
 test('the select size dropdown renders out of stock when no items in stock', async () => {
@@ -29,10 +25,24 @@ test('the select size dropdown renders out of stock when no items in stock', asy
       reviews: stateStub.reviews,
     },
   });
-  // screen.debug();
 
-  // Check that loading state is not displayed
-  // expect(screen.queryByText('Loading...')).toBeNull();
   expect(screen.getByText('Out Of Stock')).toBeInTheDocument();
-  // expect(screen.getByText('Some other string')).toBeInTheDocument();
+});
+
+test('the select size dropdown renders size options when the item is in stock', async () => {
+  renderWithProviders(<Details />, {
+    preloadedState: {
+      products: stateStub.products,
+      reviews: stateStub.reviews,
+    },
+  });
+
+  expect(await screen.findByText(stateStub.products.selectedStyle.name)).toBeInTheDocument();
+  const styleImages = screen.getAllByRole('button', { name: 'style-image' });
+  await userEvent.click(styleImages[1]);
+  expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
+  screen.logTestingPlaygroundURL();
+
+  // expect(screen.queryByText('Out Of Stock')).toBeNull();
+  expect(await screen.findByText('Select Size')).toBeInTheDocument();
 });
