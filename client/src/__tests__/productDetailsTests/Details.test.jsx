@@ -4,8 +4,17 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import Details from '../../components/ProductDetails/Details';
+
+export const handlers = [
+  rest.post('/cart', (req, res, ctx) => res(
+    ctx.data('Content created'),
+    ctx.delay(150),
+  )),
+];
 
 test('products details render', async () => {
   renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
@@ -89,6 +98,9 @@ test('the select size dropdown is selected and opened when add to cart clicked w
 });
 
 test('a quantity can be selected once a size has been selected', async () => {
+  const server = setupServer(...handlers);
+  server.listen();
+
   renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
@@ -111,4 +123,9 @@ test('a quantity can be selected once a size has been selected', async () => {
 
   expect(await screen.findByRole('option', { name: '-' }).selected).toBeFalsy();
   expect(screen.getByRole('option', { name: '1' }).selected).toBe(true);
+
+  await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
+
+  server.resetHandlers();
+  server.close();
 });
