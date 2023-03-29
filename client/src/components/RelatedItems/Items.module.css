@@ -149,7 +149,6 @@ body.active-modal {
 
 .modal {
   position: relative;
-  caption-side: top;
 }
 
 .overlay {
@@ -163,11 +162,11 @@ body.active-modal {
   position: fixed;
 }
 
-.modal-content {
+.modal-frame {
   position: fixed;
   display: grid;
   grid-template: 1fr 1fr 7fr / 1fr 3fr 1fr;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   top: 50%;
   left: 50%;
   min-width: 450px;
@@ -175,9 +174,19 @@ body.active-modal {
   min-height: 200px;
   max-height: 250px;
   transform: translate(-50%, -50%);
+  background: var(--sec1-color);
+}
+
+.modal-content {
   border-radius: 10px;
-  background: #fff;
-  filter: drop-shadow(0px 2px 8px var(--shadow-color))
+  border: 1px solid var(--main-color);
+  z-index: 2;
+}
+
+.modal-bottom {
+  filter: drop-shadow(0px 2px 8px var(--shadow-color));
+  bottom: 1px;
+  border-bottom: 20px solid var(--main-color);
 }
 
 .close-modal {
@@ -192,7 +201,7 @@ body.active-modal {
 .modal-title {
   grid-column: 2 / span 1;
   text-align: center;
-  background: #fff;
+  color: var(--main5-color);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-size: 20px;

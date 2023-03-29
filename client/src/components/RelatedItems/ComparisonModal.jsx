@@ -30,7 +30,7 @@ function ComparisonModal() {
   return modalOpen && (
     <div className={itemStyles.modal}>
       <div className={itemStyles.overlay} onClick={closeModal} />
-        <div className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+        <div className={`${itemStyles['modal-content']} ${itemStyles['modal-frame']}`} onClick={(e) => e.stopPropagation()}>
           <div className={itemStyles['modal-title']}>Comparing</div>
           <div>
             <span className={itemStyles['modal-headers']}>
@@ -42,6 +42,7 @@ function ComparisonModal() {
             {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
           </div>
         </div>
+      <div className={`${itemStyles['modal-frame']} ${itemStyles['modal-bottom']}`} />
     </div>
   );
 }
