@@ -227,7 +227,6 @@ body.active-modal {
 .modal-entry-container {
   display: grid;
   grid-area: 3 / 1 / span 5 / span 3;
-  grid-template-columns: inherit;
   width: 100%;
   height: 80%;
   padding-top: 10px;
@@ -236,18 +235,16 @@ body.active-modal {
 
 .modal-entry {
   display: grid;
-  grid-column: 2 / span 1;
   text-align: center;
-  position: absolute;
   font-size: 12px;;
 }
 
 .modal-left-check {
   position: absolute;
-  left: 25%;
+  left: 15%;
 }
 
 .modal-right-check {
   position: absolute;
-  right: 25%;
+  right: 15%;
 }

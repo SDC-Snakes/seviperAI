@@ -16,7 +16,7 @@ function ComparisonModal() {
     return (
       <div key={index} className={itemStyles['modal-row']}>
         <span className={itemStyles['modal-left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</span>
-        <span className={itemStyles.entry}>{char.value}</span>
+        <span className={itemStyles['modal-entry']}>{char.value}</span>
         <span className={itemStyles['modal-right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</span>
       </div>
     );
@@ -34,8 +34,8 @@ function ComparisonModal() {
           <div className={itemStyles['modal-title']}>Comparing</div>
           <div>
             <span className={itemStyles['modal-headers']}>
-              <span className={`${itemStyles['modal-current-product']}${itemStyles['modal-product']}`}>{currentProductName}</span>
-              <span className={`${itemStyles['modal-related-product']}${itemStyles['modal-product']}`}>{relatedProductName}</span>
+              <span className={`${itemStyles['modal-current-product']} ${itemStyles['modal-product']}`}>{currentProductName}</span>
+              <span className={`${itemStyles['modal-related-product']} ${itemStyles['modal-product']}`}>{relatedProductName}</span>
             </span>
           </div>
           <div className={itemStyles['modal-entry-container']}>
