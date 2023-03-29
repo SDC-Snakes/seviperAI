@@ -7,7 +7,7 @@ function ImageDropzone({ handleDropedInImages }) {
   const [images, setImages] = useState([]);
   const addImages = (imageUrl) => {
     setImages((prevImages) => [...prevImages, imageUrl]);
-    handleDropedInImages([imageUrl])
+    handleDropedInImages(imageUrl)
   }
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
