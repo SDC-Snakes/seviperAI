@@ -15,8 +15,6 @@ function Carousel() {
   } = useSelector((state) => state.related);
   const dispatch = useDispatch();
 
-  console.log('related: ', related);
-
   function nextSlide(relatedList) {
     if (relatedList) {
       dispatch(newRelatedCarouselIndex(relatedIndex === related.length - 1 ? 0 : relatedIndex + 1));
