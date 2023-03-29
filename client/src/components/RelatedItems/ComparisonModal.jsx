@@ -14,11 +14,11 @@ function ComparisonModal() {
 
   function renderComparison(char, index) {
     return (
-      <tr key={index} className={itemStyles['modal-row']}>
-        <td className={itemStyles['modal-left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
-        <td className={itemStyles.entry}>{char.value}</td>
-        <td className={itemStyles['modal-right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
-      </tr>
+      <div key={index} className={itemStyles['modal-row']}>
+        <span className={itemStyles['modal-left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</span>
+        <span className={itemStyles.entry}>{char.value}</span>
+        <span className={itemStyles['modal-right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</span>
+      </div>
     );
   }
 
@@ -30,18 +30,18 @@ function ComparisonModal() {
   return modalOpen && (
     <div className={itemStyles.modal}>
       <div className={itemStyles.overlay} onClick={closeModal} />
-        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
-          <caption className={itemStyles['modal-title']}>Comparing</caption>
-          <thead>
-            <tr className={itemStyles['modal-headers']}>
-              <th className={itemStyles['modal-current-product']}>{currentProductName}</th>
-              <th className={itemStyles['modal-related-product']}>{relatedProductName}</th>
-            </tr>
-          </thead>
-          <tbody className={itemStyles['modal-entry-container']}>
+        <div className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
+          <div className={itemStyles['modal-title']}>Comparing</div>
+          <div>
+            <span className={itemStyles['modal-headers']}>
+              <span className={`${itemStyles['modal-current-product']}${itemStyles['modal-product']}`}>{currentProductName}</span>
+              <span className={`${itemStyles['modal-related-product']}${itemStyles['modal-product']}`}>{relatedProductName}</span>
+            </span>
+          </div>
+          <div className={itemStyles['modal-entry-container']}>
             {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-          </tbody>
-        </table>
+          </div>
+        </div>
     </div>
   );
 }
