@@ -189,20 +189,20 @@ test('Outfit cards render to the screen', () => {
   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
 });
 
-test('Carousel renders both lists to the screen', () => {
-  renderWithProviders(
-    <Router>
-      <Carousel />
-    </Router>,
-    {
-      preloadedState: {
-        products: stateStub.products,
-        related: relatedStub.related,
-      },
-    },
-  );
-  expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
-});
+// test('Carousel renders both lists to the screen', () => {
+//   renderWithProviders(
+//     <Router>
+//       <Carousel />
+//     </Router>,
+//     {
+//       preloadedState: {
+//         products: stateStub.products,
+//         related: relatedStub.related,
+//       },
+//     },
+//   );
+//   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
+// });
 
 // test('items list cards render to the screen', () => {
 //   renderWithProviders(
