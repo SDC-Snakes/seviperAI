@@ -17,7 +17,7 @@ function RatingBar({ index, element, reviewsNum }) {
       className="rating-bar-container"
       onClick={() => (rateFunc(index + 1))}
     >
-      <span style={{ font: '2px' }}>
+      <span>
         {index + 1}
         Stars
       </span>
