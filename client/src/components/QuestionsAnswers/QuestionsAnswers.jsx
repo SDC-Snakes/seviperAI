@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Search from './subComponents/Search';
 import QuestionsList from './subComponents/QuestionsList';
 import WindowWrapper from './ModalWindow/WindowWrapper';
-import useAsync from './useAsync';
 import qnaStyles from './qnaStyles.module.css';
+import { useGetQuestionsQuery } from '../../features/api/apiSlice';
 
 // create and export css as a context object
 export const QnaStyles = React.createContext(null);
@@ -28,34 +27,34 @@ function QuestionsAnswers() {
   const [timeoutID, setTimeoutID] = useState(null);
   // show only 4 questions when reloaded
   useEffect(() => setNumberOfQs(4), [reload]);
+
+  // RTK QUERY
+  // const {
+  //   data: questionsRTK,
+  //   // isFetchingQuestions,
+  // }
+  const questionsQueryParams = {
+    productId: `${params.productId}`,
+    page: 1,
+    count: 100,
+    reload,
+  };
+  const { data: questionsRTK,
+    isError, isFetching}
+    = useGetQuestionsQuery(questionsQueryParams, {
+      refetchOnMountOrArgChange: true,
+    });
   // fetching initial data
   /// handle loading and error
-  const reqObjs = () => [
-    // questions for a product
-    axios.get(`http://localhost:${process.env.PORT}/qa/questions/`, {
-      params: {
-        product_id: params.productId,
-        page: 1,
-        count: 100,
-      },
-    }),
-    // product info. for adding a question and answer
-    axios.get(`http://localhost:${process.env.PORT}/products/${params.productId}`),
-  ];
-
-  // custom hook to handle requests
-  const { state: { loading, response, error } } = useAsync(reqObjs, [reload]);
-
-  // handle loading state;
-  if (loading) return <div> Loading...</div>;
-  if (error) return <div> Error has occurred while loading</div>;
-  if (!response) return null;
+  if (isFetching) return <div> Loading...</div>;
+  if (isError) return <div> Error has occurred while loading</div>;
+  if (!questionsRTK) return null;
 
   // extract data from responses
   // sort according to helpfulness
   const sortDescHelpful = (a, b) => (b.question_helpfulness - a.question_helpfulness);
-  const questions = response[0].data.results.sort(sortDescHelpful);
-  const productInfo = response[1].data;
+  const questions = questionsRTK.results.slice();
+  questions.sort(sortDescHelpful);
 
   // function for loading more questions
   const loadMoreQs = () => {
@@ -90,7 +89,7 @@ function QuestionsAnswers() {
     <QnaStyles.Provider value={qnaStyles}>
       <OnAddAnswer.Provider value={onAdd}>
         <div className={qnaStyles['qna-container-main']}>
-          <h2>Main Q&A Div</h2>
+          <h4>Questions & Answers</h4>
           <Search onSearch={onSearch} />
           {questions.length === 0
             ? <div> Have a question about our products? Ask us here! </div>
@@ -104,15 +103,19 @@ function QuestionsAnswers() {
           {/* show more questions button only when there are more */}
           <div>
             {numberOfQs < questions.length
-              && <input type="button" onClick={loadMoreQs} value="More Answered Questions" />}
-            <input type="button" onClick={() => { onAdd('question', true); }} value="Add a question +" />
+              && <input
+              type="button"
+              onClick={loadMoreQs}
+              value="More Answered Questions"
+              name="more-question"
+              />}
+            <input type="button" aria-label="add-question" onClick={() => { onAdd('question', true); }} value="Add a question +" />
           </div>
           {answerFormVisible
             && (
               <WindowWrapper
                 qnaStyles={qnaStyles}
                 onAdd={onAdd}
-                productInfo={productInfo}
                 questionInfo={questionInfo}
                 form="answer"
               />
@@ -122,7 +125,6 @@ function QuestionsAnswers() {
               <WindowWrapper
                 qnaStyles={qnaStyles}
                 onAdd={onAdd}
-                productInfo={productInfo}
                 form="question"
               />
             )}

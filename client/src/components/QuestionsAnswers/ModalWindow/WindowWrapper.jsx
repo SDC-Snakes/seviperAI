@@ -2,7 +2,7 @@ import React from 'react';
 import QnaForm from './QnaForm';
 
 function WindowWrapper({
-  qnaStyles, onAdd, productInfo, questionInfo, form,
+  qnaStyles, onAdd, questionInfo, form,
 }) {
   // const [reqStatus, setReqStatus] = useState(false);
   return (
@@ -12,7 +12,6 @@ function WindowWrapper({
           <QnaForm
             qnaStyles={qnaStyles}
             onAdd={onAdd}
-            productInfo={productInfo}
             questionInfo={questionInfo}
           />
         </div>
