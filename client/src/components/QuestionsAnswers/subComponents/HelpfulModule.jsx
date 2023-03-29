@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import useAsync from '../useAsync';
+import React, { useState } from 'react';
+import { useHelpfulQNAMutation } from '../../../features/api/apiSlice';
 
-function HelpfulModule({ count, itemId, item }) {
+function HelpfulModule({ count, item, itemId }) {
   const [countTemp, setCountTemp] = useState(count);
-  const [reqObjs, setReqObjs] = useState(Function);
-  const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
+  const [triggerHelpful, { isSuccess, reset }] = useHelpfulQNAMutation();
 
-  useEffect(() => {
-    if (response !== null && response[0] && response[0].status === 204) {
-      setCountTemp(count + 1);
-      setReqObjs(Function);
-    }
-  });
+  if (isSuccess) {
+    setCountTemp(count + 1);
+    reset();
+  }
 
   const onClick = () => {
-    setReqObjs(() => function putRequest() {
-      return [
-        axios.put(`http://localhost:${process.env.PORT}/qa/${item}/${itemId}/helpful`),
-      ];
-    });
+    triggerHelpful({ item, itemId });
   };
 
   return (
@@ -27,7 +19,7 @@ function HelpfulModule({ count, itemId, item }) {
       <span className="helpful-text">
         Helpful?
       </span>
-      <span className="yes-button" onClick={onClick}>
+      <span className="yes-button" onClick={onClick} aria-label='helpful-button'>
         Yes(
         {countTemp}
         )

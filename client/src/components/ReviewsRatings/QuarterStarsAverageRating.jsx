@@ -1,3 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import QuarterIncStarRating from './QuarterIncStarRating';
 
@@ -5,10 +9,10 @@ function QuarterStarsAverageRating({ productRating }) {
   let sum = 0;
   let numOfRatings = 0;
   if (!productRating || Object.keys(productRating).length === 0) {
-    return ;
+    return;
   }
   for (const key in productRating) {
-    sum+= (Number(key) * Number(productRating[key]));
+    sum += (Number(key) * Number(productRating[key]));
     numOfRatings += Number(productRating[key]);
   }
 
@@ -16,7 +20,8 @@ function QuarterStarsAverageRating({ productRating }) {
   const roundedAvg = Math.round(averageRating * 10) / 10;
   return (
     <span>
-      {roundedAvg} <QuarterIncStarRating averageRating={roundedAvg} />
+      {roundedAvg}
+      <QuarterIncStarRating averageRating={roundedAvg} />
     </span>
   );
 }

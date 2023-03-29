@@ -1,25 +1,29 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 // this is the Average ratings and reviews component
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaSortDown } from 'react-icons/fa';
 import { newSetRating, newResetRating } from '../../features/reviews/reviewsSlice';
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
-import { FaSortDown } from 'react-icons/fa';
+import Spinner from '../SharedComponents/Spinner';
 
-function AverageRatings({RNRCSS}) {
+function AverageRatings({ RNRCSS }) {
   const dispatch = useDispatch();
-  const barRating = useSelector(state => state.reviews.ratingBarSelect);
+  const barRating = useSelector((state) => state.reviews.ratingBarSelect);
   const { meta } = useSelector((state) => state.reviews);
   const obj = meta.ratings;
   const values = Object.values(obj);
   if (values.length === 0) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
   const starRatingPercentages = keys.map((key) => ((obj[key] / totalNumRatings) * 100));
-  // recommended percentage calculation
   // eslint-disable-next-line max-len
   const recommendPercent = (Number(meta.recommended.true) / (Number(meta.recommended.true) + Number(meta.recommended.false))) * 100;
   return (
@@ -27,7 +31,8 @@ function AverageRatings({RNRCSS}) {
       <h3>Product Ratings</h3>
       <QuarterStarsAverageRating productRating={obj} />
       <div>
-        Total number of reviews: {totalNumRatings}
+        Total number of reviews:
+        {totalNumRatings}
       </div>
       <h4>Rating Breakdown</h4>
       {barRating.length > 0 && (
@@ -40,8 +45,9 @@ function AverageRatings({RNRCSS}) {
               className={RNRCSS['reviews-filter']}
               key={index.toString()}
               value={filter}
-              onClick={()=>{ dispatch(newSetRating(filter))}}>
-                <FaSortDown />
+              onClick={() => { dispatch(newSetRating(filter)); }}
+            >
+              <FaSortDown />
               {filter}
             </span>
 
@@ -51,19 +57,20 @@ function AverageRatings({RNRCSS}) {
               className={RNRCSS['reviews-filter-reset-input']}
               type="submit"
               value="reset filters"
-              onClick={()=>{dispatch(newResetRating())}} />
+              onClick={() => { dispatch(newResetRating()); }}
+            />
           </div>
         </div>
       )}
 
       {
-        // make sure that the data returned from the API includes
-        // all 5 stars always, meaning if no one rated the product
-        // for 4 stars , 4 will still be a property in the object
-        // and has a value of 0
         starRatingPercentages.map((element, index) => (
           <div key={index.toString()}>
-            <RatingBar index={index} element={Number(element)} reviewsNum={values[index]} />
+            <RatingBar
+              index={index}
+              element={Number(element)}
+              reviewsNum={values[index]}
+            />
           </div>
         ))
       }

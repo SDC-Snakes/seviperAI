@@ -1,10 +1,3 @@
-// this component will render the characteristics bars for the current product
-// use meta data
-// not all characteristics are relevant for each product
-// will need similar css styling to that of rating bars
-// first off handle data
-// then css
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaSortDown } from 'react-icons/fa';
@@ -25,7 +18,10 @@ function CharBar() {
   return (
     <div>
       {charKeys.map((char) => (
-        <div className={charCSS['char-major-container']} key={charObj[char].id}>
+        <div
+          className={charCSS['char-major-container']}
+          key={charObj[char].id}
+        >
           <div className={charCSS['char-bar-label']}>
             {`(${char})`}
           </div>
@@ -35,9 +31,12 @@ function CharBar() {
             </div>
           </div>
           <div>
-            <span className={charCSS['char-1']}>{charRateValues[char][0]}</span>
-            <span className={charCSS['char-5']}>{charRateValues[char][1]}</span>
-
+            <span className={charCSS['char-1']}>
+              {charRateValues[char][0]}
+            </span>
+            <span className={charCSS['char-5']}>
+              {charRateValues[char][1]}
+            </span>
           </div>
         </div>
       ))}

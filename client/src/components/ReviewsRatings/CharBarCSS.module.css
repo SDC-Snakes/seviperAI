@@ -1,6 +1,8 @@
 /***** Rating Bar *****/
 .char-bar-label {
-  margin-top: 5px;
+  margin-top: 10px;
+  font-size: 10px;
+  margin-left: 2%;
 }
 .char-bar-container {
   display: flex;
@@ -20,9 +22,7 @@
   border-radius: 10px;
   background-color: #e4e5e9;
   margin-bottom: 10px;
-   flex-direction: row; /* default direction */
-
-
+  flex-direction: row;
 }
 
 .char-bar-icon {
@@ -33,14 +33,24 @@
   border-radius: 10px;
    color: grey;
 }
+
+
 .char-1 {
-  margin-left: 4%;
-  font-size: 10px;
+  position: absolute;
+  margin-top: 5px;
+  font-size: 8px;
+  bottom: 0;
+  left: 5%;
 }
+
 .char-5 {
-  margin-left: 40%;
-  font-size: 10px;
+  position: absolute;
+  margin-top: 5px;
+  font-size: 8px;
+  bottom: 0;
+  right: 5%;
 }
 .char-major-container {
-  display: flex;
+  position: relative;
+  font-size: 12px;
 }

@@ -1,22 +1,16 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-// this is the Review Tile component
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import QuarterIncStarRating from './QuarterIncStarRating';
-import Report from './Report';
 import ThumbnailImageModal from './ThumbnailImageModal';
 import RNRCSS from './Modal.module.css';
 import { useHelpfulReviewMutation, useReportReviewMutation } from '../../features/api/apiSlice';
 
 function ReviewTile({ reviewsObj }) {
-const [helpful, setHelpful] = useState({});
-  // send a post request with the helpful state to the API when helpful is 'yes'
-
   const [modalImage, setModalImage] = useState(false);
   const [photoState, setPhotoState] = useState('');
   const [showFull, setShowFull] = useState(false);
@@ -26,8 +20,8 @@ const [helpful, setHelpful] = useState({});
   const togglePhotoState = (photo) => (
     setPhotoState(photo)
   );
-  const [trigger, { data, isSuccess }]  = useHelpfulReviewMutation();
-  const [triggerReport, { dataReport, isSuccessReport }]  = useReportReviewMutation();
+  const [trigger, { data, isSuccess }] = useHelpfulReviewMutation();
+  const [triggerReport, { dataReport, isSuccessReport }] = useReportReviewMutation();
 
   const helpfulClickHandler = () => {
     trigger((reviewsObj.review_id));
@@ -40,16 +34,20 @@ const [helpful, setHelpful] = useState({});
   };
   return (
     <div className={RNRCSS['review-tile-in-reviews']}>
+      <div className={RNRCSS['review-username-in-reviews-tile']}>
+        {reviewsObj.reviewer_name}
+        <span className={RNRCSS['date-tile-in-reviews']}>
+          { format(new Date(reviewsObj.date), 'MMMM dd yyyy') }
+        </span>
+      </div>
       {reviewsObj.rating}
       <QuarterIncStarRating averageRating={reviewsObj.rating} />
-      <small>
-        { format(new Date(reviewsObj.date), 'MMMM dd yyyy') }
-      </small>
-      <h5>
+
+      <div className={RNRCSS['review-title-in-reviews-tile']}>
         {/* Review Title Summary: */}
         {reviewsObj.summary}
-      </h5>
-      <div style={{ maxWidth: '90%' }}>
+      </div>
+      <div className={RNRCSS['review-body-in-reviews-tile']}>
 
         {reviewsObj.body.slice(0, 250)}
         {showFull && reviewsObj.body.slice(250)}
@@ -68,7 +66,7 @@ const [helpful, setHelpful] = useState({});
           </a>
         )}
       </div>
-      {reviewsObj.photos.map((photo) => (
+      {reviewsObj.photos.length >= 1 && reviewsObj.photos.map((photo) => (
         <span key={photo.id}>
           <img
             className={RNRCSS['thumbnail-review-image']}
@@ -82,20 +80,21 @@ const [helpful, setHelpful] = useState({});
           />
         </span>
       ))}
-      {modalImage && (<ThumbnailImageModal RNRCSS={RNRCSS} toggleModalImage={toggleModalImage} photo={photoState} />)}
-      {/* if user recommends the product return text and a checkmark */}
+      {modalImage
+      && (
+      <ThumbnailImageModal
+        RNRCSS={RNRCSS}
+        toggleModalImage={toggleModalImage}
+        photo={photoState}
+      />
+      )}
       { reviewsObj.recommend
       && (
-      <div>
+      <div className={RNRCSS['recommend-product-message']}>
         <FaRegCheckCircle />
         I recommend this product
       </div>
       )}
-
-      <h6>
-        { /* Reviewer Name: */ }
-        {reviewsObj.reviewer_name}
-      </h6>
 
       {reviewsObj.response && (
       <div className={RNRCSS['response-from-seller']}>
@@ -104,17 +103,21 @@ const [helpful, setHelpful] = useState({});
       </div>
       )}
 
-      <div>
+      <div className={RNRCSS['helpful-in-review-tile']}>
         Helpful?
-        <span onClick={helpfulClickHandler}>
-          Yes
-          {reviewsObj.helpfulness}
+        <span
+          className={RNRCSS['helpful-text-in-review-tile']}
+          onClick={helpfulClickHandler}
+        >
+          {' '}Yes{' '}
+          {' ('}{reviewsObj.helpfulness}{') '}
         </span>
-        |
-        <span>No</span>
-        <span onClick={reportClickHandler}>
-          <Report />
-        </span>
+        <div
+          className={RNRCSS['report-text-in-review-tile']}
+          onClick={reportClickHandler}
+        >
+          Report
+        </div>
       </div>
     </div>
   );

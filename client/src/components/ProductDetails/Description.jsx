@@ -1,12 +1,12 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 function Description({ details }) {
   // let { details } = useSelector((state) => state.products);
 
   return (
-    <div className="flex">
+    <div className="description flex">
       <div className="description-card center">
         <h3>{details.slogan}</h3>
         {details.description}
@@ -15,7 +15,13 @@ function Description({ details }) {
         <ol>
           {details.features.map((item) => {
             const { feature, value } = item;
-            return value ? <li key={nanoid()}>{`${feature} : ${value}`}</li> : null;
+            return value ? (
+              <li className="feature-item" key={nanoid()}>
+                <FaRegCheckCircle />
+                &nbsp;
+                {`  ${feature}  :  ${value}`}
+              </li>
+            ) : null;
           })}
         </ol>
       </div>

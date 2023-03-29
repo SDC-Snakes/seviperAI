@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
-// once the data is retreived from the API,
-// ratingNum has to be replaced by the incoming review rating.
-// setState is not being utilized, might need to be removed or replaced when implementing redux
-function QuarterIncStarRating({averageRating}) {
-  // set ratingNum to equal averageRating when the data is fetched from the API /reviews/meta route
-  if (!averageRating ) {
-    return (<span> unable to fetch stars</span>)
+
+function QuarterIncStarRating({ averageRating }) {
+  if (!averageRating) {
+    return (<span> unable to fetch stars</span>);
   }
-  // const ratingNum = averageRating ;
   const fullStarsNum = Math.floor(averageRating);
   const remainder = `${(Math.round(((averageRating - fullStarsNum)) * 4) / 4) * 100}%`;
   const greyStars = 5 - (Math.ceil(averageRating));
-  const starKey = nanoid()
+  const starKey = nanoid();
   return (
 
     <span>
-      {[...Array(fullStarsNum)].map((_, index) => (
-        <span key={`yellow_star ${index}`}>
+      {[...Array(fullStarsNum)].map(() => (
+        <span key={`yellow_star ${nanoid()}`}>
           <FaStar style={{ color: '#ffc107' }} />
         </span>
       ))}
@@ -36,8 +33,8 @@ function QuarterIncStarRating({averageRating}) {
           <FaStar style={{ fill: `url(#${starKey})` }} />
         </span>
       )}
-      {[...Array(greyStars)].map((_, index) => (
-        <span key={`grey_star_${index}`}>
+      {[...Array(greyStars)].map(() => (
+        <span key={`grey_star_${nanoid()}`}>
           <FaStar style={{ color: '#e4e5e9' }} />
         </span>
       ))}

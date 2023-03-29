@@ -1,33 +1,39 @@
-import React, { useCallback, useEffect, useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function ImageDropzone({ handleUploadedImages }) {
+function ImageDropzone({ handleDropedInImages }) {
   const [images, setImages] = useState([]);
-
-  const onDrop = useCallback(acceptedFiles => {
-    acceptedFiles.forEach(file => {
+  const addImages = (image) => {
+    setImages((prevImages) => [...prevImages, image]);
+    handleDropedInImages([image])
+  }
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = () => {
         // Upload the image to Imgur
-        const dataUrl = reader.result;
+        const dataUrl = reader.result.split(',')[1];
+        console.log(encodeURIComponent(dataUrl))
         fetch('https://api.imgur.com/3/image', {
           method: 'POST',
           headers: {
-            Authorization: 'Client-ID 9fb7e41cbbbd831',
-            'Content-Type': 'application/json',
+            Authorization: 'Client-ID 27a348dc30933fb',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({ image: dataUrl }),
+          body: `image=${encodeURIComponent(dataUrl)}`,
         })
-          .then(response => response.json())
-          .then(data => {
-            // Add the link to the uploaded image to the state
-            const imageUrl = data.data.link;
-            setImages(prevImages => [...prevImages, imageUrl]);
+          .then((data) => {
+            return data.json()
           })
-          .then(() => handleUploadedImages(images[images.length-1]))
-          .catch((err)=>console.log(err))
-
+          .then((data) => {
+            const imageUrl = data.data.link;
+            console.log('imageUrl:', imageUrl);
+            addImages(imageUrl);
+          })
+          .catch((err) => console.log(err));
       };
 
       reader.readAsDataURL(file);
