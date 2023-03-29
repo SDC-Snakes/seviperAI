@@ -21,9 +21,6 @@ test('products details render', () => {
   };
 
   render(<Description details={detailsStub} />);
-  // screen.debug();
 
-  // Check that loading state is not displayed
-  // expect(screen.queryByText('Loading...')).toBeNull();
   expect(screen.getByText(detailsStub.description)).toBeInTheDocument();
 });
