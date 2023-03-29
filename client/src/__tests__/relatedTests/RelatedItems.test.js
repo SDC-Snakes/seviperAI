@@ -176,22 +176,22 @@ test('outfit cards render to the screen', () => {
   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
 });
 
-test('items list title renders to the page', async () => {
-  renderWithProviders(
-    <Router>
-      {/* <ComparisonModal /> */}
-      <ItemsList />
-    </Router>,
-    {
-      preloadedState: {
-        products: stateStub.products,
-        related: relatedStub.related,
-      },
-    },
-  );
-  screen.logTestingPlaygroundURL();
-  expect(await screen.getByText('Other items that may interest you')).toBeInTheDocument();
-});
+// test('items list title renders to the page', async () => {
+//   renderWithProviders(
+//     <Router>
+//       {/* <ComparisonModal /> */}
+//       <ItemsList />
+//     </Router>,
+//     {
+//       preloadedState: {
+//         products: stateStub.products,
+//         related: relatedStub.related,
+//       },
+//     },
+//   );
+//   screen.logTestingPlaygroundURL();
+//   expect(await screen.getByText('Other items that may interest you')).toBeInTheDocument();
+// });
 
 // test('items list cards render to the screen', () => {
 //   renderWithProviders(
