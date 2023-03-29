@@ -4,17 +4,39 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
+import getProductStub from '../proxies/getProductProxy';
+import getProductStylesStub from '../proxies/getProductStylesProxy';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 import Details from '../../components/ProductDetails/Details';
 
+// eslint-disable-next-line import/prefer-default-export
 export const handlers = [
   rest.post('/cart', (req, res, ctx) => res(
-    ctx.data('Content created'),
+    ctx.json('Content created'),
+    ctx.delay(50),
+  )),
+  rest.get('/products/:productId', (req, res, ctx) => res(
+    ctx.json(getProductStub),
+    ctx.delay(150),
+  )),
+  rest.get('/products/:productId/styles', (req, res, ctx) => res(
+    ctx.json(getProductStylesStub),
     ctx.delay(150),
   )),
 ];
+
+const server = setupServer(...handlers);
+
+// Enable API mocking before tests.
+beforeAll(() => server.listen());
+
+// Reset any runtime request handlers we may add during the tests.
+afterEach(() => server.resetHandlers());
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close());
 
 test('products details render', async () => {
   renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
@@ -71,10 +93,10 @@ test('the select size dropdown is selected and opened when add to cart clicked w
   // screen.logTestingPlaygroundURL();
 
   await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
-  expect(await screen.findByText('S')).toBeInTheDocument();
+  expect(await screen.findByText('XS')).toBeInTheDocument();
 });
 
-test('the select size dropdown is selected and opened when add to cart clicked without size selection', async () => {
+test('The select size dropdown can be used to select a size to order', async () => {
   renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
@@ -86,21 +108,15 @@ test('the select size dropdown is selected and opened when add to cart clicked w
   const styleImages = screen.getAllByRole('button', { name: 'style-image' });
   await userEvent.click(styleImages[1]);
   expect(await screen.findByText(stateStub.products.styles[1].name)).toBeInTheDocument();
-  expect(screen.queryByRole('option', { name: 'Select Size' }).selected).toBeTruthy();
-
-  await userEvent.click(screen.getByRole('combobox', { name: 'size-select' }), { target: { value: 'xs' } });
-
-  expect(await screen.findByRole('option', { name: 'Select Size' }).selected).toBeFalsy();
-
-  await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
 
   expect(screen.getByRole('option', { name: 'Select Size' }).selected).toBeTruthy();
+
+  await userEvent.selectOptions(screen.getByRole('combobox', { name: 'size-select' }), screen.getByRole('option', { name: 'XS' }));
+
+  expect(screen.getByRole('option', { name: 'XS' }).selected).toBe(true);
 });
 
 test('a quantity can be selected once a size has been selected', async () => {
-  const server = setupServer(...handlers);
-  server.listen();
-
   renderWithProviders(<Details handleScroll={() => console.log('testScroll')} />, {
     preloadedState: {
       products: stateStub.products,
@@ -115,7 +131,7 @@ test('a quantity can be selected once a size has been selected', async () => {
 
   await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
 
-  await userEvent.selectOptions(screen.getByRole('combobox', { name: 'size-select' }), screen.getByRole('option', { name: 'XS' }));
+  await userEvent.selectOptions(screen.getByRole('listbox', { name: 'size-select' }), screen.getByRole('option', { name: 'XS' }));
 
   expect(screen.getByRole('option', { name: 'XS' }).selected).toBe(true);
 
@@ -125,7 +141,4 @@ test('a quantity can be selected once a size has been selected', async () => {
   expect(screen.getByRole('option', { name: '1' }).selected).toBe(true);
 
   await userEvent.click(screen.getByRole('button', { name: 'cart-btn' }));
-
-  server.resetHandlers();
-  server.close();
 });

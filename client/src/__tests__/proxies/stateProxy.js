@@ -153,7 +153,7 @@ const stateStub = {
     },
     selectedImage: 'https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80',
     expanded: false,
-    sku: 1394769,
+    sku: '',
     quantitySelected: 1,
     imageIndex: 1,
     page: 0,

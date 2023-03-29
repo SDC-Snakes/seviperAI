@@ -7,7 +7,7 @@ import {
   FaHeart, FaTwitter, FaPinterest, FaFacebookF
 } from 'react-icons/fa';
 import { useAddToCartMutation, api } from '../../features/api/apiSlice';
-import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
+import { newAddToOutfit } from '../../features/related/relatedSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
@@ -47,7 +47,8 @@ function Details({ handleScroll }) {
   const handleCartClick = async () => {
     if (sku !== '' && sku !== 'selectSize') {
       const res = await trigger(sku);
-      if (res.data === 'Content created') {
+      const result = await res.data;
+      if (result === 'Content created') {
         toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
         dispatch(handleStateUpdate({ name: 'sku', value: 'selectSize' }));
         update(details.id);
@@ -136,8 +137,8 @@ function Details({ handleScroll }) {
       </div>
       <div className="socials">
         <a className="social-icon center" href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter className="twitter" /></a>
-        <a className="social-icon center" href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF className="facebook" /></a>
-        <a className="social-icon center" href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest className="pinterest" /></a>
+        <a className="social-icon center" href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Facebook"><FaFacebookF className="facebook" /></a>
+        <a className="social-icon center" href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Pinterest"><FaPinterest className="pinterest" /></a>
       </div>
     </div>
   );
