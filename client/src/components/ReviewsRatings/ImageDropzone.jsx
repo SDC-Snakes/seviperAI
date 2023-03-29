@@ -5,9 +5,9 @@ import { useDropzone } from 'react-dropzone';
 
 function ImageDropzone({ handleDropedInImages }) {
   const [images, setImages] = useState([]);
-  const addImages = (image) => {
-    setImages((prevImages) => [...prevImages, image]);
-    handleDropedInImages([image])
+  const addImages = (imageUrl) => {
+    setImages((prevImages) => [...prevImages, imageUrl]);
+    handleDropedInImages([imageUrl])
   }
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {

@@ -63,6 +63,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
     setReviewPropsObj({ ...reviewPropsObj, [propertyName]: event.target.value });
   };
   const uploadImageHandler = (imagesArr) => {
+    console.log('imagesArr in uploadImage Handler', imagesArr)
     setReviewPropsObj((prevState) => ({
       ...prevState,
       photos: [...prevState.photos, ...imagesArr],

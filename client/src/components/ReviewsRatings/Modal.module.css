@@ -253,7 +253,6 @@ body.active-modalimage {
   background-color: #e4e5e9;
   margin-bottom: 10px;
   flex-direction: row;
-  z-index: auto;
 }
 
 .char-bar-icon {
