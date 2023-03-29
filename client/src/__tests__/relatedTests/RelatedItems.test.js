@@ -48,17 +48,10 @@ const proxyPrice = relatedStub.relatedItem.details.default_price;
 const proxySalePrice = relatedStub.relatedItem.details.sale_price;
 const proxyItem = relatedStub.relatedItem;
 
-test('renders a product\'s information to its card', async () => {
+test('Fills cards with data pulled from the API', async () => {
   renderWithProviders(
     <Router>
       <ItemsList relatedIndex={relatedStub.related.relatedIndex} />
-      {/* <FormatCard
-        name={proxyName}
-        category={proxyCategory}
-        image={proxyImageURL}
-        price={proxyPrice}
-        salePrice={proxySalePrice}
-      /> */}
     </Router>,
     {
       preloadedState: {
@@ -69,13 +62,33 @@ test('renders a product\'s information to its card', async () => {
   );
   expect(await screen.findByText('Other items that might interest you')).toBeInTheDocument();
   expect(screen.queryByText('Loading...')).toBeNull();
-  // expect(await screen.findByText(proxyName)).toBeInTheDocument();
-  // expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
-  // expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
-  // expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
 });
 
-test('comparison modal should be null on load', async () => {
+test('Renders a product\'s information to its card', async () => {
+  renderWithProviders(
+    <Router>
+      <FormatCard
+        name={proxyName}
+        category={proxyCategory}
+        image={proxyImageURL}
+        price={proxyPrice}
+        salePrice={proxySalePrice}
+      />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
+    },
+  );
+  expect(await screen.findByText(proxyName)).toBeInTheDocument();
+  expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
+  expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+  expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
+});
+
+test('Comparison modal should be null on load', async () => {
   renderWithProviders(
     <Router><ComparisonModal /></Router>,
     {
@@ -87,7 +100,7 @@ test('comparison modal should be null on load', async () => {
   expect(screen.queryByText(relatedStub.related.combinedProductFeatures)).toBeNull();
 });
 
-test('comparison modal should appear when icon is clicked', async () => {
+test('Comparison modal should appear when icon is clicked', async () => {
   renderWithProviders(
     <Router>
       <ComparisonModal />
@@ -113,7 +126,7 @@ test('comparison modal should appear when icon is clicked', async () => {
   expect(await screen.findByLabelText('modal')).toBeInTheDocument();
 });
 
-test('click on x icon should remove item from outfit', async () => {
+test('Click on x icon should remove item from outfit', async () => {
   renderWithProviders(
     <Router>
       <ComparisonModal />
@@ -151,7 +164,7 @@ test('Your outfit title renders to the page', () => {
   expect(screen.getByText('Add to outfit')).toBeInTheDocument();
 });
 
-test('outfit cards render to the screen', () => {
+test('Outfit cards render to the screen', () => {
   renderWithProviders(
     <Router>
       <OutfitList />
@@ -176,11 +189,10 @@ test('outfit cards render to the screen', () => {
   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
 });
 
-// test('items list title renders to the page', async () => {
+// test('Carousel renders both lists to the screen', () => {
 //   renderWithProviders(
 //     <Router>
-//       {/* <ComparisonModal /> */}
-//       <ItemsList />
+//       <Carousel />
 //     </Router>,
 //     {
 //       preloadedState: {
@@ -189,8 +201,7 @@ test('outfit cards render to the screen', () => {
 //       },
 //     },
 //   );
-//   screen.logTestingPlaygroundURL();
-//   expect(await screen.getByText('Other items that may interest you')).toBeInTheDocument();
+//   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
 // });
 
 // test('items list cards render to the screen', () => {
