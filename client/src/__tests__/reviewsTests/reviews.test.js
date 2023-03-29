@@ -58,13 +58,36 @@ test('reviews render after making a call to the API', async () => {
   expect(await screen.findByText("Overall rating")).toBeInTheDocument();
   expect(await screen.findByText("Do you recommend this product?")).toBeInTheDocument();
   expect(await screen.findByText("For authentication reasons, you will not be emailed")).toBeInTheDocument();
-
+  expect(await screen.findByText("Your email")).toBeInTheDocument();
   // add images
   const addImages = await screen.findByRole('button', {name:'Add images'})
   fireEvent.click(addImages)
   expect(await screen.findByText("Add images to your review!")).toBeInTheDocument();
+  expect(await screen.findByText("Drag 'n' drop some files here, or click to select files")).toBeInTheDocument();
+
+  const searchButton = screen.getByRole('button', { name: 'search' });
+  expect(searchButton).toBeInTheDocument();
+
+  const option = screen.getByRole('option', { name: 'relevant' });
+  expect(searchButton).toBeInTheDocument();
+
+  const radio1 = screen.getByRole('radio', { name: 'Yes' });
+  expect(radio1).toBeInTheDocument();
+
+  const radio2 = screen.getByRole('radio', { name: 'No' });
+  expect(radio2).toBeInTheDocument();
+
+  const Poor = screen.getByRole('radio', { name: 'Poor' });
+  expect(Poor).toBeInTheDocument();
+
+  const expected = screen.getByRole('radio', { name: 'What I expected' });
+  expect(expected).toBeInTheDocument();
+
+  const tight = screen.getByRole('radio', { name: 'Runs tight' });
+  expect(tight).toBeInTheDocument();
+
+
 
 });
 
 
-// Simulate clicking expand and ensure product details no longer display.
