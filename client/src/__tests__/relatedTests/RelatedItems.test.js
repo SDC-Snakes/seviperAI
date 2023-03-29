@@ -18,7 +18,7 @@ import relatedStub from '../proxies/relatedItemsProxy';
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
   rest.get('/products/:productId/related', (req, res, ctx) => res(
-    ctx.json(relatedStub.related.relatedIDs),
+    ctx.json(relatedStub.related.related),
     ctx.delay(150),
   )),
   rest.get('/products/:productId', (req, res, ctx) => res(
@@ -189,20 +189,20 @@ test('Outfit cards render to the screen', () => {
   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
 });
 
-// test('Carousel renders both lists to the screen', () => {
-//   renderWithProviders(
-//     <Router>
-//       <Carousel />
-//     </Router>,
-//     {
-//       preloadedState: {
-//         products: stateStub.products,
-//         related: relatedStub.related,
-//       },
-//     },
-//   );
-//   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
-// });
+test('Carousel renders both lists to the screen', async () => {
+  renderWithProviders(
+    <Router>
+      <Carousel />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
+    },
+  );
+  expect(await screen.findByLabelText('left-arrow')).toBeInTheDocument();
+});
 
 // test('items list cards render to the screen', () => {
 //   renderWithProviders(

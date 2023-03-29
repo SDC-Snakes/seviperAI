@@ -1,6 +1,6 @@
 const relatedStub = {
   related: {
-    relatedIDs: [
+    related: [
       40348,
       40352,
       40350,
