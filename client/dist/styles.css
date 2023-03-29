@@ -83,7 +83,7 @@ table {
   --ter2-color: #F36074;
   --ter1-color: #FBB1BB;
 
-  color-scheme: dark;
+  /* color-scheme: dark; */
 }
 
 body {
@@ -94,7 +94,6 @@ h1 {
   font-size: 36px;
   line-height: 1.5em;
   margin-bottom: 22px;
-  color: var(--main-color) /* How to reference color variables, will remove later */
 }
 
 h2 {

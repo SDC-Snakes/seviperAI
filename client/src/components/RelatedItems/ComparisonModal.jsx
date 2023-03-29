@@ -14,10 +14,10 @@ function ComparisonModal() {
 
   function renderComparison(char, index) {
     return (
-      <tr key={index}>
-        <td className={itemStyles['left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
-        <td className={itemStyles.characteristic}>{char.value}</td>
-        <td className={itemStyles['right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
+      <tr key={index} className={itemStyles['modal-row']}>
+        <td className={itemStyles['modal-left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
+        <td className={itemStyles.entry}>{char.value}</td>
+        <td className={itemStyles['modal-right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
       </tr>
     );
   }
@@ -38,7 +38,7 @@ function ComparisonModal() {
               <th className={itemStyles['modal-related-product']}>{relatedProductName}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={itemStyles['modal-entry-container']}>
             {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
           </tbody>
         </table>
