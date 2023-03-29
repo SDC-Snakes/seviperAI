@@ -18,9 +18,6 @@ function ItemsList({ relatedIndex }) {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log('relatedProducts: ', relatedProducts);
-  console.log('error: ', error);
-
   // Finds first available image for the primary style
   function findImage(item) {
     for (let i = 0; i < item.photos.results.length; i++) {
