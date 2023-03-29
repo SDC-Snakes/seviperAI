@@ -1,18 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import useAsync from '../useAsync';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { usePostNewQuestionMutation, usePostNewAnswerMutation } from '../../../features/api/apiSlice';
 
 function QnaForm({
-  qnaStyles, onAdd, productInfo, questionInfo,
+  qnaStyles, onAdd, questionInfo,
 }) {
   const [reqObjs, setReqObjs] = useState(Function);
-  const { state: { loading, response, error } } = useAsync(reqObjs, [reqObjs]);
+  const productName = useSelector((state) => state.products).details.name;
+  const { productId } = useParams();
   const firstLoad = useRef(true);
   const isQuestionForm = questionInfo === undefined;
+  const [triggerQuestion,
+    { isSuccess: isSuccessQ,
+      isLoading: isLoadingQ,
+      isError: isErrorQ }]
+      = usePostNewQuestionMutation();
+  const [triggerAnswer,
+    { isSuccess: isSuccessA,
+      isLoading: isLoadingA,
+      isError: isErrorA }]
+    = usePostNewAnswerMutation();
 
   const formType = isQuestionForm ? 'question' : 'answer';
   useEffect(() => {
-    if (response && response[0] && response[0].status === 201) {
+    // if (response && response[0] && response[0].status === 201) {
+    if (isSuccessQ || isSuccessA) {
       alert(`Thank you for your ${formType}!`);
       onAdd(formType, false, true);
     }
@@ -28,11 +41,15 @@ function QnaForm({
       // Test the given email against the regular expression
       return emailRegex.test(email);
     }
-
-    const [body, name, email] = Array(3).fill(0)
-      .map((item, index) => e.target[index].value);
+    // const [body, name, email] = Array(3).fill(0)
+    //   .map((item, index) => e.target[index].value);
+    const {
+      body_input: { value: body },
+      nickname_input: { value: name },
+      email_input: { value: email },
+    } = e.target.elements;
     const errorMsg = `${body.trim().length === 0 ? `\n- ${formType}` : ''}`
-    + `${name.trim().length === 0 ? '\n- nickname' : ''}`
+      + `${name.trim().length === 0 ? '\n- nickname' : ''}`
     + `${!isValidEmail(email) ? '\n- valid email' : ''}`;
 
     if (errorMsg.length > 0) {
@@ -42,71 +59,71 @@ function QnaForm({
         body,
         name,
         email,
-        ...(isQuestionForm && { product_id: productInfo.id }),
+        ...(isQuestionForm && { product_id: Number(productId) }),
       };
-      const url = isQuestionForm
-        ? `http://localhost:${process.env.PORT}/qa/questions/`
-        : `http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`;
-      setReqObjs(() => function sendReq() { return [axios.post(url, formBody)]; });
+      if (isQuestionForm) {
+        triggerQuestion(formBody);
+      } else {
+        triggerAnswer({ body: formBody, questionId: Number(questionInfo.id) });
+      }
+      // `http://localhost:${process.env.PORT}/qa/questions/${questionInfo.id}/answers`;
+      // setReqObjs(() => function sendReq() { return [axios.post(url, formBody)]; });
     }
   };
 
   const title = isQuestionForm ? 'Ask Your Question' : 'Submit your Answer';
   const subTitle = isQuestionForm
-    ? `About the ${productInfo.name}`
-    : `${productInfo.name}: ${questionInfo.body}`;
+    ? `About the ${productName}`
+    : `${productName}: ${questionInfo.body}`;
 
   return (
     <div className={qnaStyles['modal-content']}>
       <h3>{title}</h3>
       <h6>{subTitle}</h6>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} aria-label='window-form'>
         <div className="form-group">
-          <label htmlFor="input">
+          <label htmlFor="body_input">
             {isQuestionForm ? 'Question' : 'Answer'}
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <textarea id="input" name="input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
+          <textarea id="body_input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
         </div>
         <div className="form-group">
-          <label htmlFor="nickname-input">
+          <label htmlFor="nickname_input">
             Nickname
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <input type="text" id="nickname-input" maxLength="60" placeholder="Example: Jack543!" />
+          <input type="text" id="nickname_input" maxLength="60" placeholder="Example: Jack543!" />
           <p>For privacy reasons, do not use your full name or email address.</p>
         </div>
         <div className="form-group">
-          <label htmlFor="email-input">
+          <label htmlFor="email_input">
             Email
             <small style={{ color: 'red' }}>*</small>
             :
           </label>
-          <input type="text" id="email-input" name="email" maxLength="60" placeholder="Example: jack@example.com" />
+          <input type="text" id="email_input" maxLength="60" placeholder="Example: jack@example.com" />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-        <div className="photos">
-          <input type="button" value="Upload Photos" />
-          <div className="photos-view">
-            <img src="image1.jpg" alt="supplement to the question/answer" />
-            <img src="image2.jpg" alt="supplement to the question/answer" />
-            <img src="image3.jpg" alt="supplement to the question/answer" />
-          </div>
-        </div>
-        <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} />
-        {loading && (
+        <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} aria-label="submit"/>
+        {(isLoadingQ || isLoadingA) && (
         <div>
           Submitting
           {isQuestionForm ? 'your question' : 'the answer'}
           ...
         </div>
         )}
-        {!firstLoad.current && error
+        {!firstLoad.current && (isErrorQ || isErrorA)
           && <div>Error has occurred. Please check your information.</div>}
       </form>
-      <input type="button" className={qnaStyles['close-modal']} onClick={() => onAdd(formType, false)} value="X" />
+      <input
+      type="button"
+      className={qnaStyles['close-modal']}
+      onClick={() => onAdd(formType, false)}
+      value="X"
+      />
     </div>
   );
 }
