@@ -65,12 +65,17 @@ test('reviews render after making a call to the API', async () => {
   expect(await screen.findByText("Add images to your review!")).toBeInTheDocument();
   expect(await screen.findByText("Drag 'n' drop some files here, or click to select files")).toBeInTheDocument();
 
-  const searchButton = screen.getByRole('button', { name: 'search' });
-  expect(searchButton).toBeInTheDocument();
-
+// sort drop down list
   const option = screen.getByRole('option', { name: 'relevant' });
-  expect(searchButton).toBeInTheDocument();
+  expect(option).toBeInTheDocument();
 
+  const helpful = screen.getByRole('option', { name: 'helpful' });
+  expect(helpful).toBeInTheDocument();
+
+  const newest = screen.getByRole('option', { name: 'newest' });
+  expect(newest).toBeInTheDocument();
+
+// radio buttons
   const radio1 = screen.getByRole('radio', { name: 'Yes' });
   expect(radio1).toBeInTheDocument();
 
