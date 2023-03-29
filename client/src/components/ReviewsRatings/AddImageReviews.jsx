@@ -8,15 +8,13 @@ function AddImageReviews({ uploadImageHandler }) {
   const [modal, setModal] = useState(false);
   const [images, setImages] = useState([]);
   const [inputField, setInputField] = useState('');
-  const handleUploadedImages = (image) => {
-    if (inputField.length > 1 || image.length > 1) {
-      const newImage = inputField || image;
-      setImages((prevState) => [...prevState, newImage]);
+  const handleUploadedImages = () => {
+    if (inputField.length > 1) {
+      setImages((prevState) => [...prevState, inputField]);
       setInputField('');
     }
   };
   const handleDropedInImages = (image) => {
-    console.log('%%image in handleDropedInImages', image);
     setImages((prevState) => [...prevState, image]);
   };
   const handleInputFieldChange = (e) => {
@@ -31,7 +29,6 @@ function AddImageReviews({ uploadImageHandler }) {
         type="submit"
         onClick={(event) => {
           event.preventDefault();
-          //uploadImageHandler(images);
           toggleModal(true);
         }}
         value="Add images"

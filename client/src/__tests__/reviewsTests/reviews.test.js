@@ -64,8 +64,7 @@ test('reviews render after making a call to the API', async () => {
   fireEvent.click(addImages)
   expect(await screen.findByText("Add images to your review!")).toBeInTheDocument();
   expect(await screen.findByText("Drag 'n' drop some files here, or click to select files")).toBeInTheDocument();
-// add reviews
-const addMoreReviews = await screen.findByRole('button', {name:'MORE REVIEWS'})
+  const addMoreReviews = await screen.findByRole('button', {name:'MORE REVIEWS'})
 expect(addMoreReviews).toBeInTheDocument();
 // sort drop down list
   const option = screen.getByRole('option', { name: 'relevant' });
