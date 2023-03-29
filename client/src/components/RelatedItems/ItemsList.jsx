@@ -8,12 +8,18 @@ import itemStyles from './Items.module.css';
 
 function ItemsList({ relatedIndex }) {
   const params = useParams();
+
+  // Fetches related item data from API
   const {
     data: relatedProducts,
     isFetching,
+    error,
   } = useGetRelatedProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
+
+  console.log('relatedProducts: ', relatedProducts);
+  console.log('error: ', error);
 
   // Finds first available image for the primary style
   function findImage(item) {
@@ -36,6 +42,7 @@ function ItemsList({ relatedIndex }) {
   //   };
   // };
 
+  // Produces a card for each related item
   function renderList(item, index) {
     return (
       <div key={index}>
@@ -57,6 +64,7 @@ function ItemsList({ relatedIndex }) {
     );
   }
 
+  // Displays while the data is still being loaded
   if (isFetching) {
     return <div>loading...</div>;
   }
