@@ -55,7 +55,7 @@ module.exports = {
       },
     )
       .then(() => {
-        res.status(201).send('Question created');
+        res.status(201).send(res.data);
       })
       .catch((err) => {
         res.status(422).send(err);
@@ -72,7 +72,7 @@ module.exports = {
       },
     )
       .then(() => {
-        res.status(201).send('Answer created');
+        res.status(201).send(res.data);
       })
       .catch((err) => {
         res.status(422).send(err);
@@ -91,13 +91,13 @@ module.exports = {
       )
         .then(() => {
           sessions[req.cookies.sessionID].helpfulQuestions.add(req.params.question_id);
-          res.status(204).send('Marked as helpful');
+          res.status(204).send(res.data);
         })
         .catch((err) => {
           res.status(422).send(err);
         });
     } else {
-      res.status(208).send('Already marked as helpful');
+      res.status(208).send(res.data);
     }
   },
   putAnswerHelpful: (req, res) => {
@@ -113,13 +113,13 @@ module.exports = {
       )
         .then(() => {
           sessions[req.cookies.sessionID].helpfulAnswers.add(req.params.answer_id);
-          res.status(204).send('Marked as helpful');
+          res.status(204).send(res.data);
         })
         .catch((err) => {
           res.status(422).send(err);
         });
     } else {
-      res.status(208).send('Already marked as helpful');
+      res.status(208).send(res.data);
     }
   },
   putAnswerReport: (req, res) => {
@@ -133,7 +133,7 @@ module.exports = {
       },
     )
       .then(() => {
-        res.status(204).send('Marked as helpful');
+        res.status(204).send(res.data);
       })
       .catch((err) => {
         res.status(422).send(err);
