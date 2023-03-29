@@ -16,7 +16,6 @@ function ImageDropzone({ handleDropedInImages }) {
       reader.onload = () => {
         // Upload the image to Imgur
         const dataUrl = reader.result.split(',')[1];
-        console.log(encodeURIComponent(dataUrl))
         fetch('https://api.imgur.com/3/image', {
           method: 'POST',
           headers: {
@@ -30,7 +29,6 @@ function ImageDropzone({ handleDropedInImages }) {
           })
           .then((data) => {
             const imageUrl = data.data.link;
-            console.log('imageUrl:', imageUrl);
             addImages(imageUrl);
           })
           .catch((err) => console.log(err));
