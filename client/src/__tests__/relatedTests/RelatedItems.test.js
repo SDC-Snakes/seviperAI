@@ -2,23 +2,23 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import userEvent from '@testing-library/user-event';
-import itemStyles from './Items.module.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Carousel from '../../components/RelatedItems/Carousel';
 import ComparisonModal from '../../components/RelatedItems/ComparisonModal';
 import FormatCard from '../../components/RelatedItems/FormatCard';
+import OutfitList from '../../components/RelatedItems/OutfitList';
+import ItemsList from '../../components/RelatedItems/ItemsList';
 import RelatedItems from '../../components/RelatedItems/RelatedItems';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 import relatedStub from '../proxies/relatedItemsProxy';
-import FontAwesomeIcon from '../../__mocks__/fortawesome/fontawesomeMock';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
   rest.get('/products/:productId/related', (req, res, ctx) => res(
-    ctx.json(relatedStub.related.relatedIds),
+    ctx.json(relatedStub.related.relatedIDs),
     ctx.delay(150),
   )),
   rest.get('/products/:productId', (req, res, ctx) => res(
@@ -29,13 +29,8 @@ export const handlers = [
     ctx.json(relatedStub.relatedItem.photos),
     ctx.delay(150),
   )),
-  rest.get('/reviews/meta', (req, res, ctx) => {
-    const productRatings = req.url.searchParams.getAll('product_id');
-    return res(
-      ctx.json(productRatings),
-      ctx.delay(150),
-    );
-  }),
+  rest.get('/reviews/meta', (req, res, ctx) => res(ctx.json(relatedStub.relatedItem.ratings), ctx.delay(150)),
+  ),
 ];
 
 const server = setupServer(...handlers);
@@ -56,12 +51,14 @@ const proxyItem = relatedStub.relatedItem;
 test('renders a product\'s information to its card', async () => {
   renderWithProviders(
     <Router>
-      <FormatCard
+      <ItemsList relatedIndex={relatedStub.related.relatedIndex} />
+      {/* <FormatCard
         name={proxyName}
         category={proxyCategory}
         image={proxyImageURL}
         price={proxyPrice}
-        salePrice={proxySalePrice} />
+        salePrice={proxySalePrice}
+      /> */}
     </Router>,
     {
       preloadedState: {
@@ -70,10 +67,12 @@ test('renders a product\'s information to its card', async () => {
       },
     },
   );
-  expect(await screen.findByText(proxyName)).toBeInTheDocument();
-  expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
-  expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
-  expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
+  expect(await screen.findByText('Other items that might interest you')).toBeInTheDocument();
+  expect(screen.queryByText('Loading...')).toBeNull();
+  // expect(await screen.findByText(proxyName)).toBeInTheDocument();
+  // expect(await screen.findByText(proxyCategory)).toBeInTheDocument();
+  // expect(await document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+  // expect(await screen.findByText(`$${proxyPrice}`)).toBeInTheDocument();
 });
 
 test('comparison modal should be null on load', async () => {
@@ -89,12 +88,8 @@ test('comparison modal should be null on load', async () => {
 });
 
 test('comparison modal should appear when icon is clicked', async () => {
-  // const handleClick = () => {
-  //   relatedStub.related.modalOpen = false;
-  // };
   renderWithProviders(
     <Router>
-      {/* <FontAwesomeIcon icon="circle-info" /> */}
       <ComparisonModal />
       <FormatCard
         name={proxyName}
@@ -112,17 +107,25 @@ test('comparison modal should appear when icon is clicked', async () => {
       },
     },
   );
-  const findIcon = await screen.findByLabelText('icon');
+  const findIcon = await screen.findByLabelText('modal-icon');
   expect(findIcon).toBeInTheDocument();
-  fireEvent.click(findIcon);
-  // screen.logTestingPlaygroundURL();
+  await userEvent.click(findIcon);
   expect(await screen.findByLabelText('modal')).toBeInTheDocument();
 });
 
-test('carousal should move one indx when an arrow is clicked', async () => {
+test('click on x icon should remove item from outfit', async () => {
   renderWithProviders(
     <Router>
-      <Carousel />
+      <ComparisonModal />
+      <FormatCard
+        name={proxyName}
+        category={proxyCategory}
+        image={proxyImageURL}
+        price={proxyPrice}
+        salePrice={proxySalePrice}
+        item={proxyItem}
+        outfit={"outfit"}
+      />
     </Router>,
     {
       preloadedState: {
@@ -131,12 +134,107 @@ test('carousal should move one indx when an arrow is clicked', async () => {
       },
     },
   );
-  const findArrow = await screen.findByLabelText('right-arrow');
-  expect(findArrow).toBeInTheDocument();
-  // fireEvent.click(findIcon);
-  // // screen.logTestingPlaygroundURL();
-  // expect(await screen.findByLabelText('modal')).toBeInTheDocument();
+  screen.logTestingPlaygroundURL();
+  const removeItem = await screen.findByLabelText('remove-icon');
+  expect(removeItem).toBeInTheDocument();
+  await userEvent.click(removeItem);
+  expect(await screen.queryByLabelText('modal')).toBeNull();
 });
+
+test('Your outfit title renders to the page', () => {
+  renderWithProviders(
+    <Router>
+      <OutfitList />
+    </Router>,
+  );
+  expect(screen.getByText('Your outfit')).toBeInTheDocument();
+  expect(screen.getByText('Add to outfit')).toBeInTheDocument();
+});
+
+test('outfit cards render to the screen', () => {
+  renderWithProviders(
+    <Router>
+      <OutfitList />
+      <FormatCard
+        name={proxyName}
+        category={proxyCategory}
+        image={proxyImageURL}
+        price={proxyPrice}
+        salePrice={proxySalePrice}
+        item={proxyItem}
+      />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
+    },
+  );
+  expect(screen.getByText('Kicks')).toBeInTheDocument();
+  expect(document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+  expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
+});
+
+test('items list title renders to the page', async () => {
+  renderWithProviders(
+    <Router>
+      {/* <ComparisonModal /> */}
+      <ItemsList />
+    </Router>,
+    {
+      preloadedState: {
+        products: stateStub.products,
+        related: relatedStub.related,
+      },
+    },
+  );
+  screen.logTestingPlaygroundURL();
+  expect(await screen.getByText('Other items that may interest you')).toBeInTheDocument();
+});
+
+// test('items list cards render to the screen', () => {
+//   renderWithProviders(
+//     <Router>
+//       <ItemsList />
+//       <FormatCard
+//         name={proxyName}
+//         category={proxyCategory}
+//         image={proxyImageURL}
+//         price={proxyPrice}
+//         salePrice={proxySalePrice}
+//         item={proxyItem}
+//       />
+//     </Router>,
+//     {
+//       preloadedState: {
+//         products: stateStub.products,
+//         related: relatedStub.related,
+//       },
+//     },
+//   );
+//   screen.logTestingPlaygroundURL();
+//   expect(screen.getByText('Kicks')).toBeInTheDocument();
+//   expect(document.querySelector('img').getAttribute('src')).toBe(proxyImageURL);
+//   expect(screen.getByText('Summer Shoes')).toBeInTheDocument();
+// });
+
+// test('carousal should move one index when an arrow is clicked', async () => {
+//   renderWithProviders(
+//     <Router>
+//       <Carousel />
+//     </Router>,
+//     {
+//       preloadedState: {
+//         products: stateStub.products,
+//         related: relatedStub.related,
+//       },
+//     },
+//   );
+//   const findArrow = await screen.findByLabelText('right-arrow');
+//   screen.logTestingPlaygroundURL();
+//   expect(findArrow).toBeInTheDocument();
+// });
 
 // test('comparison modal should be null on load', async () => {
 //   renderWithProviders(
