@@ -267,7 +267,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                 <div>
                   <h6 style={{ marginTop: '2%' }}>Your email</h6>
                   <input
-                    style={{width:'50%'}}
+                    style={{ width: '50%'}}
                     type="email"
                     value={reviewPropsObj.email}
                     onChange={(e) => { handleInputChange(e, 'email'); }}
