@@ -54,20 +54,9 @@ test('QnA shows renders when correct data is received', async () => {
       <QuestionsAnswers />
     </Router>,
   );
-  // check loading state
+  // check if main div is loaded
   expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
-  // check if all the components load
-  // questions list
-  /// buttons
-  /// qna set
-  //// question entry
-  //// answer list
-  ///// answer entry
-  // expect(await screen.findByClass('Questions & Answers')).toBeInTheDocument();
-  // expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
-  // expect(await screen.findByText('Questions & Answers')).toBeInTheDocument();
   // screen.logTestingPlaygroundURL();
-  // expect(screen.getByText('Some other string')).toBeInTheDocument();
 });
 
 test('A customer can post a question', async () => {
@@ -109,7 +98,6 @@ test('A customer can post an answer', async () => {
   expect(form).toBeInTheDocument();
   fireEvent.click(submitAnswer);
   // expect(await alertSpy).toHaveBeenCalled();
-  // screen.logTestingPlaygroundURL();
 
   await waitFor(() => {
     expect(window.alert).toHaveBeenCalled();
@@ -153,3 +141,30 @@ test('A customer can mark a question helpful', async () => {
     expect(helpfulQuestion.textContent).toBe('Yes(28)');
   });
 });
+
+test('A customer can search questions by keywords', async () => {
+  renderWithProviders(
+    <Router>
+      <QuestionsAnswers />
+    </Router>,
+  );
+
+  // search bar is rendered
+  const searchBar = await screen.findByLabelText('search-bar');
+  expect(searchBar).toBeInTheDocument();
+  // screen.logTestingPlaygroundURL();
+  // before: show the first question and Not show a question that is behind
+  expect(await screen.queryByText('Maiores dolor quam soluta.')).toBeInTheDocument();
+  expect(await screen.queryByText('Testing Search bar: Keyword XYZXYZ')).toBeNull();
+  // search query is set;
+  console.log(searchBar)
+  fireEvent.change(searchBar, { target: {value: 'XYZ'} });
+
+
+  await waitFor(() => {
+    // helpful count changes from 27 to 28
+    expect(screen.queryByText('Maiores dolor quam soluta.')).toBeNull();
+    expect(screen.queryByText('Testing Search bar: Keyword XYZXYZ')).toBeInTheDocument();
+  });
+});
+

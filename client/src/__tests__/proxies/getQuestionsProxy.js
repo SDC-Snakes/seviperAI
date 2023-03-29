@@ -462,7 +462,7 @@ const getQuestionsStub = {
     },
     {
       'question_id': 645172,
-      'question_body': 'Test Question',
+      'question_body': 'Testing Search bar: Keyword XYZXYZ',
       'question_date': '2023-02-11T00:00:00.000Z',
       'asker_name': 'tester',
       'question_helpfulness': 0,
