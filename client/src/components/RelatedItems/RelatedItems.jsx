@@ -6,7 +6,7 @@ function RelatedItems() {
   return (
     <div>
       <Carousel />
-      {/* <ComparisonModal /> */}
+      <ComparisonModal />
     </div>
   );
 }
