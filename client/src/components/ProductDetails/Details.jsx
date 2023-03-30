@@ -82,21 +82,26 @@ function Details({ handleScroll }) {
 
   return (
     <div className="detailsBar">
-      <div>
+      <div className="flex rating-link">
         <QuarterStarsAverageRating productRating={meta.ratings} />
-        <button type="button" onClick={handleRnrClick}>See all reviews</button>
+        <button type="button" className="buttonWrap reviews-btn" onClick={handleRnrClick}>See all reviews</button>
       </div>
-      <h3>
-        {details.category}
-      </h3>
-      <h2>
+      <p className="category">
+        {`${details.category}:`}
+      </p>
+      <h1>
         {details.name}
-      </h2>
+      </h1>
       <div className="flex">
-        { selectedStyle.sale_price ? <p className="sale">{`$${selectedStyle.sale_price}`}</p> : null}
-        <p className={selectedStyle.sale_price ? 'originalPrice' : ''}>
+        { selectedStyle.sale_price ? (
+          <h3 className="sale">
+            {`$${selectedStyle.sale_price}`}
+            &nbsp;&nbsp;
+          </h3>
+        ) : null}
+        <h3 className={selectedStyle.sale_price ? 'originalPrice' : ''}>
           {`$${selectedStyle.original_price}`}
-        </p>
+        </h3>
       </div>
       <h3>
         {selectedStyle.name}
@@ -132,7 +137,7 @@ function Details({ handleScroll }) {
           Add to cart
         </button>
         <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
-          <FaHeart />
+          <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
         </button>
       </div>
       <div className="socials">

@@ -106,7 +106,7 @@ function ImageViewer() {
       : (
         <div className="imageView">
           <button type="button" className="topRight buttonWrap" data-testid="expandBtn" onClick={() => { dispatch(toggleState('expanded')); }}>
-            {expanded ? <FaCompress /> : <FaExpand /> }
+            {expanded ? <FaCompress size={22} /> : <FaExpand size={22} /> }
           </button>
           <div className={expanded ? 'expanded' : 'inline'}>
             <div className="sideGrid">

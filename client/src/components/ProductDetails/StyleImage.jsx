@@ -26,7 +26,7 @@ function StyleImage({ image, style }) {
   return (
     <div className="flex circleDiv">
       <button className="buttonWrap circle-btn" onClick={handleClick} type="button" aria-label="style-image">
-        {current ? <FaRegCheckCircle className="visible fa-check" size="20px" /> : null}
+        {current ? <FaRegCheckCircle className="visible fa-check" size="20px" color="black" /> : null}
         <img className={current ? 'selected' : 'circleImage'} src={image || errorImage} alt="ImageView" height="60" width="auto" />
       </button>
     </div>

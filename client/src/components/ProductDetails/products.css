@@ -27,14 +27,16 @@ button {
 }
 
 .imageView {
+  display: flex;
   position: relative;
 }
 
 .topRight {
   display: flex;
-  position: relative;
-  float: right;
-  top: 14px;
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  color: #804BAC;
 }
 
 .topRight:hover {
@@ -64,6 +66,14 @@ button {
 
 .mainDiv {
   display: flex;
+}
+
+.detailsBar {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  align-items: flex-start;
+  justify-content: space-around;
 }
 
 .detailsDiv {
@@ -209,6 +219,7 @@ button {
   display: flex;
   margin: 10px;
   align-items: center;
+  color: black;
 }
 
 .size-selector {
@@ -236,9 +247,10 @@ button {
 
 .socials {
   display: flex;
-  margin: 10px;
+  margin: 10px 0px;
   align-items: center;
   height: 30px;
+  float: right;
 }
 
 .social-icon {
@@ -268,7 +280,7 @@ button {
 }
 
 .description {
-  margin: 30px 5px;
+  margin: 40px 5px;
 }
 
 .description-card {
@@ -283,11 +295,34 @@ button {
 }
 
 .features-card {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 5px;
   width: 40vw;
 }
 
 .feature-item {
   margin: 2px;
+}
+
+.reviews-btn {
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+}
+
+.reviews-btn:hover {
+  color: #804BAC;
+}
+
+.category {
+  font-size: 20px;
+  font-weight: 400;
+  border-top: -60px;
+}
+
+.rating-link {
+  border-bottom: 0px;
 }

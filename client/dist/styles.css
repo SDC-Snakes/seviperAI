@@ -206,3 +206,8 @@ animation: spinner 1.5s linear infinite;
   align-items: center;
   justify-content: center;
 }
+
+.loading {
+  margin: 20px;
+  flex-direction: column;
+}
