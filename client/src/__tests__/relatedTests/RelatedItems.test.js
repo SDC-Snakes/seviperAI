@@ -1,21 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import Carousel from '../../components/RelatedItems/Carousel';
 import ComparisonModal from '../../components/RelatedItems/ComparisonModal';
 import FormatCard from '../../components/RelatedItems/FormatCard';
 import OutfitList from '../../components/RelatedItems/OutfitList';
 import ItemsList from '../../components/RelatedItems/ItemsList';
-import RelatedItems from '../../components/RelatedItems/RelatedItems';
 import { renderWithProviders } from '../utils/test-utils';
 import stateStub from '../proxies/stateProxy';
 import relatedStub from '../proxies/relatedItemsProxy';
-import reviewsStub from '../proxies/getReviewsProxy';
-import reviewsMetaStub from '../proxies/getReviewsMetaProxy';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [

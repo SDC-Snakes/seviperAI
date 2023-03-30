@@ -72,6 +72,7 @@ table {
   --main4-color: #6B319A;
   --main2-color: #A172C8;
   --main1-color: #C7A4E2;
+  --main0-color: #F4EDF9;
 
   /* Secondary hues */
   --sec5-color: #1C4480;
@@ -85,7 +86,7 @@ table {
   --ter2-color: #F36074;
   --ter1-color: #FBB1BB;
 
-  color-scheme: dark;
+  /* color-scheme: dark; */
 }
 
 body {
