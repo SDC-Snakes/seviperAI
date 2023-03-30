@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import itemStyles from './Items.module.css';
+import { FaInfoCircle, FaTimesCircle } from 'react-icons/fa';
 import {
   newModalState,
   newRelatedProductName,
@@ -41,11 +42,11 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
 
   return (
     <div className={itemStyles['items-card']} onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
-      <i className={
+      <FaInfoCircle className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
         onClick={(e) => {handleModalClick(e, item)}}
       />
-      {outfit && <i className={
+      {outfit && <FaTimesCircle className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
         onClick={() => removeFromOutfit(item)}
       />}

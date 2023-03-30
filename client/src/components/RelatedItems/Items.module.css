@@ -36,11 +36,11 @@ body {
   position: relative;
   width: 200px;
   height: 300px;
-  /* border: 1px solid; */
   border-width: 1px;
   border-radius: 5px;
   margin: 20px;
-  transition: transform .25s ease;
+  transform: rotate();
+  transition: all .25s ease-out;
 }
 
 .items-card:hover {
@@ -95,7 +95,7 @@ body {
 .items-details {
   display: flex;
   flex-direction: column;
-  padding-left: 8%;
+  align-items: center;
 }
 
 .items-stars {
