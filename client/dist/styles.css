@@ -132,6 +132,27 @@ p {
   line-height: 1.5em;
 }
 
+/***** Navbar *****/
+
+.navbar {
+  background-color: var(--main-color);
+  color: #FFF;
+  display: flex;
+}
+
+.navbar-title {
+
+}
+
+.navbar-headers {
+
+}
+
+.navbar-search {
+
+}
+
+
 /***** Stars *****/
 
 input[name="rating"] {
@@ -175,11 +196,6 @@ input[name="rating"] {
   height: 100%;
   border-radius: 10px;
   background-color: green;
-}
-
-.navbar {
-  background-color: #525252;
-  color: var(--main-color);
 }
 
 .headline {
