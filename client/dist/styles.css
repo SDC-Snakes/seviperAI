@@ -137,7 +137,7 @@ input[name="rating"] {
   display:none;
 }
 
- .star{
+.star{
   cursor: pointer;
   transition: color 200ms;
 }
@@ -149,9 +149,9 @@ input[name="rating"] {
   width: 90%;
   margin-top: 5px;
   border-radius: 10px;
- }
+}
 
- .rating-bar-container:hover {
+.rating-bar-container:hover {
   cursor: pointer;
 }
 
