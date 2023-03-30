@@ -2,6 +2,9 @@ body.active-modal {
   overflow-y: hidden;
 }
 
+.btn-modal {
+  font-size: 15px;
+}
 
 .modal, .overlay {
   width: 100vw;

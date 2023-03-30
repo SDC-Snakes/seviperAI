@@ -5,6 +5,12 @@ body {
 
 /**** Related item list ****/
 
+.items-outfit-container {
+  display: flex;
+  justify-content: center;
+}
+
+
 .items-list-container {
   position: relative;
   padding-left: 20px;
@@ -27,7 +33,7 @@ body {
 .items-list-title {
   display: block;
   font-weight: 1000;
-  font-size: 36px;
+  font-size: 30px;
 }
 
 /**** Related item & outfit cards ****/
@@ -36,7 +42,6 @@ body {
   position: relative;
   width: 200px;
   height: 300px;
-  /* border: solid; */
   border-width: 1px;
   border-radius: 5px;
   margin: 20px;
