@@ -86,12 +86,14 @@ function Details({ handleScroll }) {
         <QuarterStarsAverageRating productRating={meta.ratings} />
         <button type="button" className="buttonWrap reviews-btn" onClick={handleRnrClick}>See all reviews</button>
       </div>
-      <p className="category">
-        {`${details.category}:`}
-      </p>
-      <h1>
-        {details.name}
-      </h1>
+      <div>
+        <p className="category">
+          {`${details.category}:`}
+        </p>
+        <p className="product-name">
+          {details.name}
+        </p>
+      </div>
       <div className="flex">
         { selectedStyle.sale_price ? (
           <h3 className="sale">

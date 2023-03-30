@@ -252,3 +252,9 @@ animation: spinner 1.5s linear infinite;
   margin: 0 20px;
   font-size: 12px;
 } */
+
+/* @media (max-width: 600px) {
+  .className {
+    margin: 10px 3px;
+  }
+} */
