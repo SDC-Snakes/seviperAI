@@ -48,7 +48,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
       />
       {outfit && <FaTimesCircle className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
-        onClick={() => removeFromOutfit(item)}
+        onClick={() => removeFromOutfit(item)} aria-label={'remove-icon'}
       />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
       <div className={itemStyles['items-details']}>

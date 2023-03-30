@@ -5,6 +5,12 @@ body {
 
 /**** Related item list ****/
 
+.items-outfit-container {
+  display: flex;
+  justify-content: center;
+}
+
+
 .items-list-container {
   position: relative;
   padding-left: 20px;

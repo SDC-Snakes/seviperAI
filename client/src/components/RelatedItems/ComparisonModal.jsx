@@ -28,7 +28,7 @@ function ComparisonModal() {
   }
 
   return modalOpen && (
-    <div className={itemStyles.modal}>
+    <div className={itemStyles.modal} aria-label="modal">
       <div className={itemStyles.overlay} onClick={closeModal} />
         <div className={`${itemStyles['modal-content']} ${itemStyles['modal-frame']}`} onClick={(e) => e.stopPropagation()}>
           <div className={itemStyles['modal-title']}>COMPARING</div>

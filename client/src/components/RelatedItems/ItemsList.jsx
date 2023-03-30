@@ -13,6 +13,7 @@ function ItemsList({ relatedIndex }) {
   const {
     data: relatedProducts,
     isFetching,
+    error,
   } = useGetRelatedProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });

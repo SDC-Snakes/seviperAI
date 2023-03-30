@@ -157,7 +157,6 @@ test('A customer can search questions by keywords', async () => {
   expect(await screen.queryByText('Maiores dolor quam soluta.')).toBeInTheDocument();
   expect(await screen.queryByText('Testing Search bar: Keyword XYZXYZ')).toBeNull();
   // search query is set;
-  console.log(searchBar)
   fireEvent.change(searchBar, { target: {value: 'XYZ'} });
 
 
