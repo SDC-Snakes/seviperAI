@@ -5,9 +5,9 @@ import { useDropzone } from 'react-dropzone';
 
 function ImageDropzone({ handleDropedInImages }) {
   const [images, setImages] = useState([]);
-  const addImages = (image) => {
-    setImages((prevImages) => [...prevImages, image]);
-    handleDropedInImages([image])
+  const addImages = (imageUrl) => {
+    setImages((prevImages) => [...prevImages, imageUrl]);
+    handleDropedInImages(imageUrl)
   }
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -16,7 +16,6 @@ function ImageDropzone({ handleDropedInImages }) {
       reader.onload = () => {
         // Upload the image to Imgur
         const dataUrl = reader.result.split(',')[1];
-        console.log(encodeURIComponent(dataUrl))
         fetch('https://api.imgur.com/3/image', {
           method: 'POST',
           headers: {
@@ -30,7 +29,6 @@ function ImageDropzone({ handleDropedInImages }) {
           })
           .then((data) => {
             const imageUrl = data.data.link;
-            console.log('imageUrl:', imageUrl);
             addImages(imageUrl);
           })
           .catch((err) => console.log(err));
