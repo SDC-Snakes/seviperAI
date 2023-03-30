@@ -49,12 +49,13 @@ table {
 	border-spacing: 0;
 }
 
+
 /***** Default styles *****/
 
 :root {
   /* Use primary colors first, hues can be used for emphasis:
   5 is the darkest version of the color, 1 is the lightest, primary is level 3 */
-
+  /* color-scheme: dark; */
   /* Primary colors */
   --main-color: #804BAC;
   --sec-color: #4C72A9;
@@ -64,12 +65,14 @@ table {
   --gray3-color: #525252;
   --gray2-color: #C2C2C2;
   --gray1-color: #EBEBEB;
+  --white-color: #FCFCFC;
 
   /* Main hues */
   --main5-color: #531A82;
   --main4-color: #6B319A;
   --main2-color: #A172C8;
   --main1-color: #C7A4E2;
+  --main0-color: #F4EDF9;
 
   /* Secondary hues */
   --sec5-color: #1C4480;
@@ -83,17 +86,22 @@ table {
   --ter2-color: #F36074;
   --ter1-color: #FBB1BB;
 
+  /* color-scheme: dark; */
 }
 
 body {
   font-family: 'Poppins', sans-serif;
 }
 
+.body-no-navbar {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
 h1 {
   font-size: 36px;
   line-height: 1.5em;
   margin-bottom: 22px;
-  color: var(--main-color) /* How to reference color variables, will remove later */
 }
 
 h2 {
@@ -137,7 +145,7 @@ input[name="rating"] {
   display:none;
 }
 
- .star{
+.star{
   cursor: pointer;
   transition: color 200ms;
 }
@@ -149,9 +157,9 @@ input[name="rating"] {
   width: 90%;
   margin-top: 5px;
   border-radius: 10px;
- }
+}
 
- .rating-bar-container:hover {
+.rating-bar-container:hover {
   cursor: pointer;
 }
 
@@ -205,3 +213,49 @@ animation: spinner 1.5s linear infinite;
   align-items: center;
   justify-content: center;
 }
+
+.loading {
+  margin: 20px;
+  flex-direction: column;
+}
+
+
+/***** Buttons *****/
+
+.button {
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin: 0 20px;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.button-light {
+  border-color: var(--main-color);
+  background-color: var(--white-color);
+}
+
+.button-dark {
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+}
+
+/* .btn-modal {
+  border: 1px;
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin: 0 20px;
+  font-size: 12px;
+} */
+
+/* @media (max-width: 600px) {
+  .className {
+    margin: 10px 3px;
+  }
+} */

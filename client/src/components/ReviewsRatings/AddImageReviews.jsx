@@ -35,9 +35,9 @@ function AddImageReviews({ uploadImageHandler }) {
       />
       {modal
       && (
-        <div className={RNRCSS.modal}>
-          <div className={RNRCSS.overlay}>
-            <div className={RNRCSS['modal-content']}>
+        <div className={RNRCSS.modalimage}>
+          <div className={RNRCSS.overlayimage}>
+            <div className={RNRCSS['modal-content-image']}>
               <h2> Add images to your review!</h2>
               <input
                 placeholder="insert image link here"
@@ -73,7 +73,7 @@ function AddImageReviews({ uploadImageHandler }) {
               )}
               <input
                 type="submit"
-                className={RNRCSS['close-modal']}
+                className={RNRCSS['close-modal-image']}
                 onClick={() => { toggleModal(false); }}
                 value="X"
               />

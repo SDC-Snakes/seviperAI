@@ -110,11 +110,11 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     No
                   </label>
                 </div>
-                <div className="characteristicsRadioButtons">
+                <div className={RNRCSS["characteristicsRadioButtons"]}>
                   <h6>Characteristics </h6>
                   {meta.characteristics.Size
                   && (
-                  <div className="Size-Radio-Button">
+                  <div className={RNRCSS["Size-Radio-Button"]}>
                     Size
                     {['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'].map((element, index) => (
                       <label key={index.toString()}>
@@ -132,7 +132,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                   {meta.characteristics.Width
                   && (
-                  <div className="Width-Radio-Button">
+                  <div className={RNRCSS["Width-Radio-Button"]}>
                     Width
                     {['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'].map((element, index) => (
                       <label key={index.toString()}>
@@ -150,7 +150,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                   {meta.characteristics.Comfort
                   && (
-                  <div className="Comfort-Radio-Button">
+                  <div className={RNRCSS["Comfort-Radio-Button"]}>
                     Comfortable
                     {['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'].map((element, index) => (
                       <label key={index.toString()}>
@@ -168,7 +168,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                   {meta.characteristics.Quality
                   && (
-                  <div className="Quality-Radio-Button">
+                  <div className={RNRCSS["Quality-Radio-Button"]}>
                     Quality
                     {['Poor', 'Below average', 'What I expected', 'Pretty Great', 'Perfect'].map((element, index) => (
                       <label key={index.toString()}>
@@ -186,7 +186,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                   {meta.characteristics.Length
                   && (
-                  <div className="Length-Radio-Button">
+                  <div className={RNRCSS["Length-Radio-Button"]}>
                     Length
                     {['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'].map((element, index) => (
                       <label key={index.toString()}>
@@ -204,7 +204,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                   {meta.characteristics.Fit
                   && (
-                  <div className="Fit-Radio-Button">
+                  <div className={RNRCSS["Fit-Radio-Button"]}>
                     Fit
                     {['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'].map((element, index) => (
                       <label key={index.toString()}>
@@ -224,6 +224,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                 <div>
                   <h6>Review summary</h6>
                   <input
+                    style={{width:'50%'}}
                     placeholder="Example: Best purchase ever!"
                     value={reviewPropsObj.summary}
                     onChange={(e) => { handleInputChange(e, 'summary'); }}
@@ -231,8 +232,9 @@ function ReviewAndRatingForm({ RNRCSS }) {
                   />
                 </div>
                 <div>
-                  <h6>Review body</h6>
+                  <h6 style={{ marginTop: '2%' }}>Review body</h6>
                   <input
+                    style={{ width: '50%' }}
                     placeholder="Why did you like the product or not?"
                     value={reviewPropsObj.body}
                     onChange={(e) => { handleInputChange(e, 'body'); }}
@@ -241,16 +243,17 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div>
+                <div style={{ fontSize: '12px' }}>
                   {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
                 </div>
                 <div>
-                  <h6> Upload your photos</h6>
+                  <h6 style={{ marginTop: '2%' }}> Upload your photos</h6>
                   <AddImageReviews uploadImageHandler={uploadImageHandler} />
                 </div>
-                <div>
+                <div style={{ marginTop: '2%' }}>
                   <h6>What is your nickname</h6>
                   <input
+                    style={{ width: '50%' }}
                     value={reviewPropsObj.name}
                     onChange={(e) => { handleInputChange(e, 'name'); }}
                     placeholder="Example: jackson11!"
@@ -258,12 +261,13 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div>
+                <div style={{ fontSize: '12px' }}>
                   For privacy reasons, do not use your full name or email address
                 </div>
                 <div>
-                  <h6>Your email</h6>
+                  <h6 style={{ marginTop: '2%' }}>Your email</h6>
                   <input
+                    style={{ width: '50%'}}
                     type="email"
                     value={reviewPropsObj.email}
                     onChange={(e) => { handleInputChange(e, 'email'); }}
@@ -272,7 +276,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div>
+                <div style={{ fontSize: '12px' }}>
                   For authentication reasons, you will not be emailed
                 </div>
                 <input
@@ -283,7 +287,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                   }}
                   value="X"
                 />
-                <div>
+                <div style={{ marginTop: '2%' }}>
                   <input type="submit" value="Submit Review" />
                 </div>
               </form>

@@ -7,7 +7,7 @@ import {
   FaHeart, FaTwitter, FaPinterest, FaFacebookF
 } from 'react-icons/fa';
 import { useAddToCartMutation, api } from '../../features/api/apiSlice';
-import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
+import { newAddToOutfit } from '../../features/related/relatedSlice';
 import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
@@ -38,7 +38,7 @@ function Details({ handleScroll }) {
 
   useEffect(() => {
     setStock(checkStock());
-  }, []);
+  }, [selectedStyle]);
 
   if (quantity > 15) {
     quantity = 15;
@@ -47,7 +47,8 @@ function Details({ handleScroll }) {
   const handleCartClick = async () => {
     if (sku !== '' && sku !== 'selectSize') {
       const res = await trigger(sku);
-      if (res.data === 'Content created') {
+      const result = await res.data;
+      if (result === 'Content created') {
         toast.success(`${details.name}, ${selectedStyle.name}, size: ${selectedStyle.skus[sku].size}, quantity: ${quantitySelected} added to cart successfully`);
         dispatch(handleStateUpdate({ name: 'sku', value: 'selectSize' }));
         update(details.id);
@@ -81,21 +82,28 @@ function Details({ handleScroll }) {
 
   return (
     <div className="detailsBar">
-      <div>
+      <div className="flex rating-link">
         <QuarterStarsAverageRating productRating={meta.ratings} />
-        <button type="button" onClick={handleRnrClick}>See all reviews</button>
+        <button type="button" className="buttonWrap reviews-btn" onClick={handleRnrClick}>See all reviews</button>
       </div>
-      <h3>
-        {details.category}
-      </h3>
-      <h2>
-        {details.name}
-      </h2>
-      <div className="flex">
-        { selectedStyle.sale_price ? <p className="sale">{`$${selectedStyle.sale_price}`}</p> : null}
-        <p className={selectedStyle.sale_price ? 'originalPrice' : ''}>
-          {`$${selectedStyle.original_price}`}
+      <div>
+        <p className="category">
+          {`${details.category}:`}
         </p>
+        <p className="product-name">
+          {details.name}
+        </p>
+      </div>
+      <div className="flex">
+        { selectedStyle.sale_price ? (
+          <h3 className="sale">
+            {`$${selectedStyle.sale_price}`}
+            &nbsp;&nbsp;
+          </h3>
+        ) : null}
+        <h3 className={selectedStyle.sale_price ? 'originalPrice' : ''}>
+          {`$${selectedStyle.original_price}`}
+        </h3>
       </div>
       <h3>
         {selectedStyle.name}
@@ -104,7 +112,7 @@ function Details({ handleScroll }) {
         <StyleList />
       </div>
       <div className="dropdowns">
-        <select className="size-selector" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
+        <select className="size-selector" aria-label="size-select" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
           <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
           {Object.keys(selectedStyle.skus).map(
             (sizeSku) => (
@@ -118,7 +126,7 @@ function Details({ handleScroll }) {
             ),
           )}
         </select>
-        <select className="qty-selector" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
+        <select className="qty-selector" aria-label="qty-select" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
           {quantity
             ? Array.from({ length: quantity }, (_, i) => i + 1).map(
               (qty) => (<option key={qty} value={qty}>{qty}</option>),
@@ -127,17 +135,17 @@ function Details({ handleScroll }) {
         </select>
       </div>
       <div className="dropdowns">
-        <button className="cart-btn" type="button" onClick={handleCartClick}>
+        <button className="cart-btn" type="button" aria-label="cart-btn" onClick={handleCartClick}>
           Add to cart
         </button>
         <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
-          <FaHeart />
+          <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
         </button>
       </div>
       <div className="socials">
         <a className="social-icon center" href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter className="twitter" /></a>
-        <a className="social-icon center" href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaFacebookF className="facebook" /></a>
-        <a className="social-icon center" href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaPinterest className="pinterest" /></a>
+        <a className="social-icon center" href={`https://www.facebook.com/sharer.php?u=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Facebook"><FaFacebookF className="facebook" /></a>
+        <a className="social-icon center" href={`http://pinterest.com/pin/create/link/?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Pinterest"><FaPinterest className="pinterest" /></a>
       </div>
     </div>
   );
