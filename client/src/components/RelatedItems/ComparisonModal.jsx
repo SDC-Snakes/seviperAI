@@ -31,7 +31,7 @@ function ComparisonModal() {
     <div className={itemStyles.modal}>
       <div className={itemStyles.overlay} onClick={closeModal} />
         <div className={`${itemStyles['modal-content']} ${itemStyles['modal-frame']}`} onClick={(e) => e.stopPropagation()}>
-          <div className={itemStyles['modal-title']}>Comparing</div>
+          <div className={itemStyles['modal-title']}>COMPARING</div>
           <div>
             <span className={itemStyles['modal-headers']}>
               <span className={`${itemStyles['modal-current-product']} ${itemStyles['modal-product']}`}>{currentProductName}</span>
