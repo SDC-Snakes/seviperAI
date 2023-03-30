@@ -50,15 +50,17 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
         onClick={() => removeFromOutfit(item)}
       />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
-      <div>{stars}</div>
-      <p className={itemStyles['product-category']}>{category}</p>
-      <h6 className={itemStyles['product-name']}>{name}</h6>
-      {salePrice ? (
-        <div className={itemStyles['card-price']}>
-          <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
-          <p><s>{`$${price}`}</s></p>
-        </div>
-      ) : <p>{`$${price}`}</p>}
+      <div className={itemStyles['items-details']}>
+        <div className={itemStyles['items-stars']}>{stars}</div>
+        <p className={itemStyles['items-product-category']}>{category}</p>
+        <h6 className={itemStyles['items-product-name']}>{name}</h6>
+        {salePrice ? (
+          <div className={itemStyles['items-price']}>
+            <p className={itemStyles['items-price-sale']}>{`$${salePrice}`}</p>
+            <p><s>{`$${price}`}</s></p>
+          </div>
+        ) : <p>{`$${price}`}</p>}
+      </div>
     </div>
   );
 }
