@@ -24,6 +24,7 @@ function QuestionEntry({ question }) {
           className="add-answer-button"
           onClick={() => onAdd('answer', true, false, question.question_id, question.question_body)}
           value="Add Answer"
+          aria-label="add-answer"
         />
       </span>
     </div>
