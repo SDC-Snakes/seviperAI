@@ -48,17 +48,17 @@ body.active-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 900px;
+  max-width: 1235px;
   width: 100%;
 }
 
 .search-input {
-  width: 100%;
+  width: 98%;
   margin-bottom: 12px;
 }
 
 .questions-list-container{
-  width: 100%;
+  width: 98%;
   /* padding: 10px; */
   /* border: 2px solid grey; */
   /* border-radius: 1%; */
