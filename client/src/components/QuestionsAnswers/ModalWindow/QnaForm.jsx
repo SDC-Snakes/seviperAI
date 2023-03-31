@@ -82,32 +82,57 @@ function QnaForm({
       <h6>{subTitle}</h6>
       <form onSubmit={onSubmit} aria-label='window-form'>
         <div className="form-group">
-          <label htmlFor="body_input">
-            {isQuestionForm ? 'Question' : 'Answer'}
-            <small style={{ color: 'red' }}>*</small>
-            :
-          </label>
-          <textarea id="body_input" rows="3" maxLength="1000" style={{width:"100px", height:"100px"}}/>
+          <div>
+            <label htmlFor="body_input">
+              Your{isQuestionForm ? ' question' : ' answer'}
+              <small style={{ color: 'red' }}>*</small>
+            </label>
+          </div>
+          <textarea
+            id="body_input"
+            rows="3"
+            maxLength="1000"
+            style={{ width: "100%", height: "50px" }}
+          />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname_input">
-            Nickname
-            <small style={{ color: 'red' }}>*</small>
-            :
-          </label>
-          <input type="text" id="nickname_input" maxLength="60" placeholder="Example: Jack543!" />
+          <div>
+            <label htmlFor="nickname_input">
+              What is your nickname?
+              <small style={{ color: 'red' }}>*</small>
+            </label>
+          </div>
+          <input
+          type="text"
+          id="nickname_input"
+          maxLength="60"
+          placeholder="Example: Jack543!"
+          style={{ width: "100%" }}
+          />
           <p>For privacy reasons, do not use your full name or email address.</p>
         </div>
         <div className="form-group">
-          <label htmlFor="email_input">
-            Email
-            <small style={{ color: 'red' }}>*</small>
-            :
-          </label>
-          <input type="text" id="email_input" maxLength="60" placeholder="Example: jack@example.com" />
+          <div>
+            <label htmlFor="email_input">
+              Your email
+              <small style={{ color: 'red' }}>*</small>
+            </label>
+          </div>
+          <input
+          type="text"
+          id="email_input"
+          maxLength="60"
+          placeholder="Example: jack@example.com"
+          style={{ width: "100%"}}
+          />
           <p>For authentication reasons, you will not be emailed.</p>
         </div>
-        <input type="submit" value={isQuestionForm ? 'Submit' : 'Submit Answer'} aria-label="submit"/>
+        <input
+          type="submit"
+          value={isQuestionForm ? 'Submit' : 'Submit Answer'}
+          aria-label="submit"
+          className="button button-dark button-small"
+        />
         {(isLoadingQ || isLoadingA) && (
         <div>
           Submitting
