@@ -22,7 +22,8 @@ function Navbar({ handleScroll }) {
 
   const setDark = (target) => {
     dispatch(toggleState('dark'));
-  }
+    console.log(dark);
+  };
 
   return (
     <div className="navbar">
@@ -34,10 +35,8 @@ function Navbar({ handleScroll }) {
         <h5 className="navbar-reviews navbar-sections" onClick={handleRnrClick}>Ratings & Reviews</h5>
       </div>
       <div className="navbar-dark-container">
-        <label>
-          <input type="checkbox" checked={dark} onChange={e => setDark(e.target.checked)} />
-          Dark Mode
-        </label>
+        <input id="dark-mode" type="checkbox" checked={dark} onChange={(e) => setDark(e.target.checked)} />
+        <label htmlFor="dark-mode" className="dark-mode-toggle">Dark mode</label>
       </div>
       <div className="navbar-search-container">
         <div className="navbar-search-bubble" />

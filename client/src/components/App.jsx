@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import ProductDetails from './ProductDetails/ProductDetails';
 import ReviewsAndRatings from './ReviewsRatings/ReviewsAndRatings';
@@ -10,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const { dark } = useSelector((state) => state.products);
   const rnrRef = React.useRef(null);
   const qnaRef = React.useRef(null);
   const relatedRef = React.useRef(null);
@@ -28,29 +30,31 @@ function App() {
       <ToastContainer />
       <Router>
         <Navbar handleScroll={handleScroll} />
-        <SiteAnnouncement />
-        <div className="body-no-navbar">
-          <Routes>
-            <Route path="/" element={<Navigate to="/40344" />} />
-            <Route path="/NotFound" element={<div>404 not found...</div>} />
-            <Route
-              path="/:productId"
-              element={(
-                <>
-                  <ProductDetails handleScroll={handleScroll} />
-                  <div ref={relatedRef}>
-                    <RelatedItems />
-                  </div>
-                  <div ref={qnaRef}>
-                    <QuestionsAnswers />
-                  </div>
-                  <div ref={rnrRef}>
-                    <ReviewsAndRatings />
-                  </div>
-                </>
-            )}
-            />
-          </Routes>
+        <div className={dark ? 'theme-dark' : null}>
+          <SiteAnnouncement />
+          <div className="body-no-navbar">
+            <Routes>
+              <Route path="/" element={<Navigate to="/40344" />} />
+              <Route path="/NotFound" element={<div>404 not found...</div>} />
+              <Route
+                path="/:productId"
+                element={(
+                  <>
+                    <ProductDetails handleScroll={handleScroll} />
+                    <div ref={relatedRef}>
+                      <RelatedItems />
+                    </div>
+                    <div ref={qnaRef}>
+                      <QuestionsAnswers />
+                    </div>
+                    <div ref={rnrRef}>
+                      <ReviewsAndRatings />
+                    </div>
+                  </>
+              )}
+              />
+            </Routes>
+          </div>
         </div>
       </Router>
     </div>
