@@ -11,3 +11,4 @@ coverage/
 client/dist/*bundle.js*
 client/dist/*bundle.min.js*
 node_modules
+
