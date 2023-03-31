@@ -86,7 +86,13 @@ table {
   --ter2-color: #F36074;
   --ter1-color: #FBB1BB;
 
-  /* color-scheme: dark; */
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  .body {
+    color-scheme: dark;
+  }
 }
 
 body {
