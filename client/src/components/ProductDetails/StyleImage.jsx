@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { newSelectedStyle, newSelectedImage, handleStateUpdate } from '../../features/products/productsSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import errorImage from '../SharedComponents/errorImage.jpg';
 import { FaRegCheckCircle } from 'react-icons/fa';
+import { newSelectedStyle, newSelectedImage, handleStateUpdate } from '../../features/products/productsSlice';
 
 function StyleImage({ image, style }) {
   const { selectedStyle, imageIndex, page } = useSelector((state) => state.products);
@@ -10,7 +9,7 @@ function StyleImage({ image, style }) {
   const [current, setCurrent] = useState(style.style_id === selectedStyle.style_id);
 
   const handleClick = () => {
-    const len = style.photos.length;
+    const len = style.photos.length || 0;
     dispatch(newSelectedStyle(style));
     if (imageIndex < len) {
       dispatch(newSelectedImage(style.photos[imageIndex].url));
@@ -27,7 +26,7 @@ function StyleImage({ image, style }) {
     <div className="flex circleDiv">
       <button className="buttonWrap circle-btn" onClick={handleClick} type="button" aria-label="style-image">
         {current ? <FaRegCheckCircle className="visible fa-check" size="20px" color="black" /> : null}
-        <img className={current ? 'selected' : 'circleImage'} src={image || errorImage} alt="ImageView" height="60" width="auto" />
+        <img className={current ? 'selected' : 'circleImage'} src={image} alt="ImageView" height="60" width="auto" />
       </button>
     </div>
   );

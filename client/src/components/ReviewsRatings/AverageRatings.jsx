@@ -10,7 +10,6 @@ import { newSetRating, newResetRating } from '../../features/reviews/reviewsSlic
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
-import Spinner from '../SharedComponents/Spinner';
 
 function AverageRatings({ RNRCSS }) {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ function AverageRatings({ RNRCSS }) {
   const obj = meta.ratings;
   const values = Object.values(obj);
   if (values.length === 0) {
-    return <Spinner />;
+    return <span>...Loading</span>;
   }
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);

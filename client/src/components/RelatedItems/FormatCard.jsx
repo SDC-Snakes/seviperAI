@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import itemStyles from './Items.module.css';
+import { FaInfoCircle, FaTimesCircle } from 'react-icons/fa';
 import {
   newModalState,
   newRelatedProductName,
@@ -40,25 +41,27 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
   }
 
   return (
-    <div className={itemStyles['items-card']} data-testid="card" onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
-      <i className={
+    <div className={itemStyles['items-card']} onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
+      <FaInfoCircle className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
-        onClick={(e) => {handleModalClick(e, item)}} aria-label={'modal-icon'}
+        onClick={(e) => handleModalClick(e, item)}
       />
-      {outfit && <i className={
+      {outfit && <FaTimesCircle className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
         onClick={() => removeFromOutfit(item)} aria-label={'remove-icon'}
       />}
       <img className={itemStyles['items-card-img']} src={image} alt="" />
-      <div>{stars}</div>
-      <p className={itemStyles['product-category']}>{category}</p>
-      <h6 className={itemStyles['product-name']}>{name}</h6>
-      {salePrice ? (
-        <div className={itemStyles['card-price']}>
-          <p className={itemStyles['card-price-sale']}>{`$${salePrice}`}</p>
-          <p><s>{`$${price}`}</s></p>
-        </div>
-      ) : <p>{`$${price}`}</p>}
+      <div className={itemStyles['items-details']}>
+        <div className={itemStyles['items-stars']}>{stars}</div>
+        <p className={itemStyles['items-product-category']}>{category}</p>
+        <h6 className={itemStyles['items-product-name']}>{name}</h6>
+        {salePrice ? (
+          <div className={itemStyles['items-price']}>
+            <p className={itemStyles['items-price-sale']}>{`$${salePrice}`}</p>
+            <p><s>{`$${price}`}</s></p>
+          </div>
+        ) : <p>{`$${price}`}</p>}
+      </div>
     </div>
   );
 }
