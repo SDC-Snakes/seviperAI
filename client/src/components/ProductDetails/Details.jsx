@@ -135,10 +135,10 @@ function Details({ handleScroll }) {
         </select>
       </div>
       <div className="dropdowns">
-        <button className="cart-btn" type="button" aria-label="cart-btn" onClick={handleCartClick}>
+        <button className="button button-dark" type="button" aria-label="cart-btn" onClick={handleCartClick}>
           Add to cart
         </button>
-        <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
+        <button className="button button-dark" type="button" onClick={handleOutfitClick}>
           <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
         </button>
       </div>
