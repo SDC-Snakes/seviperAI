@@ -1,9 +1,21 @@
 import React from 'react';
-import { nanoid } from '@reduxjs/toolkit';
 import { FaRegCheckCircle } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import { useGetSpecificProductQuery } from '../../features/api/apiSlice';
 
-function Description({ details }) {
-  // let { details } = useSelector((state) => state.products);
+function Description() {
+  const params = useParams();
+  const {
+    data: details,
+    isFetching,
+    isError,
+  } = useGetSpecificProductQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  if (isFetching || isError) {
+    return null;
+  }
 
   return (
     <div className="description flex">
@@ -16,7 +28,7 @@ function Description({ details }) {
           {details.features.map((item) => {
             const { feature, value } = item;
             return value ? (
-              <li className="feature-item center" key={nanoid()}>
+              <li className="feature-item center" key={`${feature}${value}`}>
                 <FaRegCheckCircle />
                 &nbsp;
                 {`  ${feature}  :  ${value}`}

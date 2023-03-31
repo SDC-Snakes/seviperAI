@@ -1,25 +1,34 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  FaHeart, FaTwitter, FaPinterest, FaFacebookF,
+} from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
-import { useSelector, useDispatch } from 'react-redux';
 import { handleStateUpdate } from '../../features/products/productsSlice';
-import {
-  FaHeart, FaTwitter, FaPinterest, FaFacebookF
-} from 'react-icons/fa';
-import { useAddToCartMutation, api } from '../../features/api/apiSlice';
+import { useAddToCartMutation, api, useGetSpecificProductQuery } from '../../features/api/apiSlice';
 import { newAddToOutfit } from '../../features/related/relatedSlice';
-import {toast} from 'react-toastify';
 
 function Details({ handleScroll }) {
+  const params = useParams();
   const [stock, setStock] = useState(true);
-  const [update] = api.endpoints.getProductInfo.useLazyQuery();
+  const [update] = api.endpoints.getProductStyles.useLazyQuery();
   const {
     selectedStyle,
-    details,
     sku,
     quantitySelected,
   } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
+
+  const {
+    data: details,
+    isFetching,
+    isError,
+  } = useGetSpecificProductQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
@@ -42,6 +51,10 @@ function Details({ handleScroll }) {
 
   if (quantity > 15) {
     quantity = 15;
+  }
+
+  if (isError || isFetching) {
+    return null;
   }
 
   const handleCartClick = async () => {
@@ -80,6 +93,10 @@ function Details({ handleScroll }) {
     dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value }));
   };
 
+  if (isFetching || isError) {
+    return null;
+  }
+
   return (
     <div className="detailsBar">
       <div className="flex rating-link">
@@ -94,53 +111,58 @@ function Details({ handleScroll }) {
           {details.name}
         </p>
       </div>
-      <div className="flex">
-        { selectedStyle.sale_price ? (
-          <h3 className="sale">
-            {`$${selectedStyle.sale_price}`}
-            &nbsp;&nbsp;
-          </h3>
-        ) : null}
-        <h3 className={selectedStyle.sale_price ? 'originalPrice' : ''}>
-          {`$${selectedStyle.original_price}`}
-        </h3>
-      </div>
-      <h3>
-        {selectedStyle.name}
-      </h3>
       <div>
+        <div className="flex">
+          { selectedStyle.sale_price ? (
+            <p className="sale price">
+              {`$${selectedStyle.sale_price}`}
+            &nbsp;&nbsp;
+            </p>
+          ) : null}
+          <p className={selectedStyle.sale_price ? 'originalPrice price' : 'price'}>
+            {`$${selectedStyle.original_price}`}
+          </p>
+        </div>
+        <p className="style-name">
+          {selectedStyle.name}
+        </p>
+        <br />
         <StyleList />
       </div>
+
       <div className="dropdowns">
-        <select className="size-selector" aria-label="size-select" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
-          <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
-          {Object.keys(selectedStyle.skus).map(
-            (sizeSku) => (
-              <option
-                key={sizeSku}
-                value={sizeSku}
-                disabled={!selectedStyle.skus[sizeSku].quantity}
-              >
-                {selectedStyle.skus[sizeSku].size}
-              </option>
-            ),
-          )}
-        </select>
-        <select className="qty-selector" aria-label="qty-select" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
-          {quantity
-            ? Array.from({ length: quantity }, (_, i) => i + 1).map(
-              (qty) => (<option key={qty} value={qty}>{qty}</option>),
-            )
-            : <option>-</option>}
-        </select>
-      </div>
-      <div className="dropdowns">
-        <button className="button button-dark" type="button" aria-label="cart-btn" onClick={handleCartClick}>
-          Add to cart
-        </button>
-        <button className="button button-dark" type="button" onClick={handleOutfitClick}>
-          <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
-        </button>
+        <div className="flex">
+          <select className="size-selector" aria-label="size-select" name="sku" onChange={handleSizeClick} disabled={!stock} id="sizeBtn" ref={sizeRef} value={sku}>
+            <option value={stock ? 'selectSize' : 'outOfStock'}>{stock ? 'Select Size' : 'Out Of Stock'}</option>
+            {Object.keys(selectedStyle.skus).map(
+              (sizeSku) => (
+                <option
+                  key={sizeSku}
+                  value={sizeSku}
+                  disabled={!selectedStyle.skus[sizeSku].quantity}
+                >
+                  {selectedStyle.skus[sizeSku].size}
+                </option>
+              ),
+            )}
+          </select>
+          <select className="qty-selector" aria-label="qty-select" name="quantitySelected" onChange={(e) => { dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value })); }}>
+            {quantity
+              ? Array.from({ length: quantity }, (_, i) => i + 1).map(
+                (qty) => (<option key={qty} value={qty}>{qty}</option>),
+              )
+              : <option>-</option>}
+          </select>
+        </div>
+        <br />
+        <div className="flex">
+          <button className="cart-btn" type="button" aria-label="cart-btn" onClick={handleCartClick}>
+            Add to cart
+          </button>
+          <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
+            <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
+          </button>
+        </div>
       </div>
       <div className="socials">
         <a className="social-icon center" href={`https://twitter.com/intent/tweet?url=${process.env.APP_URL}/${details.id}`} target="_blank" rel="noreferrer" aria-label="Share to Twitter"><FaTwitter className="twitter" /></a>

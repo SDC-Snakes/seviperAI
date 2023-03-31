@@ -1,5 +1,6 @@
 require('dotenv').config();
 const webpack = require('webpack');
+const TerserPlugin = require("terser-webpack-plugin");
 
 const path = require('path');
 
@@ -8,7 +9,16 @@ module.exports = {
   entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
     path: path.join(__dirname, '/client/dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin(
+      {
+        test: /\.js(\?.*)?$/i,
+      },
+    ),
+    ],
   },
   devtool: 'source-map',
   resolve: {
