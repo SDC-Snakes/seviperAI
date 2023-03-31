@@ -46,7 +46,7 @@ body {
   border-radius: 5px;
   margin: 20px;
   transform: rotate();
-  transition: all .25s ease-out;
+  transition: all .125s ease-out;
 }
 
 .items-card:hover {
