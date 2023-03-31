@@ -1,21 +1,9 @@
 import React from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
-import { useGetSpecificProductQuery } from '../../features/api/apiSlice';
+import { useSelector } from 'react-redux';
 
 function Description() {
-  const params = useParams();
-  const {
-    data: details,
-    isFetching,
-    isError,
-  } = useGetSpecificProductQuery(`${params.productId}`, {
-    refetchOnMountOrArgChange: true,
-  });
-
-  if (isFetching || isError) {
-    return null;
-  }
+  const { details } = useSelector((state) => state.products);
 
   return (
     <div className="description flex">
