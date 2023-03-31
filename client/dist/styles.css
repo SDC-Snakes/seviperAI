@@ -195,6 +195,10 @@ p {
   margin: 0 10px;
 }
 
+.navbar-sections:hover {
+  cursor: pointer;
+}
+
 .navbar-search-container {
   display: flex;
   align-items: center;

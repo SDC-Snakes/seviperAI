@@ -3,14 +3,26 @@ import logo from './WiredWardrobeLogo.png';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 function Navbar({ handleScroll }) {
+  const handleRelatedClick = () => {
+    handleScroll('related');
+  };
+
+  const handleQnAClick = () => {
+    handleScroll('qna');
+  };
+
+  const handleRnrClick = () => {
+    handleScroll('rnr');
+  };
+
   return (
     <div className="navbar">
       <img src={logo} className="navbar-logo" alt="ww-logo" />
       <h1 className="navbar-title">WiredWardrobe</h1>
       <div className="navbar-headers">
-        <h5 className="navbar-related navbar-sections">Related Items</h5>
-        <h5 className="navbar-qna navbar-sections">Questions & Answers</h5>
-        <h5 className="navbar-reviews navbar-sections">Ratings & Reviews</h5>
+        <h5 className="navbar-related navbar-sections" onClick={handleRelatedClick}>Related Items</h5>
+        <h5 className="navbar-qna navbar-sections" onClick={handleQnAClick}>Questions & Answers</h5>
+        <h5 className="navbar-reviews navbar-sections" onClick={handleRnrClick}>Ratings & Reviews</h5>
       </div>
       <div className="navbar-search-container">
         <div className="navbar-search-bubble" />
