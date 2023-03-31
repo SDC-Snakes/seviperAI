@@ -8,22 +8,24 @@ function QuestionEntry({ question }) {
 
   return (
     <div className={qnaStyles["question-entry"]}>
-      <span style={{width:"10px", "margin-right":"10px"}}> Q: </span>
+      <span style={{width:"10px", "marginRight":"10px"}}> Q: </span>
       <span className={qnaStyles["question-text"]}>
         {question.question_body}
       </span>
-      <HelpfulModule
-        count={question.question_helpfulness}
-        itemId={question.question_id}
-        item="questions"
-      />
-      <input
-        type="button"
-        className={qnaStyles["add-answer-button"]}
-        onClick={() => onAdd('answer', true, false, question.question_id, question.question_body)}
-        value="Add Answer"
-        aria-label="add-answer"
-      />
+      <span className={qnaStyles["question-buttons"]}>
+        <HelpfulModule
+          count={question.question_helpfulness}
+          itemId={question.question_id}
+          item="questions"
+        />
+        <span
+          className={qnaStyles['helpful-tile']}
+          onClick={() => onAdd('answer', true, false, question.question_id, question.question_body)}
+          aria-label="add-answer"
+        >
+          Add Answer
+        </span>
+      </span>
     </div>
   );
 }
