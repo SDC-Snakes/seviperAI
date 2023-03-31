@@ -62,7 +62,7 @@ function ImageViewer() {
     setRelPosition([relLeft, relTop]);
   };
 
-  if (selectedStyle.photos[0].url === '') {
+  if (!selectedStyle.photos || selectedStyle.photos[0].url === '') {
     return null;
   }
 
