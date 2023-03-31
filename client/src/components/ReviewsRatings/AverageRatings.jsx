@@ -29,11 +29,12 @@ function AverageRatings({ RNRCSS }) {
     <aside className={RNRCSS['average-ratings-left']}>
       <h3>Product Ratings</h3>
       <QuarterStarsAverageRating productRating={obj} />
-      <div>
+      <div style={{ marginTop: '2%' }}>
         Total number of reviews:
+        {' '}
         {totalNumRatings}
       </div>
-      <h4>Rating Breakdown</h4>
+      <h4 style={{ marginTop: '2%' }}>Rating Breakdown</h4>
       {barRating.length > 0 && (
         <div>
           <h4>
