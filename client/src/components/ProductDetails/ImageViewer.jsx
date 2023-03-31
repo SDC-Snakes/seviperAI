@@ -103,7 +103,7 @@ function ImageViewer() {
                 ? <FaChevronDown className="chevron" aria-label="down-arrow" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
                 : null}
             </div>
-            <div className="center">
+            <div className="center large-image">
               {imageIndex > 0 ? <FaChevronLeft className="chevron" aria-label="left-arrow" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('left')} /> : null}
               <input type="image" className={expanded ? 'expandedImage' : 'mainImage'} aria-label="main-image" src={(expanded ? selectedStyle.photos[imageIndex].url : selectedStyle.photos[imageIndex].thumbnail_url) || 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bm90JTIwZm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60'} alt="SelectedImage" key={selectedStyle.style_id} ref={imgRef} onClick={expanded ? handleZoom : null} height="2000" />
               {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" data-testid="chevron-icon" aria-label="right-arrow" onClick={() => handleHorizontalScroll('right')} /> : null}

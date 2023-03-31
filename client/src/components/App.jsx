@@ -44,7 +44,7 @@ function App() {
                   <div ref={qnaRef}>
                     <QuestionsAnswers />
                   </div>
-                  <div ref={rnrRef}>
+                  <div className="testHt" ref={rnrRef}>
                     <ReviewsAndRatings />
                   </div>
                 </>
