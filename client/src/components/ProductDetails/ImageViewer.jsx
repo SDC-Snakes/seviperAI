@@ -32,11 +32,6 @@ function ImageViewer() {
   const [dimensions, setDimensions] = useState([]);
   const [relPosition, setRelPosition] = useState([]);
 
-  const handleImageClick = (image, ind) => {
-    dispatch(newSelectedImage(image.url));
-    dispatch(newImageIndex(ind));
-  };
-
   const handleHorizontalScroll = (direction) => {
     if (direction === 'left') {
       if (Math.floor((imageIndex - 1) / 7) !== page) {

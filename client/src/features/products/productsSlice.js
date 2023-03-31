@@ -13,6 +13,7 @@ const initialState = {
     }],
     skus: {},
   },
+  details: {},
   selectedImage: '',
   expanded: false,
   zoom: false,
@@ -55,10 +56,13 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(api.endpoints.getProductStyles.matchFulfilled, (state, action) => {
-        if (state.selectedStyle.style_id === '') {
+        if (state.selectedStyle.style_id !== action.payload.results[0].style_id) {
           state.selectedStyle = action.payload.results[0];
           state.selectedImage = state.selectedStyle.photos[0].url;
         }
+      })
+      .addMatcher(api.endpoints.getSpecificProduct.matchFulfilled, (state, action) => {
+        state.details = action.payload;
       });
   },
 });
