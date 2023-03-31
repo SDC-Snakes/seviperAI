@@ -31,7 +31,7 @@ function AnswersList({ answers }) {
                 value={folded ? 'See more answers' : 'Collapse answers'}
                 color="blue"
                 type="button"
-                className="button button-light"
+                className="button button-light button-small"
               />
             </span>
           )}
