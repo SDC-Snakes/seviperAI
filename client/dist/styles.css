@@ -218,15 +218,6 @@ p {
   width: 200px;
 }
 
-.navbar-dark-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 320px;
-  width: 200px;
-}
-
 .navbar-search-bubble {
   position: absolute;
   border-radius: 40px;
@@ -276,6 +267,57 @@ input[name="rating"] {
 .star{
   cursor: pointer;
   transition: color 200ms;
+}
+
+/***** Dark mode toggle *****/
+
+.navbar-dark-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 280px;
+  width: 200px;
+}
+
+input[type="checkbox"] {
+	visibility: hidden;
+}
+
+input[type="checkbox"]:checked + .dark-mode-toggle {
+	background-color: #160525;
+}
+
+input[type="checkbox"]:checked + .dark-mode-toggle:before {
+	box-sizing: border-box;
+	transform: translateX(29px);
+	background-color: var(--main2-color);
+}
+
+.dark-mode-toggle {
+	box-sizing: border-box;
+	display: flex;
+	width: 60px;
+	height: 25px;
+	border-radius: 99em;
+	position: relative;
+	transition: transform .5s ease-in-out;
+	transform-origin: 50% 50%;
+  background-color: var(--main2-color);
+	cursor: pointer;
+}
+
+.dark-mode-toggle:before {
+  transition: transform .5s ease;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  background-color: var(--white-color);
+  border-radius: 50%;
+  left: 7px;
+  top: 4px;
 }
 
 /***** Rating Bar *****/
@@ -370,53 +412,6 @@ animation: spinner 1.5s linear infinite;
   background-color: var(--main-color);
   color: var(--white-color);
 }
-
-/***** Dark mode toggle *****/
-
-input[type="checkbox"] {
-	visibility: hidden;
-}
-
-input[type="checkbox"]:checked + .dark-mode-toggle {
-	background-color: var(--main5-color);
-}
-
-input[type="checkbox"]:checked + .dark-mode-toggle:before {
-	box-sizing: border-box;
-	transform: translateX(35px);
-	background-color: var(--main2-color);
-}
-
-.dark-mode-toggle {
-	box-sizing: border-box;
-	display: flex;
-	width: 80px;
-	height: 40px;
-	border-radius: 99em;
-	position: relative;
-	transition: transform .5s ease-in-out;
-	transform-origin: 50% 50%;
-  background-color: var(--main2-color);
-	cursor: pointer;
-}
-
-.dark-mode-toggle:before {
-  transition: transform .5s ease;
-  content: "";
-  display: block;
-  position: absolute;
-  width: 27px;
-  height: 27px;
-  background-color: var(--white-color);
-  border-radius: 50%;
-  left: 9px;
-  top: 6px;
-}
-
-.dark-mode-toggle {
-  color: white;
-}
-
 
 /***** Questions and Answers *****/
 #qna-block {
