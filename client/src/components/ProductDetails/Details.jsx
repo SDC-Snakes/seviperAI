@@ -160,7 +160,7 @@ function Details({ handleScroll }) {
             Add to cart
           </button>
           <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
-            <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'white' }} />
+            <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'black' }} />
           </button>
         </div>
       </div>

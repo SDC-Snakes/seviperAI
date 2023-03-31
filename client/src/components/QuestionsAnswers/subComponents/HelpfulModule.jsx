@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHelpfulQNAMutation } from '../../../features/api/apiSlice';
+import qnaStyles from '../qnaStyles.module.css';
 
 function HelpfulModule({ count, item, itemId }) {
   const [countTemp, setCountTemp] = useState(count);
@@ -15,16 +16,20 @@ function HelpfulModule({ count, item, itemId }) {
   };
 
   return (
-    <>
-      <span className="helpful-text">
-        Helpful?
+    <span className={qnaStyles['helpful-tile']}>
+      <span>
+        Helpful?{" "}
       </span>
-      <span className="yes-button" onClick={onClick} aria-label='helpful-button'>
+      <span
+        className={qnaStyles['helpful-tile-yes']}
+        onClick={onClick}
+        aria-label='helpful-button'
+      >
         Yes(
         {countTemp}
         )
       </span>
-    </>
+    </span>
   );
 }
 

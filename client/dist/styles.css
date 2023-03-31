@@ -416,3 +416,10 @@ input[type="checkbox"]:checked + .dark-mode-toggle:before {
 .dark-mode-toggle {
   color: white;
 }
+
+
+/***** Questions and Answers *****/
+#qna-block {
+  display: flex;
+  justify-content: center;
+}
