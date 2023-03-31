@@ -185,6 +185,23 @@ body.active-modalimage {
   .reviews-filter {
     margin-right: 10px;
   }
+  .reviews-filter-reset-input{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    border: 2px solid;
+    border-radius: 25px;
+    padding: 5px 5px;
+     font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    border-color: #804BAC;
+    color: black;
+    background-color: white;
+  }
+  .reviews-filter-reset-input:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
 
   /* review tile contents */
   .review-tile-in-reviews {
