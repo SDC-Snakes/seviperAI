@@ -368,7 +368,7 @@ animation: spinner 1.5s linear infinite;
 .button-dark {
   border-color: var(--main-color);
   background-color: var(--main-color);
-  color: white;
+  color: var(--white-color);
 }
 
 /***** Dark mode toggle *****/
@@ -378,13 +378,13 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked + .dark-mode-toggle {
-	background-color: var(--main2-color);
+	background-color: var(--main5-color);
 }
 
 input[type="checkbox"]:checked + .dark-mode-toggle:before {
 	box-sizing: border-box;
 	transform: translateX(35px);
-	background-color: #FFF;
+	background-color: var(--main2-color);
 }
 
 .dark-mode-toggle {
@@ -396,7 +396,7 @@ input[type="checkbox"]:checked + .dark-mode-toggle:before {
 	position: relative;
 	transition: transform .5s ease-in-out;
 	transform-origin: 50% 50%;
-  background-color: var(--main5-color);
+  background-color: var(--main2-color);
 	cursor: pointer;
 }
 
@@ -407,7 +407,7 @@ input[type="checkbox"]:checked + .dark-mode-toggle:before {
   position: absolute;
   width: 27px;
   height: 27px;
-  background-color: #804BAC;
+  background-color: var(--white-color);
   border-radius: 50%;
   left: 9px;
   top: 6px;
