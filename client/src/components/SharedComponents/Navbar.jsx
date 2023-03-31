@@ -35,7 +35,7 @@ function Navbar({ handleScroll }) {
       </div>
       <div className="navbar-dark-container">
         <input id="dark-mode" type="checkbox" checked={dark} onChange={(e) => setDark(e.target.checked)} />
-        <label htmlFor="dark-mode" className="dark-mode-toggle">Dark mode</label>
+        <label htmlFor="dark-mode" className="dark-mode-toggle"></label>
       </div>
       <div className="navbar-search-container">
         <div className="navbar-search-bubble" />

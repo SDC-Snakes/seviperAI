@@ -373,18 +373,17 @@ animation: spinner 1.5s linear infinite;
 
 /***** Dark mode toggle *****/
 
-/* input[type="checkbox"] {
+input[type="checkbox"] {
 	visibility: hidden;
 }
 
 input[type="checkbox"]:checked + .dark-mode-toggle {
 	background-color: var(--main2-color);
-		border: 6px solid var(--main2-color);
 }
 
 input[type="checkbox"]:checked + .dark-mode-toggle:before {
 	box-sizing: border-box;
-	transform: translateX(90px);
+	transform: translateX(35px);
 	background-color: #FFF;
 }
 
@@ -410,8 +409,9 @@ input[type="checkbox"]:checked + .dark-mode-toggle:before {
   height: 27px;
   background-color: #804BAC;
   border-radius: 50%;
-  left: -50px;
-} */
+  left: 9px;
+  top: 6px;
+}
 
 .dark-mode-toggle {
   color: white;
