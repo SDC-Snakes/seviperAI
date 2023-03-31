@@ -186,7 +186,7 @@ button {
   cursor: zoom-in;
   margin: 0 15px;
   max-height: 59vh;
-  max-width: 100%;
+  max-width: 70vw;
   box-shadow: 4px 4px 20px black;
   border-radius: 2%;
 }
