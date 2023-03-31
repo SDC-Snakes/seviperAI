@@ -54,31 +54,35 @@ body.active-modal {
 
 .search-input {
   width: 100%;
+  margin-bottom: 12px;
 }
 
 .questions-list-container{
   width: 100%;
-    padding: 10px;
-    border: 2px solid grey;
-    border-radius: 1%;
-    margin-right: 40px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 40px;
+  /* padding: 10px; */
+  /* border: 2px solid grey; */
+  /* border-radius: 1%; */
+  /* /* margin-right: 40px;
+  margin-left: 10px;
+  margin-top: 10px; */
+  margin-bottom: 10px;
 }
 .qna-tile {
   /* border: 2px solid grey;
   padding: 5px;
   margin: 5px;
   border-radius:1%; */
+  margin-bottom: 10px;
 }
 
 .question-entry {
-  display: flex;
+  display: grid;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  grid-template-columns: 20px 1fr 200px;
   align-items: center;
   font-weight: bold;
+  margin-bottom: 10px
 }
 
 .question-text {
@@ -109,14 +113,6 @@ body.active-modal {
   margin-right: 5px;
 }
 
-.answer-tile {
-  padding: 2px;
-  border: 2px solid grey;
-  border-radius: 1%;
-  margin-top: 10px;
-  background-color: lightgrey;
-
-}
 .question-buttons {
   font-size: 12px;
   color: black;
@@ -126,6 +122,11 @@ body.active-modal {
   border-right: 1px solid grey;
   margin-right: 10px;
 }
+.question-buttons > :last-child {
+  padding-right: 0px;
+  border-right: 0px;
+  margin-right: 0px;
+}
 .answerer-info {
   font-size: 12px;
   color: gray;
@@ -134,6 +135,14 @@ body.active-modal {
   padding-right: 10px;
   border-right: 1px solid grey;
   margin-right: 10px;
+  margin-top: 10px;
+  margin-botton: 10px;
+}
+
+.answerer-info > :last-child {
+  padding-right: 0px;
+  border-right: 0px;
+  margin-right: 0px;
 }
 
 /* Seller setting */

@@ -22,6 +22,7 @@ function QuestionEntry({ question }) {
           className={qnaStyles['helpful-tile']}
           onClick={() => onAdd('answer', true, false, question.question_id, question.question_body)}
           aria-label="add-answer"
+          style={{textDecoration: "underline"}}
         >
           Add Answer
         </span>
