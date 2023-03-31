@@ -355,6 +355,13 @@ button {
   justify-content: center;
 }
 
+.reviews-btn-dark {
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
 .reviews-btn:hover {
   color: #804BAC;
 }
@@ -375,8 +382,20 @@ button {
   font-weight: 600;
 }
 
+.product-name-dark {
+  color:#dec2f6;
+  font-size: 30px;
+  font-weight: 600;
+}
+
 .style-name {
   color:#804BAC;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.style-name-dark {
+  color:#dec2f6;
   font-size: 20px;
   font-weight: 400;
 }
