@@ -4,31 +4,22 @@ import {
   FaHeart, FaTwitter, FaPinterest, FaFacebookF,
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import StyleList from './StyleList';
 import { handleStateUpdate } from '../../features/products/productsSlice';
-import { useAddToCartMutation, api, useGetSpecificProductQuery } from '../../features/api/apiSlice';
+import { useAddToCartMutation, api } from '../../features/api/apiSlice';
 import { newAddToOutfit } from '../../features/related/relatedSlice';
 
 function Details({ handleScroll }) {
-  const params = useParams();
   const [stock, setStock] = useState(true);
   const [update] = api.endpoints.getProductStyles.useLazyQuery();
   const {
     selectedStyle,
     sku,
     quantitySelected,
+    details,
   } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
-
-  const {
-    data: details,
-    isFetching,
-    isError,
-  } = useGetSpecificProductQuery(`${params.productId}`, {
-    refetchOnMountOrArgChange: true,
-  });
 
   const dispatch = useDispatch();
   let { quantity } = selectedStyle.skus[sku] || 0;
@@ -51,10 +42,6 @@ function Details({ handleScroll }) {
 
   if (quantity > 15) {
     quantity = 15;
-  }
-
-  if (isError || isFetching) {
-    return null;
   }
 
   const handleCartClick = async () => {
@@ -92,10 +79,6 @@ function Details({ handleScroll }) {
     }
     dispatch(handleStateUpdate({ name: e.target.name, value: e.target.value }));
   };
-
-  if (isFetching || isError) {
-    return null;
-  }
 
   return (
     <div className="detailsBar">
@@ -156,10 +139,10 @@ function Details({ handleScroll }) {
         </div>
         <br />
         <div className="flex">
-          <button className="cart-btn" type="button" aria-label="cart-btn" onClick={handleCartClick}>
+          <button className="cart-btn button-dark" type="button" aria-label="cart-btn" onClick={handleCartClick}>
             Add to cart
           </button>
-          <button className="outfit-btn" type="button" onClick={handleOutfitClick}>
+          <button className="outfit-btn button-light" type="button" onClick={handleOutfitClick}>
             <FaHeart style={{ color: JSON.parse(localStorage.getItem(details.id)) ? 'red' : 'black' }} />
           </button>
         </div>
