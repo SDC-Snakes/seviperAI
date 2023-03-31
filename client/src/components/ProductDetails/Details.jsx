@@ -18,6 +18,7 @@ function Details({ handleScroll }) {
     sku,
     quantitySelected,
     details,
+    dark,
   } = useSelector((state) => state.products);
   const { meta } = useSelector((state) => state.reviews);
 
@@ -84,13 +85,13 @@ function Details({ handleScroll }) {
     <div className="detailsBar">
       <div className="flex rating-link">
         <QuarterStarsAverageRating productRating={meta.ratings} />
-        <button type="button" className="buttonWrap reviews-btn" onClick={handleRnrClick}>See all reviews</button>
+        <button type="button" className={dark ? 'buttonWrap reviews-btn-dark' : 'buttonWrap reviews-btn'} onClick={handleRnrClick}>See all reviews</button>
       </div>
       <div>
         <p className="category">
           {`${details.category}:`}
         </p>
-        <p className="product-name">
+        <p className={dark ? 'product-name-dark' : 'product-name'}>
           {details.name}
         </p>
       </div>
@@ -106,7 +107,7 @@ function Details({ handleScroll }) {
             {`$${selectedStyle.original_price}`}
           </p>
         </div>
-        <p className="style-name">
+        <p className={dark ? 'style-name-dark' : 'style-name'}>
           {selectedStyle.name}
         </p>
         <br />
