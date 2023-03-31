@@ -8,11 +8,8 @@ import {
   FaExpand,
   FaCompress,
 } from 'react-icons/fa';
-import { nanoid } from '@reduxjs/toolkit';
 import {
-  newSelectedImage,
   toggleState,
-  newImageIndex,
   handleStateUpdate,
 } from '../../features/products/productsSlice';
 import SideImages from './SideImages';
