@@ -26,6 +26,7 @@ function AddImageReviews({ uploadImageHandler }) {
   return (
     <>
       <input
+        className="button button-light"
         type="submit"
         onClick={(event) => {
           event.preventDefault();
@@ -38,25 +39,27 @@ function AddImageReviews({ uploadImageHandler }) {
         <div className={RNRCSS.modalimage}>
           <div className={RNRCSS.overlayimage}>
             <div className={RNRCSS['modal-content-image']}>
-              <h2> Add images to your review!</h2>
+              <h2 style={{ marginTop: '10%' }}> Add images to your review!</h2>
               <input
-                placeholder="insert image link here"
+                placeholder="  insert image link here"
                 value={inputField}
                 onChange={handleInputFieldChange}
+                style={{ width: '100%', marginBottom: '1%', borderRadius: '10px' }}
               />
-              <ImageDropzone handleDropedInImages={handleDropedInImages} />
               {images.length < 5
                 && (
                 <input
                   type="submit"
-                  className={RNRCSS['add-image-input']}
+                  className="button button-light"
                   onClick={(event) => {
                     event.preventDefault();
                     handleUploadedImages();
                   }}
                   value="upload image"
+                  style={{ marginBottom: '10%', marginLeft: '30%' }}
                 />
                 )}
+              <ImageDropzone handleDropedInImages={handleDropedInImages} />
               {images.length > 0
               && (
                 <div>
@@ -78,7 +81,9 @@ function AddImageReviews({ uploadImageHandler }) {
                 value="X"
               />
               <input
+                style={{ marginTop: '10%', marginLeft: '30%'}}
                 type="submit"
+                className="button button-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   uploadImageHandler(images);
