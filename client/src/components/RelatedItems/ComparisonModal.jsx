@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaTimes, FaCheckCircle } from 'react-icons/fa';
 import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
@@ -15,9 +16,9 @@ function ComparisonModal() {
   function renderComparison(char, index) {
     return (
       <div key={index} className={itemStyles['modal-row']}>
-        <span className={itemStyles['modal-left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</span>
+        <span className={itemStyles['modal-left-check']}>{char.current && <FaCheckCircle />}</span>
         <span className={itemStyles['modal-entry']}>{char.value}</span>
-        <span className={itemStyles['modal-right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</span>
+        <span className={itemStyles['modal-right-check']}>{char.related && <FaCheckCircle />}</span>
       </div>
     );
   }
@@ -32,6 +33,7 @@ function ComparisonModal() {
       <div className={itemStyles.overlay} onClick={closeModal} />
         <div className={`${itemStyles['modal-content']} ${itemStyles['modal-frame']}`} onClick={(e) => e.stopPropagation()}>
           <div className={itemStyles['modal-title']}>COMPARING</div>
+          <FaTimes className={itemStyles['modal-x-mark']} onClick={closeModal} />
           <div>
             <span className={itemStyles['modal-headers']}>
               <span className={`${itemStyles['modal-current-product']} ${itemStyles['modal-product']}`}>{currentProductName}</span>

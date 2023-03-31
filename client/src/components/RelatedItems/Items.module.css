@@ -285,11 +285,23 @@ body.active-modal {
 .modal-left-check {
   color: var(--main2-color);
   position: absolute;
-  left: 15%;
+  left: 14%;
 }
 
 .modal-right-check {
   color: var(--main2-color);
   position: absolute;
-  right: 15%;
+  right: 14%;
+}
+
+.modal-x-mark {
+  font-size: 17px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--main2-color);
+}
+
+.modal-x-mark:hover {
+  cursor: pointer;
 }
