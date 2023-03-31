@@ -5,6 +5,12 @@ body {
 
 /**** Related item list ****/
 
+.items-outfit-container {
+  display: flex;
+  justify-content: center;
+}
+
+
 .items-list-container {
   position: relative;
   padding-left: 20px;
@@ -26,7 +32,7 @@ body {
 
 .items-list-title {
   display: block;
-  font-weight: 1000;
+  font-weight: 400;
   font-size: 36px;
 }
 
@@ -36,11 +42,11 @@ body {
   position: relative;
   width: 200px;
   height: 300px;
-  /* border: solid; */
   border-width: 1px;
   border-radius: 5px;
   margin: 20px;
-  transition: transform .25s ease;
+  transform: rotate();
+  transition: all .125s ease-out;
 }
 
 .items-card:hover {
@@ -52,7 +58,7 @@ body {
 .items-card-plus {
   display: flex;
   justify-content: center;
-  background-color: #f4edf9;
+  background-color: var(--main0-color);
 }
 
 .items-card-img {
@@ -63,8 +69,6 @@ body {
 }
 
 .items-card-img:not(:hover) {
-  /* width: 100%; */
-  /* height: 75%; */
   object-fit: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -94,6 +98,39 @@ body {
   cursor: not-allowed;
 }
 
+.items-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items-stars {
+  font-size: 10px;
+  margin-top: 1.5%;
+}
+
+.items-product-category {
+  font-size: 10px;
+  margin-top: 1%;
+  font-style: italic;
+}
+
+.items-product-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.items-price {
+  display: flex;
+}
+
+.items-price-sale {
+  color: #fc3c3c;
+  padding-right: 8px;
+}
+
 .items-plus {
   color: var(--main1-color);
   font-size: 50px;
@@ -101,19 +138,11 @@ body {
   top: 30%;
 }
 
-.items-text {
+.items-add-to-outfit {
   position: absolute;
   top: 55%;
-  color: var(--main2-color)
-}
-
-.card-price {
-  display: flex;
-}
-
-.card-price-sale {
-  color: #fc3c3c;
-  padding-right: 8px;
+  color: var(--main2-color);
+  font-weight: 500;
 }
 
 /**** Carousel ****/
@@ -151,7 +180,6 @@ body.active-modal {
 
 .modal {
   position: relative;
-  caption-side: top;
 }
 
 .overlay {
@@ -165,20 +193,31 @@ body.active-modal {
   position: fixed;
 }
 
-.modal-content {
+.modal-frame {
   position: fixed;
+  display: grid;
+  grid-template: 1fr 1fr 7fr / 1fr 3fr 1fr;
   top: 50%;
   left: 50%;
-  min-width: 300px;
-  max-width: 400px;
-  min-height: 300px;
-  max-height: 500px;
+  border-radius: 10px;
+  min-width: 450px;
+  max-width: 500px;
+  min-height: 200px;
+  max-height: 250px;
   transform: translate(-50%, -50%);
-  line-height: 1.4;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background: #fff;
-  filter: drop-shadow(0px 2px 8px var(--shadow-color))
+  background: var(--main0-color);
+}
+
+.modal-content {
+  border-radius: 10px;
+  filter: drop-shadow(10px 10px 0px var(--main2-color));
+  z-index: 2;
+}
+
+.modal-bottom {
+  bottom: 1px;
+  filter: drop-shadow(10px 16px 8px var(--shadow-color));
+  z-index: 1;
 }
 
 .close-modal {
@@ -191,24 +230,78 @@ body.active-modal {
 /* Modal elements */
 
 .modal-title {
-  background: #fff;
+  grid-column: 2 / span 1;
+  text-align: center;
+  color: var(--main2-color);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  margin-bottom: -1px;
   font-size: 20px;
-  font-weight: bold;
-  padding-top: 5px;
+  font-weight: 600;
+  padding-top: 15px;
 }
 
 .modal-headers {
-  display: inline-flex;
   padding: 5px;
+  font-size: 12px;
+}
+
+.modal-row {
+  display: grid;
+  width: 100%;
+}
+
+.modal-product {
+  color: var(--main2-color);
+  position: absolute;
+  font-weight: 500;
+  padding-top: 10px;
+  top: 15%;
 }
 
 .modal-current-product {
-  align-content: flex-start;
+  left: 5%;
 }
 
 .modal-related-product {
-  align-content: flex-end;
+  right: 5%;
+}
+
+.modal-entry-container {
+  display: grid;
+  grid-area: 3 / 1 / span 5 / span 3;
+  width: 100%;
+  height: 80%;
+  padding-top: 10px;
+  align-items: center;
+}
+
+.modal-entry {
+  display: grid;
+  text-align: center;
+  font-size: 12px;
+  color: var(--main2-color);
+}
+
+.modal-left-check {
+  color: var(--main2-color);
+  position: absolute;
+  left: 14%;
+}
+
+.modal-right-check {
+  color: var(--main2-color);
+  position: absolute;
+  right: 14%;
+}
+
+.modal-x-mark {
+  font-size: 17px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--main2-color);
+}
+
+.modal-x-mark:hover {
+  cursor: pointer;
 }

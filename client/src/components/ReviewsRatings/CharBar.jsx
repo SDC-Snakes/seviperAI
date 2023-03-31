@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FaSortDown } from 'react-icons/fa';
-import charCSS from './CharBarCSS.module.css';
+import charCSS from './Modal.module.css';
 
 function CharBar() {
   const { meta } = useSelector((state) => state.reviews);

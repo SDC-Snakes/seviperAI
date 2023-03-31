@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaTimes, FaCheckCircle } from 'react-icons/fa';
 import itemStyles from './Items.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { newModalState } from '../../features/related/relatedSlice';
@@ -14,11 +15,11 @@ function ComparisonModal() {
 
   function renderComparison(char, index) {
     return (
-      <tr key={index}>
-        <td className={itemStyles['left-check']}>{char.current && <i className="fa-solid fa-circle-check" />}</td>
-        <td className={itemStyles.characteristic}>{char.value}</td>
-        <td className={itemStyles['right-check']}>{char.related && <i className="fa-solid fa-circle-check" />}</td>
-      </tr>
+      <div key={index} className={itemStyles['modal-row']}>
+        <span className={itemStyles['modal-left-check']}>{char.current && <FaCheckCircle />}</span>
+        <span className={itemStyles['modal-entry']}>{char.value}</span>
+        <span className={itemStyles['modal-right-check']}>{char.related && <FaCheckCircle />}</span>
+      </div>
     );
   }
 
@@ -28,20 +29,22 @@ function ComparisonModal() {
   }
 
   return modalOpen && (
-    <div className={itemStyles.modal}>
+    <div className={itemStyles.modal} aria-label="modal">
       <div className={itemStyles.overlay} onClick={closeModal} />
-        <table className={itemStyles['modal-content']} onClick={(e) => e.stopPropagation()}>
-          <caption className={itemStyles['modal-title']}>Comparing</caption>
-          <thead>
-            <tr className={itemStyles['modal-headers']}>
-              <th className={itemStyles['modal-current-product']}>{currentProductName}</th>
-              <th className={itemStyles['modal-related-product']}>{relatedProductName}</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className={`${itemStyles['modal-content']} ${itemStyles['modal-frame']}`} onClick={(e) => e.stopPropagation()}>
+          <div className={itemStyles['modal-title']}>COMPARING</div>
+          <FaTimes className={itemStyles['modal-x-mark']} onClick={closeModal} />
+          <div>
+            <span className={itemStyles['modal-headers']}>
+              <span className={`${itemStyles['modal-current-product']} ${itemStyles['modal-product']}`}>{currentProductName}</span>
+              <span className={`${itemStyles['modal-related-product']} ${itemStyles['modal-product']}`}>{relatedProductName}</span>
+            </span>
+          </div>
+          <div className={itemStyles['modal-entry-container']}>
             {combinedProductFeatures.map((char, index) => renderComparison(char, index))}
-          </tbody>
-        </table>
+          </div>
+        </div>
+      <div className={`${itemStyles['modal-frame']} ${itemStyles['modal-bottom']}`} />
     </div>
   );
 }

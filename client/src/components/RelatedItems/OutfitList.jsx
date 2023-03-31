@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { newOutfitList, newAddToOutfit } from '../../features/related/relatedSlice';
+import { FaPlusCircle } from 'react-icons/fa';
 import QuarterStarsAverageRating from '../ReviewsRatings/QuarterStarsAverageRating';
 import FormatCard from './FormatCard';
 import itemStyles from './Items.module.css';
@@ -20,9 +21,9 @@ function OutfitList({ outfitIndex }) {
   const currentProduct = { details, selectedStyle, meta };
 
   // Add item to outfit card
-  // function handleAddToOutfit(productData) {
-  //   dispatch(newAddToOutfit(productData));
-  // }
+  function handleAddToOutfit(productData) {
+    dispatch(newAddToOutfit(productData));
+  }
 
   // Searches item data for first photo
   function findImage(item) {
@@ -34,6 +35,7 @@ function OutfitList({ outfitIndex }) {
     }
   }
 
+  // Produces a card for each item in the outfit
   function renderList(item, index) {
     return (
       <div key={index}>
@@ -62,8 +64,8 @@ function OutfitList({ outfitIndex }) {
       <div className={itemStyles['items-list-content']}>
         <div className={`${itemStyles['items-card']} ${itemStyles['items-card-plus']}`}
           onClick={() => dispatch(newAddToOutfit(currentProduct))}>
-          <i className={`fa-solid fa-circle-plus ${itemStyles['items-plus']}`} />
-          <div className={itemStyles['items-text']}>Add to outfit</div>
+          <FaPlusCircle className={itemStyles['items-plus']} />
+          <div className={itemStyles['items-add-to-outfit']}>Add to outfit</div>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}
       </div>

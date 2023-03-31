@@ -6,6 +6,7 @@ export const api = createApi({
   reducerPath: 'api',
   // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  keepUnusedDataFor: 3000,
   // The "endpoints" represent operations and requests for this server
   endpoints: (build) => ({
     // The `getPosts` endpoint is a "query" operation that returns data
@@ -48,19 +49,27 @@ export const api = createApi({
     }),
     getRelatedProductInfo: build.query({
       async queryFn(productId, _queryApi, _extraOptions, fetchWithBQ) {
+        // Gets related product id's from current product
         const related = await fetchWithBQ(`/products/${productId}/related`);
         if (related.error) return { error: related.error };
+        // Iterates through list of related products
         const allItems = await Promise.all(related.data.map(async (item) => {
           const relatedItem = {};
           relatedItem.product_id = item;
+          // Fetches API data at specific endpoints
           const itemDetails = await fetchWithBQ(`/products/${item}`);
+          const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
+          const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
+          // Compiles data for each related item into an object
           itemDetails.data
             ? relatedItem.details = itemDetails.data
             : relatedItem.detailsError = itemDetails.error;
-          const ratingsDetails = await fetchWithBQ(`/reviews/meta?product_id=${item}`);
-          ratingsDetails.data ? relatedItem.ratings = ratingsDetails.data : relatedItem.ratingsError = ratingsDetails.error;
-          const allPhotos = await fetchWithBQ(`/products/${item}/styles`);
-          allPhotos.data ? relatedItem.photos = allPhotos.data : relatedItem.photoError = allPhotos.error;
+          ratingsDetails.data
+            ? relatedItem.ratings = ratingsDetails.data
+            : relatedItem.ratingsError = ratingsDetails.error;
+          allPhotos.data
+            ? relatedItem.photos = allPhotos.data
+            : relatedItem.photoError = allPhotos.error;
           return relatedItem;
         }));
         return { data: allItems };

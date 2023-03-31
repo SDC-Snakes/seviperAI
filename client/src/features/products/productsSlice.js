@@ -2,8 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import { api } from '../api/apiSlice';
 
 const initialState = {
-  selectedStyle: {},
-  styles: {},
+  selectedStyle: {
+    style_id: '',
+    name: '',
+    original_price: '',
+    sale_price: null,
+    photos: [{
+      thumbnail_url: '',
+      url: '',
+    }],
+    skus: {},
+  },
+  styles: [],
   details: {},
   selectedImage: '',
   expanded: false,
@@ -12,6 +22,7 @@ const initialState = {
   quantitySelected: 1,
   imageIndex: 0,
   page: 0,
+  dark: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -45,11 +56,20 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(api.endpoints.getProductInfo.matchFulfilled, (state, action) => {
-        state.styles = action.payload.styles.results;
-        state.details = action.payload.details;
+      .addMatcher(api.endpoints.getProductStyles.matchFulfilled, (state, action) => {
+        // if (state.selectedStyle.style_id === '') {
+        //   state.selectedStyle = action.payload.results[0];
+        // }
+        // if (state.selectedStyle.style_id !== action.payload.results[0].style_id) {
+        //   state.selectedStyle = action.payload.results[0];
+        //   state.selectedImage = state.selectedStyle.photos[state.imageIndex].url;
+        // }
+        state.styles = action.payload.results;
         state.selectedStyle = state.styles[0];
         state.selectedImage = state.styles[0].photos[0].url;
+      })
+      .addMatcher(api.endpoints.getSpecificProduct.matchFulfilled, (state, action) => {
+        state.details = action.payload;
       });
   },
 });

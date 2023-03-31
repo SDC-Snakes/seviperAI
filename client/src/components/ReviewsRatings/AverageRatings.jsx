@@ -10,7 +10,6 @@ import { newSetRating, newResetRating } from '../../features/reviews/reviewsSlic
 import RatingBar from './RatingsBar';
 import QuarterStarsAverageRating from './QuarterStarsAverageRating';
 import CharBar from './CharBar';
-import Spinner from '../SharedComponents/Spinner';
 
 function AverageRatings({ RNRCSS }) {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ function AverageRatings({ RNRCSS }) {
   const obj = meta.ratings;
   const values = Object.values(obj);
   if (values.length === 0) {
-    return <Spinner />;
+    return <span>...Loading</span>;
   }
   const totalNumRatings = values.reduce((a, b) => (Number(a) + Number(b)), 0);
   const keys = Object.keys(obj);
@@ -30,11 +29,12 @@ function AverageRatings({ RNRCSS }) {
     <aside className={RNRCSS['average-ratings-left']}>
       <h3>Product Ratings</h3>
       <QuarterStarsAverageRating productRating={obj} />
-      <div>
+      <div style={{ marginTop: '2%' }}>
         Total number of reviews:
+        {' '}
         {totalNumRatings}
       </div>
-      <h4>Rating Breakdown</h4>
+      <h4 style={{ marginTop: '2%' }}>Rating Breakdown</h4>
       {barRating.length > 0 && (
         <div>
           <h4>

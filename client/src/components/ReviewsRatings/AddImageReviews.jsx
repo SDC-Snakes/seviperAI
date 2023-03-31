@@ -14,6 +14,9 @@ function AddImageReviews({ uploadImageHandler }) {
       setInputField('');
     }
   };
+  const handleDropedInImages = (image) => {
+    setImages((prevState) => [...prevState, image]);
+  };
   const handleInputFieldChange = (e) => {
     setInputField(e.target.value);
   };
@@ -23,38 +26,40 @@ function AddImageReviews({ uploadImageHandler }) {
   return (
     <>
       <input
+        className="button button-light"
         type="submit"
         onClick={(event) => {
           event.preventDefault();
-          uploadImageHandler(images);
           toggleModal(true);
         }}
         value="Add images"
       />
       {modal
       && (
-        <div className={RNRCSS.modal}>
-          <div className={RNRCSS.overlay}>
-            <div className={RNRCSS['modal-content']}>
-              <h2> Add images to your review!</h2>
+        <div className={RNRCSS.modalimage}>
+          <div className={RNRCSS.overlayimage}>
+            <div className={RNRCSS['modal-content-image']}>
+              <h2 style={{ marginTop: '10%' }}> Add images to your review!</h2>
               <input
-                placeholder="insert image link here"
+                placeholder="  insert image link here"
                 value={inputField}
                 onChange={handleInputFieldChange}
+                style={{ width: '100%', marginBottom: '1%', borderRadius: '10px' }}
               />
-              <ImageDropzone handleUploadedImages={handleUploadedImages} />
               {images.length < 5
                 && (
                 <input
                   type="submit"
-                  className={RNRCSS['add-image-input']}
+                  className="button button-light"
                   onClick={(event) => {
                     event.preventDefault();
-                    handleUploadedImages(inputField);
+                    handleUploadedImages();
                   }}
                   value="upload image"
+                  style={{ marginBottom: '10%', marginLeft: '30%' }}
                 />
                 )}
+              <ImageDropzone handleDropedInImages={handleDropedInImages} />
               {images.length > 0
               && (
                 <div>
@@ -64,18 +69,21 @@ function AddImageReviews({ uploadImageHandler }) {
                       src={image}
                       alt={`${image}`}
                       key={nanoid()}
+                      referrerPolicy="no-referrer"
                     />
                   ))}
                 </div>
               )}
               <input
                 type="submit"
-                className={RNRCSS['close-modal']}
+                className={RNRCSS['close-modal-image']}
                 onClick={() => { toggleModal(false); }}
                 value="X"
               />
               <input
+                style={{ marginTop: '10%', marginLeft: '30%'}}
                 type="submit"
+                className="button button-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   uploadImageHandler(images);

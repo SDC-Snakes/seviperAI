@@ -8,46 +8,38 @@ button {
 
 .inline {
   display: flex;
-  justify-content: space-around;
+  position: relative;
   align-items: center;
   margin: 2px 2px;
-  background-color: #C2C2C2;
   width: 60vw;
   height: 60vh;
 }
 
 .expanded {
   display: flex;
-  justify-content: space-around;
+  position: relative;
   align-items: center;
   margin: 2px 2px;
-  background-color: #C2C2C2;
-  width: 98vw;
+  width: 90vw;
   height: 60vh;
 }
 
 .imageView {
+  display: flex;
   position: relative;
 }
 
 .topRight {
   display: flex;
-  position: relative;
-  float: right;
-  top: 14px;
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  color: #804BAC;
+  z-index: 2;
 }
 
 .topRight:hover {
   transform: scale(1.1);
-}
-
-.expandedImage {
-  cursor: zoom-in;
-  margin: 0 0px;
-  max-height: 59vh;
-  max-width: 80vw;
-  box-shadow: 4px 4px 20px black;
-  border-radius: 2%;
 }
 
 .noClick {
@@ -64,6 +56,14 @@ button {
 
 .mainDiv {
   display: flex;
+}
+
+.detailsBar {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .detailsDiv {
@@ -130,14 +130,18 @@ button {
   text-decoration: line-through;
 }
 
+.price {
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .sideGrid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  width: 80px;
-  left: 10px;
+  width: 5vh;
+  margin-left: 50px;
+  margin-right: 20px;
 }
 
 .sideImage {
@@ -147,8 +151,8 @@ button {
   border: 4px solid #525252;
   border-radius: 0.5rem;
   margin: 5px 0px;
-  height: 60px;
-  width: 60px;
+  height: 5vh;
+  width: 5vh;
 }
 
 .sideImage:hover {
@@ -163,16 +167,30 @@ button {
   border: 4px solid #804BAC;
   border-radius: 0.5rem;
   margin: 5px 0px;
-  height: 60px;
-  width: 60px;
+  height: 5vh;
+  width: 5vh;
 }
 
 .mainImage {
   margin: 0 15px;
-  max-height: 50vh;
-  max-width: 45vw;
+  display: block;
+  max-height: 55vh;
+  max-width: 40vw;
   box-shadow: 2px 2px 10px black;
   border-radius: 2%;
+}
+
+.expandedImage {
+  cursor: zoom-in;
+  margin: 0 15px;
+  max-height: 59vh;
+  max-width: 70vw;
+  box-shadow: 4px 4px 20px black;
+  border-radius: 2%;
+}
+
+.large-image {
+  width: calc( 100% - 5vh - 80px );
 }
 
 .detailsGrid {
@@ -207,8 +225,11 @@ button {
 
 .dropdowns {
   display: flex;
+  flex-direction: column;
   margin: 10px;
   align-items: center;
+  color: black;
+  border-color: #804BAC;
 }
 
 .size-selector {
@@ -223,22 +244,55 @@ button {
 }
 
 .cart-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5rem;
   margin-right: 10px;
   height: 30px;
   width: 150px;
 }
 
 .outfit-btn {
-  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5rem;
   height: 30px;
   width: 80px;
 }
 
+.outfit-btn:hover,
+.cart-btn:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.button-light {
+  border-color: var(--main-color);
+  background-color: var(--white-color);
+}
+
+.button-dark {
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  color: white;
+}
+
 .socials {
   display: flex;
-  margin: 10px;
+  margin: 10px 0px;
   align-items: center;
   height: 30px;
+  float: right;
 }
 
 .social-icon {
@@ -268,7 +322,7 @@ button {
 }
 
 .description {
-  margin: 30px 5px;
+  margin: 40px 5px;
 }
 
 .description-card {
@@ -283,11 +337,46 @@ button {
 }
 
 .features-card {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 5px;
   width: 40vw;
 }
 
 .feature-item {
   margin: 2px;
+}
+
+.reviews-btn {
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+}
+
+.reviews-btn:hover {
+  color: #804BAC;
+}
+
+.category {
+  font-size: 20px;
+  font-weight: 200;
+  border-top: -60px;
+}
+
+.rating-link {
+  border-bottom: 0px;
+}
+
+.product-name {
+  color:#804BAC;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.style-name {
+  color:#804BAC;
+  font-size: 20px;
+  font-weight: 400;
 }

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ImageViewer from './ImageViewer';
 import Details from './Details';
 import Description from './Description';
-import './products.css';
-import { useGetProductInfoQuery } from '../../features/api/apiSlice';
 import Spinner from '../SharedComponents/Spinner';
+import './products.css';
+import { useGetSpecificProductQuery, useGetProductStylesQuery } from '../../features/api/apiSlice';
 
 function ProductDetails({ handleScroll }) {
   const params = useParams();
@@ -17,8 +17,15 @@ function ProductDetails({ handleScroll }) {
     data: productInfo,
     isFetching,
     isError,
+  } = useGetSpecificProductQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const {
+    data: styles,
+    isLoading,
     error,
-  } = useGetProductInfoQuery(`${params.productId}`, {
+  } = useGetProductStylesQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -30,8 +37,8 @@ function ProductDetails({ handleScroll }) {
     }
   }, [productInfo, isFetching, error, isError]);
 
-  if (isFetching || !productInfo) {
-    return (<div><Spinner context="details" /></div>);
+  if (!styles || isFetching || isLoading || !productInfo) {
+    return <Spinner />;
   }
 
   return (
@@ -50,7 +57,7 @@ function ProductDetails({ handleScroll }) {
           </div>
         </div>
       )}
-      <Description details={productInfo.details} />
+      <Description />
     </div>
   );
 }

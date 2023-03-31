@@ -3,9 +3,12 @@
 .env
 
 node_modules/
+Dockerfile
 
 coverage/
 
 #webpack build output
 client/dist/*bundle.js*
+client/dist/*bundle.min.js*
 node_modules
+

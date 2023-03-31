@@ -1,10 +1,10 @@
 import React from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import StyleImage from './StyleImage';
-import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux';
 
 function StyleList() {
-  let { styles } = useSelector((state) => state.products);
+  const { styles } = useSelector((state) => state.products);
 
   return (
     <div className="flex containCircles">

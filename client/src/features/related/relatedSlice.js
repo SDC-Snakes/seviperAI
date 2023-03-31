@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { api } from '../api/apiSlice';
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
   relatedIndex: 0,
   outfitIndex: 0,
   modalOpen: false,
-  relatedProductFeatures: {},
+  relatedProductFeatures: [],
   relatedProductName: null,
   currentProductName: null,
   combinedProductFeatures: [],

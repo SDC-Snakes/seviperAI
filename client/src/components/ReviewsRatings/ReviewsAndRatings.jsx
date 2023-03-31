@@ -5,11 +5,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AverageRatings from './AverageRatings';
-import Search from './SearchBarReviews';
 import Reviews from './Reviews';
 import RNRCSS from './Modal.module.css';
 import { useGetProductReviewsQuery, useGetMetaReviewsQuery } from '../../features/api/apiSlice';
-import Spinner from '../SharedComponents/Spinner';
 
 
 function ReviewsAndRatings() {
@@ -48,14 +46,13 @@ function ReviewsAndRatings() {
     return (
       <div className={RNRCSS['loading-window']}>
         <h1>Ratings & Reviews</h1>
-        <Search />
         <aside className={RNRCSS['average-ratings-left']}>
           <h3>Product Ratings</h3>
-          <div><Spinner context="Ratings" /></div>
+          <div>...Loading</div>
         </aside>
         <div className={RNRCSS['reviews-container-right']}>
           <h3>Product Reviews</h3>
-          <div><Spinner context="Reviews" /></div>
+          <div>...Loading</div>
         </div>
       </div>
     );
@@ -63,9 +60,8 @@ function ReviewsAndRatings() {
 
   return (
     <div className={RNRCSS['reviewsAndRatings-container-main']}>
-      <div>
+      <div className="rnr-body">
         <h1>Ratings & Reviews</h1>
-        <Search />
         <AverageRatings RNRCSS={RNRCSS} />
         <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} sortState={sortState} />
       </div>
