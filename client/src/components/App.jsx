@@ -1,10 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import ProductDetails from './ProductDetails/ProductDetails';
 import ReviewsAndRatings from './ReviewsRatings/ReviewsAndRatings';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers';
 import RelatedItems from './RelatedItems/RelatedItems';
-import Landing from './SharedComponents/Landing';
 import Navbar from './SharedComponents/Navbar';
 import SiteAnnouncement from './SharedComponents/SiteAnnouncement';
 import { ToastContainer } from 'react-toastify';
@@ -32,7 +31,7 @@ function App() {
         <SiteAnnouncement />
         <div className="body-no-navbar">
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Navigate to="/40344" />} />
             <Route path="/NotFound" element={<div>404 not found...</div>} />
             <Route
               path="/:productId"
