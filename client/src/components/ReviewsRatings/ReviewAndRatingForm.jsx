@@ -77,21 +77,21 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
   return (
     <>
-      <input type="submit" onClick={() => { toggleModal(true); }} className="button button-light" value="Add a review" />
+      <input type="submit" onClick={() => { toggleModal(true); }} className="button button-dark" value="Add a review" />
 
       {modal && (
         <div className={RNRCSS['modal']}>
           <div className={RNRCSS['overlay']}>
             <div className={RNRCSS['modal-content']}>
               <form onSubmit={onSubmit}>
-                <h2>Write Your Review</h2>
-                <h4>
+                <h3>Write Your Review!</h3>
+                <h5>
                   About the {details.name}
-                </h4>
+                </h5>
                 <h6>Overall rating </h6>
                 <div><StarRating handleStarRatingChange={handleStarRatingChange} /></div>
                 <div>
-                  <h6 style={{ marginTop: '2%' }}>Do you recommend this product?</h6>
+                  <h6 style={{ marginTop: '1%' }}>Do you recommend this product?</h6>
                   <label>
                     <input
                       type="radio"
@@ -222,7 +222,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
                 </div>
                 <div>
-                  <h6 style={{ marginTop: '5%' }}>Review summary</h6>
+                  <h6 style={{ marginTop: '3%' }}>Review summary</h6>
                   <input
                     style={{ width: '100%', borderRadius: '10px'  }}
                     placeholder="Example: Best purchase ever!"
@@ -232,7 +232,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                   />
                 </div>
                 <div>
-                  <h6 style={{ marginTop: '2%' }}>Review body</h6>
+                  <h6 style={{ marginTop: '1%' }}>Review body</h6>
                   <input
                     style={{ width: '100%', borderRadius: '10px'  }}
                     placeholder="Why did you like the product or not?"
@@ -243,11 +243,11 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div style={{ fontSize: '12px' }}>
+                <div style={{ fontSize: '10px' }}>
                   {reviewPropsObj.body.length < 50 ? `Minimum required characters left: ${50 - reviewPropsObj.body.length}` : 'Minimum reached'}
                 </div>
 
-                <div style={{ marginTop: '2%' }}>
+                <div style={{ marginTop: '1%' }}>
                   <h6>What is your nickname</h6>
                   <input
                     style={{ width: '100%', borderRadius: '10px'  }}
@@ -258,11 +258,11 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div style={{ fontSize: '12px' }}>
+                <div style={{ fontSize: '10px' }}>
                   For privacy reasons, do not use your full name or email address
                 </div>
                 <div>
-                  <h6 style={{ marginTop: '2%' }}>Your email</h6>
+                  <h6 style={{ marginTop: '1%' }}>Your email</h6>
                   <input
                     style={{ width: '100%', borderRadius: '10px' }}
                     type="email"
@@ -273,11 +273,11 @@ function ReviewAndRatingForm({ RNRCSS }) {
                     required
                   />
                 </div>
-                <div style={{ fontSize: '12px' }}>
+                <div style={{ fontSize: '10px' }}>
                   For authentication reasons, you will not be emailed
                 </div>
-                <div style={{ marginTop: '5%', marginLeft: '36%' }}>
-                  <h6 style={{ marginTop: '2%' }}> Upload your photos</h6>
+                <div style={{ marginTop: '2%', marginLeft: '36%' }}>
+                  <h6 style={{ marginTop: '1%' }}> Upload your photos</h6>
                   <AddImageReviews uploadImageHandler={uploadImageHandler} />
                 </div>
                 <input
@@ -288,7 +288,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
                   }}
                   value="X"
                 />
-                <div style={{ marginTop: '5%', marginBottom: '5%', marginLeft: '35%' }}>
+                <div style={{ marginTop: '1%', marginLeft: '35%' }}>
                   <input
                     className="button button-dark"
                     type="submit"

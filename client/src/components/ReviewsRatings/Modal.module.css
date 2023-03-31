@@ -11,6 +11,7 @@ body.active-modal {
 }
 
 .modal, .overlay {
+  margin-top: 1%;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -19,8 +20,8 @@ body.active-modal {
   bottom: 0;
   position: fixed;
   z-index: 4;
-
 }
+
 
 .overlay {
   background: rgba(49,49,49,0.8);
@@ -266,8 +267,6 @@ body.active-modalimage {
   width: 95%;
   margin-top: 10px;
   align-items: center;
-
-
  }
 
 .char-bar {
