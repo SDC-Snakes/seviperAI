@@ -1,3 +1,7 @@
+body {
+  --shadow-color: hsl(0deg 0% 0% / 26%);
+}
+
 body.active-modal {
   overflow-y: hidden;
 }
@@ -54,12 +58,13 @@ body.active-modalimage {
   bottom: 0;
   position: fixed;
   z-index: 4;
+  filter: drop-shadow(0px 2px 8px var(--shadow-color));
 
 }
 
 
 .overlayimage {
-  background: rgba(49,49,49,0.8);
+  background: rgba(49,49,49,0);
 }
 
 .modal-content-image {
