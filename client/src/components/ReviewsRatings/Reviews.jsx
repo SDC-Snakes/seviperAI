@@ -44,7 +44,7 @@ function Reviews({ RNRCSS, handleSortState, sortState }) {
       {filteredArr.length - numberReviews >= 1
       && (
         <input
-          className={RNRCSS['add-more-reviews-button']}
+          className="button button-dark"
           type="submit"
           value="MORE REVIEWS"
           onClick={addReviews}
