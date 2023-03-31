@@ -22,7 +22,6 @@ function Navbar({ handleScroll }) {
 
   const setDark = (target) => {
     dispatch(toggleState('dark'));
-    console.log(dark);
   };
 
   return (
