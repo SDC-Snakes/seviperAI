@@ -54,7 +54,7 @@ function ImageViewer() {
     selectedStyle.photos.map((photo, ind) => {
       if (ind - (7 * page) >= 0 && ind - (7 * page) <= 6) {
         return (
-          <button className="buttonWrap" onClick={() => handleImageClick(photo, ind)} type="button" key={nanoid()}>
+          <button className="buttonWrap" aria-label="side-img" onClick={() => handleImageClick(photo, ind)} type="button" key={nanoid()}>
             <img className={photo.url === selectedStyle.photos[imageIndex].url ? 'selectedSideImage' : 'sideImage'} src={photo.thumbnail_url ? photo.thumbnail_url : errorImage} alt="ImageView" height="40" width="auto" />
           </button>
         );
@@ -86,7 +86,7 @@ function ImageViewer() {
     zoom && !expanded
       ? (
         <div className="imageViewPort expanded center">
-          <button className="imgContainer" type="button" onClick={handleZoom} onMouseMove={mousePos} style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px`, overflow: 'hidden' }}>
+          <button className="imgContainer" type="button" aria-label="image-window" onClick={handleZoom} onMouseMove={mousePos} style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px`, overflow: 'hidden' }}>
             <div style={{
               width: `${dimensions[0] * 4}px`, height: `${dimensions[1] * 4}px`, overflow: 'hidden', cursor: 'zoom-out', position: 'relative', left: `${-1.5 * dimensions[0]}px`, top: `${-1.5 * dimensions[1]}px`,
             }}
@@ -105,23 +105,23 @@ function ImageViewer() {
       )
       : (
         <div className="imageView">
-          <button type="button" className="topRight buttonWrap" onClick={() => { dispatch(toggleState('expanded')); }}>
-            {expanded ? <FaCompress /> : <FaExpand /> }
+          <button type="button" className="topRight buttonWrap" data-testid="expandBtn" onClick={() => { dispatch(toggleState('expanded')); }}>
+            {expanded ? <FaCompress size={22} /> : <FaExpand size={22} /> }
           </button>
           <div className={expanded ? 'expanded' : 'inline'}>
             <div className="sideGrid">
-              {page > 0 ? <FaChevronUp className="chevron" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
+              {page > 0 ? <FaChevronUp className="chevron" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
               {sideImages()}
               {page < ((selectedStyle.photos.length / 7) - 1)
-                ? <FaChevronDown className="chevron" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
+                ? <FaChevronDown className="chevron" aria-label="down-arrow" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
                 : null}
             </div>
             <div className="center">
-              {imageIndex > 0 ? <FaChevronLeft className="chevron" onClick={() => handleHorizontalScroll('left')} /> : null}
-              <button className={expanded ? 'buttonWrap' : 'buttonWrap noClick'} type="button" onClick={expanded ? handleZoom : null} ref={imgRef}>
-                <img className={expanded ? 'expandedImage' : 'mainImage'} src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
+              {imageIndex > 0 ? <FaChevronLeft className="chevron" aria-label="left-arrow" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('left')} /> : null}
+              <button className={expanded ? 'buttonWrap' : 'buttonWrap noClick'} type="button" aria-label="image-window" onClick={expanded ? handleZoom : null} ref={imgRef}>
+                <img className={expanded ? 'expandedImage' : 'mainImage'} aria-label="main-image" src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
               </button>
-              {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" onClick={() => handleHorizontalScroll('right')} /> : null}
+              {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" data-testid="chevron-icon" aria-label="right-arrow" onClick={() => handleHorizontalScroll('right')} /> : null}
             </div>
           </div>
         </div>
