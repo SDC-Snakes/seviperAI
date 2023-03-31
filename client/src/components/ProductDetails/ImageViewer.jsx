@@ -15,7 +15,7 @@ import {
   newImageIndex,
   handleStateUpdate,
 } from '../../features/products/productsSlice';
-import errorImage from '../SharedComponents/errorImage.jpg';
+import SideImages from './SideImages';
 
 function ImageViewer() {
   const {
@@ -25,6 +25,7 @@ function ImageViewer() {
     imageIndex,
     page,
   } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
   const imgRef = useRef(null);
 
@@ -50,19 +51,6 @@ function ImageViewer() {
     }
   };
 
-  const sideImages = () => (
-    selectedStyle.photos.map((photo, ind) => {
-      if (ind - (7 * page) >= 0 && ind - (7 * page) <= 6) {
-        return (
-          <button className="buttonWrap" aria-label="side-img" onClick={() => handleImageClick(photo, ind)} type="button" key={nanoid()}>
-            <img className={photo.url === selectedStyle.photos[imageIndex].url ? 'selectedSideImage' : 'sideImage'} src={photo.thumbnail_url ? photo.thumbnail_url : errorImage} alt="ImageView" height="40" width="auto" />
-          </button>
-        );
-      }
-      return null;
-    })
-  );
-
   const handleZoom = () => {
     if (zoom === false) {
       const newArray = [imgRef.current.clientWidth, imgRef.current.clientHeight];
@@ -82,6 +70,10 @@ function ImageViewer() {
     setRelPosition([relLeft, relTop]);
   };
 
+  if (selectedStyle.photos[0].url === '') {
+    return null;
+  }
+
   return (
     zoom && !expanded
       ? (
@@ -92,7 +84,7 @@ function ImageViewer() {
             }}
             >
               <img
-                src={selectedStyle.photos[imageIndex].url || errorImage}
+                src={selectedStyle.photos[imageIndex].url || 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bm90JTIwZm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60'}
                 alt="SelectedImage"
                 key={selectedStyle.style_id}
                 style={{
@@ -111,16 +103,14 @@ function ImageViewer() {
           <div className={expanded ? 'expanded' : 'inline'}>
             <div className="sideGrid">
               {page > 0 ? <FaChevronUp className="chevron" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page - 1 }))} /> : null}
-              {sideImages()}
+              <SideImages />
               {page < ((selectedStyle.photos.length / 7) - 1)
                 ? <FaChevronDown className="chevron" aria-label="down-arrow" data-testid="chevron-icon" onClick={() => dispatch(handleStateUpdate({ name: 'page', value: page + 1 }))} />
                 : null}
             </div>
             <div className="center">
               {imageIndex > 0 ? <FaChevronLeft className="chevron" aria-label="left-arrow" data-testid="chevron-icon" onClick={() => handleHorizontalScroll('left')} /> : null}
-              <button className={expanded ? 'buttonWrap' : 'buttonWrap noClick'} type="button" aria-label="image-window" onClick={expanded ? handleZoom : null} ref={imgRef}>
-                <img className={expanded ? 'expandedImage' : 'mainImage'} aria-label="main-image" src={selectedStyle.photos[imageIndex].url || errorImage} alt="SelectedImage" key={selectedStyle.style_id} />
-              </button>
+              <input type="image" className={expanded ? 'expandedImage' : 'mainImage'} aria-label="main-image" src={(expanded ? selectedStyle.photos[imageIndex].url : selectedStyle.photos[imageIndex].thumbnail_url) || 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bm90JTIwZm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60'} alt="SelectedImage" key={selectedStyle.style_id} ref={imgRef} onClick={expanded ? handleZoom : null} height="2000" />
               {imageIndex < selectedStyle.photos.length - 1 ? <FaChevronRight className="chevron" data-testid="chevron-icon" aria-label="right-arrow" onClick={() => handleHorizontalScroll('right')} /> : null}
             </div>
           </div>

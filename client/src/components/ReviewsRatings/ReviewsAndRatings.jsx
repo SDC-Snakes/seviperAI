@@ -45,17 +45,19 @@ function ReviewsAndRatings() {
 
   if (isFetching || isFetchingMeta || !productReviews || !metaReviews) {
     return (
-      <div className={RNRCSS['loading-window']}>
-        <h1>Ratings & Reviews</h1>
-        <aside className={RNRCSS['average-ratings-left']}>
-          <h3>Product Ratings</h3>
-          <div><Spinner context="Ratings" /></div>
-        </aside>
-        <div className={RNRCSS['reviews-container-right']}>
-          <h3>Product Reviews</h3>
-          <div><Spinner context="Reviews" /></div>
-        </div>
-      </div>
+      <>
+      </>
+      // <div className={RNRCSS['loading-window']}>
+      //   <h1>Ratings & Reviews</h1>
+      //   <aside className={RNRCSS['average-ratings-left']}>
+      //     <h3>Product Ratings</h3>
+      //     <div><Spinner context="Ratings" /></div>
+      //   </aside>
+      //   <div className={RNRCSS['reviews-container-right']}>
+      //     <h3>Product Reviews</h3>
+      //     <div><Spinner context="Reviews" /></div>
+      //   </div>
+      // </div>
     );
   }
 

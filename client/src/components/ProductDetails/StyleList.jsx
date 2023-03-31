@@ -1,14 +1,26 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import StyleImage from './StyleImage';
-import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit'
+import { useGetProductStylesQuery } from '../../features/api/apiSlice';
 
 function StyleList() {
-  let { styles } = useSelector((state) => state.products);
+  const params = useParams();
+  const {
+    data: styles,
+    isFetching,
+    isError,
+  } = useGetProductStylesQuery(`${params.productId}`, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  if (isFetching || isError) {
+    return null;
+  }
 
   return (
     <div className="flex containCircles">
-      {styles.map((style) => (
+      {styles.results.map((style) => (
         <StyleImage
           image={style.photos[0].thumbnail_url}
           key={nanoid()}
