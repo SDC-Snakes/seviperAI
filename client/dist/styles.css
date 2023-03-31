@@ -141,24 +141,66 @@ p {
 
 /***** Navbar *****/
 
+.navbar ::placeholder {
+  color: var(--white-color);
+  font-family: 'Poppins', sans-serif;
+  margin-left: 15%;
+  text-align: left;
+}
+
+.navbar input[type="search"]:focus{
+  outline: none;
+}
+
 .navbar {
   background-color: var(--main-color);
   color: #FFF;
   display: flex;
+  align-items: center;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .navbar-title {
-
+  margin: 0;
 }
 
 .navbar-headers {
+  display: flex;
+  align-items: center;
+}
 
+.navbar-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 30px;
+  width: 15vw;
+}
+
+.navbar-search-bubble {
+  position: absolute;
+  border-radius: 40px;
+  border: none;
+  height: 40px;
+  width: 200px;
+  background-color: var(--main2-color);
 }
 
 .navbar-search {
-
+  position: absolute;
+  background-color: var(--main2-color);
+  border: none;
+  color: var(--white-color);
+  z-index: 0;
 }
 
+/* ::placeholder {
+  color: var(--gray2-color)
+} */
 
 /***** Stars *****/
 

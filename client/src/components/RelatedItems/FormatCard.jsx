@@ -44,7 +44,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
     <div className={itemStyles['items-card']} onDoubleClick={(e) => navigateToRelatedItem(e, item.details.id)}>
       <FaInfoCircle className={
         `fa-solid fa-circle-info ${itemStyles['items-icon']} ${itemStyles['items-modal']}`}
-        onClick={(e) => {handleModalClick(e, item)}}
+        onClick={(e) => handleModalClick(e, item)}
       />
       {outfit && <FaTimesCircle className={
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
