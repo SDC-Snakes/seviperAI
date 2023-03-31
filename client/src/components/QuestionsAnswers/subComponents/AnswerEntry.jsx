@@ -26,34 +26,27 @@ function AnswerEntry({ answer }) {
     <span>
       <div className={qnaStyles['qna-tile']}>
         <div>{body}</div>
-        <div>
-          <span>
+        <div className={qnaStyles['answerer-info']}>
+          <span> by{" "}
             {answerer_name === 'Seller'
-              ? <strong>{answerer_name}</strong>
-              : <span>{answerer_name}</span>}
+              ? <strong>{`${answerer_name}, `}</strong>
+              : <span>{`${answerer_name}, `}</span>}
+            {format(new Date(date), 'MMMM dd yyyy')}
           </span>
-          <span>
-            <small>
-              {format(new Date(date), 'MMMM dd yyyy')}
-            </small>
-
+          <HelpfulModule
+            count={helpfulness}
+            itemId={id}
+            item="answers"
+          />
+          <span
+            className={qnaStyles['helpful-tile-yes']}
+            onClick={onReport}
+            aria-label="report-button"
+          >
+            {reportButtonText}
           </span>
         </div>
-
       </div>
-      <HelpfulModule
-        count={helpfulness}
-        itemId={id}
-        item="answers"
-      />
-      <input
-        type="button"
-        className="report-button"
-        value={reportButtonText}
-        onClick={onReport}
-        disabled={reportButtonStatus}
-        aria-label="report-button"
-      />
     </span>
   );
 }
