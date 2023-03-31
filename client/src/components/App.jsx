@@ -42,7 +42,7 @@ function App() {
                   <div ref={relatedRef}>
                     <RelatedItems />
                   </div>
-                  <div ref={qnaRef}>
+                  <div ref={qnaRef} id="qna-block">
                     <QuestionsAnswers />
                   </div>
                   <div ref={rnrRef}>

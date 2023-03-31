@@ -1,4 +1,5 @@
 import React from 'react';
+import qnaStyles from '../qnaStyles.module.css';
 
 function Search({ onSearch }) {
   return (
@@ -8,7 +9,7 @@ function Search({ onSearch }) {
         placeholder="Have a question? Search for answers…"
         onChange={onSearch}
         aria-label="search-bar"
-        style={{ width: "500px" }}
+        className={qnaStyles['search-input']}
       />
     </div>
   );

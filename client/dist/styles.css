@@ -259,3 +259,9 @@ animation: spinner 1.5s linear infinite;
     margin: 10px 3px;
   }
 } */
+
+/***** Questions and Answers *****/
+#qna-block {
+  display: flex;
+  justify-content: center;
+}
