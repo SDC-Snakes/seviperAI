@@ -60,7 +60,7 @@ function ReviewsAndRatings() {
 
   return (
     <div className={RNRCSS['reviewsAndRatings-container-main']}>
-      <div>
+      <div className="rnr-body">
         <h1>Ratings & Reviews</h1>
         <AverageRatings RNRCSS={RNRCSS} />
         <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} sortState={sortState} />

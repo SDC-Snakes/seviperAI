@@ -16,7 +16,8 @@ import {
 function FormatCard({ name, image, price, category, stars, outfit, item, salePrice }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let { details } = useSelector((state) => state.products);
+  const { details } = useSelector((state) => state.products);
+  const errorImg = 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bm90JTIwZm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60';
 
   // itemData is passed as a prop 'item' from the corresponding list
   function removeFromOutfit(itemData) {
@@ -50,7 +51,7 @@ function FormatCard({ name, image, price, category, stars, outfit, item, salePri
         `fa-solid fa-circle-xmark ${itemStyles['items-icon']} ${itemStyles['items-xmark']}`}
         onClick={() => removeFromOutfit(item)} aria-label={'remove-icon'}
       />}
-      <img className={itemStyles['items-card-img']} src={image} alt="" />
+      <img className={itemStyles['items-card-img']} src={image ? image : errorImg} alt="" />
       <div className={itemStyles['items-details']}>
         <div className={itemStyles['items-stars']}>{stars}</div>
         <p className={itemStyles['items-product-category']}>{category}</p>
