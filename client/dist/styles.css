@@ -339,8 +339,9 @@ animation: spinner 1.5s linear infinite;
   border: 2px solid;
   border-radius: 25px;
   padding: 10px 20px;
-  margin: 0 20px;
-  font-size: 12px;
+  margin-left: 20px;
+  font-size: 15px;
+  font-weight: 500;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -357,6 +358,7 @@ animation: spinner 1.5s linear infinite;
 .button-dark {
   border-color: var(--main-color);
   background-color: var(--main-color);
+  color: white;
 }
 
 /* .btn-modal {
