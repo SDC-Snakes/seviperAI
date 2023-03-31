@@ -8,9 +8,12 @@ import itemStyles from './Items.module.css';
 
 function ItemsList({ relatedIndex }) {
   const params = useParams();
+
+  // Fetches related item data from API
   const {
     data: relatedProducts,
     isFetching,
+    error,
   } = useGetRelatedProductInfoQuery(`${params.productId}`, {
     refetchOnMountOrArgChange: true,
   });
@@ -36,6 +39,7 @@ function ItemsList({ relatedIndex }) {
   //   };
   // };
 
+  // Produces a card for each related item
   function renderList(item, index) {
     return (
       <div key={index}>
@@ -57,16 +61,19 @@ function ItemsList({ relatedIndex }) {
     );
   }
 
+  // Displays while the data is still being loaded
   if (isFetching) {
     return <div>loading...</div>;
   }
 
   return relatedProducts && (
-    <div className={itemStyles['items-list-wrapper']}>
+    <div>
       <ComparisonModal />
-      <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
-      <div className={itemStyles['items-list-content']}>
-        { relatedProducts.map((item, index) => renderList(item, index)) }
+      <div className={itemStyles['items-list-wrapper']}>
+        <span className={itemStyles['items-list-title']}>Other items that might interest you</span>
+        <div className={itemStyles['items-list-content']}>
+          { relatedProducts.map((item, index) => renderList(item, index)) }
+        </div>
       </div>
     </div>
   );

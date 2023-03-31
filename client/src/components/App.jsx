@@ -30,27 +30,29 @@ function App() {
       <Router>
         <Navbar handleScroll={handleScroll} />
         <SiteAnnouncement />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/NotFound" element={<div>404 not found...</div>} />
-          <Route
-            path="/:productId"
-            element={(
-              <>
-                <ProductDetails handleScroll={handleScroll} />
-                <div ref={relatedRef}>
-                  <RelatedItems />
-                </div>
-                <div ref={qnaRef}>
-                  <QuestionsAnswers />
-                </div>
-                <div ref={rnrRef}>
-                  <ReviewsAndRatings />
-                </div>
-              </>
-          )}
-          />
-        </Routes>
+        <div className="body-no-navbar">
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/NotFound" element={<div>404 not found...</div>} />
+            <Route
+              path="/:productId"
+              element={(
+                <>
+                  <ProductDetails handleScroll={handleScroll} />
+                  <div ref={relatedRef}>
+                    <RelatedItems />
+                  </div>
+                  <div ref={qnaRef} id="qna-block">
+                    <QuestionsAnswers />
+                  </div>
+                  <div ref={rnrRef}>
+                    <ReviewsAndRatings />
+                  </div>
+                </>
+            )}
+            />
+          </Routes>
+        </div>
       </Router>
     </div>
   );
