@@ -42,23 +42,21 @@ body.active-modal {
   right: 10px;
   padding: 5px 7px;
 }
-/* review containers left and right */
 
+/* questions and answers components */
+.qna-container-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 900px;
+}
 
-.average-ratings-left {
-  width: 22%;
-    float: left;
-    padding: 10px;
-    border: 2px solid grey;
-    border-radius: 1%;
-    margin-top: 10px;
-    margin-bottom: 40px;
-
-
+.search-input {
+  width: 100%;
 }
 
 .questions-list-container{
-  width: 90%;
+  width: 100%;
     float: left;
     padding: 10px;
     border: 2px solid grey;
@@ -67,15 +65,6 @@ body.active-modal {
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 40px;
-
-}
-.qna-container-main {
-    margin-left: 20px;
-    padding: 2px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-
 }
 .qna-tile {
   border: 2px solid grey;
@@ -84,6 +73,21 @@ body.active-modal {
   border-radius:1%;
 }
 
+.question-entry {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.question-text {
+  margin-right:auto;
+}
+
+.add-answer-button {
+  padding:10px;
+}
 .answer-tile {
   padding: 2px;
   border: 2px solid grey;
@@ -91,12 +95,6 @@ body.active-modal {
   margin-top: 10px;
   background-color: lightgrey;
 
-}
-
-/* images in reviewTile, thumbnail images */
-.thumbnail-review-image {
-  height:40px;
-  margin-right: 10px;
 }
 
 /* Seller setting */
