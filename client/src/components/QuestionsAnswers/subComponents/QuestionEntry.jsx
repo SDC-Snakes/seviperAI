@@ -8,7 +8,7 @@ function QuestionEntry({ question }) {
 
   return (
     <div className={qnaStyles["question-entry"]}>
-      <span style={{width:"10px"}}> Q: </span>
+      <span style={{width:"10px", "margin-right":"10px"}}> Q: </span>
       <span className={qnaStyles["question-text"]}>
         {question.question_body}
       </span>
