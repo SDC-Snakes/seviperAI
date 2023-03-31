@@ -210,6 +210,15 @@ p {
   width: 200px;
 }
 
+.navbar-dark-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 320px;
+  width: 200px;
+}
+
 .navbar-search-bubble {
   position: absolute;
   border-radius: 40px;

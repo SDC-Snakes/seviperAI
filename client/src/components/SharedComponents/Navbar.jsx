@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from './WiredWardrobeLogo.png';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleState } from '../../features/products/productsSlice';
 
 function Navbar({ handleScroll }) {
+  const { dark } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
   const handleRelatedClick = () => {
     handleScroll('related');
   };
@@ -15,6 +20,10 @@ function Navbar({ handleScroll }) {
     handleScroll('rnr');
   };
 
+  const setDark = (target) => {
+    dispatch(toggleState('dark'));
+  }
+
   return (
     <div className="navbar">
       <img src={logo} className="navbar-logo" alt="ww-logo" />
@@ -23,6 +32,12 @@ function Navbar({ handleScroll }) {
         <h5 className="navbar-related navbar-sections" onClick={handleRelatedClick}>Related Items</h5>
         <h5 className="navbar-qna navbar-sections" onClick={handleQnAClick}>Questions & Answers</h5>
         <h5 className="navbar-reviews navbar-sections" onClick={handleRnrClick}>Ratings & Reviews</h5>
+      </div>
+      <div className="navbar-dark-container">
+        <label>
+          <input type="checkbox" checked={dark} onChange={e => setDark(e.target.checked)} />
+          Dark Mode
+        </label>
       </div>
       <div className="navbar-search-container">
         <div className="navbar-search-bubble" />

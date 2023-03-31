@@ -20,6 +20,7 @@ const initialState = {
   quantitySelected: 1,
   imageIndex: 0,
   page: 0,
+  dark: false,
 };
 
 // eslint-disable-next-line default-param-last
