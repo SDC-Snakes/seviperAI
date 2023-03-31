@@ -7,9 +7,7 @@ import App from './components/App';
 const domNode = document.getElementById('root') || document.createElement('div'); // for testing purposes
 const root = createRoot(domNode);
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
 );

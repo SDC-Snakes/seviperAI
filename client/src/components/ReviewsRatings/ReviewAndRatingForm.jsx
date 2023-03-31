@@ -77,7 +77,7 @@ function ReviewAndRatingForm({ RNRCSS }) {
 
   return (
     <>
-      <input type="submit" onClick={() => { toggleModal(true); }} className="button button-dark" value="Add a review" />
+      <input type="submit" onClick={() => { toggleModal(true); }} className="button button-light" value="Add a review" />
 
       {modal && (
         <div className={RNRCSS['modal']}>

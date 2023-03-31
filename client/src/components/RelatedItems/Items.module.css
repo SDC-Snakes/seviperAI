@@ -45,7 +45,8 @@ body {
   border-width: 1px;
   border-radius: 5px;
   margin: 20px;
-  transition: transform .25s ease;
+  transform: rotate();
+  transition: all .125s ease-out;
 }
 
 .items-card:hover {
@@ -97,6 +98,39 @@ body {
   cursor: not-allowed;
 }
 
+.items-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items-stars {
+  font-size: 10px;
+  margin-top: 1.5%;
+}
+
+.items-product-category {
+  font-size: 10px;
+  margin-top: 1%;
+  font-style: italic;
+}
+
+.items-product-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.items-price {
+  display: flex;
+}
+
+.items-price-sale {
+  color: #fc3c3c;
+  padding-right: 8px;
+}
+
 .items-plus {
   color: var(--main1-color);
   font-size: 50px;
@@ -104,20 +138,11 @@ body {
   top: 30%;
 }
 
-.items-text {
+.items-add-to-outfit {
   position: absolute;
   top: 55%;
   color: var(--main2-color);
   font-weight: 500;
-}
-
-.card-price {
-  display: flex;
-}
-
-.card-price-sale {
-  color: #fc3c3c;
-  padding-right: 8px;
 }
 
 /**** Carousel ****/
@@ -260,11 +285,23 @@ body.active-modal {
 .modal-left-check {
   color: var(--main2-color);
   position: absolute;
-  left: 15%;
+  left: 14%;
 }
 
 .modal-right-check {
   color: var(--main2-color);
   position: absolute;
-  right: 15%;
+  right: 14%;
+}
+
+.modal-x-mark {
+  font-size: 17px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--main2-color);
+}
+
+.modal-x-mark:hover {
+  cursor: pointer;
 }

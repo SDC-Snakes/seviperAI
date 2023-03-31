@@ -64,7 +64,7 @@ function OutfitList({ outfitIndex }) {
         <div className={`${itemStyles['items-card']} ${itemStyles['items-card-plus']}`}
           onClick={() => dispatch(newAddToOutfit(currentProduct))}>
           <i className={`fa-solid fa-circle-plus ${itemStyles['items-plus']}`} />
-          <div className={itemStyles['items-text']}>Add to outfit</div>
+          <div className={itemStyles['items-add-to-outfit']}>Add to outfit</div>
         </div>
         {outfitList.map((item, index) => renderList(item, index))}
       </div>
