@@ -173,19 +173,19 @@ p {
 .navbar-title {
   margin: 0;
   margin-left: 20px;
-  font-size: 25px;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
 .navbar-headers {
   display: flex;
-  align-items: center;
   margin-left: 30px;
 }
 
 .navbar-sections {
   font-size: 10px;
   font-weight: 200;
-  letter-spacing: 2.5px;
+  letter-spacing: 1.5px;
   margin: 0 10px;
 }
 
@@ -194,7 +194,7 @@ p {
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 70px;
+  right: 120px;
   width: 200px;
 }
 
@@ -222,6 +222,24 @@ p {
   color: var(--white-color);
   z-index: 0;
 }
+
+.navbar-right-icons-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right-icon {
+  position: absolute;
+  right: 40px;
+  fill: none;
+  stroke-width: 15;
+  stroke: var(--white-color);
+}
+
+.navbar-person {
+  right: 75px;
+}
+
 
 /* ::placeholder {
   color: var(--gray2-color)
