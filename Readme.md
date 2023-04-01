@@ -25,7 +25,7 @@ A modernized e-commerce site built for an optimal user browsing experience.
 - Scroll through images, expand images and zoom in on specific parts of the image
 
 
-![Product overview](image_path)
+![Product overview](https://user-images.githubusercontent.com/91165462/229319127-6bdc5119-7f46-46e0-bb93-f69ef21cb98d.png)
 
 <details>
     <summary>Zoom view tracks mouse to expand parts of image</summary>
@@ -34,8 +34,7 @@ A modernized e-commerce site built for an optimal user browsing experience.
 		<li>The user can view different parts of the image by moving the mouse around</li>
 	</ul>
 	
-	
-<img src="https://media.giphy.com/media/lJbot6b2yxvDBfL0bJ/giphy.gif" alt="My Image"  width="600" height="350">
+<img src="https://user-images.githubusercontent.com/91165462/229319132-2aaac662-d4d5-4c1d-b666-d9bbbef099f7.png" alt="My Image"  width="600" height="350">
 	
 	
 </details>
