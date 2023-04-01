@@ -68,19 +68,31 @@ SCREENSHOT
 
 ## Ratings & Reviews
 #### Features
+<ul>
+	<li>Product ratings breakdown, visual representations of ratings and product characteristics</li>
+	<li>Product specific reviews including uploaded images</li>
+	<li>A custom form for adding reviews and a drag and drop image upload widget</li>
+	<li> filter reviews by rating, relevance, helpfulness or date posted </li>
+</ul>
+
+<img align="center" src="https://i.imgur.com/ui4GR8d.png" alt="My Image"  width="900">
 
 
-SCREENSHOT
+<div>
+	<details>
+		<summary>See R&R Form</summary>
+			<div style={{marginBottom: "2%";}}>Form to submit a new product review</div>
+			<img align="center" src="https://i.imgur.com/byUJJbc.png" alt="My Image"  width="400">
+	</details>
+</div>
+<div>
+	<details>
+		<summary>See R&R image upload</summary>
+		<div>Modal window to upload images to product reviews</div>
+	 	<img align="center" src="https://i.imgur.com/M5pGDZP.png" alt="My Image"  width="500">
 
-
-<details>
-    <summary>See R&R Form</summary>
-	
-	
-SCREENSHOT
-	
-</details>
-
+	</details>
+</div>
 
 ## Getting Started
 
