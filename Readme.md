@@ -87,7 +87,7 @@ SCREENSHOT
 Installation
 - Clone the repository
     ```
-        git clone https://github.com/Demon-Slayer-FEC/project-atlier.git
+        git clone https://github.com/Wired-Wardrobe/project-atlier.git
     ```
 - Install the dependencies
     ```
