@@ -59,8 +59,8 @@ SCREENSHOT
 <details>
     <summary>See Q&A Forms</summary>
 	
-SCREENSHOT
-
+![question-modal](https://user-images.githubusercontent.com/80349718/229319502-52af2f22-615c-43f6-b761-c64f5eb642f3.png)
+![answer-modal](https://user-images.githubusercontent.com/80349718/229319499-fb9898d7-947a-4a23-a0ed-211a94dce628.png)
 
 	
 </details>
