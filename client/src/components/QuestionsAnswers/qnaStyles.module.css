@@ -44,14 +44,18 @@ body.active-modal {
 }
 
 /* questions and answers components */
+
+.qna-outer-container {
+  display: flex;
+  justify-content: center;
+}
+
 .qna-container-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 1215px;
   width: 100%;
-  padding-left: 20px;
-  margin-left: 13%;
 }
 
 .search-input {

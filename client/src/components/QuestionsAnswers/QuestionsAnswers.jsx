@@ -88,55 +88,57 @@ function QuestionsAnswers() {
 
     <QnaStyles.Provider value={qnaStyles}>
       <OnAddAnswer.Provider value={onAdd}>
-        <div className={qnaStyles['qna-container-main']}>
-          <h4>Questions & Answers</h4>
-          <Search onSearch={onSearch} />
-          {questions.length === 0
-            ? <div> Have a question about our products? Ask us here! </div>
-            : (
-              <QuestionsList
-                questions={questions}
-                numberOfQs={numberOfQs}
-                query={query}
-              />
-            )}
-          {/* show more questions button only when there are more */}
-          <div>
-            {numberOfQs < questions.length
-              && (
-                <input
-                  type="button"
-                  onClick={loadMoreQs}
-                  value="More Answered Questions"
-                  name="more-question"
-                  className="button button-light"
+        <div className={qnaStyles['qna-outer-container']}>
+          <div className={qnaStyles['qna-container-main']}>
+            <h4>Questions & Answers</h4>
+            <Search onSearch={onSearch} />
+            {questions.length === 0
+              ? <div> Have a question about our products? Ask us here! </div>
+              : (
+                <QuestionsList
+                  questions={questions}
+                  numberOfQs={numberOfQs}
+                  query={query}
                 />
               )}
-            <input
-              type="button"
-              aria-label="add-question"
-              onClick={() => { onAdd('question', true); }}
-              value="Add a question +"
-              className="button button-light"
-            />
+            {/* show more questions button only when there are more */}
+            <div>
+              {numberOfQs < questions.length
+                && (
+                  <input
+                    type="button"
+                    onClick={loadMoreQs}
+                    value="More Answered Questions"
+                    name="more-question"
+                    className="button button-light"
+                  />
+                )}
+              <input
+                type="button"
+                aria-label="add-question"
+                onClick={() => { onAdd('question', true); }}
+                value="Add a question +"
+                className="button button-light"
+              />
+            </div>
+            {answerFormVisible
+              && (
+                <WindowWrapper
+                  qnaStyles={qnaStyles}
+                  onAdd={onAdd}
+                  questionInfo={questionInfo}
+                  form="answer"
+                />
+              )}
+            {questionFormVisible
+              && (
+                <WindowWrapper
+                  qnaStyles={qnaStyles}
+                  onAdd={onAdd}
+                  form="question"
+                />
+              )}
           </div>
-          {answerFormVisible
-            && (
-              <WindowWrapper
-                qnaStyles={qnaStyles}
-                onAdd={onAdd}
-                questionInfo={questionInfo}
-                form="answer"
-              />
-            )}
-          {questionFormVisible
-            && (
-              <WindowWrapper
-                qnaStyles={qnaStyles}
-                onAdd={onAdd}
-                form="question"
-              />
-            )}
         </div>
       </OnAddAnswer.Provider>
     </QnaStyles.Provider>

@@ -94,12 +94,17 @@ body.active-modalimage {
 }
 
 /* review containers left and right */
+
+.reviewsAndRatings-outer-container {
+  display: flex;
+  justify-content: center;
+}
+
 .reviewsAndRatings-container-main {
   padding: 2%;
   margin-top: 20px;
   margin-bottom: 1%;
   width: 1235px;
-  margin-left: 12%;
 }
 
 .average-ratings-left {

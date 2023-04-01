@@ -59,13 +59,14 @@ function ReviewsAndRatings() {
   }
 
   return (
-    <div className={RNRCSS['reviewsAndRatings-container-main']}>
-      <div className="rnr-body">
-        <h1>Ratings & Reviews</h1>
-        <AverageRatings RNRCSS={RNRCSS} />
-        <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} sortState={sortState} />
+    <div className={RNRCSS['reviewsAndRatings-outer-container']}>
+      <div className={RNRCSS['reviewsAndRatings-container-main']}>
+        <div className="rnr-body">
+          <h1>Ratings & Reviews</h1>
+          <AverageRatings RNRCSS={RNRCSS} />
+          <Reviews RNRCSS={RNRCSS} handleSortState={handleSortState} sortState={sortState} />
+        </div>
       </div>
-
     </div>
 
   );
