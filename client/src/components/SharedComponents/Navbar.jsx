@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './WiredWardrobeLogo.png';
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import logo from './WiredWardrobeLogo.png';
 import { toggleState } from '../../features/products/productsSlice';
 
 function Navbar({ handleScroll }) {
