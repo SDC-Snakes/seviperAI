@@ -54,7 +54,7 @@ SCREENSHOT
 - Filter questions using a search bar.
 - Report or mark questions and answers as helpful with immediate feedback.
 
-SCREENSHOT
+![Questions and Answers](https://user-images.githubusercontent.com/80349718/229324161-03e53deb-c327-4987-8be9-ba3668328553.png)
 
 <details>
     <summary>See Q&A Forms</summary>
