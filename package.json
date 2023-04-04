@@ -5,7 +5,7 @@
     "client-dev": "npx webpack --watch",
     "build": "npx webpack",
     "start": "node server/index.js",
-    "reset-main": "git checkout main && git fetch origin && git reset --hard origin/main",
+    "reset-main": "git checkout main && git fetch origin && git reset --hard origin/main && npm install",
     "test": "jest",
     "test-qna": "npx jest --collect-coverage client/src/__tests__/qnaTests"
   },
