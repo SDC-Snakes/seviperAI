@@ -1,5 +1,5 @@
-# project-atlier
-Front end capstone project repository
+# SDC-Snake
+System Design Capston Repository
 
 ## GitHub workflow
 
